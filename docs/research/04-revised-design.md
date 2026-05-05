@@ -21,7 +21,9 @@
 
 ## 2. Model architecture
 
-### 2.1 Headline (primary) model — TabPFN v2.5 / v2.6
+> **What "headline" vs. "baseline" means here.** "Headline" is the model the README and UI lead with — chosen because it represents 2026-vintage tabular ML and exercises the Bayesian-style calibrated-output story end-to-end. "Baseline" is *not* a demotion: every model below is reported in the same comparison table under the same protocol ([§5.4](#54-the-honesty-baseline-comparison)), and the eval table is the binding source of truth on which model actually wins. If under LODO-CV the calibrated XGBoost beats TabPFN, that is what we publish at the top of the README. The headline label is about narrative ordering, not implicit confidence.
+
+### 2.1 Headline (lead-in) model — TabPFN v2.5 / v2.6
 
 **Why.** At n < 10,000 rows on a tabular clinical problem, TabPFN matches or beats hyperparameter-tuned XGBoost zero-shot (no per-dataset training), and ships with calibrated Bayesian-style posterior probabilities by construction. It also natively handles missing values, which addresses the Switzerland-cholesterol issue (see [03 §2](./03-critical-review.md#2-choice--imputation-missforest)). Source: [02 §1.1](./02-current-soa.md#11-tabular-foundation-models--the-new-default-for-small-clinical-data).
 
