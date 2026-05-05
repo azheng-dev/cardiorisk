@@ -35,6 +35,17 @@ models/artifacts/
 *.pkl
 *.joblib
 
+# --- v1 model artefacts + reports (Phase 2.3b, ADR-010) -------------------
+# Model joblibs are already covered by *.joblib above. Keep the README
+# checked in so the directory has documentation. Reports JSONs + figures
+# from the *full* run are committed (the v1 result-of-record); the
+# *smoke* outputs from CI runs are noise and stay local.
+reports/v1/smoke/
+reports/v1/figures/smoke/
+models/v1/smoke/
+!models/v1/README.md
+!reports/v1/README.md
+
 # --- Honours archive (PII; lives outside the repo, but defensive) ---------
 FIT4701-4702*/
 *-2024S1-1698*/

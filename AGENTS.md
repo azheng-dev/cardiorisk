@@ -51,38 +51,54 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.3a (eval harness) implementation complete on
-                      feat/phase-2-3-eval-harness. PR pending; awaiting CI green
-                      and user merge approval before Phase 2.3b (model wrappers
-                      + training driver) kickoff.
-Last checkpoint:      Phase 2.2 (preprocessing pipeline) accepted by user (PR #6 merged 2026-05-05).
+Current phase:        Phase 2.3b (v1 model wrappers + training driver) implementation
+                      complete on feat/phase-2-3b-v1-training. PR pending; awaiting CI
+                      green and user merge approval before Phase 2.4 (WOA reproduction
+                      + cross-model honesty comparison) kickoff.
+Last checkpoint:      Phase 2.3a (eval harness) accepted by user (PR #7 merged 2026-05-05).
+                      Phase 2.2 (preprocessing pipeline) accepted by user (PR #6 merged 2026-05-05).
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
                       Phase 2.3 plan + sub-phasing approved by user (2026-05-05); 2.3 sliced
                       into 2.3a (eval harness) + 2.3b (models + training driver).
-Open decisions:       - Phase 2.3a PR review + merge approval.
-                      - Phase 2.3b open decisions (locked to defaults; revisit only if 2.3a
-                        merge feedback prompts a change):
-                          - TabPFN pin: v2.6 (>=2.6,<2.7).
-                          - XGBoost Optuna budget: 50 trials per LODO fold, 10-min cap.
-                          - L1 LR: solver='saga', C in {0.001, 0.01, 0.1, 1, 10, 100}.
-                          - Calibration: isotonic for XGBoost (per ADR-006); sigmoid for LR.
-                          - Class-weighting: none in v1 (revisit per-source confusion mx).
-                          - RCS n_knots: 4 (no ablation in v1).
-                          - DCA: rolled in-house (lands in 2.3a; ADR-009).
-                          - Model artefact storage: local + reproduce-script (ADR-010 lands 2.3b).
-                          - MODEL_CARD.md: drafted in Phase 2.4 with all four model rows.
+                      Phase 2.3b plan approved by user (2026-05-05): single PR, JSON+figs
+                      committed, full smoke in CI, ephemeral Optuna storage, joblib artefacts,
+                      branch feat/phase-2-3b-v1-training.
+                      TabPFN -> TabICL substitution approved by user (2026-05-05) after
+                      TabPFN 7.x licensing+token gate broke reproducibility (ADR-011).
+Open decisions:       - Phase 2.3b PR review + merge approval.
+                      - Phase 2.4 (WOA reproduction + honesty comparison) open decisions:
+                          - WOA implementation: port the Honours notebook end-to-end vs.
+                            re-implement against the 2.2 preprocessing pipeline. Default:
+                            re-implement against 2.2 pipeline; archive original notebook
+                            verbatim under docs/research/ for traceability.
+                          - WOA hyperparameters: keep Honours pin (n_whales=30, max_iter=50,
+                            base learners = LR + RF + XGB) vs. re-tune. Default: keep pin
+                            so the comparison is honest (same WOA the Honours work shipped).
+                          - MODEL_CARD.md: draft alongside 2.4 with all four model rows
+                            (TabICL, XGBoost, LR, WOA) populated from reports/v1/.
+                          - WOA on the same LODO splits + identical eval harness +
+                            calibration treatment as v1 models (no special pleading).
+                          - Honesty discussion: how WOA's published AUROC vs. its LODO AUROC
+                            in this repo lands in docs/research/09-woa-honesty.md.
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4, #5, #6) merged via standard gh pr merge.
-Last meaningful PR:   #6 feat(features): Phase 2.2 — preprocessing pipeline (LODO + per-model
+Last meaningful PR:   #7 feat(eval): Phase 2.3a — eval harness (metrics, DCA, bootstrap,
+                      reliability, subgroup, calibration wrapper) (merged 2026-05-05).
+                      #6 feat(features): Phase 2.2 — preprocessing pipeline (LODO + per-model
                       factories) (merged d2d0e2d). #5 feat(data): Phase 2.1 — UCI ingestion,
                       HFP-schema combine, EDA notebook (merged 61dafc0). #4 chore(repo):
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        n/a (eval harness lands in 2.3a; first eval run is Phase 2.3b)
+Last eval run:        Phase 2.3b full LODO run on processed/combined.parquet
+                      (3 sources x 3 models x calibration + bootstrap). Outputs
+                      committed under reports/v1/ (metrics_per_fold.json,
+                      metrics_aggregate.json, figures/*.png). Model artefacts
+                      regenerable via backend/scripts/train_v1.py per ADR-010
+                      (see models/v1/README.md).
 
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
@@ -93,7 +109,67 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 2.3a deliverables (in pending PR feat/phase-2-3-eval-harness):
+Phase 2.3b deliverables (in pending PR feat/phase-2-3b-v1-training):
+  backend/cardiorisk/models/__init__.py        package skeleton; re-exports ModelWrapper protocol
+  backend/cardiorisk/models/base.py            ModelWrapper Protocol (fit/predict/predict_proba),
+                                               MODEL_NAMES = ('lr','xgboost','tabicl'), pinned SEED
+  backend/cardiorisk/models/lr.py              L1 LR (l1_ratio=1.0, saga) on RCS-expanded numerics +
+                                               OHE categoricals; GridSearchCV(C in {0.001..100});
+                                               sklearn ClassifierMixin/BaseEstimator surface
+  backend/cardiorisk/models/xgboost_model.py   XGBoost + Optuna 50-trial / 10-min cap (ephemeral
+                                               in-memory study); deterministic seed; sklearn surface
+  backend/cardiorisk/models/tabicl.py          TabICL wrapper (per ADR-011); NaN passthrough
+                                               verified; sklearn-compatible predict_proba
+  backend/cardiorisk/training/__init__.py      package skeleton for training drivers
+  backend/cardiorisk/training/train_v1.py      driver: LODO outer + 80/10/10 within-fold split +
+                                               per-model fit + post-hoc calibrate (frozen) + eval +
+                                               bootstrap CIs + subgroup audit + DCA + reliability;
+                                               --smoke (1 fold, 1 trial, 100 resamples, synthetic
+                                               two-source generator) and --full modes; strict-JSON
+                                               output via _to_json_safe (NaN/inf -> null)
+  backend/scripts/train_v1.py                  thin CLI wrapper: sets OMP_NUM_THREADS=1 +
+                                               KMP_DUPLICATE_LIB_OK=TRUE + torch.set_num_threads(1)
+                                               BEFORE importing training module to defuse the
+                                               XGBoost/PyTorch OpenMP deadlock on macOS
+  backend/tests/conftest.py                    same env-var pre-amble at pytest collection time
+  backend/tests/test_models_lr.py              wrapper smoke: instantiation + sklearn classifier
+                                               compliance + ModelWrapper protocol + fit/predict/
+                                               predict_proba + GridSearchCV + determinism
+  backend/tests/test_models_xgboost.py         same surface + Optuna best_params_ + determinism
+  backend/tests/test_models_tabicl.py          same surface + NaN passthrough + determinism
+  backend/tests/test_train_v1.py               end-to-end driver smoke: 3 models x 1 LODO fold;
+                                               verifies metric schema + bootstrap CIs + subgroup +
+                                               DCA + reliability figures + joblib artefacts +
+                                               strict-JSON parseability
+  backend/pyproject.toml                       adds tabicl>=2.1,<2.2 (replacing tabpfn),
+                                               xgboost>=3.0, optuna>=4.4, joblib>=1.5; CPU-only
+                                               torch via [tool.uv.sources] (pytorch-cpu index);
+                                               mypy ignore_missing_imports for tabicl/xgboost/
+                                               optuna/joblib; ruff per-file-ignores N803/N806
+                                               for cardiorisk/training/**
+  models/v1/README.md                          local-only artefact policy + reproduce steps
+                                               (per ADR-010); models/ kept out of git
+  reports/v1/README.md                         committed JSONs + figures schema + reproduce
+  reports/v1/metrics_per_fold.json             per-fold per-model metrics + bootstrap CIs +
+                                               subgroup tables + DCA thresholds (committed)
+  reports/v1/metrics_aggregate.json            cross-fold aggregates per model (committed)
+  reports/v1/figures/*.png                     reliability + DCA per (model x fold) (committed)
+  docs/adr/010-model-artefact-storage.md       binding decision: local artefacts + reproduce
+                                               script (no LFS, no Hub); reproducibility contract
+  docs/adr/011-tfm-tabicl-supersedes-tabpfn.md TFM swap rationale + licensing trigger; supersedes
+                                               ADR-006 §"Headline (lead-in) model"
+  docs/adr/README.md                           index updated for ADR-010 + ADR-011
+  docs/research/08-v1-model-results.md         cross-model comparison (TabICL/XGBoost/LR rows;
+                                               WOA row blank for 2.4); per-source breakdown;
+                                               subgroup audit narrative; LongBeachVA fold +
+                                               small-n calibration honesty discussion
+  .github/workflows/ci.yml                     adds train-v1-smoke step in test-python (1 fold,
+                                               1 trial, 100 resamples; ~30s on ubuntu-latest)
+  .gitignore                                   models/v1/ ignored except README; reports/v1/
+                                               smoke outputs ignored; full-run JSONs/figs
+                                               explicitly tracked
+
+Phase 2.3a deliverables (in PR #7 feat/phase-2-3-eval-harness, merged):
   backend/cardiorisk/eval/__init__.py          package skeleton + module map for eval layer
   backend/cardiorisk/eval/metrics.py           AUROC, AUPRC, Brier, calibration slope/intercept,
                                                sens@spec (85% + 90%), headline_metrics one-shot;

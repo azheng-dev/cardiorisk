@@ -15,3 +15,9 @@ DATA_RAW: Final[Path] = REPO_ROOT / "data" / "raw"
 DATA_PROCESSED: Final[Path] = REPO_ROOT / "data" / "processed"
 DATA_CHECKSUMS: Final[Path] = REPO_ROOT / "data" / "checksums"
 FIXTURE_PATH: Final[Path] = REPO_ROOT / "backend" / "tests" / "fixtures" / "hfp_mini.csv"
+COMBINED_PARQUET: Final[Path] = DATA_PROCESSED / "combined.parquet"
+
+# Phase 2.3b model artefact + reports layout (ADR-010).
+MODELS_V1_DIR: Final[Path] = REPO_ROOT / "models" / "v1"
+REPORTS_V1_DIR: Final[Path] = REPO_ROOT / "reports" / "v1"
+REPORTS_V1_FIGURES: Final[Path] = REPORTS_V1_DIR / "figures"
