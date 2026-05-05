@@ -51,20 +51,22 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 1 closed. Branch-protection-policy PR in flight; awaiting Phase 2 kickoff.
+Current phase:        Phase 2.1 implementation complete. PR open against main; awaiting CI green
+                      and user merge approval before Phase 2.2 kickoff.
 Last checkpoint:      Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Ready to proceed to Phase 2.1 (data ingestion + EDA on HFP)?
-                      - Confirm dataset acquisition path: Kaggle CLI vs UCI mirror vs vendored
-                        synthetic-only fixture for tests.
-Open issues:          - PRs #1 and #3 were merged via REST endpoint (gh api PUT pulls/{n}/merge)
-                      that bypassed gh pr merge's BLOCKED state. Underlying CI was green; rollup
-                      was poisoned by CANCELLED duplicate runs from concurrency dedup. Both
-                      bypasses logged in ADR-007 §"Bypass log". The CI workflow fix in this
-                      pending PR removes the root cause, so future merges go through the
-                      standard gh pr merge path.
+                      Phase 2 greenlit by user (2026-05-05).
+Open decisions:       - Phase 2.1 PR review + merge approval.
+                      - Phase 2.2 (preprocessing pipeline) plan: confirm MissForest within-fold
+                        approach for XGBoost / WOA-Ensemble baselines; categorical-Missing-as-its-
+                        own-category vs. mode-impute; whether to add per-feature was_missing
+                        indicator columns (EDA recommends yes for 4 features).
+Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
+                      REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
+                      root cause and PR #4 itself merged via standard gh pr merge.
 Last meaningful PR:   #3 docs(research): Phase 1 critical review + v1 risk-model design (merged
-                      4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
+                      4553c61). #1 chore(repo): bootstrap (merged 2e2d648). #4 chore(repo):
+                      branch-protection policy ADR + workflow hardening (merged 41b697f).
 Last eval run:        n/a (Phase 2.3 onward)
 
 Branch protection on main (live, set 2026-05-05):
@@ -76,6 +78,23 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
+Phase 2.1 deliverables (in pending PR feat/phase-2-1-data-ingestion-eda):
+  backend/cardiorisk/data/                     paths, fetch, combine, synthetic submodules
+  backend/scripts/fetch_hfp.py                 CLI: UCI primary fetch with SHA-256 pin,
+                                               --use-fixture for CI, --include-kaggle optional
+  backend/scripts/build_combined.py            CLI: UCI -> HFP-schema parquet with `source` col
+  backend/scripts/generate_fixture.py          CLI: deterministic synthetic 20-row HFP fixture
+  backend/tests/test_synthetic.py              schema, determinism, round-trip
+  backend/tests/test_fetch.py                  hash, idempotency, mocked HTTP, atomic writes
+  backend/tests/test_combine.py                schema mapping, source tagging, parquet round-trip
+  backend/tests/fixtures/hfp_mini.csv          synthetic only (seed=20260505); fixtures README
+  notebooks/01-eda.py + .ipynb                 jupytext-paired EDA, executes in CI on fixture
+  data/checksums/uci_*.sha256                  pinned digests for the four UCI subsets
+  docs/research/05-eda-findings.md             concrete numbers + Phase 2.2 implications
+  docs/data/README.md                          data layer rules + fetch instructions
+  .pre-commit-config.yaml                      adds nbstripout hook for .ipynb outputs
+  .github/workflows/ci.yml                     test-python now also runs the EDA notebook smoke
+
 Phase 1 deliverables (all on main):
   docs/research/01-honours-recap.md       sanitised recap of prior work
   docs/research/02-current-soa.md         2025-2026 SoA + cross-checked Deep Research synthesis
@@ -84,13 +103,6 @@ Phase 1 deliverables (all on main):
   docs/research/README.md                 index updated
   docs/adr/006-risk-model-architecture.md binding decision (Proposed)
   docs/adr/README.md                      ADR index updated
-
-Pending in chore/branch-protection-policy:
-  docs/adr/007-solo-phase-branch-protection.md   accepts the relaxed-review-count policy
-  docs/adr/README.md                             adds ADR-007 row, renumbers placeholders to 008-011
-  CONTRIBUTING.md                                replaces the wrong "1 review" text with live policy
-  .github/workflows/ci.yml                       push: branches: [main] (was ["**"]) — kills duplicate runs
-  AGENTS.md                                      this status block update
 ```
 
 When the agent finishes any phase or subphase, it updates this block before checkpointing with the user.

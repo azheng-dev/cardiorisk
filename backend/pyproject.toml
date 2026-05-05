@@ -7,9 +7,25 @@ requires-python = ">=3.12,<3.13"
 license = { text = "MIT" }
 authors = [{ name = "CardioRisk Co-Pilot contributors" }]
 
-# Phase 0 keeps deps minimal. New deps are added in their owning phase
-# (e.g. fastapi/pydantic in Phase 4, langgraph in Phase 4, shap in Phase 2.5).
-dependencies = []
+# Deps grow per-phase. Phase 2.1 adds the data + EDA stack. Future phases:
+# fastapi/pydantic in Phase 4, langgraph in Phase 4, shap in Phase 2.5,
+# tabpfn / xgboost / scikit-learn in Phase 2.3.
+dependencies = [
+    # data + I/O
+    "pandas>=3.0.2",
+    "numpy>=2.4.4",
+    "pyarrow>=24.0.0",
+    "requests>=2.33.1",
+    # notebook + viz (Phase 2.1 EDA)
+    "matplotlib>=3.10.9",
+    "seaborn>=0.13.2",
+    "missingno>=0.5.2",
+    "ipykernel>=7.2.0",
+    "jupytext>=1.19.1",
+    # optional dataset source: Kaggle HFP cross-check (UCI is primary)
+    "kaggle>=2.1.0",
+    "nbconvert>=7.17.1",
+]
 
 [dependency-groups]
 dev = [
@@ -17,6 +33,11 @@ dev = [
   "pytest-cov>=5.0",
   "ruff>=0.14",
   "mypy>=1.18",
+  # type stubs for the Phase 2.1 stack
+  "pandas-stubs>=3.0",
+  "types-requests>=2.33",
+  # strips notebook outputs at commit time (paired with jupytext .py source)
+  "nbstripout>=0.9",
 ]
 
 [build-system]
@@ -30,7 +51,6 @@ packages = ["cardiorisk"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["**/notebooks/**"]
 
 [tool.ruff.lint]
 # Strict-ish defaults. Add rules as the codebase grows.
@@ -54,6 +74,9 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # Tests can use asserts and have less strict naming.
 "tests/**" = ["S101", "N802", "N803"]
+# CLI scripts: stdlib `random` is fine for deterministic synthetic-data
+# generation; T201 (print) is fine in a script that prints status to stdout.
+"scripts/**" = ["S311", "T201"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -73,6 +96,13 @@ plugins = []
 # Test code can be a touch looser; we still want types but not strict-mode purity.
 module = "tests.*"
 disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+# Third-party libs without type stubs in the Phase 2.1 stack. These are
+# scoped to the modules where typing is genuinely missing upstream; remove
+# any line that gains stubs.
+module = ["missingno", "missingno.*", "kaggle", "kaggle.*"]
+ignore_missing_imports = true
 
 # ------------------------------------------------------------------- pytest
 [tool.pytest.ini_options]
