@@ -80,18 +80,21 @@ cd ../frontend && pnpm test    # frontend tests
 cd ../frontend && pnpm tsc --noEmit  # type-check
 ```
 
-## Branch protection (set on `main` in GitHub Settings → Branches)
+## Branch protection (live on `main`)
 
-Enforced on `main` from Phase 0:
+Enforced on `main` from Phase 0. The full rationale lives in [ADR-007](./docs/adr/007-solo-phase-branch-protection.md).
 
-- Require pull request before merging
-- Require at least 1 approving review (self-review allowed in solo phase, can be tightened later)
-- Require status checks to pass: `gitleaks`, `lint-python`, `lint-ts`, `test-python`, `test-ts`, `type-check-ts`
-- Require linear history (no merge commits)
-- Require signed commits
-- Block force pushes
-- Block deletions
-- Auto-delete head branches after merge (Settings → General → Pull Requests)
+- Require pull request before merging.
+- **Required approving reviews: 0** while this is a solo-maintainer project. GitHub blocks self-approval, so requiring 1 review here would force admin-bypass on every PR. We compensate by making CI mandatory (below). Flip back to `>=1` the day a second maintainer joins.
+- Require all status checks to pass: `secret-scan`, `lint-python`, `type-check-python`, `test-python`, `lint-ts`, `type-check-ts`, `test-ts`. PRs cannot merge while any of these are pending or failing.
+- Require linear history (no merge commits → squash-merge only).
+- Require signed commits (SSH or GPG).
+- Block force pushes to `main`.
+- Block deletions of `main`.
+- Auto-delete head branches after merge (Settings → General → Pull Requests).
+- `enforce_admins: false` is intentional — preserves an admin escape hatch if CI itself breaks for an unrelated reason. Use it sparingly and document why in the PR body. See ADR-007 §"Bypass log".
+
+The set is managed via the GitHub API; if you need to change it, update [ADR-007](./docs/adr/007-solo-phase-branch-protection.md) in the same PR and apply with `gh api -X PUT repos/<owner>/<repo>/branches/main/protection`.
 
 ## Reporting a security issue
 
