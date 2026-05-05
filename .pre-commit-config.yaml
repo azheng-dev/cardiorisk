@@ -1,0 +1,71 @@
+# Pre-commit hooks. Run `pre-commit install` once after clone.
+# Order matters: cheapest checks first, secret scan last so it always runs.
+#
+# Note on Python version: hooks run inside their own pre-commit-managed venvs
+# and only need any modern Python 3 to bootstrap. The actual project Python
+# version (3.12) is enforced separately in backend/pyproject.toml and CI.
+default_language_version:
+  python: python3
+
+repos:
+  # --- Generic hygiene ---
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: detect-private-key
+
+  # --- Python: Ruff (lint + format) ---
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.4
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+        files: ^backend/
+      - id: ruff-format
+        files: ^backend/
+
+  # --- Python: mypy (staged-only, scoped to backend) ---
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        files: ^backend/
+        args: ["--config-file=backend/pyproject.toml"]
+        additional_dependencies: ["pydantic>=2.0", "pydantic-settings>=2.0"]
+
+  # --- TS / JS: Biome (lint + format) ---
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v1.9.4
+    hooks:
+      - id: biome-check
+        files: ^frontend/
+        additional_dependencies: ["@biomejs/biome@1.9.4"]
+
+  # --- Custom: block raw data CSVs from being staged ---
+  - repo: local
+    hooks:
+      - id: no-raw-data
+        name: block raw data files
+        description: |
+          Refuses to commit files under data/raw/ or any *.csv outside fixtures/.
+          Raw data (especially anything resembling clinical data) must never enter
+          the public repo. Use a download script and store data in data/raw/ locally.
+        entry: scripts/no_raw_data.sh
+        language: script
+        pass_filenames: true
+
+  # --- Secret scanning (last so it always runs even if earlier hooks fail) ---
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
