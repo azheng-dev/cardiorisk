@@ -11,15 +11,15 @@ Each module in this package wraps one trained estimator the design doc
   via :func:`cardiorisk.calibration.calibrate_for_model`.
 - :mod:`cardiorisk.models.lr` — L1 logistic regression with restricted
   cubic spline expansions (transparency anchor).
+- :mod:`cardiorisk.models.ensemble` — Honours-baseline 4-net
+  mean-averaged ensemble (DNN + CNN + LSTM + BiLSTM), PyTorch port
+  per ADR-012. Phase 2.4 deliverable.
 
 The shared interface lives in :mod:`cardiorisk.models.base` as a
 :class:`~cardiorisk.models.base.ModelWrapper` Protocol. Every wrapper
 exposes the same surface (``fit(X, y) -> Self`` and ``predict_proba(X)
--> np.ndarray``) so the Phase-2.3b training driver can iterate over
-them without per-model branching.
-
-The Phase-2.4 WOA-Ensemble reproduction will land as a fourth module
-in this package without changing the shared interface.
+-> np.ndarray``) so the training driver can iterate over them without
+per-model branching.
 """
 
 from cardiorisk.models.base import ModelWrapper

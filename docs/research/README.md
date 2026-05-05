@@ -11,12 +11,14 @@ Phase 1 deliverables for CardioRisk Co-Pilot — a critical examination of a pri
 | 05 | [EDA findings (Phase 2.1)](./05-eda-findings.md) | Done | Concrete numbers from the four UCI subsets in HFP schema; what's there, what's broken, implications for Phase 2.2. |
 | 06 | [Preprocessing decisions (Phase 2.2)](./06-preprocessing-decisions.md) | Done | Opinionated walkthrough of the cleaning + per-model pipeline + LODO splitter; cross-refs design and EDA. |
 | 07 | [Eval harness design (Phase 2.3a)](./07-eval-design.md) | Done | Opinionated walkthrough of metrics + DCA + bootstrap CIs + reliability + subgroup audits + calibration wrapper. |
-| 08 | [v1 model results (Phase 2.3b)](./08-v1-model-results.md) | Done | LODO-CV results for TabICL + XGBoost + L1 LR; per-fold + subgroup + DCA tables; honest discussion of XGBoost's calibration failure mode and LongBeachVA's structural difficulty. WOA row pending Phase 2.4. |
-| ADR-006 | [Risk-model architecture](../adr/006-risk-model-architecture.md) | Proposed (Accepted on Phase 1 checkpoint; partly superseded by ADR-011) | Binding decision: chosen architecture, rejected alternatives, trigger to revisit. |
+| 08 | [v1 model results (Phase 2.3b)](./08-v1-model-results.md) | Done | LODO-CV results for TabICL + XGBoost + L1 LR (+ Honours-Ensemble row backfilled in Phase 2.4); per-fold + subgroup + DCA tables; honest discussion of XGBoost's calibration failure mode and LongBeachVA's structural difficulty. |
+| 09 | [Honours vs v1 honesty doc (Phase 2.4)](./09-honours-vs-v1.md) | Done | The "WOA implementation is missing from the supplied archive" finding documented in full; cross-model comparison (Honours-claimed vs Honours-reproduced vs v1) under the same LODO; rationale for not reconstructing WOA from scratch. |
+| ADR-006 | [Risk-model architecture](../adr/006-risk-model-architecture.md) | Proposed (Accepted on Phase 1 checkpoint; partly superseded by ADR-011 + ADR-012) | Binding decision: chosen architecture, rejected alternatives, trigger to revisit. |
 | ADR-008 | [Preprocessing pipeline](../adr/008-preprocessing-pipeline.md) | Accepted | Binding decision: cleaning prefix + per-model sklearn factories + LODO + indicators + RCS. |
 | ADR-009 | [Eval harness](../adr/009-eval-harness.md) | Accepted | Binding decision: metrics set + DCA + percentile bootstrap + reliability defaults + calibration dispatch. |
 | ADR-010 | [Model artefact storage](../adr/010-model-artefact-storage.md) | Accepted | Binding decision: local-only artefacts under `models/v1/`; reproducibility guaranteed by `train_v1.py` rebuild rather than LFS or model hub. |
 | ADR-011 | [TabICL supersedes TabPFN](../adr/011-tfm-tabicl-supersedes-tabpfn.md) | Accepted | Binding decision: TabICL 2.1 replaces TabPFN as the v1 TFM headline after TabPFN 7.x's licensing + token gate broke reproducibility. |
+| ADR-012 | [Honours-baseline reproduction](../adr/012-honours-baseline-reproduction.md) | Accepted | Binding decision: faithful PyTorch port of the Honours Ensemble (no WOA layer — code missing from archive); sigmoid (Platt) calibration; identical LODO harness as the v1 trio. |
 
 ## What to read first
 

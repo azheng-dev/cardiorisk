@@ -51,41 +51,50 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.3b (v1 model wrappers + training driver) implementation
-                      complete on feat/phase-2-3b-v1-training. PR pending; awaiting CI
-                      green and user merge approval before Phase 2.4 (WOA reproduction
-                      + cross-model honesty comparison) kickoff.
-Last checkpoint:      Phase 2.3a (eval harness) accepted by user (PR #7 merged 2026-05-05).
+Current phase:        Phase 2.4 (Honours-baseline reproduction: PyTorch Ensemble +
+                      cross-model honesty comparison + MODEL_CARD.md draft)
+                      implementation complete on feat/phase-2-4-honours-baseline. PR
+                      pending; awaiting CI green and user merge approval before Phase
+                      2.5 (SHAP / explainability) kickoff.
+Last checkpoint:      Phase 2.3b (v1 model wrappers + training driver + LODO results)
+                      accepted by user (PR #8 merged 2026-05-05).
+                      Phase 2.3a (eval harness) accepted by user (PR #7 merged 2026-05-05).
                       Phase 2.2 (preprocessing pipeline) accepted by user (PR #6 merged 2026-05-05).
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-                      Phase 2.3 plan + sub-phasing approved by user (2026-05-05); 2.3 sliced
-                      into 2.3a (eval harness) + 2.3b (models + training driver).
-                      Phase 2.3b plan approved by user (2026-05-05): single PR, JSON+figs
-                      committed, full smoke in CI, ephemeral Optuna storage, joblib artefacts,
-                      branch feat/phase-2-3b-v1-training.
-                      TabPFN -> TabICL substitution approved by user (2026-05-05) after
-                      TabPFN 7.x licensing+token gate broke reproducibility (ADR-011).
-Open decisions:       - Phase 2.3b PR review + merge approval.
-                      - Phase 2.4 (WOA reproduction + honesty comparison) open decisions:
-                          - WOA implementation: port the Honours notebook end-to-end vs.
-                            re-implement against the 2.2 preprocessing pipeline. Default:
-                            re-implement against 2.2 pipeline; archive original notebook
-                            verbatim under docs/research/ for traceability.
-                          - WOA hyperparameters: keep Honours pin (n_whales=30, max_iter=50,
-                            base learners = LR + RF + XGB) vs. re-tune. Default: keep pin
-                            so the comparison is honest (same WOA the Honours work shipped).
-                          - MODEL_CARD.md: draft alongside 2.4 with all four model rows
-                            (TabICL, XGBoost, LR, WOA) populated from reports/v1/.
-                          - WOA on the same LODO splits + identical eval harness +
-                            calibration treatment as v1 models (no special pleading).
-                          - Honesty discussion: how WOA's published AUROC vs. its LODO AUROC
-                            in this repo lands in docs/research/09-woa-honesty.md.
+                      Phase 2.4 plan approved by user (2026-05-05): Path A (Honours-Ensemble
+                      only, no WOA reconstruction) after pre-implementation discovery that
+                      the WOA/GWO/CS/BA/FA/HHO/RFE-CV code is missing from the supplied
+                      archive (only empty placeholder cells under markdown headers in
+                      Demos/Data_Pre-processing.ipynb); PyTorch port; sigmoid (Platt)
+                      calibration (ADR-012); identical LODO harness; MODEL_CARD.md
+                      drafted in 2.4; new docs/research/09-honours-vs-v1.md with the
+                      WOA-code-missing finding; patch to docs/research/01-honours-recap.md
+                      §8 with implementation-gap disclaimer; branch feat/phase-2-4-honours-baseline.
+Open decisions:       - Phase 2.4 PR review + merge approval.
+                      - Phase 2.5 (SHAP / explainability) open decisions (to surface at
+                        Phase 2.5 kickoff):
+                          - Explainer choice: KernelSHAP (model-agnostic, works for all
+                            four models including TabICL/Ensemble) vs per-model native
+                            (TreeSHAP for XGBoost, coefficients for LR). Default:
+                            KernelSHAP for all four for comparison consistency.
+                          - Explanation surface: per-prediction local + global feature
+                            importance + per-subgroup explanation drift (sex, age band).
+                          - Background-data sample for KernelSHAP: train slice or
+                            calibration slice; size cap.
+                          - SHAP plots committed: per (model x fold) under
+                            reports/v1/explainability/.
+                          - Honest discussion of explainer disagreement across models.
+                      - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
+                        user later requests it; ADR-012 documents the deferral.
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
-                      root cause and every PR since (#4, #5, #6) merged via standard gh pr merge.
-Last meaningful PR:   #7 feat(eval): Phase 2.3a — eval harness (metrics, DCA, bootstrap,
+                      root cause and every PR since (#4, #5, #6, #7, #8) merged via standard
+                      gh pr merge.
+Last meaningful PR:   #8 feat(models): Phase 2.3b — v1 model wrappers (TabICL, XGBoost, LR)
+                      + training driver + full LODO results (merged 2026-05-05).
+                      #7 feat(eval): Phase 2.3a — eval harness (metrics, DCA, bootstrap,
                       reliability, subgroup, calibration wrapper) (merged 2026-05-05).
                       #6 feat(features): Phase 2.2 — preprocessing pipeline (LODO + per-model
                       factories) (merged d2d0e2d). #5 feat(data): Phase 2.1 — UCI ingestion,
@@ -93,12 +102,12 @@ Last meaningful PR:   #7 feat(eval): Phase 2.3a — eval harness (metrics, DCA, 
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 2.3b full LODO run on processed/combined.parquet
-                      (3 sources x 3 models x calibration + bootstrap). Outputs
-                      committed under reports/v1/ (metrics_per_fold.json,
-                      metrics_aggregate.json, figures/*.png). Model artefacts
-                      regenerable via backend/scripts/train_v1.py per ADR-010
-                      (see models/v1/README.md).
+Last eval run:        Phase 2.4 full LODO run on processed/combined.parquet (4 sources
+                      x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x calibration +
+                      bootstrap). Outputs refreshed in-place under reports/v1/
+                      (metrics_per_fold.json, metrics_aggregate.json, figures/*.png; 32
+                      PNGs total now). Model artefacts regenerable via
+                      backend/scripts/train_v1.py per ADR-010 (see models/v1/README.md).
 
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
@@ -108,6 +117,57 @@ Branch protection on main (live, set 2026-05-05):
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 2.4 deliverables (in pending PR feat/phase-2-4-honours-baseline):
+  backend/cardiorisk/models/ensemble.py        Honours-baseline 4-net mean-averaged Ensemble
+                                               (DNN + 1D CNN + LSTM + BiLSTM); PyTorch port of
+                                               Demos/Data_Pre-processing.ipynb cell 55; sklearn
+                                               ClassifierMixin/BaseEstimator surface; ModelWrapper
+                                               protocol; deterministic seed; honest documentation
+                                               of Keras->PyTorch departures (no recurrent_dropout,
+                                               Kaiming vs Glorot init)
+  backend/cardiorisk/models/base.py            MODEL_NAMES extended with "ensemble"
+  backend/cardiorisk/models/__init__.py        package docstring updated for the 4th model
+  backend/cardiorisk/calibration.py            DEFAULT_METHOD_FOR_MODEL gains ensemble->sigmoid
+                                               (Platt) per ADR-012; rationale documented inline
+  backend/cardiorisk/training/train_v1.py      _build_model dispatches "ensemble"; RunConfig
+                                               gains n_ensemble_epochs (1 in smoke, 100 in full);
+                                               aggregate config block records the new knob
+  backend/tests/test_models_ensemble.py        14 tests: instantiation + sklearn classifier
+                                               compliance + ModelWrapper protocol + fit/predict/
+                                               predict_proba + 4 sub-models present + mean-averaged
+                                               output audit + determinism + no-fit guard
+  backend/tests/test_train_v1.py               extended with 4 Phase-2.4 specific tests:
+                                               ensemble row in per-fold + aggregate JSONs;
+                                               n_ensemble_epochs recorded in config; ensemble
+                                               artefact persisted; 12 tests total (was 8)
+  docs/adr/012-honours-baseline-reproduction.md  binding decision: Path A (Ensemble-only port);
+                                               documents the WOA-code-missing finding; PyTorch
+                                               port rationale; sigmoid (Platt) calibration
+                                               rationale; departures from Keras semantics;
+                                               trigger to revisit; partially supersedes ADR-006
+                                               §"WOA-Ensemble (honesty baseline)"
+  docs/research/09-honours-vs-v1.md            cross-model honesty comparison: WOA-code-missing
+                                               finding documented in full (cell-by-cell archive
+                                               audit); Honours-Ensemble row backfilled into
+                                               cross-model comparison table; per-fold reading;
+                                               why Path A and not Path B (WOA reconstruction);
+                                               what the public-repo audience should take away
+  docs/research/01-honours-recap.md            §8 patched with implementation-gap disclaimer
+                                               immediately under the report's headline table;
+                                               cross-references 09-honours-vs-v1.md + ADR-012
+  docs/research/08-v1-model-results.md         headline aggregate table backfilled with the
+                                               Ensemble row (replaces "_pending Phase 2.4_"
+                                               placeholder); per-fold + per-model joins below
+  docs/research/README.md                      indices updated for 09-honours-vs-v1.md + ADR-012
+  docs/adr/README.md                           indices updated for ADR-012; placeholder ADR
+                                               numbering bumped (013/014/015/016)
+  MODEL_CARD.md                                NEW at repo root: 4 model rows from reports/v1/;
+                                               intended use; out-of-scope statement (LongBeachVA
+                                               ≥70 stratum); calibration story; per-source +
+                                               per-subgroup breakdown; honesty caveats
+  AGENTS.md                                    Phase 2.4 status block + Phase 2.5 (SHAP) open
+                                               questions; Phase 2.4 deliverables block
 
 Phase 2.3b deliverables (in pending PR feat/phase-2-3b-v1-training):
   backend/cardiorisk/models/__init__.py        package skeleton; re-exports ModelWrapper protocol

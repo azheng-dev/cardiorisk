@@ -1,11 +1,14 @@
-"""End-to-end smoke test for the Phase-2.3b training driver.
+"""End-to-end smoke test for the Phase 2.3b + 2.4 training driver.
 
 Drives ``backend/scripts/train_v1.py`` in ``--smoke`` mode against the
 deterministic synthetic dataset that smoke mode generates. Verifies:
 
-- All 3 models complete fit -> calibrate -> predict -> persist.
+- All ``len(MODEL_NAMES)`` models (Phase 2.3b: tabicl/xgboost/lr;
+  Phase 2.4 adds ensemble) complete fit -> calibrate -> predict ->
+  persist.
 - Per-fold JSON has the documented schema.
-- Aggregate JSON has the documented schema.
+- Aggregate JSON has the documented schema and includes the
+  ``n_ensemble_epochs`` Phase-2.4 config knob.
 - Bootstrap CIs land for every metric we bootstrap.
 - All artefacts land in ``models/v1/smoke/``.
 - All figures land in ``reports/v1/figures/smoke/``.
@@ -25,6 +28,7 @@ import pytest
 
 from cardiorisk.data.paths import FIXTURE_PATH
 from cardiorisk.models.base import MODEL_NAMES
+from cardiorisk.models.ensemble import SMOKE_N_EPOCHS as ENSEMBLE_SMOKE_N_EPOCHS
 
 
 @pytest.fixture
@@ -38,6 +42,7 @@ def driver_outputs(
         smoke=True,
         n_trials=train_v1.SMOKE_N_TRIALS,
         n_resamples=train_v1.SMOKE_N_RESAMPLES,
+        n_ensemble_epochs=ENSEMBLE_SMOKE_N_EPOCHS,
         # Smoke path: passing FIXTURE_PATH triggers the synthetic-on-the-fly
         # branch; the file itself is never read in smoke mode.
         data_path=FIXTURE_PATH,
@@ -150,3 +155,43 @@ def test_strict_json_no_nan_literal(driver_outputs):
     aggregate, per_fold, _, _ = driver_outputs
     json.dumps(aggregate, allow_nan=False)
     json.dumps(per_fold, allow_nan=False)
+
+
+# ----------------------------------------------------- Phase 2.4 specifics
+
+
+def test_ensemble_row_present_per_fold(driver_outputs):
+    """Phase 2.4: the Honours-Ensemble row must land in the per-fold JSON."""
+    _, per_fold, _, _ = driver_outputs
+    ensemble_blocks = [b for b in per_fold if b["model"] == "ensemble"]
+    assert len(ensemble_blocks) == 1
+    block = ensemble_blocks[0]
+    # Same headline-metric surface as the other models.
+    for metric in ("auroc", "auprc", "brier"):
+        assert metric in block["headline"]
+
+
+def test_ensemble_row_present_in_aggregate(driver_outputs):
+    """Phase 2.4: the Honours-Ensemble row must appear in by_model aggregates."""
+    aggregate, _, _, _ = driver_outputs
+    assert "ensemble" in aggregate["by_model"]
+    rows = aggregate["by_model"]["ensemble"]
+    for metric in ("auroc", "auprc", "brier"):
+        assert metric in rows
+        assert {"mean", "std", "n_folds"}.issubset(rows[metric].keys())
+
+
+def test_aggregate_records_n_ensemble_epochs(driver_outputs):
+    """Phase 2.4: the smoke-mode ensemble epoch budget is recorded in config."""
+    aggregate, _, _, _ = driver_outputs
+    assert aggregate["config"]["n_ensemble_epochs"] == 1
+
+
+def test_ensemble_artefact_persisted(driver_outputs):
+    """Phase 2.4: a calibrated ensemble joblib lands alongside the v1 trio."""
+    _, _, models_dir, _ = driver_outputs
+    ensemble_paths = list(models_dir.glob("ensemble_*.joblib"))
+    assert len(ensemble_paths) == 1
+    clf = joblib.load(ensemble_paths[0])
+    # Calibration applied (sigmoid/Platt per ADR-012).
+    assert hasattr(clf, "predict_proba")

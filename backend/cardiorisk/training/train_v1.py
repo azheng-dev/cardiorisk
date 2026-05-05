@@ -83,6 +83,15 @@ from cardiorisk.features.cv import (
     within_fold_split,
 )
 from cardiorisk.models.base import MODEL_NAMES, SEED
+from cardiorisk.models.ensemble import (
+    DEFAULT_N_EPOCHS as ENSEMBLE_FULL_N_EPOCHS,
+)
+from cardiorisk.models.ensemble import (
+    SMOKE_N_EPOCHS as ENSEMBLE_SMOKE_N_EPOCHS,
+)
+from cardiorisk.models.ensemble import (
+    build_ensemble,
+)
 from cardiorisk.models.lr import build_lr
 from cardiorisk.models.tabicl import build_tabicl
 from cardiorisk.models.xgboost_model import build_xgboost
@@ -115,6 +124,7 @@ class RunConfig:
     smoke: bool
     n_trials: int
     n_resamples: int
+    n_ensemble_epochs: int  # Phase 2.4: 1 in smoke, 100 in full (Honours-faithful).
     data_path: Path
     models_dir: Path
     reports_dir: Path
@@ -165,7 +175,7 @@ def _load_dataframe(data_path: Path, smoke: bool, seed: int) -> pd.DataFrame:
     )
 
 
-def _build_model(name: str, n_trials: int) -> Any:
+def _build_model(name: str, n_trials: int, n_ensemble_epochs: int) -> Any:
     """Construct a fresh wrapper for ``name``."""
     if name == "tabicl":
         return build_tabicl()
@@ -173,6 +183,8 @@ def _build_model(name: str, n_trials: int) -> Any:
         return build_xgboost(n_trials=n_trials)
     if name == "lr":
         return build_lr()
+    if name == "ensemble":
+        return build_ensemble(n_epochs=n_ensemble_epochs)
     raise ValueError(f"unknown model name: {name!r}")
 
 
@@ -311,7 +323,11 @@ def _run_one_fold_one_model(
     """End-to-end fit -> calibrate -> predict -> eval -> persist for one cell."""
     t0 = time.perf_counter()
     logger.info("[%s | %s] fitting", held_out_source, model_name)
-    model = _build_model(model_name, n_trials=cfg.n_trials)
+    model = _build_model(
+        model_name,
+        n_trials=cfg.n_trials,
+        n_ensemble_epochs=cfg.n_ensemble_epochs,
+    )
     model.fit(X_train, y_train)
 
     logger.info("[%s | %s] calibrating", held_out_source, model_name)
@@ -482,6 +498,7 @@ def run(cfg: RunConfig) -> dict[str, object]:
             "smoke": cfg.smoke,
             "n_trials": cfg.n_trials,
             "n_resamples": cfg.n_resamples,
+            "n_ensemble_epochs": cfg.n_ensemble_epochs,
             "seed": cfg.seed,
             "n_folds_cap": cfg.n_folds_cap,
         },
@@ -526,6 +543,7 @@ def resolve_config(args: argparse.Namespace) -> RunConfig:
             smoke=True,
             n_trials=SMOKE_N_TRIALS,
             n_resamples=SMOKE_N_RESAMPLES,
+            n_ensemble_epochs=ENSEMBLE_SMOKE_N_EPOCHS,
             data_path=data_path,
             models_dir=MODELS_V1_DIR / "smoke",
             reports_dir=REPORTS_V1_DIR / "smoke",
@@ -538,6 +556,7 @@ def resolve_config(args: argparse.Namespace) -> RunConfig:
         smoke=False,
         n_trials=FULL_N_TRIALS,
         n_resamples=FULL_N_RESAMPLES,
+        n_ensemble_epochs=ENSEMBLE_FULL_N_EPOCHS,
         data_path=data_path,
         models_dir=MODELS_V1_DIR,
         reports_dir=REPORTS_V1_DIR,
