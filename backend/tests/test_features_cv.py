@@ -76,6 +76,14 @@ def test_iter_lodo_folds_raises_on_missing_columns() -> None:
         list(iter_lodo_folds(df))
 
 
+def test_iter_lodo_folds_error_names_both_required_columns() -> None:
+    """Error message should list both required columns so the caller knows
+    what to add. Regression test for the looser per-splitter validation."""
+    df = pd.DataFrame({"HeartDisease": [0, 1]})
+    with pytest.raises(KeyError, match="source"):
+        list(iter_lodo_folds(df))
+
+
 def test_lodo_fold_validates_disjoint_in_constructor() -> None:
     with pytest.raises(ValueError, match="overlapping train/test"):
         LodoFold(
@@ -175,3 +183,18 @@ def test_iter_random_kfold_is_reproducible_under_same_seed() -> None:
     a_test = [t.tolist() for _, t in iter_random_kfold(df, seed=SEED)]
     b_test = [t.tolist() for _, t in iter_random_kfold(df, seed=SEED)]
     assert a_test == b_test
+
+
+def test_iter_random_kfold_does_not_require_source_column() -> None:
+    """Random K-fold deliberately ignores source identity; it must not
+    fail on a frame that has the target but no source. Bug fix for the
+    over-validation in the original `_validate_columns` helper."""
+    df = pd.DataFrame({"HeartDisease": [0, 1] * 10})
+    folds = list(iter_random_kfold(df, n_splits=2))
+    assert len(folds) == 2
+
+
+def test_iter_random_kfold_raises_on_missing_target() -> None:
+    df = pd.DataFrame({"only_source": ["A", "B"] * 5})
+    with pytest.raises(KeyError, match="HeartDisease"):
+        list(iter_random_kfold(df, n_splits=2))

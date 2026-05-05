@@ -71,15 +71,20 @@ _INDICATOR_COLS: Final[tuple[str, ...]] = tuple(
 def _one_hot_encoder() -> OneHotEncoder:
     """OHE configured for our LODO setting.
 
-    ``handle_unknown='infrequent_if_exist'`` matters: a category that appears
-    in test but not training (rare but possible under LODO with small per-
-    source samples — e.g. a single ``ST_Slope`` value in Switzerland) maps
-    to a fallback bucket rather than raising.
+    ``handle_unknown='ignore'`` matters: a category that appears in test
+    but not training (rare but possible under LODO with small per-source
+    samples — e.g. a single ``ST_Slope`` value present only in Switzerland)
+    is encoded as all-zeros rather than raising. We previously specified
+    ``handle_unknown='infrequent_if_exist'`` with ``min_frequency=1``, but
+    ``min_frequency=1`` makes no fitted category infrequent (a fitted level
+    must occur ≥1 times by definition), so the infrequent-bucket fallback
+    never triggers and the behaviour collapses to ``handle_unknown='ignore'``
+    semantics anyway. ``ignore`` makes the contract honest and removes
+    misleading config.
     """
     return OneHotEncoder(
         sparse_output=False,
-        handle_unknown="infrequent_if_exist",
-        min_frequency=1,
+        handle_unknown="ignore",
         dtype="float64",
     )
 

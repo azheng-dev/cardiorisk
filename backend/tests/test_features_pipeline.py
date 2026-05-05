@@ -206,17 +206,46 @@ def test_lr_pipeline_imputer_means_differ_when_fit_on_disjoint_slices(
     )
 
 
+def test_xgboost_pipeline_imputer_state_differs_when_fit_on_disjoint_slices(
+    feature_target_split: tuple[pd.DataFrame, pd.Series],
+) -> None:
+    """State-level leakage check for the IterativeImputer (MissForest variant).
+
+    Reaches into the fitted ``IterativeImputer.initial_imputer_.statistics_``
+    (the per-column means used as starting values for the iterative
+    procedure) and asserts they differ across disjoint training slices.
+    This is shape-independent — it works even when the OHE happens to
+    produce the same column count on both slices, which the previous
+    `transform-and-compare` version could short-circuit past."""
+    X, y = feature_target_split
+    (X_a, y_a), (X_b, y_b), _ = _disjoint_slices(X, y)
+
+    pipe_a = make_xgboost_pipeline().fit(X_a, y_a)
+    pipe_b = make_xgboost_pipeline().fit(X_b, y_b)
+
+    ct_a = pipe_a.named_steps["preprocess"]
+    ct_b = pipe_b.named_steps["preprocess"]
+    imp_a = ct_a.named_transformers_["missforest_continuous"]
+    imp_b = ct_b.named_transformers_["missforest_continuous"]
+
+    stats_a = imp_a.initial_imputer_.statistics_
+    stats_b = imp_b.initial_imputer_.statistics_
+    assert not np.allclose(stats_a, stats_b), (
+        "IterativeImputer (MissForest) fit on disjoint slices produced "
+        "identical initial-imputer statistics; check for leakage. "
+        f"a={stats_a.tolist()}, b={stats_b.tolist()}"
+    )
+
+
 def test_xgboost_pipeline_imputed_values_differ_when_fit_on_disjoint_slices(
     feature_target_split: tuple[pd.DataFrame, pd.Series],
 ) -> None:
-    """Behavioural leakage check for the IterativeImputer (MissForest variant):
-    fit on subset A, transform shared holdout. Fit on subset B, transform
-    same holdout. The two transformed outputs must differ for at least one
-    cell that was originally NaN. If they don't, the imputer is degenerate
-    or being fit on the union somehow."""
+    """End-to-end transform-level leakage check: complements the state-level
+    test above by verifying the *behaviour* differs, not just the internal
+    state. Allowed to short-circuit on shape mismatch (which is itself
+    evidence of fit-dependence — different OHE levels seen)."""
     X, y = feature_target_split
     (X_a, y_a), (X_b, y_b), X_holdout = _disjoint_slices(X, y)
-    # Inject a NaN into the holdout so there's something to impute.
     X_holdout = X_holdout.copy()
     X_holdout.loc[X_holdout.index[0], "Cholesterol"] = np.nan
 
@@ -225,10 +254,6 @@ def test_xgboost_pipeline_imputed_values_differ_when_fit_on_disjoint_slices(
 
     out_a = pipe_a.transform(X_holdout)
     out_b = pipe_b.transform(X_holdout)
-    # Disjoint fit slices may produce different OHE column counts (different
-    # categorical levels seen). Either is evidence of fit-dependence:
-    #   - different shape  => OHE columns differ  => leakage protected
-    #   - same shape but cell-wise different values => imputer differs => leakage protected
     if out_a.shape != out_b.shape:
         return
     assert not np.allclose(out_a, out_b), (

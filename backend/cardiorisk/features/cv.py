@@ -81,12 +81,17 @@ class WithinFoldSplit:
                 raise ValueError(f"within-fold {a_name} and {b_name} indices overlap")
 
 
-def _validate_columns(df: pd.DataFrame) -> None:
-    missing = [c for c in (TARGET_COLUMN, SOURCE_COLUMN) if c not in df.columns]
+def _require_columns(df: pd.DataFrame, required: tuple[str, ...]) -> None:
+    """Raise ``KeyError`` if any of ``required`` is not in ``df.columns``.
+
+    Splitter-scoped: each splitter validates only the columns it actually
+    consumes. LODO needs ``source`` *and* the target; random K-fold only
+    needs the target.
+    """
+    missing = [c for c in required if c not in df.columns]
     if missing:
         raise KeyError(
-            f"DataFrame is missing required column(s) {missing}; expected at "
-            f"least {TARGET_COLUMN!r} and {SOURCE_COLUMN!r}"
+            f"DataFrame is missing required column(s) {missing}; expected {list(required)}"
         )
 
 
@@ -99,7 +104,7 @@ def iter_lodo_folds(df: pd.DataFrame) -> Iterator[LodoFold]:
     callers slice the underlying ``X``/``y`` numpy arrays directly without
     paying for ``df.loc`` lookups in a hot loop.
     """
-    _validate_columns(df)
+    _require_columns(df, (TARGET_COLUMN, SOURCE_COLUMN))
     groups = df[SOURCE_COLUMN].to_numpy()
     splitter = LeaveOneGroupOut()
     folds: list[LodoFold] = []
@@ -180,9 +185,11 @@ def iter_random_kfold(
     with LODO-CV. Never run as the headline; included so we can publish
     the gap.
 
-    Yields ``(train_idx, test_idx)`` tuples in fold order.
+    Yields ``(train_idx, test_idx)`` tuples in fold order. Only requires
+    the ``HeartDisease`` column (no ``source`` needed) — random K-fold
+    deliberately ignores source identity.
     """
-    _validate_columns(df)
+    _require_columns(df, (TARGET_COLUMN,))
     skf = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=seed)
     for train_idx, test_idx in skf.split(X=df, y=df[TARGET_COLUMN]):
         yield (
