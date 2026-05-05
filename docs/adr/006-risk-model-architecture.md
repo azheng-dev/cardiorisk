@@ -10,8 +10,8 @@
 
 The v1 CardioRisk Co-Pilot risk model is built around the following stack:
 
-- **Headline (primary) model:** TabPFN v2.5 / v2.6 (zero-shot, in-context, calibrated by construction).
-- **White-box baseline:** XGBoost with isotonic post-hoc calibration, hyperparameters tuned by Optuna (Bayesian optimisation, strict early stopping).
+- **Headline (lead-in) model:** TabPFN v2.5 / v2.6 (zero-shot, in-context, calibrated by construction). "Headline" denotes README/UI narrative ordering, not implied confidence; the LODO-CV eval table is the binding source of truth on which model actually wins. See [04 §2](../research/04-revised-design.md#2-model-architecture).
+- **Co-headline candidate / white-box workhorse:** XGBoost with isotonic post-hoc calibration, hyperparameters tuned by Optuna (Bayesian optimisation, strict early stopping). If it beats TabPFN under LODO-CV, the README is rewritten accordingly.
 - **Transparency anchor:** L1 logistic regression with restricted-cubic-spline expansions on continuous features.
 - **Honesty baseline:** the prior Honours WOA-Ensemble (CNN + LSTM + ANN with WOA-tuned hyperparameters), reimplemented and run under the same protocol.
 - **Evaluation protocol:** Leave-One-Domain-Out cross-validation across the five HFP source datasets (Cleveland / Hungarian / Switzerland / Long Beach VA / Stalog), reported with bootstrapped 95% CIs.
