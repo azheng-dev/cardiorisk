@@ -44,11 +44,16 @@ repos:
         additional_dependencies: ["pydantic>=2.0", "pydantic-settings>=2.0"]
 
   # --- TS / JS: Biome (lint + format) ---
+  # Biome 1.x resolves biome.json from the *current working directory*, not from
+  # each input file's directory. The pre-commit hook runs from repo root, so we
+  # must pass --config-path=frontend explicitly or it silently falls back to
+  # tab-indent defaults and rewrites every frontend file. See ADR-007.
   - repo: https://github.com/biomejs/pre-commit
     rev: v1.9.4
     hooks:
       - id: biome-check
         files: ^frontend/
+        args: ["--config-path=frontend"]
         additional_dependencies: ["@biomejs/biome@1.9.4"]
 
   # --- Custom: block raw data CSVs from being staged ---

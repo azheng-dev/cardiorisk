@@ -11,10 +11,11 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [004](./004-monorepo-layout-backend-frontend.md) | Monorepo layout — backend + frontend siblings | Accepted | 0 |
 | [005](./005-conventional-commits-and-pr-flow.md) | Conventional Commits + branch-per-PR + squash-merge | Accepted | 0 |
 | [006](./006-risk-model-architecture.md) | Risk-model architecture for v1 (TabPFN + XGBoost + L1 LR + WOA-Ensemble baseline) | Proposed | 1 |
+| [007](./007-solo-phase-branch-protection.md) | Branch protection policy for solo-maintainer phase | Accepted | 0 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-007: Embeddings + retrieval architecture (Phase 3).
-- ADR-008: Citation + NLI verification approach (Phase 3).
-- ADR-009: LLM choice + multi-model evaluation (Phase 6).
-- ADR-010: Brand + visual identity (Phase 5).
+- ADR-008: Embeddings + retrieval architecture (Phase 3).
+- ADR-009: Citation + NLI verification approach (Phase 3).
+- ADR-010: LLM choice + multi-model evaluation (Phase 6).
+- ADR-011: Brand + visual identity (Phase 5).

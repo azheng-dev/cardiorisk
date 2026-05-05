@@ -1,10 +1,13 @@
 name: CI
 
 on:
-  # Run on every push to any branch so push-time checks catch issues
-  # before a PR is opened (e.g. rebases that resurrect old blobs).
+  # Post-merge gate on main only. Pre-PR feedback is delegated to local
+  # pre-commit hooks. Restricting push to main avoids the
+  # duplicate-cancelled-run trap that poisoned statusCheckRollup
+  # when push: ["**"] and pull_request: ["**"] both fired for the
+  # same SHA. See ADR-007 §"Workflow change shipped with this ADR".
   push:
-    branches: ["**"]
+    branches: [main]
   # Run on PRs against any base branch, including stacked PRs
   # (e.g. docs/* targeting chore/* before chore/* lands on main).
   pull_request:
