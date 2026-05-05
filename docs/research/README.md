@@ -8,6 +8,7 @@ Phase 1 deliverables for CardioRisk Co-Pilot — a critical examination of a pri
 | 02 | [Current state of the art (2025–2026)](./02-current-soa.md) | Done | Distilled summary of the current literature on tabular CVD risk prediction, calibrated against the user-supplied Deep Research report. |
 | 03 | [Critical review](./03-critical-review.md) | Done | Opinionated, head-to-head verdict for each Honours design choice: defensible / outdated / what to upgrade / evidence. |
 | 04 | [Revised v1 design](./04-revised-design.md) | Done | The proposed v1 ML system, justified line-by-line against §03. |
+| 05 | [EDA findings (Phase 2.1)](./05-eda-findings.md) | Done | Concrete numbers from the four UCI subsets in HFP schema; what's there, what's broken, implications for Phase 2.2. |
 | ADR-006 | [Risk-model architecture](../adr/006-risk-model-architecture.md) | Proposed (Accepted on Phase 1 checkpoint) | Binding decision: chosen architecture, rejected alternatives, trigger to revisit. |
 
 ## What to read first

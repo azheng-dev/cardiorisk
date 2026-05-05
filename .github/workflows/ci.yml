@@ -98,6 +98,14 @@ jobs:
       - name: Pytest
         working-directory: backend
         run: uv run pytest -q
+      # Smoke-test the EDA notebook end-to-end against the synthetic fixture.
+      # No network, no Kaggle credentials. Catches regressions in the data
+      # layer that don't show up in unit tests (e.g. notebook-only imports,
+      # broken plotting calls, schema mismatches against the parquet writer).
+      - name: Build combined.parquet from fixture
+        run: uv run --project backend python backend/scripts/build_combined.py --use-fixture
+      - name: Execute EDA notebook
+        run: uv run --project backend jupytext --execute notebooks/01-eda.py
 
   # ---------------------------------------------------------------- typescript
   lint-ts:
