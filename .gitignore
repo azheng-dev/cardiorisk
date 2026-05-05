@@ -40,6 +40,12 @@ FIT4701-4702*/
 *-2024S1-1698*/
 _honours-archive/
 
+# --- Working research artefacts (Deep Research outputs, scratch PDFs) -----
+# These are inputs to docs/research/*, not deliverables. Keep them on disk
+# but never in git.
+*.pdf
+!docs/**/*.pdf  # explicit allow if we ever publish a PDF deliverable
+
 # --- Python -----------------------------------------------------------------
 __pycache__/
 *.py[cod]
