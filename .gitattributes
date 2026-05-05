@@ -1,0 +1,37 @@
+# Normalise line endings to LF on commit; check out as-is on Windows.
+* text=auto eol=lf
+
+# Explicit text types
+*.py     text eol=lf
+*.ts     text eol=lf
+*.tsx    text eol=lf
+*.js     text eol=lf
+*.jsx    text eol=lf
+*.json   text eol=lf
+*.md     text eol=lf
+*.yml    text eol=lf
+*.yaml   text eol=lf
+*.toml   text eol=lf
+*.sh     text eol=lf
+
+# Explicit binary types
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.pdf    binary
+*.ico    binary
+*.woff   binary
+*.woff2  binary
+
+# Notebooks: treat as text but never auto-merge (use nbdime instead).
+*.ipynb  text eol=lf merge=nbdime diff=nbdime
+
+# Lockfiles: text but rarely useful in diffs.
+pnpm-lock.yaml -diff
+uv.lock        -diff
+
+# Git LFS placeholder — uncomment if/when we version model weights.
+# *.pt   filter=lfs diff=lfs merge=lfs -text
+# *.onnx filter=lfs diff=lfs merge=lfs -text

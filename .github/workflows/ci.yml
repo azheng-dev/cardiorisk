@@ -1,0 +1,166 @@
+name: CI
+
+on:
+  # Run on every push to any branch so push-time checks catch issues
+  # before a PR is opened (e.g. rebases that resurrect old blobs).
+  push:
+    branches: ["**"]
+  # Run on PRs against any base branch, including stacked PRs
+  # (e.g. docs/* targeting chore/* before chore/* lands on main).
+  pull_request:
+    branches: ["**"]
+
+# Cancel in-progress runs on the same branch when a new push lands.
+# Use ref_name (branch name, no refs/heads/) on push and head_ref on PR
+# events so the push- and PR-triggered runs for the same source branch
+# share one group key and only one executes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ---------------------------------------------------------------- gitleaks
+  gitleaks:
+    name: secret-scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # full history for gitleaks
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ---------------------------------------------------------------- python
+  lint-python:
+    name: lint-python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install 3.12
+      - name: Sync deps
+        working-directory: backend
+        run: uv sync --frozen --all-extras
+      - name: Ruff lint
+        working-directory: backend
+        run: uv run ruff check .
+      - name: Ruff format check
+        working-directory: backend
+        run: uv run ruff format --check .
+
+  type-check-python:
+    name: type-check-python
+    runs-on: ubuntu-latest
+    needs: lint-python
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install 3.12
+      - name: Sync deps
+        working-directory: backend
+        run: uv sync --frozen --all-extras
+      - name: Mypy strict
+        working-directory: backend
+        run: uv run mypy .
+
+  test-python:
+    name: test-python
+    runs-on: ubuntu-latest
+    needs: lint-python
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Set up Python
+        run: uv python install 3.12
+      - name: Sync deps
+        working-directory: backend
+        run: uv sync --frozen --all-extras
+      - name: Pytest
+        working-directory: backend
+        run: uv run pytest -q
+
+  # ---------------------------------------------------------------- typescript
+  lint-ts:
+    name: lint-ts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      - name: Biome check
+        working-directory: frontend
+        run: pnpm exec biome check .
+
+  type-check-ts:
+    name: type-check-ts
+    runs-on: ubuntu-latest
+    needs: lint-ts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      - name: tsc --noEmit
+        working-directory: frontend
+        run: pnpm exec tsc --noEmit
+
+  test-ts:
+    name: test-ts
+    runs-on: ubuntu-latest
+    needs: lint-ts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      - name: Vitest
+        working-directory: frontend
+        run: pnpm test --run
