@@ -10,10 +10,10 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [003](./003-typescript-tooling-pnpm-biome.md) | TypeScript tooling — pnpm, Biome, strict tsc, Vitest | Accepted | 0 |
 | [004](./004-monorepo-layout-backend-frontend.md) | Monorepo layout — backend + frontend siblings | Accepted | 0 |
 | [005](./005-conventional-commits-and-pr-flow.md) | Conventional Commits + branch-per-PR + squash-merge | Accepted | 0 |
+| [006](./006-risk-model-architecture.md) | Risk-model architecture for v1 (TabPFN + XGBoost + L1 LR + WOA-Ensemble baseline) | Proposed | 1 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-006: Risk model architecture (Phase 1) — supersedes the AGENTS.md "ADR-001 for the risk model" item.
 - ADR-007: Embeddings + retrieval architecture (Phase 3).
 - ADR-008: Citation + NLI verification approach (Phase 3).
 - ADR-009: LLM choice + multi-model evaluation (Phase 6).

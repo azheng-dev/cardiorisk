@@ -51,25 +51,32 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 0 — scaffolding built + validated locally; awaiting checkpoint
-Last checkpoint:      Pre-Phase-0: Honours archive moved out of repo to ~/GitRepo/_honours-archive/
-Open decisions:       Phase 0 checkpoint questions pending user approval:
-                      - GitHub repo name
-                      - Approval for first commit
-                      - Approval for `gh repo create` + push (or user creates repo themselves)
-                      - Branch-protection rules to apply once `main` exists on GitHub
-Open issues:          (none yet)
-Last meaningful PR:   n/a (smoke PR pending)
-Last eval run:        n/a
+Current phase:        Phase 1 — critical review complete; awaiting Phase 1 checkpoint
+Last checkpoint:      Phase 0 bootstrap commit landed locally (chore/phase-0-bootstrap, fcde125);
+                      remote push deferred at user request (auth + author-identity issues to
+                      resolve out-of-band).
+Open decisions:       Phase 1 checkpoint questions pending user approval:
+                      - Accept the verdict on each Honours design choice?
+                      - Approve the v1 design (TabPFN + XGBoost + L1 LR + WOA baseline,
+                        LODO-CV, TRIPOD+AI Model Card, AusCVDRisk-subordinate positioning)?
+                      - Anything from the prior work to preserve verbatim beyond what's listed
+                        in 03 §9?
+                      - Architectures missed (CatBoost, EBM, TabuLa-8B already considered)?
+                      - Ready to proceed to Phase 2.1 (data ingestion + EDA)?
+Open issues:          - Remote-push auth (work email cached, wrong GitHub account)
+                      - Author identity on prior commit is work email; needs amend or accept
+Last meaningful PR:   none pushed yet (chore/phase-0-bootstrap branch local-only;
+                      docs/phase-1-critical-review branch pending commit + push)
+Last eval run:        n/a (Phase 2.3 onward)
 
-Phase 0 local validation (all green):
-  uv sync + ruff lint + ruff format-check + mypy strict + pytest        passing
-  pnpm install + biome check + tsc --noEmit (strict) + vitest           passing
-  pre-commit run --all-files (15 hooks: yaml/toml/json/MR/largefile/    passing
-    EOF/whitespace/EOL/private-key/ruff/ruff-fmt/mypy/biome/no-raw-data/
-    gitleaks)
-  gitleaks detect (working tree)                                        0 leaks
-  Files staged: 38; no PII, no data, no caches, no node_modules
+Phase 1 deliverables (all written, awaiting commit + checkpoint):
+  docs/research/01-honours-recap.md       sanitised recap of prior work
+  docs/research/02-current-soa.md         2025-2026 SoA + cross-checked Deep Research synthesis
+  docs/research/03-critical-review.md     opinionated head-to-head verdict
+  docs/research/04-revised-design.md      proposed v1 risk-model design
+  docs/research/README.md                 index updated
+  docs/adr/006-risk-model-architecture.md binding decision (Proposed)
+  docs/adr/README.md                      ADR index updated
 ```
 
 When the agent finishes any phase or subphase, it updates this block before checkpointing with the user.
