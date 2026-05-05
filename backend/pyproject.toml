@@ -83,9 +83,10 @@ ignore = [
 # generation; T201 (print) is fine in a script that prints status to stdout.
 "scripts/**" = ["S311", "T201"]
 # Sklearn convention uses uppercase X for the feature matrix; we follow it
-# in custom transformers and pipeline factories so the API matches what
-# users expect from sklearn estimators.
+# in custom transformers, pipeline factories, calibration wrappers, and
+# anywhere else that mirrors an sklearn estimator API.
 "cardiorisk/features/**" = ["N803", "N806"]
+"cardiorisk/calibration.py" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"

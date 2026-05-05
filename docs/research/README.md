@@ -10,8 +10,10 @@ Phase 1 deliverables for CardioRisk Co-Pilot — a critical examination of a pri
 | 04 | [Revised v1 design](./04-revised-design.md) | Done | The proposed v1 ML system, justified line-by-line against §03. |
 | 05 | [EDA findings (Phase 2.1)](./05-eda-findings.md) | Done | Concrete numbers from the four UCI subsets in HFP schema; what's there, what's broken, implications for Phase 2.2. |
 | 06 | [Preprocessing decisions (Phase 2.2)](./06-preprocessing-decisions.md) | Done | Opinionated walkthrough of the cleaning + per-model pipeline + LODO splitter; cross-refs design and EDA. |
+| 07 | [Eval harness design (Phase 2.3a)](./07-eval-design.md) | Done | Opinionated walkthrough of metrics + DCA + bootstrap CIs + reliability + subgroup audits + calibration wrapper. |
 | ADR-006 | [Risk-model architecture](../adr/006-risk-model-architecture.md) | Proposed (Accepted on Phase 1 checkpoint) | Binding decision: chosen architecture, rejected alternatives, trigger to revisit. |
 | ADR-008 | [Preprocessing pipeline](../adr/008-preprocessing-pipeline.md) | Accepted | Binding decision: cleaning prefix + per-model sklearn factories + LODO + indicators + RCS. |
+| ADR-009 | [Eval harness](../adr/009-eval-harness.md) | Accepted | Binding decision: metrics set + DCA + percentile bootstrap + reliability defaults + calibration dispatch. |
 
 ## What to read first
 
