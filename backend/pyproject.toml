@@ -7,9 +7,11 @@ requires-python = ">=3.12,<3.13"
 license = { text = "MIT" }
 authors = [{ name = "CardioRisk Co-Pilot contributors" }]
 
-# Deps grow per-phase. Phase 2.1 adds the data + EDA stack. Future phases:
+# Deps grow per-phase. Phase 2.1 added data + EDA. Phase 2.2 adds scikit-learn
+# for the preprocessing pipeline (IterativeImputer / OneHotEncoder /
+# Pipeline / ColumnTransformer / LeaveOneGroupOut). Future phases:
 # fastapi/pydantic in Phase 4, langgraph in Phase 4, shap in Phase 2.5,
-# tabpfn / xgboost / scikit-learn in Phase 2.3.
+# tabpfn / xgboost in Phase 2.3.
 dependencies = [
     # data + I/O
     "pandas>=3.0.2",
@@ -22,9 +24,11 @@ dependencies = [
     "missingno>=0.5.2",
     "ipykernel>=7.2.0",
     "jupytext>=1.19.1",
+    "nbconvert>=7.17.1",
     # optional dataset source: Kaggle HFP cross-check (UCI is primary)
     "kaggle>=2.1.0",
-    "nbconvert>=7.17.1",
+    # preprocessing pipeline (Phase 2.2): pipelines, splitters, IterativeImputer
+    "scikit-learn>=1.8.0",
 ]
 
 [dependency-groups]
@@ -72,11 +76,16 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-# Tests can use asserts and have less strict naming.
-"tests/**" = ["S101", "N802", "N803"]
+# Tests can use asserts and have less strict naming. N806 covers tests
+# of sklearn-shaped APIs that bind X = ... in helper bodies.
+"tests/**" = ["S101", "N802", "N803", "N806"]
 # CLI scripts: stdlib `random` is fine for deterministic synthetic-data
 # generation; T201 (print) is fine in a script that prints status to stdout.
 "scripts/**" = ["S311", "T201"]
+# Sklearn convention uses uppercase X for the feature matrix; we follow it
+# in custom transformers and pipeline factories so the API matches what
+# users expect from sklearn estimators.
+"cardiorisk/features/**" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -98,10 +107,15 @@ module = "tests.*"
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
-# Third-party libs without type stubs in the Phase 2.1 stack. These are
-# scoped to the modules where typing is genuinely missing upstream; remove
-# any line that gains stubs.
-module = ["missingno", "missingno.*", "kaggle", "kaggle.*"]
+# Third-party libs without type stubs. Scoped to the modules where typing
+# is genuinely missing upstream; drop a line if the package gains stubs.
+module = [
+  # Phase 2.1: notebook stack + Kaggle
+  "missingno", "missingno.*",
+  "kaggle", "kaggle.*",
+  # Phase 2.2: scikit-learn ships no py.typed marker as of 1.8
+  "sklearn", "sklearn.*",
+]
 ignore_missing_imports = true
 
 # ------------------------------------------------------------------- pytest
@@ -114,7 +128,15 @@ addopts = [
   "--strict-config",
 ]
 xfail_strict = true
-filterwarnings = ["error"]
+filterwarnings = [
+  "error",
+  # IterativeImputer's "Early stopping criterion not reached" at small n
+  # (our LODO folds are 600-800 rows) is expected behaviour, not a bug.
+  # The imputer still produces sensible imputations; convergence is a
+  # nice-to-have, not a correctness condition. Suppressed only for this
+  # specific class so any *other* sklearn warning still fails tests.
+  "ignore:\\[IterativeImputer\\] Early stopping criterion not reached:sklearn.exceptions.ConvergenceWarning",
+]
 
 # ------------------------------------------------------------------- coverage
 [tool.coverage.run]

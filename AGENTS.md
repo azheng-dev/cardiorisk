@@ -51,22 +51,28 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.1 implementation complete. PR open against main; awaiting CI green
-                      and user merge approval before Phase 2.2 kickoff.
-Last checkpoint:      Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
+Current phase:        Phase 2.2 implementation complete. PR open against main; awaiting CI green
+                      and user merge approval before Phase 2.3 kickoff.
+Last checkpoint:      Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
+                      Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-                      Phase 2 greenlit by user (2026-05-05).
-Open decisions:       - Phase 2.1 PR review + merge approval.
-                      - Phase 2.2 (preprocessing pipeline) plan: confirm MissForest within-fold
-                        approach for XGBoost / WOA-Ensemble baselines; categorical-Missing-as-its-
-                        own-category vs. mode-impute; whether to add per-feature was_missing
-                        indicator columns (EDA recommends yes for 4 features).
+                      Phase 2.2 greenlit by user (2026-05-05).
+Open decisions:       - Phase 2.2 PR review + merge approval.
+                      - Phase 2.3 (risk model v1) plan: TabPFN v2.5 vs v2.6 pin choice;
+                        XGBoost hyperparameter search budget (Optuna trials, time cap);
+                        L1 LR solver (liblinear vs saga) and C grid; isotonic vs Platt
+                        scaling for post-hoc calibration; class-weighting decision based
+                        on per-source confusion matrices; n_knots ablation for the LR
+                        baseline (3/4/5 vs accept default 4 and ship); model artefact
+                        storage (Hugging Face vs W&B vs Git LFS).
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
-                      root cause and PR #4 itself merged via standard gh pr merge.
-Last meaningful PR:   #3 docs(research): Phase 1 critical review + v1 risk-model design (merged
-                      4553c61). #1 chore(repo): bootstrap (merged 2e2d648). #4 chore(repo):
-                      branch-protection policy ADR + workflow hardening (merged 41b697f).
+                      root cause and every PR since (#4, #5) merged via standard gh pr merge.
+Last meaningful PR:   #5 feat(data): Phase 2.1 — UCI ingestion, HFP-schema combine, EDA notebook
+                      (merged 61dafc0). #4 chore(repo): branch-protection policy ADR + workflow
+                      hardening (merged 41b697f). #3 docs(research): Phase 1 critical review
+                      + v1 risk-model design (merged 4553c61). #1 chore(repo): bootstrap
+                      (merged 2e2d648).
 Last eval run:        n/a (Phase 2.3 onward)
 
 Branch protection on main (live, set 2026-05-05):
@@ -78,22 +84,44 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 2.1 deliverables (in pending PR feat/phase-2-1-data-ingestion-eda):
+Phase 2.2 deliverables (in pending PR feat/phase-2-2-preprocessing-pipeline):
+  backend/cardiorisk/data/preprocess.py        cleaning prefix: chol==0->NaN, 5 was_missing
+                                               indicators, categorical NaN -> "Missing",
+                                               Int64 -> float64 coercion. Pure functions.
+  backend/cardiorisk/features/__init__.py      package skeleton + module map
+  backend/cardiorisk/features/cv.py            iter_lodo_folds (4-fold), within_fold_split
+                                               (80/10/10 stratified), iter_random_kfold sanity
+  backend/cardiorisk/features/spline.py        custom RestrictedCubicSpline transformer with
+                                               Harrell quantile knots; n_knots in {3,4,5}
+  backend/cardiorisk/features/pipeline.py      4 sklearn factories: tabpfn (NaN passthrough),
+                                               xgboost (MissForest), lr (mean+RCS+scale),
+                                               woa (MissForest + scale)
+  backend/tests/test_preprocess.py             22 tests: cleaning + indicators + idempotency
+                                               + numeric coercion + clean_for_modelling chain
+  backend/tests/test_features_cv.py            16 tests: LODO 4-fold count + held-out source
+                                               + within-fold disjointness + reproducibility
+  backend/tests/test_features_spline.py        18 tests: knot placement + output shape
+                                               + linear-extrapolation + API contracts
+  backend/tests/test_features_pipeline.py      16 tests: factory shapes + LEAKAGE TESTS for LR
+                                               imputer means + XGBoost imputer values + categorical
+                                               Missing round-trip + TabPFN NaN passthrough
+  docs/research/06-preprocessing-decisions.md  opinionated walkthrough of the choices
+  docs/adr/008-preprocessing-pipeline.md       binding decision (Accepted)
+  docs/research/README.md, docs/adr/README.md  index updates
+  backend/pyproject.toml                       adds scikit-learn>=1.8.0 + sklearn mypy override
+                                               + IterativeImputer ConvergenceWarning filter
+                                               + features/* per-file ruff ignore (N803/N806)
+  uv.lock                                      sklearn 1.8.0 + joblib + threadpoolctl pinned
+
+Phase 2.1 deliverables (all on main, PR #5 merged 61dafc0):
   backend/cardiorisk/data/                     paths, fetch, combine, synthetic submodules
-  backend/scripts/fetch_hfp.py                 CLI: UCI primary fetch with SHA-256 pin,
-                                               --use-fixture for CI, --include-kaggle optional
-  backend/scripts/build_combined.py            CLI: UCI -> HFP-schema parquet with `source` col
-  backend/scripts/generate_fixture.py          CLI: deterministic synthetic 20-row HFP fixture
-  backend/tests/test_synthetic.py              schema, determinism, round-trip
-  backend/tests/test_fetch.py                  hash, idempotency, mocked HTTP, atomic writes
-  backend/tests/test_combine.py                schema mapping, source tagging, parquet round-trip
-  backend/tests/fixtures/hfp_mini.csv          synthetic only (seed=20260505); fixtures README
-  notebooks/01-eda.py + .ipynb                 jupytext-paired EDA, executes in CI on fixture
+  backend/scripts/{fetch_hfp,build_combined,generate_fixture}.py
+  backend/tests/{test_synthetic,test_fetch,test_combine}.py
+  backend/tests/fixtures/hfp_mini.csv          synthetic 20 rows (seed=20260505)
+  notebooks/01-eda.py + .ipynb                 jupytext-paired EDA, executes in CI
   data/checksums/uci_*.sha256                  pinned digests for the four UCI subsets
   docs/research/05-eda-findings.md             concrete numbers + Phase 2.2 implications
   docs/data/README.md                          data layer rules + fetch instructions
-  .pre-commit-config.yaml                      adds nbstripout hook for .ipynb outputs
-  .github/workflows/ci.yml                     test-python now also runs the EDA notebook smoke
 
 Phase 1 deliverables (all on main):
   docs/research/01-honours-recap.md       sanitised recap of prior work
