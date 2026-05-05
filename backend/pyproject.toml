@@ -8,10 +8,11 @@ license = { text = "MIT" }
 authors = [{ name = "CardioRisk Co-Pilot contributors" }]
 
 # Deps grow per-phase. Phase 2.1 added data + EDA. Phase 2.2 adds scikit-learn
-# for the preprocessing pipeline (IterativeImputer / OneHotEncoder /
-# Pipeline / ColumnTransformer / LeaveOneGroupOut). Future phases:
-# fastapi/pydantic in Phase 4, langgraph in Phase 4, shap in Phase 2.5,
-# tabpfn / xgboost in Phase 2.3.
+# for the preprocessing pipeline. Phase 2.3a added no new deps (eval harness
+# is pure sklearn + numpy + matplotlib). Phase 2.3b adds tabpfn (TFM headline),
+# xgboost (white-box workhorse), optuna (Bayesian hyperparam search).
+# Future phases: fastapi/pydantic in Phase 4, langgraph in Phase 4,
+# shap in Phase 2.5.
 dependencies = [
     # data + I/O
     "pandas>=3.0.2",
@@ -29,6 +30,20 @@ dependencies = [
     "kaggle>=2.1.0",
     # preprocessing pipeline (Phase 2.2): pipelines, splitters, IterativeImputer
     "scikit-learn>=1.8.0",
+    # v1 risk model (Phase 2.3b): TFM headline + XGBoost workhorse + Optuna tuner.
+    # joblib is already pulled transitively by sklearn; we list it explicitly because
+    # the model artefact storage layer depends on it directly (ADR-010).
+    #
+    # TFM choice: ADR-006 specified TabPFN. By Phase 2.3b implementation, TabPFN's
+    # 7.x line had added a PriorLabs license + TABPFN_TOKEN gate for model weight
+    # download, which breaks the no-auth reproducibility commitment of ADR-010.
+    # TabPFN 2.x is incompatible with scikit-learn 1.8. ADR-011 supersedes ADR-006
+    # on this point and substitutes TabICL (Inria Soda team, BSD-3, freely
+    # distributable, same in-context-learning TFM family).
+    "tabicl>=2.1,<2.2",
+    "xgboost>=3.0",
+    "optuna>=4.4",
+    "joblib>=1.5",
 ]
 
 [dependency-groups]
@@ -83,10 +98,13 @@ ignore = [
 # generation; T201 (print) is fine in a script that prints status to stdout.
 "scripts/**" = ["S311", "T201"]
 # Sklearn convention uses uppercase X for the feature matrix; we follow it
-# in custom transformers, pipeline factories, calibration wrappers, and
-# anywhere else that mirrors an sklearn estimator API.
+# in custom transformers, pipeline factories, calibration wrappers, model
+# wrappers, and anywhere else that mirrors an sklearn estimator API.
 "cardiorisk/features/**" = ["N803", "N806"]
 "cardiorisk/calibration.py" = ["N803", "N806"]
+"cardiorisk/models/**" = ["N803", "N806"]
+"cardiorisk/eval/**" = ["N803", "N806"]
+"cardiorisk/training/**" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -116,6 +134,11 @@ module = [
   "kaggle", "kaggle.*",
   # Phase 2.2: scikit-learn ships no py.typed marker as of 1.8
   "sklearn", "sklearn.*",
+  # Phase 2.3b: TabICL / XGBoost / Optuna / joblib all without py.typed
+  "tabicl", "tabicl.*",
+  "xgboost", "xgboost.*",
+  "optuna", "optuna.*",
+  "joblib", "joblib.*",
 ]
 ignore_missing_imports = true
 
@@ -137,6 +160,13 @@ filterwarnings = [
   # nice-to-have, not a correctness condition. Suppressed only for this
   # specific class so any *other* sklearn warning still fails tests.
   "ignore:\\[IterativeImputer\\] Early stopping criterion not reached:sklearn.exceptions.ConvergenceWarning",
+  # Phase 2.3b training-driver smoke test: the synthetic smoke dataset
+  # is small enough that sklearn's StratifiedKFold (n_splits=5) sometimes
+  # finds <5 members in the minority class of an inner CV slice. The
+  # warning is informational, not a correctness failure — the inner CV
+  # still runs with the available members. Suppressed only for the
+  # specific message; any other sklearn UserWarning still fails tests.
+  "ignore:The least populated class in y has only:UserWarning:sklearn.model_selection._split",
 ]
 
 # ------------------------------------------------------------------- coverage
@@ -152,3 +182,17 @@ exclude_lines = [
   "raise NotImplementedError",
   "if TYPE_CHECKING:",
 ]
+
+# ------------------------------------------------------------------- uv
+# Force CPU-only torch wheels everywhere. Without this, Linux pulls the
+# CUDA wheel by default (~2GB), bloating CI cache and adding nothing for
+# inference-only TabPFN use. macOS torch wheels are CPU-only by default;
+# this index is identical to the default there.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+torchvision = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

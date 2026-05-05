@@ -14,11 +14,12 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [007](./007-solo-phase-branch-protection.md) | Branch protection policy for solo-maintainer phase | Accepted | 0 |
 | [008](./008-preprocessing-pipeline.md) | Preprocessing pipeline for v1 (cleaning + LODO + per-model sklearn factories) | Accepted | 2.2 |
 | [009](./009-eval-harness.md) | Evaluation harness for v1 (metrics, DCA, bootstrap, calibration) | Accepted | 2.3a |
+| [010](./010-model-artefact-storage.md) | Model artefact storage for v1: local + rebuild script | Accepted | 2.3b |
+| [011](./011-tfm-tabicl-supersedes-tabpfn.md) | TabICL replaces TabPFN as the v1 TFM headline (supersedes ADR-006 §"Headline") | Accepted | 2.3b |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-010: Model artefact storage for v1 (local + rebuild script vs Hugging Face / W&B / Git LFS) (Phase 2.3b).
-- ADR-011: Embeddings + retrieval architecture (Phase 3).
-- ADR-012: Citation + NLI verification approach (Phase 3).
-- ADR-013: LLM choice + multi-model evaluation (Phase 6).
-- ADR-014: Brand + visual identity (Phase 5).
+- ADR-012: Embeddings + retrieval architecture (Phase 3).
+- ADR-013: Citation + NLI verification approach (Phase 3).
+- ADR-014: LLM choice + multi-model evaluation (Phase 6).
+- ADR-015: Brand + visual identity (Phase 5).

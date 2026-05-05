@@ -15,8 +15,8 @@ Two methods supported (see ADR-006 + the user's Phase-2.3 decision):
   fit; more stable on small calibration slices like ours (~60 rows
   per fold).
 
-TabPFN is calibrated by construction and does not pass through this
-module.
+TabICL (per ADR-011, replacing TabPFN per ADR-006's original choice)
+is calibrated by construction and does not pass through this module.
 
 Implementation: thin wrapper around sklearn's
 :class:`~sklearn.calibration.CalibratedClassifierCV` with
@@ -41,7 +41,8 @@ CalibrationMethod = Literal["isotonic", "sigmoid"]
 DEFAULT_METHOD_FOR_MODEL: Final[dict[str, CalibrationMethod]] = {
     "xgboost": "isotonic",
     "lr": "sigmoid",
-    # tabpfn deliberately absent: native calibration, no wrapper needed.
+    # tabicl deliberately absent: native calibration (TFM trained for
+    # direct probabilistic prediction), no post-hoc wrapper needed.
 }
 
 

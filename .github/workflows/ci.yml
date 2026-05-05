@@ -106,6 +106,13 @@ jobs:
         run: uv run --project backend python backend/scripts/build_combined.py --use-fixture
       - name: Execute EDA notebook
         run: uv run --project backend jupytext --execute notebooks/01-eda.py
+      # Phase 2.3b: smoke the full training driver end-to-end (1 LODO fold,
+      # 1 Optuna trial, 100 bootstrap resamples, all 3 v1 models). Catches
+      # regressions in the model wrappers, calibration wiring, and report-
+      # writing path that don't surface in unit tests. Runs in ~30s on the
+      # GitHub Actions ubuntu-latest runner.
+      - name: Smoke train_v1.py --smoke (3 models, 1 LODO fold)
+        run: uv run --project backend python backend/scripts/train_v1.py --smoke
 
   # ---------------------------------------------------------------- typescript
   lint-ts:
