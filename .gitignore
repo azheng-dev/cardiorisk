@@ -42,6 +42,8 @@ models/artifacts/
 # *smoke* outputs from CI runs are noise and stay local.
 reports/v1/smoke/
 reports/v1/figures/smoke/
+reports/v1/explainability/smoke/
+reports/v1/figures/explainability/smoke/
 models/v1/smoke/
 !models/v1/README.md
 !reports/v1/README.md

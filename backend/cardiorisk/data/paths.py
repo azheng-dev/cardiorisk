@@ -21,3 +21,7 @@ COMBINED_PARQUET: Final[Path] = DATA_PROCESSED / "combined.parquet"
 MODELS_V1_DIR: Final[Path] = REPO_ROOT / "models" / "v1"
 REPORTS_V1_DIR: Final[Path] = REPO_ROOT / "reports" / "v1"
 REPORTS_V1_FIGURES: Final[Path] = REPORTS_V1_DIR / "figures"
+
+# Phase 2.5 explainability layout (ADR-013).
+REPORTS_V1_EXPLAIN: Final[Path] = REPORTS_V1_DIR / "explainability"
+REPORTS_V1_EXPLAIN_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "explainability"

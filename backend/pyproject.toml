@@ -10,9 +10,10 @@ authors = [{ name = "CardioRisk Co-Pilot contributors" }]
 # Deps grow per-phase. Phase 2.1 added data + EDA. Phase 2.2 adds scikit-learn
 # for the preprocessing pipeline. Phase 2.3a added no new deps (eval harness
 # is pure sklearn + numpy + matplotlib). Phase 2.3b adds tabpfn (TFM headline),
-# xgboost (white-box workhorse), optuna (Bayesian hyperparam search).
-# Future phases: fastapi/pydantic in Phase 4, langgraph in Phase 4,
-# shap in Phase 2.5.
+# xgboost (white-box workhorse), optuna (Bayesian hyperparam search). Phase
+# 2.4 adds no new deps (Honours-Ensemble PyTorch port reuses torch transitively
+# via tabicl). Phase 2.5 adds shap (SHAP / KernelExplainer / TreeExplainer).
+# Future phases: fastapi/pydantic in Phase 4, langgraph in Phase 4.
 dependencies = [
     # data + I/O
     "pandas>=3.0.2",
@@ -44,6 +45,10 @@ dependencies = [
     "xgboost>=3.0",
     "optuna>=4.4",
     "joblib>=1.5",
+    # Phase 2.5 explainability: KernelExplainer (model-agnostic, used as the
+    # cross-model headline) + TreeExplainer (XGBoost native sanity-check).
+    # ADR-013. MIT-licensed. Pulls numba + cloudpickle + slicer transitively.
+    "shap>=0.51,<0.52",
 ]
 
 [dependency-groups]
@@ -105,6 +110,7 @@ ignore = [
 "cardiorisk/models/**" = ["N803", "N806"]
 "cardiorisk/eval/**" = ["N803", "N806"]
 "cardiorisk/training/**" = ["N803", "N806"]
+"cardiorisk/explainability/**" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -139,6 +145,15 @@ module = [
   "xgboost", "xgboost.*",
   "optuna", "optuna.*",
   "joblib", "joblib.*",
+  # Phase 2.5: shap (and its numba/llvmlite/slicer/cloudpickle transitive
+  # deps), plus scipy (used by cross_model_agreement for stats.spearmanr;
+  # scipy ships no py.typed marker as of 1.17, scipy-stubs is third-party).
+  "shap", "shap.*",
+  "numba", "numba.*",
+  "llvmlite", "llvmlite.*",
+  "slicer", "slicer.*",
+  "cloudpickle", "cloudpickle.*",
+  "scipy", "scipy.*",
 ]
 ignore_missing_imports = true
 

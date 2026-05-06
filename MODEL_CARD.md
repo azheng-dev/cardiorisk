@@ -1,10 +1,10 @@
 # Model Card — CardioRisk Co-Pilot v1 risk models
 
-> **Reading order.** This card is the user-facing summary of [`docs/research/08-v1-model-results.md`](docs/research/08-v1-model-results.md) (full Phase 2.3b + 2.4 LODO results) and [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md) (Honours-baseline honesty discussion). Read those for the per-fold tables, per-subgroup audit, decision-curve analysis, and bootstrap CIs.
+> **Reading order.** This card is the user-facing summary of [`docs/research/08-v1-model-results.md`](docs/research/08-v1-model-results.md) (Phase 2.3b + 2.4 LODO results), [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md) (Honours-baseline honesty discussion), and [`docs/research/10-explainability.md`](docs/research/10-explainability.md) (Phase 2.5 KernelSHAP + cross-model agreement). Read those for the per-fold tables, per-subgroup audit, decision-curve analysis, bootstrap CIs, and per-(model × fold) SHAP figures.
 >
-> **Status.** Phase 2.4 deliverable. v1 = the four-model risk-prediction stack the rest of the CardioRisk Co-Pilot system is built on. Numbers below are produced verbatim by `backend/scripts/train_v1.py` from `data/processed/combined.parquet` (the Heart Failure Prediction dataset's underlying UCI sources combined under the HFP schema).
+> **Status.** Phase 2.5 deliverable. v1 = the four-model risk-prediction stack the rest of the CardioRisk Co-Pilot system is built on. Numbers below are produced verbatim by `backend/scripts/train_v1.py` and `backend/scripts/compute_explanations.py` from `data/processed/combined.parquet` (the Heart Failure Prediction dataset's underlying UCI sources combined under the HFP schema).
 >
-> **TL;DR.** The cardiovascular-risk module ships **four** binary classifiers — TabICL (TFM), L1 LR with restricted-cubic-spline expansion, XGBoost, and a faithful PyTorch port of the Honours team's 4-net mean-averaged Ensemble — evaluated under Leave-One-Domain-Out CV across the four UCI sources, with post-hoc calibration on a within-fold calibration slice, bootstrap CIs, subgroup audits, and decision-curve analysis at the AusCVDRisk thresholds. **TabICL is the headline model by AUROC, AUPRC, Brier, and calibration slope. L1 LR is the strongest white-box.** XGBoost suffers from isotonic-on-small-slice calibration collapse (slope 0.21). The Honours-Ensemble is reproduced honestly — without the WOA feature-selection layer (because the WOA code is not in the supplied archive); see §3 below and [ADR-012](docs/adr/012-honours-baseline-reproduction.md).
+> **TL;DR.** The cardiovascular-risk module ships **four** binary classifiers — TabICL (TFM), L1 LR with restricted-cubic-spline expansion, XGBoost, and a faithful PyTorch port of the Honours team's 4-net mean-averaged Ensemble — evaluated under Leave-One-Domain-Out CV across the four UCI sources, with post-hoc calibration on a within-fold calibration slice, bootstrap CIs, subgroup audits, decision-curve analysis at the AusCVDRisk thresholds, and KernelSHAP-headline cross-model explainability with TreeSHAP / analytic-LR sanity checks. **TabICL is the headline model by AUROC, AUPRC, Brier, and calibration slope. L1 LR is the strongest white-box.** XGBoost suffers from isotonic-on-small-slice calibration collapse (slope 0.21). The Honours-Ensemble is reproduced honestly — without the WOA feature-selection layer (because the WOA code is not in the supplied archive); see §3 below and [ADR-012](docs/adr/012-honours-baseline-reproduction.md). The four models **agree on feature importance** at aggregate Spearman ρ ≥ 0.81 across all six pairwise comparisons (§5).
 
 ---
 
@@ -21,7 +21,7 @@ This is a **research artefact, not a clinical product.** It exists to demonstrat
 
 - Real patient care, EHR integration, or clinical decision support.
 - Populations the LODO procedure does not cover (the four UCI sources: Cleveland, Hungarian, LongBeachVA, Switzerland) — particularly any non-European, non-North-American cohort, or a population with a substantially different prevalence profile.
-- The LongBeachVA ≥70 stratum, which is structurally under-served by every v1 model under our LODO protocol (see §6 below).
+- The LongBeachVA ≥70 stratum, which is structurally under-served by every v1 model under our LODO protocol (see §8 below).
 
 ## 2. Models
 
@@ -59,7 +59,7 @@ Mean ± standard deviation across the four LODO folds, from `reports/v1/metrics_
 Full per-fold tables (including AUPRC, Brier, calibration, sensitivity) are in [`docs/research/08-v1-model-results.md`](docs/research/08-v1-model-results.md) §2. The qualitative reading consistent across all four models:
 
 - **Cleveland and Hungarian** are the easiest folds. TabICL leads, all four are within ~5pp.
-- **LongBeachVA** — every model loses ~10–15pp AUROC vs. the easier folds. Highest cholesterol-missingness, prevalence inversion vs. the training pool. The Honours-Ensemble *just* edges TabICL on AUROC here (0.745 vs 0.740) and is the only model whose net benefit at the 10% threshold beats treat-all (DCA §6); both within bootstrap noise.
+- **LongBeachVA** — every model loses ~10–15pp AUROC vs. the easier folds. Highest cholesterol-missingness, prevalence inversion vs. the training pool. The Honours-Ensemble *just* edges TabICL on AUROC here (0.745 vs 0.740) and is the only model whose net benefit at the 10% threshold beats treat-all (DCA §7); both within bootstrap noise.
 - **Switzerland** — degenerate-by-design (negative class is borderline absent). All metrics are noisy on this fold; we do not drop it from LODO.
 
 ## 4. Subgroup audit
@@ -67,9 +67,64 @@ Full per-fold tables (including AUPRC, Brier, calibration, sensitivity) are in [
 Per-(model × stratum) AUROC for sex and age band, with `min_stratum_size` guarding against meaningless small strata. Full table in [`docs/research/08-v1-model-results.md`](docs/research/08-v1-model-results.md) §3. Headlines:
 
 - **Sex (F vs M):** Cleveland and Hungarian are the only auditable folds (LongBeachVA has F=6, Switzerland F=10 — both below the guard). Within auditable folds, Cleveland favours F slightly across every model (gaps 0.04–0.08); Hungarian favours M across every model (gaps 0.04–0.14). The Honours-Ensemble has the **largest Hungarian sex gap (0.142)** of the four — TabICL 0.099, LR 0.054, XGBoost 0.037 — flagged as the strongest single subgroup-audit reason not to prefer the Ensemble for deployment.
-- **Age band (<50 / 50–69 / ≥70):** the ≥70 stratum on LongBeachVA (n=16) is the structural weak spot for **every v1 model.** AUROC there: TabICL 0.464, LR 0.536, XGBoost 0.518, Ensemble 0.393. The Ensemble is the worst on this stratum and posts the largest cross-stratum gap on LongBeachVA (0.440). The Honours architecture does not close this gap — it widens it. **The LongBeachVA ≥70 stratum is therefore declared out-of-scope for any deployment use of these four models** (see §7).
+- **Age band (<50 / 50–69 / ≥70):** the ≥70 stratum on LongBeachVA (n=16) is the structural weak spot for **every v1 model.** AUROC there: TabICL 0.464, LR 0.536, XGBoost 0.518, Ensemble 0.393. The Ensemble is the worst on this stratum and posts the largest cross-stratum gap on LongBeachVA (0.440). The Honours architecture does not close this gap — it widens it. **The LongBeachVA ≥70 stratum is therefore declared out-of-scope for any deployment use of these four models** (see §8).
 
-## 5. Calibration story (read carefully)
+## 5. Explainability (Phase 2.5)
+
+KernelSHAP is the cross-model headline (per [ADR-013](docs/adr/013-explainability-strategy.md)) — same algorithm, same background distribution (`shap.kmeans(50)`), same coalition budget (128) across all four models so the resulting feature attributions are commensurable. Native fast-path attributions (TreeSHAP for XGBoost; analytic LR-coefficient sum-back) run as sanity checks. Full discussion + per-(model × fold) figures: [`docs/research/10-explainability.md`](docs/research/10-explainability.md).
+
+### Top-5 cross-fold-averaged feature importance per model
+
+Mean |SHAP value| (probability space), averaged across the four LODO folds. Numbers from `reports/v1/explainability/explanations_per_cell.json`.
+
+| Rank | TabICL | XGBoost | LR | Ensemble |
+|---|---|---|---|---|
+| 1 | **ChestPainType (0.112)** | **ChestPainType (0.144)** | **ChestPainType (0.122)** | **ChestPainType (0.104)** |
+| 2 | FastingBS (0.047) | FastingBS (0.072) | MaxHR (0.069) | ST_Slope (0.055) |
+| 3 | ExerciseAngina (0.045) | Oldpeak (0.065) | Oldpeak (0.062) | Oldpeak (0.040) |
+| 4 | ST_Slope (0.041) | MaxHR (0.053) | ExerciseAngina (0.045) | ExerciseAngina (0.039) |
+| 5 | Oldpeak (0.037) | ExerciseAngina (0.044) | ST_Slope (0.043) | Sex (0.037) |
+
+`ChestPainType` is universally rank-1 across all four models on all four folds (the asymptomatic level dominates the contribution — see the LR per-spline-basis figures). `Cholesterol` is bottom-half for every model, an artefact of Switzerland's 100% missingness on that field, not a model-emergent dismissal of the textbook risk factor.
+
+### Cross-model agreement (Spearman rank correlation, aggregate over 4 folds)
+
+|  | TabICL | XGBoost | LR | Ensemble |
+|---|---|---|---|---|
+| **TabICL** | 1.00 | 0.90 | 0.84 | 0.83 |
+| **XGBoost** | 0.90 | 1.00 | 0.85 | 0.83 |
+| **LR** | 0.84 | 0.85 | 1.00 | 0.81 |
+| **Ensemble** | 0.83 | 0.83 | 0.81 | 1.00 |
+
+All six pairwise correlations ≥ 0.81 — the four models substantially agree on which features matter, the precondition the Phase 3 agentic system needs in order to draft a coherent risk-driver narrative on top of any one of them. TabICL ↔ XGBoost (0.90) is the closest pair despite maximally different inductive biases; the Honours-Ensemble disagrees most with the others (0.81–0.83), driven by its higher emphasis on `ST_Slope` and the `ST_Slope_was_missing` indicator. Visualisation: [`reports/v1/figures/explainability/aggregate_cross_model_agreement_heatmap.png`](reports/v1/figures/explainability/aggregate_cross_model_agreement_heatmap.png).
+
+### Sanity checks: KernelSHAP vs native attribution
+
+Spearman rank correlation between the cross-model KernelSHAP feature ranking and the native fast-path ranking (TreeSHAP for XGBoost; LR-coefficient × spline expansion summed back to raw HFP features for LR). Cell-by-cell numbers from `explanations_per_cell.json`:
+
+| Fold | XGBoost (KernelSHAP vs TreeSHAP) | LR (KernelSHAP vs analytic-summed) |
+|---|---|---|
+| Cleveland | 0.91 | 0.93 |
+| Hungarian | 0.96 | 0.89 |
+| LongBeachVA | 0.93 | 0.93 |
+| Switzerland | 0.98 | 0.89 |
+| **Mean** | **0.95** | **0.91** |
+
+ADR-013's "trigger to revisit" was set at 0.7; the actual numbers are far above that. The cross-model KernelSHAP comparison is not an algorithm artefact.
+
+### Subgroup-feature drift (auditable strata only)
+
+Per ADR-013 §4 + [`07-eval-design.md`](docs/research/07-eval-design.md) §5, per-stratum mean |SHAP| deltas are computed only on strata with `n ≥ 30`. The structural finding: **no LODO fold has an auditable F sex-stratum.** F counts in the per-fold KernelSHAP test slices: Cleveland ≈ 19–24, Hungarian ≈ 17–22, LongBeachVA ≈ 2–4, Switzerland ≈ 7–8 — all below the guard. We do not report per-feature drift between sexes because we cannot do so honestly at this sample size. The discrimination-side analogue is §4 above (sex AUROC reported only for Cleveland and Hungarian); the explainability-side analogue is here. Where the guard passes (M-stratum always; 50–69 age band always; <50 age band on Hungarian only), per-(model × fold × stratum) bars are under [`reports/v1/figures/explainability/<model>_<fold>_subgroup_drift_*.png`](reports/v1/figures/explainability/) and are uniformly small (≤ 0.02 per-feature delta vs the per-fold average).
+
+### Local explanations: 64 archetype waterfalls
+
+Four representative test patients per (model × fold) — TP-high, TP-low, FN, FP, picked deterministically from the per-fold test slice — are rendered as SHAP waterfall plots. Total 64 PNGs (4 archetypes × 4 folds × 4 models) under [`reports/v1/figures/explainability/<model>_<fold>_<archetype>_waterfall.png`](reports/v1/figures/explainability/). The archetype rows are always included in the KernelSHAP test-row cap so the waterfalls reflect actual archetype patients, not stand-ins.
+
+### Methodological caveats
+
+The wall-clock cost of KernelSHAP forced a contingency at execution time (documented inline in [`10-explainability.md`](docs/research/10-explainability.md) §1 and in the [ADR-013 amendment](docs/adr/013-explainability-strategy.md)): the per-(model × fold) test slice was capped at 80 rows (stratified-sampled, archetype rows always preserved) instead of explaining every test row. This inflates the standard error of mean |SHAP| by roughly 1.2×–1.9× depending on fold; the rank-based cross-model agreement above is essentially unaffected. The full per-fold slice is recoverable via `compute_explanations.py --max-test-rows 0` (~4× wall-clock).
+
+## 6. Calibration story (read carefully)
 
 Phase 2.3b's empirical finding ([`08-v1-model-results.md`](docs/research/08-v1-model-results.md) §4): the within-fold calibration slice sits at ~50–100 rows per LODO fold. **Isotonic regression on this slice size collapses XGBoost** (cross-fold mean calibration slope = 0.21, vs ideal=1). The collapse manifests as a near-flat reliability curve and zero/near-zero sensitivity at high specificity. This is *not* a bug in our XGBoost wrapper — it is a known property of isotonic regression on small calibration sets.
 
@@ -80,36 +135,39 @@ Two consequences for the model card:
 
 If the deployment context allows for a larger calibration slice (e.g. an Australian-cohort retraining where ≥1000 calibration rows are available), isotonic for XGBoost becomes viable. The current artefact does not.
 
-## 6. Decision-curve analysis at AusCVDRisk thresholds
+## 7. Decision-curve analysis at AusCVDRisk thresholds
 
 DCA at 5% and 10% (the AusCVDRisk treatment thresholds, [`07-eval-design.md`](docs/research/07-eval-design.md) §6). Headline: models add net benefit over treat-all in **moderate-prevalence settings (Cleveland, Hungarian)** but not in **very-high-prevalence settings (Switzerland)**, where treat-all dominates because the negative-class base rate is too low for any model's predicted-low-risk subgroup to deliver clinical value vs. simply treating everyone. **LongBeachVA at 10%** is borderline: the Honours-Ensemble is the only model whose net benefit (+0.7178) exceeds treat-all (+0.7167); LR and XGBoost are *worse* than treat-all on this fold; TabICL ties. The gap is well within bootstrap noise.
 
 This is honest information about the *data*, not a verdict on the *models*. Full per-fold DCA values in [`reports/v1/metrics_per_fold.json`](reports/v1/metrics_per_fold.json) under each `dca` block; visualisations under [`reports/v1/figures/`](reports/v1/figures/).
 
-## 7. Limitations & out-of-scope
+## 8. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
 - **LongBeachVA ≥70 stratum is structurally under-served.** Every v1 model loses meaningful AUROC on that stratum. The model card flags this explicitly; any deployed surface must either exclude this stratum or carry a "low-confidence" UI affordance.
 - **No external validation cohort.** The LODO protocol simulates a deployment-like scenario (test on a source the model has never seen) but does not replace external validation on a non-UCI cohort.
 - **No fairness audit beyond sex + age band.** Race, ethnicity, socioeconomic status, geographic strata: not in the data, not auditable.
-- **Calibration slice size limits XGBoost.** See §5.
+- **No auditable F sex-stratum subgroup-feature-drift on any LODO fold.** §5 above. We do not report sex-based feature-importance drift because every fold's F count is below the `n ≥ 30` honesty guard.
+- **Calibration slice size limits XGBoost.** See §6.
+- **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 8. Honesty caveats specific to the Honours-Ensemble row
+## 9. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 9. Reproducibility
+## 10. Reproducibility
 
 - All code: this repo, MIT-licensed.
-- Run: `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py` (full LODO, ~40 min on a recent CPU). `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
-- Model artefacts: not in git (per [ADR-010](docs/adr/010-model-artefact-storage.md)); regenerated locally by the script above.
-- Reports: in git under [`reports/v1/`](reports/v1/) — `metrics_per_fold.json`, `metrics_aggregate.json`, and `figures/*.png`.
-- Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)).
-- CI: smoke run is enforced on every PR (`train-v1-smoke` step in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+- Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
+- Run explainability sweep (~2h 20m on a recent CPU): `uv run --project backend python backend/scripts/compute_explanations.py`. `--smoke` for the 1-fold smoke pass (~30s); `--max-test-rows 0` to explain every per-fold test row (~4× wall-clock).
+- Model artefacts: not in git (per [ADR-010](docs/adr/010-model-artefact-storage.md)); regenerated locally by the training script above.
+- Reports: in git under [`reports/v1/`](reports/v1/) — `metrics_per_fold.json`, `metrics_aggregate.json`, `explainability/{explanations_per_cell,explanations_aggregate,cross_model_agreement}.json`, and `figures/**/*.png`.
+- Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6.
+- CI: both smoke runs are enforced on every PR (`train-v1.py --smoke` and `compute_explanations.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 10. References
+## 11. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -128,3 +186,4 @@ Architecture decisions:
 - [ADR-010](docs/adr/010-model-artefact-storage.md) — model artefact storage.
 - [ADR-011](docs/adr/011-tfm-tabicl-supersedes-tabpfn.md) — TabICL supersedes TabPFN.
 - [ADR-012](docs/adr/012-honours-baseline-reproduction.md) — Honours-baseline reproduction (Phase 2.4).
+- [ADR-013](docs/adr/013-explainability-strategy.md) — explainability strategy (Phase 2.5; with 2026-05-06 amendment recording the wall-clock contingency).

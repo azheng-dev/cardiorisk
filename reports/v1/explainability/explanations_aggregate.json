@@ -1,0 +1,64 @@
+{
+  "config": {
+    "background_k": 50,
+    "max_test_rows": 80,
+    "min_stratum_size": 30,
+    "n_folds_cap": null,
+    "nsamples": 128,
+    "seed": 20260505,
+    "smoke": false
+  },
+  "cross_model_aggregate_spearman": {
+    "feature_names": [
+      "Sex",
+      "ChestPainType",
+      "RestingECG",
+      "ExerciseAngina",
+      "ST_Slope",
+      "Age",
+      "RestingBP",
+      "Cholesterol",
+      "MaxHR",
+      "Oldpeak",
+      "FastingBS",
+      "RestingBP_was_missing",
+      "MaxHR_was_missing",
+      "ExerciseAngina_was_missing",
+      "Oldpeak_was_missing",
+      "ST_Slope_was_missing"
+    ],
+    "model_names": [
+      "tabicl",
+      "xgboost",
+      "lr",
+      "ensemble"
+    ],
+    "spearman_matrix": [
+      [
+        1.0,
+        0.9024803218523019,
+        0.8392220617915779,
+        0.8256265227984685
+      ],
+      [
+        0.9024803218523019,
+        1.0,
+        0.8543239683933276,
+        0.828591110312725
+      ],
+      [
+        0.8392220617915779,
+        0.8543239683933276,
+        1.0,
+        0.8095117398256962
+      ],
+      [
+        0.8256265227984685,
+        0.828591110312725,
+        0.8095117398256962,
+        1.0
+      ]
+    ]
+  },
+  "n_cells": 16
+}
