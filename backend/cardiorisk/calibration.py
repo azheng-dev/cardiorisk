@@ -7,13 +7,15 @@ The calibration slice is held out specifically to fit a *post-hoc*
 calibrator on top of an already-fitted base model, decoupling the
 calibration data from both the training and evaluation paths.
 
-Two methods supported (see ADR-006 + the user's Phase-2.3 decision):
+Methods supported (see ADR-006 + the user's Phase-2.3 / 2.4 decisions):
 
 - ``"isotonic"`` for XGBoost — non-parametric monotonic regression;
   more flexible, needs more calibration data.
-- ``"sigmoid"`` (Platt) for L1 LR — parametric one-parameter logistic
-  fit; more stable on small calibration slices like ours (~60 rows
-  per fold).
+- ``"sigmoid"`` (Platt) for L1 LR and the Honours Ensemble (Phase 2.4,
+  per ADR-012) — parametric one-parameter logistic fit; more stable
+  on small calibration slices like ours (~60 rows per fold). Picked
+  for the Ensemble specifically because Phase 2.3b found isotonic
+  collapsed XGBoost on the same slice size.
 
 TabICL (per ADR-011, replacing TabPFN per ADR-006's original choice)
 is calibrated by construction and does not pass through this module.
@@ -37,10 +39,11 @@ from sklearn.frozen import FrozenEstimator
 
 CalibrationMethod = Literal["isotonic", "sigmoid"]
 
-#: Default per-model calibration choices from the Phase-2.3 plan.
+#: Default per-model calibration choices from the Phase-2.3 / 2.4 plans.
 DEFAULT_METHOD_FOR_MODEL: Final[dict[str, CalibrationMethod]] = {
     "xgboost": "isotonic",
     "lr": "sigmoid",
+    "ensemble": "sigmoid",  # Honours-baseline; ADR-012 calibration choice.
     # tabicl deliberately absent: native calibration (TFM trained for
     # direct probabilistic prediction), no post-hoc wrapper needed.
 }

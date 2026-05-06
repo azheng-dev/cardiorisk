@@ -34,8 +34,10 @@ SEED: Final[int] = 20260505
 
 #: Canonical model names used by ``calibrate_for_model`` and the per-fold JSON
 #: schema. The training driver iterates over these in this order so the
-#: cross-model results table reads consistently across runs.
-MODEL_NAMES: Final[tuple[str, ...]] = ("tabicl", "xgboost", "lr")
+#: cross-model results table reads consistently across runs. Phase 2.4
+#: appends ``"ensemble"`` (the Honours 4-net mean-averaged baseline,
+#: per ADR-012).
+MODEL_NAMES: Final[tuple[str, ...]] = ("tabicl", "xgboost", "lr", "ensemble")
 
 
 @runtime_checkable
