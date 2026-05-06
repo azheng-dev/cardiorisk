@@ -51,13 +51,18 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.5 (Explainability: KernelSHAP cross-model headline +
+Current phase:        Phase 2.6 (Drift / monitoring: input-feature PSI+KS + prediction-
+                      drift PSI on calibrated predict_proba; per-fold combined-pool
+                      reference; report-only) in progress on feat/phase-2-6-drift.
+                      Plan approved by user 2026-05-06 with the defaults from the
+                      Phase 2.5 §Open decisions block (input + prediction drift only;
+                      concept drift deferred; per-fold reference; report-only severity
+                      bands; CI smoke = yes).
+Last checkpoint:      Phase 2.5 (Explainability: KernelSHAP cross-model headline +
                       TreeSHAP/analytic-LR sanity-checks + per-archetype waterfalls +
-                      cross-model agreement matrix) implementation complete on
-                      feat/phase-2-5-shap. PR pending; awaiting CI green and user
-                      merge approval before Phase 2.6 (drift / monitoring) or Phase 3
-                      (agentic system) kickoff.
-Last checkpoint:      Phase 2.4 (Honours-baseline Ensemble + cross-model honesty +
+                      cross-model agreement matrix) accepted by user (PR #10 merged
+                      2026-05-06; commit 2b003e9).
+                      Phase 2.4 (Honours-baseline Ensemble + cross-model honesty +
                       MODEL_CARD.md) accepted by user (PR #9 merged 2026-05-05).
                       Phase 2.3b (v1 model wrappers + training driver + LODO results)
                       accepted by user (PR #8 merged 2026-05-05).
@@ -66,43 +71,31 @@ Last checkpoint:      Phase 2.4 (Honours-baseline Ensemble + cross-model honesty
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-                      Phase 2.5 plan approved by user (2026-05-06): KernelSHAP-everywhere
-                      headline + TreeSHAP/analytic-LR sanity-checks; shap.kmeans(50)
-                      background; 4 archetypes per (model x fold) = 64 waterfalls;
-                      auditable-strata-only subgroup-drift (n>=30); Spearman rank
-                      cross-model agreement; spline-basis sum-back for LR (ADR-013).
-                      Wall-clock contingency fired: ADR-013 amendment 2026-05-06
-                      reduced nsamples 256->128 and capped per-cell test slice at
-                      80 stratified rows; full sweep completed in 2h 20m on M4 Pro.
-Open decisions:       - Phase 2.5 PR review + merge approval.
-                      - Phase 2.6 (drift / monitoring) open decisions (to surface at
-                        Phase 2.6 kickoff):
-                          - Drift detection scope: input-feature drift (PSI, KS) vs
-                            prediction drift (PSI on predict_proba) vs concept drift
-                            (need labelled new data). Default: input + prediction; concept
-                            drift deferred to a follow-up phase that has new labelled data.
-                          - Reference distribution: Phase 2.3b training-pool combined
-                            distribution vs per-source distributions. Default: combined.
-                          - Drift-monitoring driver: standalone CLI script (cardiorisk/
-                            monitoring/) that reads new data + emits a JSON report + a
-                            single dashboard PNG, mirroring the train_v1.py /
-                            compute_explanations.py pattern.
-                          - Drift threshold action: report-only (Phase 2.6) vs
-                            auto-block-deployment (deferred to a productionisation phase
-                            that doesn't exist yet).
-                          - CI smoke for monitoring: synthetic drift fixture + assertion
-                            that the script flags it. Default: yes.
-                      - Alternative path: skip 2.6, jump to Phase 3 (agentic system
-                        scaffolding: LangGraph orchestrator + retrieval + drafting).
-                        Phase 2.5 already shipped the per-row attribution surface that
-                        Phase 3's risk-driver narrative drafter needs; drift monitoring
-                        is a "ship later" deliverable rather than a blocker for Phase 3.
+Open decisions:       - Phase 2.6 PR review + merge approval (after CI green on
+                        feat/phase-2-6-drift).
+                      - Phase 3 (agentic system) open questions (to surface at
+                        Phase 3 kickoff):
+                          - Corpus scope: RACGP Red Book + NVDPA absolute-CVD-risk
+                            materials only (Phase 3.1 default), or also AusCVDRisk
+                            calculator logic? Default: RACGP + NVDPA only; AusCVDRisk
+                            deferred to "future scope" (AGENTS §8).
+                          - Chunking: token-window vs semantic vs hybrid. Plan to
+                            eval all three on a 50-question retrieval set (Phase 3.2).
+                          - Embeddings model: bge-m3 (open) vs text-embedding-3-large
+                            (proprietary). Decide with Phase 3.2 retrieval eval data.
+                          - LLM choice: Claude Sonnet 4.5 + 1 alternative (per AGENTS §4).
+                            Specific second model deferred to Phase 6.
+                          - NLI verifier: DeBERTa-v3-MNLI vs MoritzLaurer/deberta-v3-large-
+                            zeroshot-v2.0 vs vectara/hallucination_evaluation_model.
+                            Default: DeBERTa-v3-MNLI for the first cut.
                       - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
                         user later requests it; ADR-012 documents the deferral.
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
-                      root cause and every PR since (#4..#9) merged via standard gh pr merge.
-Last meaningful PR:   #9 feat(models): Phase 2.4 — Honours-baseline Ensemble + cross-model
+                      root cause and every PR since (#4..#10) merged via standard gh pr merge.
+Last meaningful PR:   #10 feat(explain): Phase 2.5 — KernelSHAP cross-model explainability +
+                      sanity checks (merged 2026-05-06).
+                      #9 feat(models): Phase 2.4 — Honours-baseline Ensemble + cross-model
                       honesty (merged 2026-05-05).
                       #8 feat(models): Phase 2.3b — v1 model wrappers (TabICL, XGBoost, LR)
                       + training driver + full LODO results (merged 2026-05-05).
@@ -114,16 +107,20 @@ Last meaningful PR:   #9 feat(models): Phase 2.4 — Honours-baseline Ensemble +
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 2.5 full LODO explainability sweep on data/processed/combined.parquet
-                      (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x KernelSHAP
-                      with nsamples=128, max_test_rows=80, background_k=50) plus TreeSHAP
-                      sanity (XGBoost) + analytic-LR-summed sanity (LR) + 4 archetypes
-                      per (model x fold). Wall-clock 2h 20m on M4 Pro. Outputs under
-                      reports/v1/explainability/{explanations_per_cell,explanations_aggregate,
-                      cross_model_agreement}.json + reports/v1/figures/explainability/*.png
-                      (142 PNGs total). Phase 2.4 LODO run still authoritative for
-                      discrimination/calibration metrics under reports/v1/{metrics_*.json,
-                      figures/*.png}; Phase 2.5 did not re-train, only re-explained.
+Last eval run:        Phase 2.6 full LODO drift sweep on data/processed/combined.parquet
+                      (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x
+                      per-feature PSI + KS sanity + prediction-drift PSI; 10 quantile
+                      bins; per-fold combined-pool reference; held-out source as the
+                      "current" slice). Wall-clock ~30s on M4 Pro. Outputs under
+                      reports/v1/drift/{per_fold,aggregate}.json + 16 dashboard PNGs
+                      under reports/v1/figures/drift/. Headline: every fold has 5–8 of
+                      11 features in `major` band; ST_Slope PSI=7.06 on Cleveland;
+                      TabICL/Ensemble translate input drift into ~3-4x larger
+                      predicted-probability shifts than XGBoost/LR (mean prediction-PSI
+                      1.57/1.24 vs 0.44/0.40). Phase 2.5 explainability sweep + Phase
+                      2.4 LODO discrimination/calibration sweep both still authoritative
+                      under reports/v1/{explainability/*.json, metrics_*.json,
+                      figures/**/*.png}; Phase 2.6 did not re-train or re-explain.
 
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
@@ -134,7 +131,74 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 2.5 deliverables (in pending PR feat/phase-2-5-shap):
+Phase 2.6 deliverables (in progress on feat/phase-2-6-drift):
+  backend/cardiorisk/monitoring/__init__.py        package skeleton + module map; documents the
+                                                   PSI+KS scope, per-fold combined-pool reference
+                                                   choice, and report-only severity bands;
+                                                   cross-references ADR-014
+  backend/cardiorisk/monitoring/psi.py             psi_numeric (quantile-binned) + psi_categorical
+                                                   (level-frequency) + severity_band; ε=1e-6 floor
+                                                   for empty bins per ADR-014
+  backend/cardiorisk/monitoring/ks.py              thin scipy.stats.ks_2samp wrapper; numeric only
+  backend/cardiorisk/monitoring/reference.py       FoldReference dataclass: per-feature reference
+                                                   summaries (quantile edges + bin counts for
+                                                   numerics, category-frequency vectors for
+                                                   categoricals, prediction-percentile edges +
+                                                   counts) + build_fold_reference + save/load
+                                                   (joblib, mirrors ADR-010 artefact contract)
+  backend/cardiorisk/monitoring/drift.py           compute_drift -> DriftReport (per_feature +
+                                                   prediction); FeatureDrift = (psi, ks_stat?,
+                                                   ks_p?, severity)
+  backend/cardiorisk/monitoring/figures.py         single dashboard PNG per (model x fold): PSI bar
+                                                   (severity-coloured, sorted desc) + top-3 ECDF
+                                                   overlays + predict_proba histogram overlay
+  backend/cardiorisk/monitoring/orchestrator.py    end-to-end driver; --smoke and full modes;
+                                                   per-fold loop using iter_lodo_folds; loads
+                                                   models/v1/<model>_<source>.joblib calibrated
+                                                   artefacts; uses each fold's held-out source as
+                                                   the "current" slice; writes JSONs + 16 PNGs;
+                                                   argparse + main()
+  backend/scripts/compute_drift.py                 thin CLI wrapper; identical OpenMP-guard
+                                                   preamble to compute_explanations.py
+  backend/scripts/build_reference.py               one-shot: build all 4 per-fold references from
+                                                   data/processed/combined.parquet + persist under
+                                                   models/v1/<source>_reference.joblib (gitignored)
+  backend/cardiorisk/data/paths.py                 adds REPORTS_V1_DRIFT + REPORTS_V1_DRIFT_FIGURES
+                                                   constants
+  backend/tests/test_monitoring_*.py               6 test modules covering psi + ks + reference +
+                                                   drift + figures + end-to-end CLI smoke
+  backend/pyproject.toml                           ruff per-file-ignores N803/N806 for
+                                                   cardiorisk/monitoring/**
+  reports/v1/drift/*.json                          per_fold.json (4 folds x 4 models nested:
+                                                   per-feature PSI/KS, prediction-drift PSI,
+                                                   severity counts) + aggregate.json (config +
+                                                   cross-fold summary)
+  reports/v1/figures/drift/*.png                   16 dashboard PNGs (one per model x fold)
+  docs/adr/014-drift-monitoring.md                 binding decision: PSI + KS, per-fold combined-
+                                                   pool reference, report-only, ε=1e-6 floor,
+                                                   severity bands, CI smoke; promotes ADR-014
+                                                   placeholder slot
+  docs/research/11-drift-design.md                 opinionated walkthrough: why PSI over Wasserstein,
+                                                   why per-fold ref, what the held-out-source
+                                                   headline numbers mean, honest discussion of
+                                                   PSI's known weaknesses
+  docs/research/README.md                          index entry for 11-drift-design.md
+  docs/adr/README.md                               index updated for ADR-014 (placeholder
+                                                   numbering bumped: 015 Embeddings, 016
+                                                   Citation+NLI, 017 LLM, 018 Brand)
+  MODEL_CARD.md                                    new §"Drift monitoring" with severity thresholds,
+                                                   how to reproduce, headline cross-source PSI
+                                                   numbers from the full run
+  .github/workflows/ci.yml                         adds compute_drift.py --smoke step in
+                                                   test-python (4 models x 1 LODO fold; reuses
+                                                   smoke-trained artefacts; ~30s on ubuntu-latest)
+  .gitignore                                       reports/v1/drift/smoke/ ignored;
+                                                   models/v1/*_reference.joblib already covered by
+                                                   the existing models/v1/ ignore
+  AGENTS.md                                        Phase 2.6 status block + Phase 3 open questions;
+                                                   Phase 2.6 deliverables block
+
+Phase 2.5 deliverables (PR #10 merged 2026-05-06 commit 2b003e9):
   backend/cardiorisk/explainability/__init__.py        package skeleton + module map; documents
                                                        the four-explainer strategy (KernelSHAP
                                                        headline + TreeSHAP/analytic-LR sanity

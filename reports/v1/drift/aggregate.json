@@ -1,0 +1,51 @@
+{
+  "by_model": {
+    "ensemble": {
+      "n_folds": 4,
+      "prediction_psi_max": 1.7242737236451207,
+      "prediction_psi_mean": 1.2377527661246763,
+      "severity_counts_total": {
+        "major": 25,
+        "moderate": 8,
+        "stable": 11
+      }
+    },
+    "lr": {
+      "n_folds": 4,
+      "prediction_psi_max": 0.5750166588267153,
+      "prediction_psi_mean": 0.40325709176152147,
+      "severity_counts_total": {
+        "major": 25,
+        "moderate": 8,
+        "stable": 11
+      }
+    },
+    "tabicl": {
+      "n_folds": 4,
+      "prediction_psi_max": 2.9407521367844196,
+      "prediction_psi_mean": 1.566785544156186,
+      "severity_counts_total": {
+        "major": 25,
+        "moderate": 8,
+        "stable": 11
+      }
+    },
+    "xgboost": {
+      "n_folds": 4,
+      "prediction_psi_max": 0.6786994415691315,
+      "prediction_psi_mean": 0.4408619412676916,
+      "severity_counts_total": {
+        "major": 25,
+        "moderate": 8,
+        "stable": 11
+      }
+    }
+  },
+  "config": {
+    "n_bins": 10,
+    "n_folds_cap": null,
+    "seed": 20260505,
+    "smoke": false
+  },
+  "n_cells": 16
+}

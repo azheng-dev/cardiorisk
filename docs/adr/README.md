@@ -18,10 +18,11 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [011](./011-tfm-tabicl-supersedes-tabpfn.md) | TabICL replaces TabPFN as the v1 TFM headline (supersedes ADR-006 §"Headline") | Accepted | 2.3b |
 | [012](./012-honours-baseline-reproduction.md) | Honours-baseline reproduction strategy (Path A: Ensemble-only PyTorch port; partially supersedes ADR-006 §"WOA-Ensemble") | Accepted | 2.4 |
 | [013](./013-explainability-strategy.md) | Explainability strategy (KernelSHAP-everywhere headline + native sanity-checks + sum-back LR + Spearman cross-model agreement) | Accepted | 2.5 |
+| [014](./014-drift-monitoring.md) | Drift / monitoring strategy (PSI + KS, per-fold combined-pool reference, report-only) | Accepted | 2.6 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-014: Embeddings + retrieval architecture (Phase 3).
-- ADR-015: Citation + NLI verification approach (Phase 3).
-- ADR-016: LLM choice + multi-model evaluation (Phase 6).
-- ADR-017: Brand + visual identity (Phase 5).
+- ADR-015: Embeddings + retrieval architecture (Phase 3).
+- ADR-016: Citation + NLI verification approach (Phase 3).
+- ADR-017: LLM choice + multi-model evaluation (Phase 6).
+- ADR-018: Brand + visual identity (Phase 5).
