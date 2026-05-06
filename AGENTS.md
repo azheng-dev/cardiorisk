@@ -51,14 +51,21 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.6 (Drift / monitoring: input-feature PSI+KS + prediction-
+Current phase:        Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolute-CVD-
+                      risk materials; pdfplumber parse + 3 pluggable chunkers
+                      [token-window / regex-semantic / heading-aware hybrid] + manifest;
+                      10-Q retrieval eval scaffold deferring 50-Q expansion + chunking
+                      A/B + embeddings choice to Phase 3.2) in progress on
+                      feat/phase-3-1-corpus-ingestion. Plan approved by user 2026-05-06
+                      with corpus_scope=racgp_nvdpa (AusCVDRisk + eTG out of scope).
+Last checkpoint:      Phase 2.6 (Drift / monitoring: input-feature PSI+KS + prediction-
                       drift PSI on calibrated predict_proba; per-fold combined-pool
-                      reference; report-only) in progress on feat/phase-2-6-drift.
-                      Plan approved by user 2026-05-06 with the defaults from the
-                      Phase 2.5 §Open decisions block (input + prediction drift only;
-                      concept drift deferred; per-fold reference; report-only severity
-                      bands; CI smoke = yes).
-Last checkpoint:      Phase 2.5 (Explainability: KernelSHAP cross-model headline +
+                      reference; report-only) accepted by user (PR #11 merged
+                      2026-05-06; commit a339b15). Headline: every fold has 5-8 of 11
+                      features in `major` PSI band; ST_Slope PSI=7.06 on Cleveland;
+                      TabICL/Ensemble translate input drift into ~3-4x larger
+                      predicted-probability shifts than XGBoost/LR.
+                      Phase 2.5 (Explainability: KernelSHAP cross-model headline +
                       TreeSHAP/analytic-LR sanity-checks + per-archetype waterfalls +
                       cross-model agreement matrix) accepted by user (PR #10 merged
                       2026-05-06; commit 2b003e9).
@@ -71,29 +78,33 @@ Last checkpoint:      Phase 2.5 (Explainability: KernelSHAP cross-model headline
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 2.6 PR review + merge approval (after CI green on
-                        feat/phase-2-6-drift).
-                      - Phase 3 (agentic system) open questions (to surface at
-                        Phase 3 kickoff):
-                          - Corpus scope: RACGP Red Book + NVDPA absolute-CVD-risk
-                            materials only (Phase 3.1 default), or also AusCVDRisk
-                            calculator logic? Default: RACGP + NVDPA only; AusCVDRisk
-                            deferred to "future scope" (AGENTS §8).
-                          - Chunking: token-window vs semantic vs hybrid. Plan to
-                            eval all three on a 50-question retrieval set (Phase 3.2).
+Open decisions:       - Phase 3.1 PR review + merge approval (after CI green on
+                        feat/phase-3-1-corpus-ingestion).
+                      - Deferred to Phase 3.2 (chunking + embeddings + retrieval):
+                          - Chunking winner: token-window vs regex-semantic vs heading-
+                            aware hybrid. Phase 3.1 ships all three side-by-side; the
+                            50-Q hand-curated retrieval eval set picks one.
                           - Embeddings model: bge-m3 (open) vs text-embedding-3-large
                             (proprietary). Decide with Phase 3.2 retrieval eval data.
-                          - LLM choice: Claude Sonnet 4.5 + 1 alternative (per AGENTS §4).
-                            Specific second model deferred to Phase 6.
+                          - 50-Q retrieval eval set expansion (Phase 3.1 ships a 10-Q
+                            scaffold + JSON Schema; Phase 3.2 grows it to 50).
+                      - Deferred to Phase 3.3 (citation-mandatory generation):
                           - NLI verifier: DeBERTa-v3-MNLI vs MoritzLaurer/deberta-v3-large-
                             zeroshot-v2.0 vs vectara/hallucination_evaluation_model.
                             Default: DeBERTa-v3-MNLI for the first cut.
+                      - Deferred to Phase 6 (eval harness): LLM choice — Claude Sonnet 4.5
+                        + 1 alternative (per AGENTS §4). Specific second model decided
+                        with Phase 6 cost/quality data.
                       - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
                         user later requests it; ADR-012 documents the deferral.
+                      - Deferred to "future scope" (AGENTS §8): AusCVDRisk calculator
+                        logic + Therapeutic Guidelines (eTG) cardiac chapters.
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
-                      root cause and every PR since (#4..#10) merged via standard gh pr merge.
-Last meaningful PR:   #10 feat(explain): Phase 2.5 — KernelSHAP cross-model explainability +
+                      root cause and every PR since (#4..#11) merged via standard gh pr merge.
+Last meaningful PR:   #11 feat(monitoring): Phase 2.6 — drift / monitoring layer (PSI + KS,
+                      per-fold reference, report-only) (merged 2026-05-06).
+                      #10 feat(explain): Phase 2.5 — KernelSHAP cross-model explainability +
                       sanity checks (merged 2026-05-06).
                       #9 feat(models): Phase 2.4 — Honours-baseline Ensemble + cross-model
                       honesty (merged 2026-05-05).
@@ -131,7 +142,76 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 2.6 deliverables (in progress on feat/phase-2-6-drift):
+Phase 3.1 deliverables (in progress on feat/phase-3-1-corpus-ingestion):
+  backend/cardiorisk/rag/__init__.py             package skeleton + module map; documents the
+                                                 ingest-only scope (no retrieval, no generator)
+                                                 and cross-references ADR-015
+  backend/cardiorisk/rag/ingest/__init__.py      sub-package skeleton + chunker registry export
+  backend/cardiorisk/rag/ingest/sources.py       CorpusSource dataclass + CORPUS_SOURCES tuple:
+                                                 RACGP Red Book chapters + NVDPA absolute-CVD-
+                                                 risk PDFs with publisher, title, URL, sha256
+                                                 lockfile name, doc_id
+  backend/cardiorisk/rag/ingest/fetch.py         idempotent PDF fetcher mirroring
+                                                 cardiorisk.data.fetch: stream-download with
+                                                 60s timeout, atomic .part->rename, sha256
+                                                 verify against pinned lockfile, FetchError on
+                                                 mismatch; --use-fixture short-circuits
+  backend/cardiorisk/rag/ingest/parse.py         pdfplumber wrapper -> ParsedDoc {doc_id, pages:
+                                                 list[ParsedPage{page_no, text, char_offset}]};
+                                                 markdown-fixture path emits the same schema
+                                                 without pdfplumber
+  backend/cardiorisk/rag/ingest/chunkers/        Chunker Protocol + Chunk dataclass; 3 chunkers:
+                                                 token-window (tiktoken cl100k_base, 512/64),
+                                                 regex-semantic (sentence-aware), heading-aware
+                                                 hybrid (sections then token fallback);
+                                                 deterministic chunk_ids via doc_id+span hash
+  backend/cardiorisk/rag/ingest/manifest.py      build/load/persist manifest.json {sources,
+                                                 parsed_docs, chunks_by_strategy} with sha256
+                                                 references
+  backend/cardiorisk/data/paths.py               adds CORPUS_RAW + CORPUS_PARSED + CORPUS_CHUNKS
+                                                 + CORPUS_MANIFEST constants
+  backend/scripts/fetch_corpus.py                thin CLI: --force/--use-fixture/--source flags;
+                                                 OpenMP-guard preamble for invariance with
+                                                 other scripts
+  backend/scripts/build_corpus.py                thin CLI: parse + all 3 chunkers + manifest
+                                                 write; --use-fixture/--strategy flags
+  backend/tests/fixtures/corpus_mini/            two markdown documents (RACGP-shaped + NVDPA-
+                                                 shaped) + sources.json the --use-fixture mode
+                                                 reads
+  backend/tests/test_rag_ingest_*.py             6 test modules: sources + fetch + parse +
+                                                 chunkers + manifest + eval_schema
+  backend/tests/test_build_corpus.py             end-to-end CLI smoke against the fixture
+  backend/pyproject.toml                         adds pdfplumber>=0.11,<0.13, tiktoken>=0.8,<0.10,
+                                                 jsonschema>=4.23,<5; mypy ignore_missing_imports
+                                                 for pdfplumber + tiktoken; ruff per-file-ignores
+                                                 N803/N806 for cardiorisk/rag/**
+  eval/retrieval/README.md                       methodology + 50-Q target + schema + contributor
+                                                 guide
+  eval/retrieval/schema.json                     JSON Schema for one Q row
+  eval/retrieval/questions.jsonl                 10 seed Qs (4 RACGP-fixture, 4 NVDPA-fixture,
+                                                 2 real-corpus marked requires_full_corpus:true)
+  scripts/no_raw_data.sh                         extended to refuse *.pdf outside tests/fixtures/
+  docs/adr/015-corpus-ingestion.md               binding decision: pdfplumber over pymupdf (MIT
+                                                 vs AGPL); 3 chunkers ship together; manifest-
+                                                 as-derived; eval-set at repo root; corpus PDFs
+                                                 gitignored; promotes ADR-015 placeholder slot
+  docs/research/12-corpus-ingestion-design.md    opinionated walkthrough: which RACGP/NVDPA
+                                                 documents and why; pdfplumber vs pypdf vs
+                                                 pymupdf vs marker/docling (with AGPL note);
+                                                 chunking trade-off matrix
+  docs/research/README.md                        index entry for 12-corpus-ingestion-design.md
+  docs/adr/README.md                             index updated for ADR-015 (placeholder
+                                                 numbering bumped: 016 Embeddings, 017
+                                                 Citation+NLI, 018 LLM, 019 Brand)
+  docs/data/README.md                            §"Future datasets" replaced by a real
+                                                 §"Phase 3.1 — RACGP + NVDPA corpus" subsection
+  .github/workflows/ci.yml                       adds build_corpus.py --use-fixture --strategy
+                                                 all step in test-python (~5s on ubuntu-latest)
+  .gitignore                                     data/external/ ignored except .gitkeep
+  AGENTS.md                                      Phase 3.1 status block + open decisions refreshed
+                                                 + Phase 3.1 deliverables block
+
+Phase 2.6 deliverables (PR #11 merged 2026-05-06 commit a339b15):
   backend/cardiorisk/monitoring/__init__.py        package skeleton + module map; documents the
                                                    PSI+KS scope, per-fold combined-pool reference
                                                    choice, and report-only severity bands;

@@ -1,11 +1,21 @@
 #!/usr/bin/env bash
-# Refuse to commit raw data: anything under data/raw/, or any *.csv outside
-# explicitly-allowed fixture directories. Keeps the public repo from ever
-# absorbing clinical data, even if .gitignore is bypassed.
+# Refuse to commit raw data: anything under data/raw/, or any *.csv / *.pdf
+# / etc. outside explicitly-allowed fixture or docs directories. Keeps the
+# public repo from ever absorbing clinical data or copyrighted PDF
+# corpora, even if .gitignore is bypassed.
 #
-# Allowed paths for CSVs:
-#   - backend/tests/fixtures/**/*.csv  (synthetic test fixtures only)
-#   - frontend/tests/fixtures/**/*.csv
+# Allowed paths for tabular data files (CSV / TSV / parquet / feather):
+#   - backend/tests/fixtures/**  (synthetic test fixtures only)
+#   - frontend/tests/fixtures/**
+#   - tests/fixtures/**
+#
+# Allowed paths for PDFs:
+#   - docs/**                    (deliberately published PDF deliverables)
+#
+# Phase 3.1 Note: RACGP / NVDPA corpus PDFs live under
+# data/external/corpus/raw/ which is gitignored; this hook is the
+# fail-safe if .gitignore is bypassed (-f, --no-verify, or hand-editing
+# the index).
 set -euo pipefail
 
 violations=()
@@ -26,6 +36,15 @@ for f in "$@"; do
           ;;
         *)
           violations+=("$f (data file outside tests/fixtures/)")
+          ;;
+      esac
+      ;;
+    *.pdf)
+      case "$f" in
+        docs/*)
+          ;;
+        *)
+          violations+=("$f (PDF outside docs/; corpus PDFs belong under data/external/ which is gitignored)")
           ;;
       esac
       ;;

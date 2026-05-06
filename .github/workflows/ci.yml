@@ -127,6 +127,13 @@ jobs:
       # renderer. Runs in ~10s on the GitHub Actions ubuntu-latest runner.
       - name: Smoke compute_drift.py --smoke (4 models, 1 LODO fold)
         run: uv run --project backend python backend/scripts/compute_drift.py --smoke
+      # Phase 3.1: smoke the corpus ingestion pipeline against the
+      # markdown fixture (no PDFs, no network). Exercises parse + all
+      # three chunkers + manifest write. Catches regressions in
+      # pdfplumber wiring, tiktoken encoding, the heading-aware hybrid
+      # chunker, and the eval-set JSON Schema validator. Runs in ~5s.
+      - name: Smoke build_corpus.py --use-fixture --strategy all
+        run: uv run --project backend python backend/scripts/build_corpus.py --use-fixture --strategy all
 
   # ---------------------------------------------------------------- typescript
   lint-ts:
