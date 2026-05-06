@@ -141,7 +141,42 @@ DCA at 5% and 10% (the AusCVDRisk treatment thresholds, [`07-eval-design.md`](do
 
 This is honest information about the *data*, not a verdict on the *models*. Full per-fold DCA values in [`reports/v1/metrics_per_fold.json`](reports/v1/metrics_per_fold.json) under each `dca` block; visualisations under [`reports/v1/figures/`](reports/v1/figures/).
 
-## 8. Limitations & out-of-scope
+## 8. Drift monitoring (Phase 2.6)
+
+Per-feature input-drift PSI + prediction-drift PSI for every (model × LODO fold) cell, computed by `backend/scripts/compute_drift.py` against the in-fold training-pool combined distribution as the reference. Each fold's held-out source is used as the "current" slice — i.e. the drift number quantifies how different the data is from what the fold's model was actually fit on. Severity bands per [ADR-014](docs/adr/014-drift-monitoring.md) (industry convention; not validated for this dataset): `< 0.10` stable / `0.10 – 0.25` moderate / `>= 0.25` major.
+
+**Per-feature drift is identical across models within a fold** (input drift is a property of the data, not the model). Severity counts (out of 11 features per fold):
+
+| Held-out source | stable | moderate | major | Top-3 drifted features |
+|---|---:|---:|---:|---|
+| Cleveland | 4 | 2 | 5 | `ST_Slope` (PSI=7.06), `RestingECG` (1.84), `ExerciseAngina` (1.13) |
+| Hungarian | 3 | 2 | 6 | `Age` (2.23), `Oldpeak` (1.42), `ST_Slope` (1.41) |
+| LongBeachVA | 2 | 1 | 8 | `ExerciseAngina` (1.77), `Age` (0.78), `MaxHR` (0.68) |
+| Switzerland | 2 | 3 | 6 | `MaxHR` (0.60), `ChestPainType` (0.54), `Oldpeak` (0.42) |
+
+**Prediction-drift PSI varies dramatically across models under the same input drift.** The two foundation-model-style learners (TabICL, Honours-Ensemble) translate cross-source covariate shift into 3–4× larger predicted-probability shifts than the calibrated tree (XGBoost) and linear (LR) models:
+
+| Model | mean prediction-PSI (across 4 folds) | max prediction-PSI |
+|---|---:|---:|
+| **TabICL** | 1.57 | 2.94 (LongBeachVA) |
+| **Honours-Ensemble** | 1.24 | 1.72 (Switzerland) |
+| **XGBoost** | 0.44 | 0.68 (Switzerland) |
+| **L1 LR** | 0.40 | 0.58 (Switzerland) |
+
+Operational reading: if any of these models were deployed, **TabICL and the Ensemble would warrant more aggressive prediction-drift monitoring than XGBoost and LR**. The narrower XGBoost/LR ranges are partly because their post-hoc calibration mappings absorb some of the covariate-shift signal — a known effect, not a free pass on stability.
+
+**The methodological caveats are honest about what this metric does and doesn't see** (full discussion in [`docs/research/11-drift-design.md`](docs/research/11-drift-design.md) §5):
+
+- PSI is per-feature; joint-distribution shifts are invisible to it. Multivariate drift (MMD, domain-classifier) is deferred to a productionisation phase.
+- Severity bands are industry convention, not derived from this dataset.
+- 10 quantile bins fixed across the sweep; PSI is bin-count-sensitive.
+- KS p-values in the JSON report are *sanity-only* — they use bin-midpoint reconstruction of the reference, not raw reference samples.
+- No time component (single point-in-time PSI; no rolling-window series).
+- No concept drift (would require labelled new data; deferred).
+
+Reproduce: `uv run --project backend python backend/scripts/compute_drift.py` (full sweep ~30 s) writes [`reports/v1/drift/per_fold.json`](reports/v1/drift/per_fold.json), [`reports/v1/drift/aggregate.json`](reports/v1/drift/aggregate.json), and 16 dashboard PNGs (one per model × fold) to [`reports/v1/figures/drift/`](reports/v1/figures/drift/). Each dashboard shows the PSI bar across all features, an ECDF overlay for the top-3 drifted numerics, and a `predict_proba` histogram overlay.
+
+## 9. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -153,21 +188,22 @@ This is honest information about the *data*, not a verdict on the *models*. Full
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 9. Honesty caveats specific to the Honours-Ensemble row
+## 10. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 10. Reproducibility
+## 11. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
 - Run explainability sweep (~2h 20m on a recent CPU): `uv run --project backend python backend/scripts/compute_explanations.py`. `--smoke` for the 1-fold smoke pass (~30s); `--max-test-rows 0` to explain every per-fold test row (~4× wall-clock).
+- Run drift sweep (~30s on a recent CPU): `uv run --project backend python backend/scripts/compute_drift.py`. `--smoke` for the 1-fold smoke pass (~10s).
 - Model artefacts: not in git (per [ADR-010](docs/adr/010-model-artefact-storage.md)); regenerated locally by the training script above.
-- Reports: in git under [`reports/v1/`](reports/v1/) — `metrics_per_fold.json`, `metrics_aggregate.json`, `explainability/{explanations_per_cell,explanations_aggregate,cross_model_agreement}.json`, and `figures/**/*.png`.
-- Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6.
-- CI: both smoke runs are enforced on every PR (`train-v1.py --smoke` and `compute_explanations.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+- Reports: in git under [`reports/v1/`](reports/v1/) — `metrics_per_fold.json`, `metrics_aggregate.json`, `explainability/{explanations_per_cell,explanations_aggregate,cross_model_agreement}.json`, `drift/{per_fold,aggregate}.json`, and `figures/**/*.png`.
+- Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
+- CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 11. References
+## 12. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -187,3 +223,4 @@ Architecture decisions:
 - [ADR-011](docs/adr/011-tfm-tabicl-supersedes-tabpfn.md) — TabICL supersedes TabPFN.
 - [ADR-012](docs/adr/012-honours-baseline-reproduction.md) — Honours-baseline reproduction (Phase 2.4).
 - [ADR-013](docs/adr/013-explainability-strategy.md) — explainability strategy (Phase 2.5; with 2026-05-06 amendment recording the wall-clock contingency).
+- [ADR-014](docs/adr/014-drift-monitoring.md) — drift / monitoring strategy (Phase 2.6).

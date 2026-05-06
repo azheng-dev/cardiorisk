@@ -1,0 +1,2290 @@
+[
+  {
+    "compute_seconds": 5.67,
+    "held_out_source": "Cleveland",
+    "model": "tabicl",
+    "n_current": 303,
+    "per_feature": [
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 7.061388502943829,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.8363182796805906,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.1255575367960446,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 1.0859962900573252e-21,
+        "ks_statistic": 0.36301415376436974,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 447,
+        "psi": 0.568729687692056,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.682500181677925e-22,
+        "ks_statistic": 0.36903078062908334,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 441,
+        "psi": 0.296662061739939,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.13610490634032305,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.10975835845859991,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.022090626205806662,
+        "ks_statistic": 0.10840211810227676,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.09710134755623373,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0236857108657143e-05,
+        "ks_statistic": 0.17396076686320316,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 445,
+        "psi": 0.07418953948729269,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.06567621911735365,
+        "ks_statistic": 0.10240963855421686,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 332,
+        "psi": 0.05988986275385573,
+        "severity": "stable"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 4.622482910000646e-132,
+        "ks_statistic": 0.8514851485148515,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 421,
+        "psi": 0.01099396830659458,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.5106115649844652,
+      "mean_ref": 0.6060196021552865,
+      "model_name": "tabicl",
+      "n_cur": 303,
+      "n_ref": 493,
+      "psi": 0.8805707629721005,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 5,
+      "moderate": 2,
+      "stable": 4
+    }
+  },
+  {
+    "compute_seconds": 0.66,
+    "held_out_source": "Cleveland",
+    "model": "xgboost",
+    "n_current": 303,
+    "per_feature": [
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 7.061388502943829,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.8363182796805906,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.1255575367960446,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 1.0859962900573252e-21,
+        "ks_statistic": 0.36301415376436974,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 447,
+        "psi": 0.568729687692056,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.682500181677925e-22,
+        "ks_statistic": 0.36903078062908334,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 441,
+        "psi": 0.296662061739939,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.13610490634032305,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.10975835845859991,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.022090626205806662,
+        "ks_statistic": 0.10840211810227676,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.09710134755623373,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0236857108657143e-05,
+        "ks_statistic": 0.17396076686320316,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 445,
+        "psi": 0.07418953948729269,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.06567621911735365,
+        "ks_statistic": 0.10240963855421686,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 332,
+        "psi": 0.05988986275385573,
+        "severity": "stable"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 4.622482910000646e-132,
+        "ks_statistic": 0.8514851485148515,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 421,
+        "psi": 0.01099396830659458,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6108079439354906,
+      "mean_ref": 0.6429305002754497,
+      "model_name": "xgboost",
+      "n_cur": 303,
+      "n_ref": 493,
+      "psi": 0.19606020115623787,
+      "severity": "moderate"
+    },
+    "severity_counts": {
+      "major": 5,
+      "moderate": 2,
+      "stable": 4
+    }
+  },
+  {
+    "compute_seconds": 0.17,
+    "held_out_source": "Cleveland",
+    "model": "lr",
+    "n_current": 303,
+    "per_feature": [
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 7.061388502943829,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.8363182796805906,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.1255575367960446,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 1.0859962900573252e-21,
+        "ks_statistic": 0.36301415376436974,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 447,
+        "psi": 0.568729687692056,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.682500181677925e-22,
+        "ks_statistic": 0.36903078062908334,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 441,
+        "psi": 0.296662061739939,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.13610490634032305,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.10975835845859991,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.022090626205806662,
+        "ks_statistic": 0.10840211810227676,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.09710134755623373,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0236857108657143e-05,
+        "ks_statistic": 0.17396076686320316,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 445,
+        "psi": 0.07418953948729269,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.06567621911735365,
+        "ks_statistic": 0.10240963855421686,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 332,
+        "psi": 0.05988986275385573,
+        "severity": "stable"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 4.622482910000646e-132,
+        "ks_statistic": 0.8514851485148515,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 421,
+        "psi": 0.01099396830659458,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.570981160493256,
+      "mean_ref": 0.6408910325894398,
+      "model_name": "lr",
+      "n_cur": 303,
+      "n_ref": 493,
+      "psi": 0.21701488164982757,
+      "severity": "moderate"
+    },
+    "severity_counts": {
+      "major": 5,
+      "moderate": 2,
+      "stable": 4
+    }
+  },
+  {
+    "compute_seconds": 0.71,
+    "held_out_source": "Cleveland",
+    "model": "ensemble",
+    "n_current": 303,
+    "per_feature": [
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 7.061388502943829,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.8363182796805906,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 1.1255575367960446,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 1.0859962900573252e-21,
+        "ks_statistic": 0.36301415376436974,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 447,
+        "psi": 0.568729687692056,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.682500181677925e-22,
+        "ks_statistic": 0.36903078062908334,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 441,
+        "psi": 0.296662061739939,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.13610490634032305,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.10975835845859991,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.022090626205806662,
+        "ks_statistic": 0.10840211810227676,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 493,
+        "psi": 0.09710134755623373,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0236857108657143e-05,
+        "ks_statistic": 0.17396076686320316,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 445,
+        "psi": 0.07418953948729269,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.06567621911735365,
+        "ks_statistic": 0.10240963855421686,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 332,
+        "psi": 0.05988986275385573,
+        "severity": "stable"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 4.622482910000646e-132,
+        "ks_statistic": 0.8514851485148515,
+        "n_cur": 303,
+        "n_missing_cur": 0,
+        "n_ref": 421,
+        "psi": 0.01099396830659458,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6126584776707196,
+      "mean_ref": 0.6389186810537283,
+      "model_name": "ensemble",
+      "n_cur": 303,
+      "n_ref": 493,
+      "psi": 1.4964079907982837,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 5,
+      "moderate": 2,
+      "stable": 4
+    }
+  },
+  {
+    "compute_seconds": 4.89,
+    "held_out_source": "Hungarian",
+    "model": "tabicl",
+    "n_current": 294,
+    "per_feature": [
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 4.03976719922863e-39,
+        "ks_statistic": 0.47937414965986397,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 2.231107823007986,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.3593132486421984e-64,
+        "ks_statistic": 0.6185208596713021,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 452,
+        "psi": 1.4198225969319482,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 1.411167969124449,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.9097571476866936,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.39190279899031377,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.3154609194112682,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.0002470779899437149,
+        "ks_statistic": 0.15747665303979297,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 455,
+        "psi": 0.215992037946483,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.1520808082975106e-162,
+        "ks_statistic": 0.9300699300699301,
+        "n_cur": 286,
+        "n_missing_cur": 8,
+        "n_ref": 427,
+        "psi": 0.18349294564311713,
+        "severity": "moderate"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 0.009540669742141902,
+        "ks_statistic": 0.12100797846632017,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 459,
+        "psi": 0.08175160780763534,
+        "severity": "stable"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.06259010164621646,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.1485131341304746,
+        "ks_statistic": 0.09062480455313028,
+        "n_cur": 271,
+        "n_missing_cur": 23,
+        "n_ref": 354,
+        "psi": 0.018179602525772293,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.49672409306679455,
+      "mean_ref": 0.6530604728609324,
+      "model_name": "tabicl",
+      "n_cur": 294,
+      "n_ref": 500,
+      "psi": 0.5539691850349278,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 2,
+      "stable": 3
+    }
+  },
+  {
+    "compute_seconds": 0.58,
+    "held_out_source": "Hungarian",
+    "model": "xgboost",
+    "n_current": 294,
+    "per_feature": [
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 4.03976719922863e-39,
+        "ks_statistic": 0.47937414965986397,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 2.231107823007986,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.3593132486421984e-64,
+        "ks_statistic": 0.6185208596713021,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 452,
+        "psi": 1.4198225969319482,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 1.411167969124449,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.9097571476866936,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.39190279899031377,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.3154609194112682,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.0002470779899437149,
+        "ks_statistic": 0.15747665303979297,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 455,
+        "psi": 0.215992037946483,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.1520808082975106e-162,
+        "ks_statistic": 0.9300699300699301,
+        "n_cur": 286,
+        "n_missing_cur": 8,
+        "n_ref": 427,
+        "psi": 0.18349294564311713,
+        "severity": "moderate"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 0.009540669742141902,
+        "ks_statistic": 0.12100797846632017,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 459,
+        "psi": 0.08175160780763534,
+        "severity": "stable"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.06259010164621646,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.1485131341304746,
+        "ks_statistic": 0.09062480455313028,
+        "n_cur": 271,
+        "n_missing_cur": 23,
+        "n_ref": 354,
+        "psi": 0.018179602525772293,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.571398832030645,
+      "mean_ref": 0.7105198691813275,
+      "model_name": "xgboost",
+      "n_cur": 294,
+      "n_ref": 500,
+      "psi": 0.28590600186467424,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 2,
+      "stable": 3
+    }
+  },
+  {
+    "compute_seconds": 0.16,
+    "held_out_source": "Hungarian",
+    "model": "lr",
+    "n_current": 294,
+    "per_feature": [
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 4.03976719922863e-39,
+        "ks_statistic": 0.47937414965986397,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 2.231107823007986,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.3593132486421984e-64,
+        "ks_statistic": 0.6185208596713021,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 452,
+        "psi": 1.4198225969319482,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 1.411167969124449,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.9097571476866936,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.39190279899031377,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.3154609194112682,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.0002470779899437149,
+        "ks_statistic": 0.15747665303979297,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 455,
+        "psi": 0.215992037946483,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.1520808082975106e-162,
+        "ks_statistic": 0.9300699300699301,
+        "n_cur": 286,
+        "n_missing_cur": 8,
+        "n_ref": 427,
+        "psi": 0.18349294564311713,
+        "severity": "moderate"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 0.009540669742141902,
+        "ks_statistic": 0.12100797846632017,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 459,
+        "psi": 0.08175160780763534,
+        "severity": "stable"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.06259010164621646,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.1485131341304746,
+        "ks_statistic": 0.09062480455313028,
+        "n_cur": 271,
+        "n_missing_cur": 23,
+        "n_ref": 354,
+        "psi": 0.018179602525772293,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.5327641013669373,
+      "mean_ref": 0.6993460021162105,
+      "model_name": "lr",
+      "n_cur": 294,
+      "n_ref": 500,
+      "psi": 0.35038951074271274,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 2,
+      "stable": 3
+    }
+  },
+  {
+    "compute_seconds": 0.77,
+    "held_out_source": "Hungarian",
+    "model": "ensemble",
+    "n_current": 294,
+    "per_feature": [
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 4.03976719922863e-39,
+        "ks_statistic": 0.47937414965986397,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 2.231107823007986,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 2.3593132486421984e-64,
+        "ks_statistic": 0.6185208596713021,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 452,
+        "psi": 1.4198225969319482,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 1.411167969124449,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.9097571476866936,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.39190279899031377,
+        "severity": "major"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.3154609194112682,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.0002470779899437149,
+        "ks_statistic": 0.15747665303979297,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 455,
+        "psi": 0.215992037946483,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.1520808082975106e-162,
+        "ks_statistic": 0.9300699300699301,
+        "n_cur": 286,
+        "n_missing_cur": 8,
+        "n_ref": 427,
+        "psi": 0.18349294564311713,
+        "severity": "moderate"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 0.009540669742141902,
+        "ks_statistic": 0.12100797846632017,
+        "n_cur": 293,
+        "n_missing_cur": 1,
+        "n_ref": 459,
+        "psi": 0.08175160780763534,
+        "severity": "stable"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 294,
+        "n_missing_cur": 0,
+        "n_ref": 500,
+        "psi": 0.06259010164621646,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.1485131341304746,
+        "ks_statistic": 0.09062480455313028,
+        "n_cur": 271,
+        "n_missing_cur": 23,
+        "n_ref": 354,
+        "psi": 0.018179602525772293,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.5950770801831551,
+      "mean_ref": 0.6703028774123743,
+      "model_name": "ensemble",
+      "n_cur": 294,
+      "n_ref": 500,
+      "psi": 0.490010979021461,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 2,
+      "stable": 3
+    }
+  },
+  {
+    "compute_seconds": 5.19,
+    "held_out_source": "LongBeachVA",
+    "model": "tabicl",
+    "n_current": 200,
+    "per_feature": [
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 1.7663653774498247,
+        "severity": "major"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 1.6321403788637486e-19,
+        "ks_statistic": 0.37854166666666667,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.7762535648959703,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 3.402547670208857e-17,
+        "ks_statistic": 0.3985329784087548,
+        "n_cur": 147,
+        "n_missing_cur": 53,
+        "n_ref": 575,
+        "psi": 0.6828721560087705,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.6657458096870283,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5858181356619209,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5035462082525324,
+        "severity": "major"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.9412817004615625e-56,
+        "ks_statistic": 0.6476683937823834,
+        "n_cur": 193,
+        "n_missing_cur": 7,
+        "n_ref": 514,
+        "psi": 0.3480390053892746,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 6.089945236524368e-08,
+        "ks_statistic": 0.27076061663758,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 573,
+        "psi": 0.2656202899090324,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.2123899088267032,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.0036926826982249966,
+        "ks_statistic": 0.1672216222702184,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 463,
+        "psi": 0.07148363493313788,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.056062130379384484,
+        "ks_statistic": 0.12284649632210608,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 574,
+        "psi": 0.047908685706357305,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6924080149456858,
+      "mean_ref": 0.49872969220733565,
+      "model_name": "tabicl",
+      "n_cur": 200,
+      "n_ref": 576,
+      "psi": 2.9407521367844196,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 8,
+      "moderate": 1,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.64,
+    "held_out_source": "LongBeachVA",
+    "model": "xgboost",
+    "n_current": 200,
+    "per_feature": [
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 1.7663653774498247,
+        "severity": "major"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 1.6321403788637486e-19,
+        "ks_statistic": 0.37854166666666667,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.7762535648959703,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 3.402547670208857e-17,
+        "ks_statistic": 0.3985329784087548,
+        "n_cur": 147,
+        "n_missing_cur": 53,
+        "n_ref": 575,
+        "psi": 0.6828721560087705,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.6657458096870283,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5858181356619209,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5035462082525324,
+        "severity": "major"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.9412817004615625e-56,
+        "ks_statistic": 0.6476683937823834,
+        "n_cur": 193,
+        "n_missing_cur": 7,
+        "n_ref": 514,
+        "psi": 0.3480390053892746,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 6.089945236524368e-08,
+        "ks_statistic": 0.27076061663758,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 573,
+        "psi": 0.2656202899090324,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.2123899088267032,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.0036926826982249966,
+        "ks_statistic": 0.1672216222702184,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 463,
+        "psi": 0.07148363493313788,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.056062130379384484,
+        "ks_statistic": 0.12284649632210608,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 574,
+        "psi": 0.047908685706357305,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.727434065900743,
+      "mean_ref": 0.4856597398975282,
+      "model_name": "xgboost",
+      "n_cur": 200,
+      "n_ref": 576,
+      "psi": 0.6027821204807228,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 8,
+      "moderate": 1,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.16,
+    "held_out_source": "LongBeachVA",
+    "model": "lr",
+    "n_current": 200,
+    "per_feature": [
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 1.7663653774498247,
+        "severity": "major"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 1.6321403788637486e-19,
+        "ks_statistic": 0.37854166666666667,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.7762535648959703,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 3.402547670208857e-17,
+        "ks_statistic": 0.3985329784087548,
+        "n_cur": 147,
+        "n_missing_cur": 53,
+        "n_ref": 575,
+        "psi": 0.6828721560087705,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.6657458096870283,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5858181356619209,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5035462082525324,
+        "severity": "major"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.9412817004615625e-56,
+        "ks_statistic": 0.6476683937823834,
+        "n_cur": 193,
+        "n_missing_cur": 7,
+        "n_ref": 514,
+        "psi": 0.3480390053892746,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 6.089945236524368e-08,
+        "ks_statistic": 0.27076061663758,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 573,
+        "psi": 0.2656202899090324,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.2123899088267032,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.0036926826982249966,
+        "ks_statistic": 0.1672216222702184,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 463,
+        "psi": 0.07148363493313788,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.056062130379384484,
+        "ks_statistic": 0.12284649632210608,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 574,
+        "psi": 0.047908685706357305,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.655753476062128,
+      "mean_ref": 0.49383192733233067,
+      "model_name": "lr",
+      "n_cur": 200,
+      "n_ref": 576,
+      "psi": 0.47060731582683024,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 8,
+      "moderate": 1,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.81,
+    "held_out_source": "LongBeachVA",
+    "model": "ensemble",
+    "n_current": 200,
+    "per_feature": [
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 1.7663653774498247,
+        "severity": "major"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 1.6321403788637486e-19,
+        "ks_statistic": 0.37854166666666667,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.7762535648959703,
+        "severity": "major"
+      },
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 3.402547670208857e-17,
+        "ks_statistic": 0.3985329784087548,
+        "n_cur": 147,
+        "n_missing_cur": 53,
+        "n_ref": 575,
+        "psi": 0.6828721560087705,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.6657458096870283,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5858181356619209,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.5035462082525324,
+        "severity": "major"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 1.9412817004615625e-56,
+        "ks_statistic": 0.6476683937823834,
+        "n_cur": 193,
+        "n_missing_cur": 7,
+        "n_ref": 514,
+        "psi": 0.3480390053892746,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 6.089945236524368e-08,
+        "ks_statistic": 0.27076061663758,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 573,
+        "psi": 0.2656202899090324,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 200,
+        "n_missing_cur": 0,
+        "n_ref": 576,
+        "psi": 0.2123899088267032,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": 0.0036926826982249966,
+        "ks_statistic": 0.1672216222702184,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 463,
+        "psi": 0.07148363493313788,
+        "severity": "stable"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 0.056062130379384484,
+        "ks_statistic": 0.12284649632210608,
+        "n_cur": 144,
+        "n_missing_cur": 56,
+        "n_ref": 574,
+        "psi": 0.047908685706357305,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6728833173832782,
+      "mean_ref": 0.47897269312476554,
+      "model_name": "ensemble",
+      "n_cur": 200,
+      "n_ref": 576,
+      "psi": 1.2403183710338395,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 8,
+      "moderate": 1,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 5.69,
+    "held_out_source": "Switzerland",
+    "model": "tabicl",
+    "n_current": 123,
+    "per_feature": [
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 6.997575248518573e-14,
+        "ks_statistic": 0.3840315725561627,
+        "n_cur": 122,
+        "n_missing_cur": 1,
+        "n_ref": 594,
+        "psi": 0.598731692636888,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.537973997248931,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 1.4771950953964264e-21,
+        "ks_statistic": 0.48549029799029797,
+        "n_cur": 117,
+        "n_missing_cur": 6,
+        "n_ref": 592,
+        "psi": 0.4206052938597876,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0319045648815765e-07,
+        "ks_statistic": 0.27585436676345765,
+        "n_cur": 121,
+        "n_missing_cur": 2,
+        "n_ref": 592,
+        "psi": 0.36907331795442155,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.2932296318899141,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.28585247469715297,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.1955996690933766,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.15328135045732227,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.01774093572459136,
+        "ks_statistic": 0.14939183928730967,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.10644201091674417,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 5.625722084776291e-42,
+        "ks_statistic": 0.8958333333333334,
+        "n_cur": 48,
+        "n_missing_cur": 75,
+        "n_ref": 626,
+        "psi": 0.028786817691714255,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 0,
+        "n_missing_cur": 123,
+        "n_ref": 576,
+        "psi": 0.0,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6897341024463739,
+      "mean_ref": 0.4960687290825932,
+      "model_name": "tabicl",
+      "n_cur": 123,
+      "n_ref": 637,
+      "psi": 1.891850091833296,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 3,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.6,
+    "held_out_source": "Switzerland",
+    "model": "xgboost",
+    "n_current": 123,
+    "per_feature": [
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 6.997575248518573e-14,
+        "ks_statistic": 0.3840315725561627,
+        "n_cur": 122,
+        "n_missing_cur": 1,
+        "n_ref": 594,
+        "psi": 0.598731692636888,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.537973997248931,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 1.4771950953964264e-21,
+        "ks_statistic": 0.48549029799029797,
+        "n_cur": 117,
+        "n_missing_cur": 6,
+        "n_ref": 592,
+        "psi": 0.4206052938597876,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0319045648815765e-07,
+        "ks_statistic": 0.27585436676345765,
+        "n_cur": 121,
+        "n_missing_cur": 2,
+        "n_ref": 592,
+        "psi": 0.36907331795442155,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.2932296318899141,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.28585247469715297,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.1955996690933766,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.15328135045732227,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.01774093572459136,
+        "ks_statistic": 0.14939183928730967,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.10644201091674417,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 5.625722084776291e-42,
+        "ks_statistic": 0.8958333333333334,
+        "n_cur": 48,
+        "n_missing_cur": 75,
+        "n_ref": 626,
+        "psi": 0.028786817691714255,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 0,
+        "n_missing_cur": 123,
+        "n_ref": 576,
+        "psi": 0.0,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6070850882224921,
+      "mean_ref": 0.41661342213535607,
+      "model_name": "xgboost",
+      "n_cur": 123,
+      "n_ref": 637,
+      "psi": 0.6786994415691315,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 3,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.15,
+    "held_out_source": "Switzerland",
+    "model": "lr",
+    "n_current": 123,
+    "per_feature": [
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 6.997575248518573e-14,
+        "ks_statistic": 0.3840315725561627,
+        "n_cur": 122,
+        "n_missing_cur": 1,
+        "n_ref": 594,
+        "psi": 0.598731692636888,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.537973997248931,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 1.4771950953964264e-21,
+        "ks_statistic": 0.48549029799029797,
+        "n_cur": 117,
+        "n_missing_cur": 6,
+        "n_ref": 592,
+        "psi": 0.4206052938597876,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0319045648815765e-07,
+        "ks_statistic": 0.27585436676345765,
+        "n_cur": 121,
+        "n_missing_cur": 2,
+        "n_ref": 592,
+        "psi": 0.36907331795442155,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.2932296318899141,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.28585247469715297,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.1955996690933766,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.15328135045732227,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.01774093572459136,
+        "ks_statistic": 0.14939183928730967,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.10644201091674417,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 5.625722084776291e-42,
+        "ks_statistic": 0.8958333333333334,
+        "n_cur": 48,
+        "n_missing_cur": 75,
+        "n_ref": 626,
+        "psi": 0.028786817691714255,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 0,
+        "n_missing_cur": 123,
+        "n_ref": 576,
+        "psi": 0.0,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.5996968222654829,
+      "mean_ref": 0.44428562659608467,
+      "model_name": "lr",
+      "n_cur": 123,
+      "n_ref": 637,
+      "psi": 0.5750166588267153,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 3,
+      "stable": 2
+    }
+  },
+  {
+    "compute_seconds": 0.87,
+    "held_out_source": "Switzerland",
+    "model": "ensemble",
+    "n_current": 123,
+    "per_feature": [
+      {
+        "feature": "MaxHR",
+        "kind": "numeric",
+        "ks_p_value": 6.997575248518573e-14,
+        "ks_statistic": 0.3840315725561627,
+        "n_cur": 122,
+        "n_missing_cur": 1,
+        "n_ref": 594,
+        "psi": 0.598731692636888,
+        "severity": "major"
+      },
+      {
+        "feature": "ChestPainType",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.537973997248931,
+        "severity": "major"
+      },
+      {
+        "feature": "Oldpeak",
+        "kind": "numeric",
+        "ks_p_value": 1.4771950953964264e-21,
+        "ks_statistic": 0.48549029799029797,
+        "n_cur": 117,
+        "n_missing_cur": 6,
+        "n_ref": 592,
+        "psi": 0.4206052938597876,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingBP",
+        "kind": "numeric",
+        "ks_p_value": 3.0319045648815765e-07,
+        "ks_statistic": 0.27585436676345765,
+        "n_cur": 121,
+        "n_missing_cur": 2,
+        "n_ref": 592,
+        "psi": 0.36907331795442155,
+        "severity": "major"
+      },
+      {
+        "feature": "RestingECG",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.2932296318899141,
+        "severity": "major"
+      },
+      {
+        "feature": "ST_Slope",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.28585247469715297,
+        "severity": "major"
+      },
+      {
+        "feature": "Sex",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.1955996690933766,
+        "severity": "moderate"
+      },
+      {
+        "feature": "ExerciseAngina",
+        "kind": "categorical",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.15328135045732227,
+        "severity": "moderate"
+      },
+      {
+        "feature": "Age",
+        "kind": "numeric",
+        "ks_p_value": 0.01774093572459136,
+        "ks_statistic": 0.14939183928730967,
+        "n_cur": 123,
+        "n_missing_cur": 0,
+        "n_ref": 637,
+        "psi": 0.10644201091674417,
+        "severity": "moderate"
+      },
+      {
+        "feature": "FastingBS",
+        "kind": "numeric",
+        "ks_p_value": 5.625722084776291e-42,
+        "ks_statistic": 0.8958333333333334,
+        "n_cur": 48,
+        "n_missing_cur": 75,
+        "n_ref": 626,
+        "psi": 0.028786817691714255,
+        "severity": "stable"
+      },
+      {
+        "feature": "Cholesterol",
+        "kind": "numeric",
+        "ks_p_value": null,
+        "ks_statistic": null,
+        "n_cur": 0,
+        "n_missing_cur": 123,
+        "n_ref": 576,
+        "psi": 0.0,
+        "severity": "stable"
+      }
+    ],
+    "prediction": {
+      "mean_cur": 0.6027218994479925,
+      "mean_ref": 0.4234997812075372,
+      "model_name": "ensemble",
+      "n_cur": 123,
+      "n_ref": 637,
+      "psi": 1.7242737236451207,
+      "severity": "major"
+    },
+    "severity_counts": {
+      "major": 6,
+      "moderate": 3,
+      "stable": 2
+    }
+  }
+]

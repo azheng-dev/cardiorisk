@@ -107,16 +107,20 @@ Last meaningful PR:   #10 feat(explain): Phase 2.5 — KernelSHAP cross-model ex
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 2.5 full LODO explainability sweep on data/processed/combined.parquet
-                      (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x KernelSHAP
-                      with nsamples=128, max_test_rows=80, background_k=50) plus TreeSHAP
-                      sanity (XGBoost) + analytic-LR-summed sanity (LR) + 4 archetypes
-                      per (model x fold). Wall-clock 2h 20m on M4 Pro. Outputs under
-                      reports/v1/explainability/{explanations_per_cell,explanations_aggregate,
-                      cross_model_agreement}.json + reports/v1/figures/explainability/*.png
-                      (142 PNGs total). Phase 2.4 LODO run still authoritative for
-                      discrimination/calibration metrics under reports/v1/{metrics_*.json,
-                      figures/*.png}; Phase 2.5 did not re-train, only re-explained.
+Last eval run:        Phase 2.6 full LODO drift sweep on data/processed/combined.parquet
+                      (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x
+                      per-feature PSI + KS sanity + prediction-drift PSI; 10 quantile
+                      bins; per-fold combined-pool reference; held-out source as the
+                      "current" slice). Wall-clock ~30s on M4 Pro. Outputs under
+                      reports/v1/drift/{per_fold,aggregate}.json + 16 dashboard PNGs
+                      under reports/v1/figures/drift/. Headline: every fold has 5–8 of
+                      11 features in `major` band; ST_Slope PSI=7.06 on Cleveland;
+                      TabICL/Ensemble translate input drift into ~3-4x larger
+                      predicted-probability shifts than XGBoost/LR (mean prediction-PSI
+                      1.57/1.24 vs 0.44/0.40). Phase 2.5 explainability sweep + Phase
+                      2.4 LODO discrimination/calibration sweep both still authoritative
+                      under reports/v1/{explainability/*.json, metrics_*.json,
+                      figures/**/*.png}; Phase 2.6 did not re-train or re-explain.
 
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
