@@ -51,48 +51,60 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 2.4 (Honours-baseline reproduction: PyTorch Ensemble +
-                      cross-model honesty comparison + MODEL_CARD.md draft)
-                      implementation complete on feat/phase-2-4-honours-baseline. PR
-                      pending; awaiting CI green and user merge approval before Phase
-                      2.5 (SHAP / explainability) kickoff.
-Last checkpoint:      Phase 2.3b (v1 model wrappers + training driver + LODO results)
+Current phase:        Phase 2.5 (Explainability: KernelSHAP cross-model headline +
+                      TreeSHAP/analytic-LR sanity-checks + per-archetype waterfalls +
+                      cross-model agreement matrix) implementation complete on
+                      feat/phase-2-5-shap. PR pending; awaiting CI green and user
+                      merge approval before Phase 2.6 (drift / monitoring) or Phase 3
+                      (agentic system) kickoff.
+Last checkpoint:      Phase 2.4 (Honours-baseline Ensemble + cross-model honesty +
+                      MODEL_CARD.md) accepted by user (PR #9 merged 2026-05-05).
+                      Phase 2.3b (v1 model wrappers + training driver + LODO results)
                       accepted by user (PR #8 merged 2026-05-05).
                       Phase 2.3a (eval harness) accepted by user (PR #7 merged 2026-05-05).
                       Phase 2.2 (preprocessing pipeline) accepted by user (PR #6 merged 2026-05-05).
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-                      Phase 2.4 plan approved by user (2026-05-05): Path A (Honours-Ensemble
-                      only, no WOA reconstruction) after pre-implementation discovery that
-                      the WOA/GWO/CS/BA/FA/HHO/RFE-CV code is missing from the supplied
-                      archive (only empty placeholder cells under markdown headers in
-                      Demos/Data_Pre-processing.ipynb); PyTorch port; sigmoid (Platt)
-                      calibration (ADR-012); identical LODO harness; MODEL_CARD.md
-                      drafted in 2.4; new docs/research/09-honours-vs-v1.md with the
-                      WOA-code-missing finding; patch to docs/research/01-honours-recap.md
-                      §8 with implementation-gap disclaimer; branch feat/phase-2-4-honours-baseline.
-Open decisions:       - Phase 2.4 PR review + merge approval.
-                      - Phase 2.5 (SHAP / explainability) open decisions (to surface at
-                        Phase 2.5 kickoff):
-                          - Explainer choice: KernelSHAP (model-agnostic, works for all
-                            four models including TabICL/Ensemble) vs per-model native
-                            (TreeSHAP for XGBoost, coefficients for LR). Default:
-                            KernelSHAP for all four for comparison consistency.
-                          - Explanation surface: per-prediction local + global feature
-                            importance + per-subgroup explanation drift (sex, age band).
-                          - Background-data sample for KernelSHAP: train slice or
-                            calibration slice; size cap.
-                          - SHAP plots committed: per (model x fold) under
-                            reports/v1/explainability/.
-                          - Honest discussion of explainer disagreement across models.
+                      Phase 2.5 plan approved by user (2026-05-06): KernelSHAP-everywhere
+                      headline + TreeSHAP/analytic-LR sanity-checks; shap.kmeans(50)
+                      background; 4 archetypes per (model x fold) = 64 waterfalls;
+                      auditable-strata-only subgroup-drift (n>=30); Spearman rank
+                      cross-model agreement; spline-basis sum-back for LR (ADR-013).
+                      Wall-clock contingency fired: ADR-013 amendment 2026-05-06
+                      reduced nsamples 256->128 and capped per-cell test slice at
+                      80 stratified rows; full sweep completed in 2h 20m on M4 Pro.
+Open decisions:       - Phase 2.5 PR review + merge approval.
+                      - Phase 2.6 (drift / monitoring) open decisions (to surface at
+                        Phase 2.6 kickoff):
+                          - Drift detection scope: input-feature drift (PSI, KS) vs
+                            prediction drift (PSI on predict_proba) vs concept drift
+                            (need labelled new data). Default: input + prediction; concept
+                            drift deferred to a follow-up phase that has new labelled data.
+                          - Reference distribution: Phase 2.3b training-pool combined
+                            distribution vs per-source distributions. Default: combined.
+                          - Drift-monitoring driver: standalone CLI script (cardiorisk/
+                            monitoring/) that reads new data + emits a JSON report + a
+                            single dashboard PNG, mirroring the train_v1.py /
+                            compute_explanations.py pattern.
+                          - Drift threshold action: report-only (Phase 2.6) vs
+                            auto-block-deployment (deferred to a productionisation phase
+                            that doesn't exist yet).
+                          - CI smoke for monitoring: synthetic drift fixture + assertion
+                            that the script flags it. Default: yes.
+                      - Alternative path: skip 2.6, jump to Phase 3 (agentic system
+                        scaffolding: LangGraph orchestrator + retrieval + drafting).
+                        Phase 2.5 already shipped the per-row attribution surface that
+                        Phase 3's risk-driver narrative drafter needs; drift monitoring
+                        is a "ship later" deliverable rather than a blocker for Phase 3.
                       - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
                         user later requests it; ADR-012 documents the deferral.
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
-                      root cause and every PR since (#4, #5, #6, #7, #8) merged via standard
-                      gh pr merge.
-Last meaningful PR:   #8 feat(models): Phase 2.3b — v1 model wrappers (TabICL, XGBoost, LR)
+                      root cause and every PR since (#4..#9) merged via standard gh pr merge.
+Last meaningful PR:   #9 feat(models): Phase 2.4 — Honours-baseline Ensemble + cross-model
+                      honesty (merged 2026-05-05).
+                      #8 feat(models): Phase 2.3b — v1 model wrappers (TabICL, XGBoost, LR)
                       + training driver + full LODO results (merged 2026-05-05).
                       #7 feat(eval): Phase 2.3a — eval harness (metrics, DCA, bootstrap,
                       reliability, subgroup, calibration wrapper) (merged 2026-05-05).
@@ -102,12 +114,16 @@ Last meaningful PR:   #8 feat(models): Phase 2.3b — v1 model wrappers (TabICL,
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 2.4 full LODO run on processed/combined.parquet (4 sources
-                      x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x calibration +
-                      bootstrap). Outputs refreshed in-place under reports/v1/
-                      (metrics_per_fold.json, metrics_aggregate.json, figures/*.png; 32
-                      PNGs total now). Model artefacts regenerable via
-                      backend/scripts/train_v1.py per ADR-010 (see models/v1/README.md).
+Last eval run:        Phase 2.5 full LODO explainability sweep on data/processed/combined.parquet
+                      (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x KernelSHAP
+                      with nsamples=128, max_test_rows=80, background_k=50) plus TreeSHAP
+                      sanity (XGBoost) + analytic-LR-summed sanity (LR) + 4 archetypes
+                      per (model x fold). Wall-clock 2h 20m on M4 Pro. Outputs under
+                      reports/v1/explainability/{explanations_per_cell,explanations_aggregate,
+                      cross_model_agreement}.json + reports/v1/figures/explainability/*.png
+                      (142 PNGs total). Phase 2.4 LODO run still authoritative for
+                      discrimination/calibration metrics under reports/v1/{metrics_*.json,
+                      figures/*.png}; Phase 2.5 did not re-train, only re-explained.
 
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
@@ -118,7 +134,132 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 2.4 deliverables (in pending PR feat/phase-2-4-honours-baseline):
+Phase 2.5 deliverables (in pending PR feat/phase-2-5-shap):
+  backend/cardiorisk/explainability/__init__.py        package skeleton + module map; documents
+                                                       the four-explainer strategy (KernelSHAP
+                                                       headline + TreeSHAP/analytic-LR sanity
+                                                       checks); cross-references ADR-013
+  backend/cardiorisk/explainability/encoder.py         EncodedFeatureSpace dataclass: shared
+                                                       OHE+passthrough encoder so KernelSHAP
+                                                       perturbs a uniform numeric matrix while
+                                                       models see raw HFP DataFrames; bidirectional
+                                                       encode/decode + aggregate_shap (sum
+                                                       OHE-block columns back to the raw feature)
+  backend/cardiorisk/explainability/kernel_shap.py     shap.KernelExplainer wrapper; shap.kmeans(50)
+                                                       background per ADR-013; nsamples default
+                                                       128 (per ADR-013 amendment 2026-05-06);
+                                                       seeded RNG for ~1e-5 determinism band;
+                                                       local ConvergenceWarning suppression
+  backend/cardiorisk/explainability/tree_shap.py       XGBoost-specific TreeSHAP wrapper; unwraps
+                                                       CalibratedClassifierCV+FrozenEstimator to
+                                                       reach the raw booster; aggregates back to
+                                                       raw HFP feature names
+  backend/cardiorisk/explainability/linear_attribution.py exact analytic LR SHAP; sums spline-basis
+                                                       contributions back to original NUMERIC_COLUMNS
+                                                       names so cross-model comparison aligns;
+                                                       per-spline-basis values preserved for the
+                                                       LR-detail figure
+  backend/cardiorisk/explainability/archetypes.py      pick_archetypes: deterministic TP-high /
+                                                       TP-low / FN / FP selector at the 0.5 threshold
+                                                       per (model x fold)
+  backend/cardiorisk/explainability/subgroup_drift.py  per-stratum mean |SHAP| deltas with
+                                                       min_stratum_size=30 guard; mirrors Phase 2.3b
+                                                       fairness-gap honesty discipline
+  backend/cardiorisk/explainability/cross_model_agreement.py Spearman rank correlation matrix of
+                                                       mean |SHAP| feature rankings; per-fold +
+                                                       aggregate-across-folds variants
+  backend/cardiorisk/explainability/figures.py         matplotlib renderers for global bar +
+                                                       beeswarm + waterfall + heatmap +
+                                                       subgroup-drift + sanity-scatter +
+                                                       LR-summed-vs-basis figures
+  backend/cardiorisk/explainability/orchestrator.py    end-to-end driver: per (model x fold)
+                                                       loads pre-trained calibrated artefact
+                                                       (ADR-010); fits encoder; runs KernelSHAP
+                                                       on stratified-sampled test slice (cap 80,
+                                                       archetypes always included); runs
+                                                       TreeSHAP/analytic-LR sanity; picks
+                                                       archetypes; computes subgroup-drift +
+                                                       cross-model agreement; writes JSONs +
+                                                       142 PNGs; --max-test-rows N CLI override
+                                                       per ADR-013 amendment
+  backend/scripts/compute_explanations.py              thin CLI wrapper; sets OMP_NUM_THREADS=1
+                                                       + KMP_DUPLICATE_LIB_OK=TRUE +
+                                                       torch.set_num_threads(1) BEFORE importing
+                                                       any model wrapper (defuses the
+                                                       TabICL/XGBoost/PyTorch OpenMP deadlock
+                                                       on macOS)
+  backend/cardiorisk/data/paths.py                     adds REPORTS_V1_EXPLAIN +
+                                                       REPORTS_V1_EXPLAIN_FIGURES constants
+  backend/tests/test_explainability_*.py               9 test modules; 98 tests covering
+                                                       encoder + KernelSHAP + TreeSHAP +
+                                                       linear-attribution + archetypes +
+                                                       subgroup-drift + cross-model-agreement +
+                                                       figures + end-to-end orchestrator smoke
+                                                       (including new --max-test-rows flag tests)
+  backend/pyproject.toml                               adds shap>=0.51,<0.52 (pulls numba+llvmlite
+                                                       ~38 MB into uv.lock; accepted in ADR-013);
+                                                       mypy ignore_missing_imports for shap +
+                                                       numba + llvmlite + slicer + cloudpickle +
+                                                       scipy; ruff per-file-ignores N803/N806
+                                                       for cardiorisk/explainability/**
+  reports/v1/explainability/*.json                     explanations_per_cell.json (16 cells:
+                                                       4 models x 4 folds; global_importance,
+                                                       subgroup_drift_{sex,age_band}, archetypes,
+                                                       sanity), explanations_aggregate.json
+                                                       (config + n_cells + aggregate Spearman),
+                                                       cross_model_agreement.json (per-fold +
+                                                       aggregate)
+  reports/v1/figures/explainability/*.png              142 PNGs per ADR-013 §7: 16 global_bar +
+                                                       16 global_beeswarm + 64 archetype
+                                                       waterfalls + 4 per-fold cross-model
+                                                       heatmap + 1 aggregate cross-model heatmap
+                                                       + 24 subgroup-drift bars (auditable strata
+                                                       only) + 4 XGBoost TreeSHAP-vs-KernelSHAP
+                                                       scatter + 4 LR summed-vs-basis bar
+  docs/adr/013-explainability-strategy.md              binding decision: KernelSHAP-everywhere
+                                                       cross-model headline + TreeSHAP/analytic-LR
+                                                       sanity-checks; shap.kmeans(50); auditable-
+                                                       strata-only subgroup-drift; Spearman
+                                                       cross-model agreement; LR sum-back from
+                                                       spline basis; +Amendment 2026-05-06
+                                                       documenting the wall-clock contingency
+                                                       (nsamples 256->128, max_test_rows=80
+                                                       stratified cap)
+  docs/research/10-explainability.md                   Phase 2.5 results: §1 contingency disclosure;
+                                                       §2 cross-model Spearman matrix (aggregate
+                                                       and per-fold); §3 top-8 cross-fold-averaged
+                                                       global importance per model; §4 KernelSHAP-
+                                                       vs-native sanity Spearman (XGBoost mean
+                                                       0.95, LR mean 0.91); §5 64-archetype
+                                                       waterfall surface; §6 auditable-strata-only
+                                                       subgroup-drift (with the F sex-stratum
+                                                       data-shortage flagged honestly); §7 honest
+                                                       discussion of explainer disagreement; §8
+                                                       what this enables for Phase 3
+  docs/research/README.md                              index updated for 10-explainability.md
+                                                       with concrete headline numbers
+  docs/adr/README.md                                   index updated for ADR-013 (already in
+                                                       place pre-2.5; amendment is internal to
+                                                       the ADR file)
+  MODEL_CARD.md                                        new §5 Explainability with top-5 features
+                                                       per model + cross-model Spearman matrix +
+                                                       sanity-check Spearman + subgroup-drift
+                                                       findings + 4-archetype waterfall surface +
+                                                       methodological caveats; subsequent
+                                                       sections renumbered §6..§11; ADR-013
+                                                       added to references
+  .github/workflows/ci.yml                             adds compute_explanations.py --smoke step
+                                                       in test-python (4 models x 1 LODO fold;
+                                                       reuses smoke-trained artefacts from
+                                                       train_v1 step; ~30s on ubuntu-latest)
+  .gitignore                                           reports/v1/explainability/smoke/ +
+                                                       reports/v1/figures/explainability/smoke/
+                                                       ignored; full-run JSONs/figs explicitly
+                                                       tracked
+  AGENTS.md                                            Phase 2.5 status block + Phase 2.6 / Phase 3
+                                                       open questions; Phase 2.5 deliverables block
+
+Phase 2.4 deliverables (in PR #9 feat/phase-2-4-honours-baseline, merged):
   backend/cardiorisk/models/ensemble.py        Honours-baseline 4-net mean-averaged Ensemble
                                                (DNN + 1D CNN + LSTM + BiLSTM); PyTorch port of
                                                Demos/Data_Pre-processing.ipynb cell 55; sklearn

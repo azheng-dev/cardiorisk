@@ -1,0 +1,4763 @@
+[
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 51.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 298.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 122.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 4.2,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 50,
+        "y_proba": 0.979556679725647,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 46.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 249.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 144.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.8,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 120.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 63,
+        "y_proba": 0.5000803470611572,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 54.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 283.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 195.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 192.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 49,
+        "y_proba": 0.11406103521585464,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 45.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 208.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 148.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 104.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 22,
+        "y_proba": 0.9358360767364502,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7519847678424862,
+    "fit_seconds": 892.45,
+    "global_importance": {
+      "Age": 0.01652695659191921,
+      "ChestPainType": 0.13328956828547003,
+      "Cholesterol": 0.024828557274856607,
+      "ExerciseAngina": 0.049210723894298355,
+      "ExerciseAngina_was_missing": 0.00033268416259612686,
+      "FastingBS": 0.04899091492858243,
+      "MaxHR": 0.023018353262593372,
+      "MaxHR_was_missing": 0.0008414369431163707,
+      "Oldpeak": 0.02819147000349604,
+      "Oldpeak_was_missing": 0.0010529261603958152,
+      "RestingBP": 0.01690585801933433,
+      "RestingBP_was_missing": 0.0007341600459857205,
+      "RestingECG": 0.0029137665552349105,
+      "ST_Slope": 0.048404709711171445,
+      "ST_Slope_was_missing": 0.0074253616327157644,
+      "Sex": 0.050455359859473546
+    },
+    "held_out_source": "Cleveland",
+    "model": "tabicl",
+    "n_test_explained": 80,
+    "n_test_full": 303,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0038956571800182888,
+            "ChestPainType": -0.01885879646829465,
+            "Cholesterol": -0.003778663851807286,
+            "ExerciseAngina": 0.0032919111623234618,
+            "ExerciseAngina_was_missing": -7.991648605521954e-05,
+            "FastingBS": -0.003622134525632731,
+            "MaxHR": -0.0019050384563169195,
+            "MaxHR_was_missing": 0.0003272157121506482,
+            "Oldpeak": 0.004773745232709743,
+            "Oldpeak_was_missing": -4.404765524941719e-05,
+            "RestingBP": -0.001744773774304072,
+            "RestingBP_was_missing": -0.00014976831196604067,
+            "RestingECG": -4.619000981813653e-05,
+            "ST_Slope": -0.0007932911256640571,
+            "ST_Slope_was_missing": 0.00032895123547044356,
+            "Sex": 0.0060880433966490136
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.012631299411900922,
+            "ChestPainType": 0.11443077181717538,
+            "Cholesterol": 0.02104989342304932,
+            "ExerciseAngina": 0.05250263505662182,
+            "ExerciseAngina_was_missing": 0.0002527676765409073,
+            "FastingBS": 0.0453687804029497,
+            "MaxHR": 0.021113314806276453,
+            "MaxHR_was_missing": 0.0011686526552670189,
+            "Oldpeak": 0.03296521523620578,
+            "Oldpeak_was_missing": 0.001008878505146398,
+            "RestingBP": 0.015161084245030257,
+            "RestingBP_was_missing": 0.0005843917340196799,
+            "RestingECG": 0.002867576545416774,
+            "ST_Slope": 0.04761141858550739,
+            "ST_Slope_was_missing": 0.007754312868186208,
+            "Sex": 0.05654340325612256
+          },
+          "n": 54,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.01652695659191921,
+        "ChestPainType": 0.13328956828547003,
+        "Cholesterol": 0.024828557274856607,
+        "ExerciseAngina": 0.049210723894298355,
+        "ExerciseAngina_was_missing": 0.00033268416259612686,
+        "FastingBS": 0.04899091492858243,
+        "MaxHR": 0.023018353262593372,
+        "MaxHR_was_missing": 0.0008414369431163707,
+        "Oldpeak": 0.02819147000349604,
+        "Oldpeak_was_missing": 0.0010529261603958152,
+        "RestingBP": 0.01690585801933433,
+        "RestingBP_was_missing": 0.0007341600459857205,
+        "RestingECG": 0.0029137665552349105,
+        "ST_Slope": 0.048404709711171445,
+        "ST_Slope_was_missing": 0.0074253616327157644,
+        "Sex": 0.050455359859473546
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 21,
+          "stratum": "<50"
+        },
+        {
+          "n": 5,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0008864794537228535,
+            "ChestPainType": -0.005314876866350016,
+            "Cholesterol": 0.00047385525244103555,
+            "ExerciseAngina": 0.002034891276833768,
+            "ExerciseAngina_was_missing": -3.0333943225393904e-05,
+            "FastingBS": -0.005461605277884592,
+            "MaxHR": 0.003331258937000439,
+            "MaxHR_was_missing": 5.482333091254971e-05,
+            "Oldpeak": 0.004794255883177896,
+            "Oldpeak_was_missing": -0.0003529902634617229,
+            "RestingBP": -5.5000199916995646e-05,
+            "RestingBP_was_missing": 0.00016572176614847417,
+            "RestingECG": -0.00118779880693133,
+            "ST_Slope": -0.0036776303790803794,
+            "ST_Slope_was_missing": 0.0019940865848588037,
+            "Sex": -0.049146127272750424
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.015640477138196357,
+            "ChestPainType": 0.12797469141912002,
+            "Cholesterol": 0.025302412527297643,
+            "ExerciseAngina": 0.051245615171132124,
+            "ExerciseAngina_was_missing": 0.00030235021937073295,
+            "FastingBS": 0.04352930965069784,
+            "MaxHR": 0.02634961219959381,
+            "MaxHR_was_missing": 0.0008962602740289204,
+            "Oldpeak": 0.032985725886673936,
+            "Oldpeak_was_missing": 0.0006999358969340923,
+            "RestingBP": 0.016850857819417333,
+            "RestingBP_was_missing": 0.0008998818121341947,
+            "RestingECG": 0.0017259677483035805,
+            "ST_Slope": 0.044727079332091066,
+            "ST_Slope_was_missing": 0.009419448217574568,
+            "Sex": 0.0013092325867231198
+          },
+          "n": 56,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.01652695659191921,
+        "ChestPainType": 0.13328956828547003,
+        "Cholesterol": 0.024828557274856607,
+        "ExerciseAngina": 0.049210723894298355,
+        "ExerciseAngina_was_missing": 0.00033268416259612686,
+        "FastingBS": 0.04899091492858243,
+        "MaxHR": 0.023018353262593372,
+        "MaxHR_was_missing": 0.0008414369431163707,
+        "Oldpeak": 0.02819147000349604,
+        "Oldpeak_was_missing": 0.0010529261603958152,
+        "RestingBP": 0.01690585801933433,
+        "RestingBP_was_missing": 0.0007341600459857205,
+        "RestingECG": 0.0029137665552349105,
+        "ST_Slope": 0.048404709711171445,
+        "ST_Slope_was_missing": 0.0074253616327157644,
+        "Sex": 0.050455359859473546
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 24,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 62.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 267.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 99.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.8,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 120.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 19,
+        "y_proba": 1.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 64.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 335.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 158.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 10,
+        "y_proba": 0.5,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 48.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 229.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 168.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 5,
+        "y_proba": 0.09090909361839294,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 64.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 263.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 105.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.2,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 128.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 64,
+        "y_proba": 0.9858157634735107,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.8358076254687976,
+    "fit_seconds": 3.12,
+    "global_importance": {
+      "Age": 0.019321658244926567,
+      "ChestPainType": 0.18899466693671027,
+      "Cholesterol": 0.027145196124844805,
+      "ExerciseAngina": 0.026172379840869765,
+      "ExerciseAngina_was_missing": 0.0022133379761036785,
+      "FastingBS": 0.08740658180981456,
+      "MaxHR": 0.01758021125696877,
+      "MaxHR_was_missing": 0.0018457076953176266,
+      "Oldpeak": 0.019506796898368615,
+      "Oldpeak_was_missing": 0.001317481252219411,
+      "RestingBP": 0.01089429600003682,
+      "RestingBP_was_missing": 0.0015272535505482672,
+      "RestingECG": 0.004987421704094288,
+      "ST_Slope": 0.057656957220968766,
+      "ST_Slope_was_missing": 0.016256060524431886,
+      "Sex": 0.02903524995414471
+    },
+    "held_out_source": "Cleveland",
+    "model": "xgboost",
+    "n_test_explained": 80,
+    "n_test_full": 303,
+    "sanity": {
+      "treeshap": {
+        "treeshap_expected_value": 0.4169737994670868,
+        "treeshap_mean_abs_per_raw": {
+          "Age": 0.15241706047963816,
+          "ChestPainType": 0.9567813308749464,
+          "Cholesterol": 0.27232749909744597,
+          "ExerciseAngina": 0.38055318574406555,
+          "ExerciseAngina_was_missing": 0.001407877908059163,
+          "FastingBS": 0.28398272693157195,
+          "MaxHR": 0.3143314925371669,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.22688626088784075,
+          "Oldpeak_was_missing": 0.0010662932938430459,
+          "RestingBP": 0.10433774395642104,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.04369762194401119,
+          "ST_Slope": 0.38655442821327596,
+          "ST_Slope_was_missing": 0.15625917203724385,
+          "Sex": 0.33196414723061024
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0005017490133032813,
+            "ChestPainType": -0.035596141771721934,
+            "Cholesterol": -0.0039920779727001705,
+            "ExerciseAngina": 0.0003709096293713597,
+            "ExerciseAngina_was_missing": 0.0002644129186375574,
+            "FastingBS": -0.006097913371925973,
+            "MaxHR": 0.0014162770792429218,
+            "MaxHR_was_missing": -0.00014975077018982547,
+            "Oldpeak": 0.002359121766929529,
+            "Oldpeak_was_missing": 0.0004917603258251509,
+            "RestingBP": -0.003200465855358676,
+            "RestingBP_was_missing": -4.2226147593061496e-05,
+            "RestingECG": 0.0004498070693220047,
+            "ST_Slope": 0.00376710984565657,
+            "ST_Slope_was_missing": 0.0003182074256495443,
+            "Sex": 0.0015833548045855461
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.018819909231623286,
+            "ChestPainType": 0.15339852516498834,
+            "Cholesterol": 0.023153118152144634,
+            "ExerciseAngina": 0.026543289470241125,
+            "ExerciseAngina_was_missing": 0.002477750894741236,
+            "FastingBS": 0.08130866843788859,
+            "MaxHR": 0.018996488336211693,
+            "MaxHR_was_missing": 0.0016959569251278012,
+            "Oldpeak": 0.021865918665298145,
+            "Oldpeak_was_missing": 0.001809241578044562,
+            "RestingBP": 0.007693830144678145,
+            "RestingBP_was_missing": 0.0014850274029552058,
+            "RestingECG": 0.0054372287734162925,
+            "ST_Slope": 0.061424067066625336,
+            "ST_Slope_was_missing": 0.01657426795008143,
+            "Sex": 0.030618604758730256
+          },
+          "n": 55,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.019321658244926567,
+        "ChestPainType": 0.18899466693671027,
+        "Cholesterol": 0.027145196124844805,
+        "ExerciseAngina": 0.026172379840869765,
+        "ExerciseAngina_was_missing": 0.0022133379761036785,
+        "FastingBS": 0.08740658180981456,
+        "MaxHR": 0.01758021125696877,
+        "MaxHR_was_missing": 0.0018457076953176266,
+        "Oldpeak": 0.019506796898368615,
+        "Oldpeak_was_missing": 0.001317481252219411,
+        "RestingBP": 0.01089429600003682,
+        "RestingBP_was_missing": 0.0015272535505482672,
+        "RestingECG": 0.004987421704094288,
+        "ST_Slope": 0.057656957220968766,
+        "ST_Slope_was_missing": 0.016256060524431886,
+        "Sex": 0.02903524995414471
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 19,
+          "stratum": "<50"
+        },
+        {
+          "n": 6,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.000262283455884426,
+            "ChestPainType": -0.003829255290151684,
+            "Cholesterol": -0.002030519325922145,
+            "ExerciseAngina": -0.003182585712512405,
+            "ExerciseAngina_was_missing": 0.00039869397181492745,
+            "FastingBS": -0.0145423934093412,
+            "MaxHR": -0.00033045163880489337,
+            "MaxHR_was_missing": -0.00019633776362711422,
+            "Oldpeak": -0.0012357803804221128,
+            "Oldpeak_was_missing": -0.0003261341802403212,
+            "RestingBP": 0.000105325891669188,
+            "RestingBP_was_missing": -0.00011424009527170637,
+            "RestingECG": 0.00016019615288920177,
+            "ST_Slope": 0.0012016856873011059,
+            "ST_Slope_was_missing": 0.0015637505513822168,
+            "Sex": -0.023741866650293847
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.01905937478904214,
+            "ChestPainType": 0.1851654116465586,
+            "Cholesterol": 0.02511467679892266,
+            "ExerciseAngina": 0.02298979412835736,
+            "ExerciseAngina_was_missing": 0.002612031947918606,
+            "FastingBS": 0.07286418840047336,
+            "MaxHR": 0.017249759618163878,
+            "MaxHR_was_missing": 0.0016493699316905124,
+            "Oldpeak": 0.018271016517946503,
+            "Oldpeak_was_missing": 0.0009913470719790899,
+            "RestingBP": 0.010999621891706009,
+            "RestingBP_was_missing": 0.0014130134552765609,
+            "RestingECG": 0.0051476178569834895,
+            "ST_Slope": 0.05885864290826987,
+            "ST_Slope_was_missing": 0.017819811075814103,
+            "Sex": 0.005293383303850863
+          },
+          "n": 61,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.019321658244926567,
+        "ChestPainType": 0.18899466693671027,
+        "Cholesterol": 0.027145196124844805,
+        "ExerciseAngina": 0.026172379840869765,
+        "ExerciseAngina_was_missing": 0.0022133379761036785,
+        "FastingBS": 0.08740658180981456,
+        "MaxHR": 0.01758021125696877,
+        "MaxHR_was_missing": 0.0018457076953176266,
+        "Oldpeak": 0.019506796898368615,
+        "Oldpeak_was_missing": 0.001317481252219411,
+        "RestingBP": 0.01089429600003682,
+        "RestingBP_was_missing": 0.0015272535505482672,
+        "RestingECG": 0.004987421704094288,
+        "ST_Slope": 0.057656957220968766,
+        "ST_Slope_was_missing": 0.016256060524431886,
+        "Sex": 0.02903524995414471
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 19,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 55.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 217.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 111.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 5.6,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 32,
+        "y_proba": 0.9470802687011537,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 47.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 243.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 152.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 108.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 36,
+        "y_proba": 0.5043464407192355,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 57.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 236.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 174.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 130.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 79,
+        "y_proba": 0.11362470793094456,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 64.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 263.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 105.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.2,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 128.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 63,
+        "y_proba": 0.9349285714878499,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7452905598564938,
+    "fit_seconds": 1.95,
+    "global_importance": {
+      "Age": 0.025610821215215563,
+      "ChestPainType": 0.1266006694140384,
+      "Cholesterol": 0.022854146026207976,
+      "ExerciseAngina": 0.049423373130383454,
+      "ExerciseAngina_was_missing": 0.0016989089448525944,
+      "FastingBS": 0.02353576629940192,
+      "MaxHR": 0.05533272365345695,
+      "MaxHR_was_missing": 0.001634547626515955,
+      "Oldpeak": 0.04192657395303644,
+      "Oldpeak_was_missing": 0.0005275144163551266,
+      "RestingBP": 0.009328833793623013,
+      "RestingBP_was_missing": 0.0009603014212503152,
+      "RestingECG": 0.04095002653027326,
+      "ST_Slope": 0.040007654244413146,
+      "ST_Slope_was_missing": 0.019813439363509343,
+      "Sex": 0.050033332549955234
+    },
+    "held_out_source": "Cleveland",
+    "model": "lr",
+    "n_test_explained": 80,
+    "n_test_full": 303,
+    "sanity": {
+      "lr_basis": {
+        "intercept": 0.2693203471418423,
+        "per_basis": {
+          "ChestPainType_ASY": 0.5883522113497685,
+          "ChestPainType_ATA": 0.21662200182673966,
+          "ChestPainType_NAP": 0.0,
+          "ChestPainType_TA": 0.0,
+          "ExerciseAngina_Missing": 0.0,
+          "ExerciseAngina_N": 0.43293795279804553,
+          "ExerciseAngina_Y": 0.03354419592530845,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.2644300299363295,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG_LVH": 0.3086129059850807,
+          "RestingECG_Missing": 0.0,
+          "RestingECG_Normal": 0.03714182422289083,
+          "RestingECG_ST": 4.603660259103645e-05,
+          "ST_Slope_Down": 0.0,
+          "ST_Slope_Flat": 0.14436321141635816,
+          "ST_Slope_Missing": 0.0,
+          "ST_Slope_Up": 0.0,
+          "ST_Slope_was_missing": 0.0,
+          "Sex_F": 0.1220439481294097,
+          "Sex_M": 0.49390229747685443,
+          "x0": 0.0,
+          "x0_rcs1": 0.2166914637227984,
+          "x0_rcs2": 0.0,
+          "x1": 0.2391207504372896,
+          "x1_rcs1": 0.0,
+          "x1_rcs2": 0.20278595399452168,
+          "x2": 0.39435602716853035,
+          "x2_rcs1": 0.19556541281165538,
+          "x2_rcs2": 0.0,
+          "x3": 0.5523940484550367,
+          "x3_rcs1": 0.0,
+          "x3_rcs2": 0.14464600496419194,
+          "x4": 0.2369581466195428,
+          "x4_rcs1": 0.7115574147223744
+        },
+        "summed_per_raw": {
+          "Age": 0.2166914637227984,
+          "ChestPainType": 0.8049742131765074,
+          "Cholesterol": 0.21960659395045085,
+          "ExerciseAngina": 0.4664821487233538,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.26443002993632975,
+          "MaxHR": 0.4199190052891768,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.4947037216054705,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.11958579203880686,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.3458007668105628,
+          "ST_Slope": 0.14436321141635813,
+          "ST_Slope_was_missing": 0.0,
+          "Sex": 0.6159462456062643
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0034177286992586944,
+            "ChestPainType": -0.028261185770933034,
+            "Cholesterol": -0.0027118308704614236,
+            "ExerciseAngina": -0.00243820341059596,
+            "ExerciseAngina_was_missing": 0.0007722313385693613,
+            "FastingBS": 0.004114100983868409,
+            "MaxHR": -0.004887189556334208,
+            "MaxHR_was_missing": 0.00029684108373419314,
+            "Oldpeak": 0.008925908661122472,
+            "Oldpeak_was_missing": -0.00019083525980527298,
+            "RestingBP": -0.0022786985205999312,
+            "RestingBP_was_missing": -0.0003130251188330897,
+            "RestingECG": -0.0023990966370372735,
+            "ST_Slope": 0.003035173195565566,
+            "ST_Slope_was_missing": 0.00020278232418266193,
+            "Sex": 0.002893251849633731
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.02219309251595687,
+            "ChestPainType": 0.09833948364310538,
+            "Cholesterol": 0.020142315155746552,
+            "ExerciseAngina": 0.046985169719787494,
+            "ExerciseAngina_was_missing": 0.0024711402834219558,
+            "FastingBS": 0.02764986728327033,
+            "MaxHR": 0.05044553409712274,
+            "MaxHR_was_missing": 0.0019313887102501482,
+            "Oldpeak": 0.050852482614158916,
+            "Oldpeak_was_missing": 0.0003366791565498536,
+            "RestingBP": 0.0070501352730230815,
+            "RestingBP_was_missing": 0.0006472763024172255,
+            "RestingECG": 0.03855092989323599,
+            "ST_Slope": 0.04304282743997871,
+            "ST_Slope_was_missing": 0.020016221687692005,
+            "Sex": 0.052926584399588965
+          },
+          "n": 55,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.025610821215215563,
+        "ChestPainType": 0.1266006694140384,
+        "Cholesterol": 0.022854146026207976,
+        "ExerciseAngina": 0.049423373130383454,
+        "ExerciseAngina_was_missing": 0.0016989089448525944,
+        "FastingBS": 0.02353576629940192,
+        "MaxHR": 0.05533272365345695,
+        "MaxHR_was_missing": 0.001634547626515955,
+        "Oldpeak": 0.04192657395303644,
+        "Oldpeak_was_missing": 0.0005275144163551266,
+        "RestingBP": 0.009328833793623013,
+        "RestingBP_was_missing": 0.0009603014212503152,
+        "RestingECG": 0.04095002653027326,
+        "ST_Slope": 0.040007654244413146,
+        "ST_Slope_was_missing": 0.019813439363509343,
+        "Sex": 0.050033332549955234
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 20,
+          "stratum": "<50"
+        },
+        {
+          "n": 5,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.004386911013847812,
+            "ChestPainType": 0.0011798865614160159,
+            "Cholesterol": 0.0012647656863349413,
+            "ExerciseAngina": -0.0028682186448443434,
+            "ExerciseAngina_was_missing": -0.00046471651103048074,
+            "FastingBS": 0.003481340983638455,
+            "MaxHR": -0.0033627148542747162,
+            "MaxHR_was_missing": -0.0005742815930255159,
+            "Oldpeak": -0.0022583062325496617,
+            "Oldpeak_was_missing": 0.0002128566943187352,
+            "RestingBP": 0.0002057174880709979,
+            "RestingBP_was_missing": -4.2499559166982344e-07,
+            "RestingECG": -0.004237179606631031,
+            "ST_Slope": 0.0004558360298787187,
+            "ST_Slope_was_missing": 0.0035099474610062846,
+            "Sex": -0.04850501958103249
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.02122391020136775,
+            "ChestPainType": 0.12778055597545443,
+            "Cholesterol": 0.024118911712542917,
+            "ExerciseAngina": 0.04655515448553911,
+            "ExerciseAngina_was_missing": 0.0012341924338221137,
+            "FastingBS": 0.027017107283040374,
+            "MaxHR": 0.05197000879918223,
+            "MaxHR_was_missing": 0.0010602660334904392,
+            "Oldpeak": 0.03966826772048678,
+            "Oldpeak_was_missing": 0.0007403711106738618,
+            "RestingBP": 0.00953455128169401,
+            "RestingBP_was_missing": 0.0009598764256586454,
+            "RestingECG": 0.03671284692364223,
+            "ST_Slope": 0.040463490274291865,
+            "ST_Slope_was_missing": 0.023323386824515627,
+            "Sex": 0.0015283129689227474
+          },
+          "n": 57,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.025610821215215563,
+        "ChestPainType": 0.1266006694140384,
+        "Cholesterol": 0.022854146026207976,
+        "ExerciseAngina": 0.049423373130383454,
+        "ExerciseAngina_was_missing": 0.0016989089448525944,
+        "FastingBS": 0.02353576629940192,
+        "MaxHR": 0.05533272365345695,
+        "MaxHR_was_missing": 0.001634547626515955,
+        "Oldpeak": 0.04192657395303644,
+        "Oldpeak_was_missing": 0.0005275144163551266,
+        "RestingBP": 0.009328833793623013,
+        "RestingBP_was_missing": 0.0009603014212503152,
+        "RestingECG": 0.04095002653027326,
+        "ST_Slope": 0.040007654244413146,
+        "ST_Slope_was_missing": 0.019813439363509343,
+        "Sex": 0.050033332549955234
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 23,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 55.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 217.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 111.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 5.6,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 32,
+        "y_proba": 0.9120749391479059,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 58.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 319.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 152.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 136.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "F"
+        },
+        "label": "tp_low",
+        "test_index": 66,
+        "y_proba": 0.5051297812494671,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 57.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 261.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 141.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.3,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 124.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 65,
+        "y_proba": 0.20084907483021236,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 66.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 228.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 138.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.3,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Up",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 71,
+        "y_proba": 0.9099230767494431,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7119366159085687,
+    "fit_seconds": 119.72,
+    "global_importance": {
+      "Age": 0.02523229765467259,
+      "ChestPainType": 0.12325890924649933,
+      "Cholesterol": 0.011903613929618275,
+      "ExerciseAngina": 0.038292238759109185,
+      "ExerciseAngina_was_missing": 0.0025380189858985975,
+      "FastingBS": 0.04206044743531841,
+      "MaxHR": 0.023932481818638794,
+      "MaxHR_was_missing": 0.0015676426091885208,
+      "Oldpeak": 0.03573773264797543,
+      "Oldpeak_was_missing": 0.0023964807868479274,
+      "RestingBP": 0.006064907638909973,
+      "RestingBP_was_missing": 0.0013724173048081125,
+      "RestingECG": 0.020212959547012237,
+      "ST_Slope": 0.027838578267081394,
+      "ST_Slope_was_missing": 0.044203919907002544,
+      "Sex": 0.0390707143437055
+    },
+    "held_out_source": "Cleveland",
+    "model": "ensemble",
+    "n_test_explained": 80,
+    "n_test_full": 303,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.004940029083492434,
+            "ChestPainType": -0.017172459245011984,
+            "Cholesterol": 0.0005939013343995159,
+            "ExerciseAngina": -0.004141320419214951,
+            "ExerciseAngina_was_missing": -0.000740724423179603,
+            "FastingBS": 0.002145523670610411,
+            "MaxHR": 0.0019858832595010256,
+            "MaxHR_was_missing": 0.00042969734362668737,
+            "Oldpeak": 0.006663131165827542,
+            "Oldpeak_was_missing": 0.0007748027284998371,
+            "RestingBP": 0.0019480121433581334,
+            "RestingBP_was_missing": -0.0005021535077309294,
+            "RestingECG": -0.002786492829517609,
+            "ST_Slope": -0.0006176181905815925,
+            "ST_Slope_was_missing": -0.0017175339229401274,
+            "Sex": 0.004775911159780433
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.020292268571180157,
+            "ChestPainType": 0.10608645000148735,
+            "Cholesterol": 0.012497515264017791,
+            "ExerciseAngina": 0.03415091833989423,
+            "ExerciseAngina_was_missing": 0.0017972945627189945,
+            "FastingBS": 0.04420597110592882,
+            "MaxHR": 0.02591836507813982,
+            "MaxHR_was_missing": 0.001997339952815208,
+            "Oldpeak": 0.04240086381380297,
+            "Oldpeak_was_missing": 0.0031712835153477645,
+            "RestingBP": 0.008012919782268106,
+            "RestingBP_was_missing": 0.000870263797077183,
+            "RestingECG": 0.017426466717494628,
+            "ST_Slope": 0.027220960076499802,
+            "ST_Slope_was_missing": 0.042486385984062416,
+            "Sex": 0.043846625503485934
+          },
+          "n": 53,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.02523229765467259,
+        "ChestPainType": 0.12325890924649933,
+        "Cholesterol": 0.011903613929618275,
+        "ExerciseAngina": 0.038292238759109185,
+        "ExerciseAngina_was_missing": 0.0025380189858985975,
+        "FastingBS": 0.04206044743531841,
+        "MaxHR": 0.023932481818638794,
+        "MaxHR_was_missing": 0.0015676426091885208,
+        "Oldpeak": 0.03573773264797543,
+        "Oldpeak_was_missing": 0.0023964807868479274,
+        "RestingBP": 0.006064907638909973,
+        "RestingBP_was_missing": 0.0013724173048081125,
+        "RestingECG": 0.020212959547012237,
+        "ST_Slope": 0.027838578267081394,
+        "ST_Slope_was_missing": 0.044203919907002544,
+        "Sex": 0.0390707143437055
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 21,
+          "stratum": "<50"
+        },
+        {
+          "n": 6,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.010382653454371425,
+            "ChestPainType": 0.017220041047699655,
+            "Cholesterol": -0.0034086160653204,
+            "ExerciseAngina": -0.0034436053267757755,
+            "ExerciseAngina_was_missing": 0.0003198226056937729,
+            "FastingBS": 0.0002291380776077781,
+            "MaxHR": -0.00132262364136208,
+            "MaxHR_was_missing": -0.0004279828024983624,
+            "Oldpeak": 0.001881148631236021,
+            "Oldpeak_was_missing": -2.729685332466831e-05,
+            "RestingBP": -7.022718581431876e-05,
+            "RestingBP_was_missing": 0.0005205720811341118,
+            "RestingECG": -0.00325346347656523,
+            "ST_Slope": -0.0022598405834864457,
+            "ST_Slope_was_missing": 0.0037835183653133556,
+            "Sex": -0.03643386808798418
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.014849644200301167,
+            "ChestPainType": 0.140478950294199,
+            "Cholesterol": 0.008494997864297875,
+            "ExerciseAngina": 0.03484863343233341,
+            "ExerciseAngina_was_missing": 0.0028578415915923704,
+            "FastingBS": 0.042289585512926185,
+            "MaxHR": 0.022609858177276714,
+            "MaxHR_was_missing": 0.0011396598066901584,
+            "Oldpeak": 0.03761888127921145,
+            "Oldpeak_was_missing": 0.002369183933523259,
+            "RestingBP": 0.005994680453095654,
+            "RestingBP_was_missing": 0.0018929893859422242,
+            "RestingECG": 0.016959496070447007,
+            "ST_Slope": 0.02557873768359495,
+            "ST_Slope_was_missing": 0.0479874382723159,
+            "Sex": 0.002636846255721325
+          },
+          "n": 58,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.02523229765467259,
+        "ChestPainType": 0.12325890924649933,
+        "Cholesterol": 0.011903613929618275,
+        "ExerciseAngina": 0.038292238759109185,
+        "ExerciseAngina_was_missing": 0.0025380189858985975,
+        "FastingBS": 0.04206044743531841,
+        "MaxHR": 0.023932481818638794,
+        "MaxHR_was_missing": 0.0015676426091885208,
+        "Oldpeak": 0.03573773264797543,
+        "Oldpeak_was_missing": 0.0023964807868479274,
+        "RestingBP": 0.006064907638909973,
+        "RestingBP_was_missing": 0.0013724173048081125,
+        "RestingECG": 0.020212959547012237,
+        "ST_Slope": 0.027838578267081394,
+        "ST_Slope_was_missing": 0.044203919907002544,
+        "Sex": 0.0390707143437055
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 22,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 52.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 246.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 82.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 4.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 74,
+        "y_proba": 0.9711832404136658,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 49.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 206.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 170.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 130.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 57,
+        "y_proba": 0.5056376457214355,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 49.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 180.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 156.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 56,
+        "y_proba": 0.08233483135700226,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 260.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 112.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 124.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 36,
+        "y_proba": 0.9601802229881287,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.8099698593765496,
+    "fit_seconds": 813.97,
+    "global_importance": {
+      "Age": 0.01310213850357426,
+      "ChestPainType": 0.1570159424183976,
+      "Cholesterol": 0.03338163187711014,
+      "ExerciseAngina": 0.046686708915960176,
+      "ExerciseAngina_was_missing": 0.0010924860487655016,
+      "FastingBS": 0.07481741354241975,
+      "MaxHR": 0.029191803072941058,
+      "MaxHR_was_missing": 0.00043424168208479373,
+      "Oldpeak": 0.014975157024740875,
+      "Oldpeak_was_missing": 0.0009152721603235747,
+      "RestingBP": 0.005408001502036437,
+      "RestingBP_was_missing": 0.0006805157327630228,
+      "RestingECG": 0.00314976786753333,
+      "ST_Slope": 0.017055812377850116,
+      "ST_Slope_was_missing": 0.0045081865610958494,
+      "Sex": 0.04165460013927618
+    },
+    "held_out_source": "Hungarian",
+    "model": "tabicl",
+    "n_test_explained": 80,
+    "n_test_full": 294,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.008724736177390991,
+            "ChestPainType": 0.0018979415987303572,
+            "Cholesterol": -0.0011068510197095385,
+            "ExerciseAngina": 0.0009299466164965908,
+            "ExerciseAngina_was_missing": -0.000582590782347892,
+            "FastingBS": -0.0047988792749545095,
+            "MaxHR": -0.00598511383488658,
+            "MaxHR_was_missing": 1.0687822119319291e-05,
+            "Oldpeak": 0.0036209384958191156,
+            "Oldpeak_was_missing": 0.00020174680879555206,
+            "RestingBP": 0.001270612089879961,
+            "RestingBP_was_missing": -0.0005613578227947189,
+            "RestingECG": 0.0005322273209810084,
+            "ST_Slope": -6.507543449865705e-05,
+            "ST_Slope_was_missing": 0.0008187580631725516,
+            "Sex": -0.0006021284126400128
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.004377402326183269,
+            "ChestPainType": 0.15891388401712797,
+            "Cholesterol": 0.032274780857400605,
+            "ExerciseAngina": 0.04761665553245677,
+            "ExerciseAngina_was_missing": 0.0005098952664176096,
+            "FastingBS": 0.07001853426746524,
+            "MaxHR": 0.023206689238054478,
+            "MaxHR_was_missing": 0.000444929504204113,
+            "Oldpeak": 0.01859609552055999,
+            "Oldpeak_was_missing": 0.0011170189691191267,
+            "RestingBP": 0.006678613591916398,
+            "RestingBP_was_missing": 0.00011915790996830387,
+            "RestingECG": 0.0036819951885143382,
+            "ST_Slope": 0.01699073694335146,
+            "ST_Slope_was_missing": 0.005326944624268401,
+            "Sex": 0.04105247172663617
+          },
+          "n": 36,
+          "stratum": "50-69"
+        },
+        {
+          "delta_per_feature": {
+            "Age": 0.007138420508774451,
+            "ChestPainType": -0.001552861308052128,
+            "Cholesterol": 0.0009056053797623226,
+            "ExerciseAngina": -0.0007608654134972012,
+            "ExerciseAngina_was_missing": 0.00047666518555736616,
+            "FastingBS": 0.003926355770417361,
+            "MaxHR": 0.0048969113194526626,
+            "MaxHR_was_missing": -8.744581733988491e-06,
+            "Oldpeak": -0.002962586042033819,
+            "Oldpeak_was_missing": -0.00016506557083272434,
+            "RestingBP": -0.001039591709901787,
+            "RestingBP_was_missing": 0.00045929276410476994,
+            "RestingECG": -0.0004354587171662796,
+            "ST_Slope": 5.324353731707768e-05,
+            "ST_Slope_was_missing": -0.0006698929607775409,
+            "Sex": 0.0004926505194327163
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.02024055901234871,
+            "ChestPainType": 0.15546308111034549,
+            "Cholesterol": 0.034287237256872466,
+            "ExerciseAngina": 0.045925843502462975,
+            "ExerciseAngina_was_missing": 0.0015691512343228677,
+            "FastingBS": 0.07874376931283711,
+            "MaxHR": 0.03408871439239372,
+            "MaxHR_was_missing": 0.00042549710035080524,
+            "Oldpeak": 0.012012570982707057,
+            "Oldpeak_was_missing": 0.0007502065894908503,
+            "RestingBP": 0.00436840979213465,
+            "RestingBP_was_missing": 0.0011398084968677928,
+            "RestingECG": 0.0027143091503670502,
+            "ST_Slope": 0.017109055915167194,
+            "ST_Slope_was_missing": 0.0038382936003183085,
+            "Sex": 0.0421472506587089
+          },
+          "n": 44,
+          "stratum": "<50"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.01310213850357426,
+        "ChestPainType": 0.1570159424183976,
+        "Cholesterol": 0.03338163187711014,
+        "ExerciseAngina": 0.046686708915960176,
+        "ExerciseAngina_was_missing": 0.0010924860487655016,
+        "FastingBS": 0.07481741354241975,
+        "MaxHR": 0.029191803072941058,
+        "MaxHR_was_missing": 0.00043424168208479373,
+        "Oldpeak": 0.014975157024740875,
+        "Oldpeak_was_missing": 0.0009152721603235747,
+        "RestingBP": 0.005408001502036437,
+        "RestingBP_was_missing": 0.0006805157327630228,
+        "RestingECG": 0.00314976786753333,
+        "ST_Slope": 0.017055812377850116,
+        "ST_Slope_was_missing": 0.0045081865610958494,
+        "Sex": 0.04165460013927618
+      },
+      "overall_n": 80,
+      "skipped_strata": []
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0011878303626748094,
+            "ChestPainType": -0.02366168741495503,
+            "Cholesterol": -0.0020866728269208143,
+            "ExerciseAngina": -0.002680648396209559,
+            "ExerciseAngina_was_missing": 0.00031717336899643586,
+            "FastingBS": -0.009819812278169568,
+            "MaxHR": 0.0029112279804430555,
+            "MaxHR_was_missing": -7.406091798669261e-05,
+            "Oldpeak": 0.0029241117923411546,
+            "Oldpeak_was_missing": 0.00011055565581617743,
+            "RestingBP": -0.0006348630277986352,
+            "RestingBP_was_missing": -7.473671671704807e-05,
+            "RestingECG": 0.0004398258367955647,
+            "ST_Slope": 0.0020181493184500757,
+            "ST_Slope_was_missing": -0.00043097505611939483,
+            "Sex": -0.037846703377625586
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.01191430814089945,
+            "ChestPainType": 0.13335425500344258,
+            "Cholesterol": 0.03129495905018933,
+            "ExerciseAngina": 0.04400606051975062,
+            "ExerciseAngina_was_missing": 0.0014096594177619374,
+            "FastingBS": 0.06499760126425018,
+            "MaxHR": 0.032103031053384114,
+            "MaxHR_was_missing": 0.0003601807640981011,
+            "Oldpeak": 0.01789926881708203,
+            "Oldpeak_was_missing": 0.0010258278161397521,
+            "RestingBP": 0.0047731384742378015,
+            "RestingBP_was_missing": 0.0006057790160459747,
+            "RestingECG": 0.0035895937043288946,
+            "ST_Slope": 0.01907396169630019,
+            "ST_Slope_was_missing": 0.004077211504976455,
+            "Sex": 0.0038078967616505957
+          },
+          "n": 62,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.01310213850357426,
+        "ChestPainType": 0.1570159424183976,
+        "Cholesterol": 0.03338163187711014,
+        "ExerciseAngina": 0.046686708915960176,
+        "ExerciseAngina_was_missing": 0.0010924860487655016,
+        "FastingBS": 0.07481741354241975,
+        "MaxHR": 0.029191803072941058,
+        "MaxHR_was_missing": 0.00043424168208479373,
+        "Oldpeak": 0.014975157024740875,
+        "Oldpeak_was_missing": 0.0009152721603235747,
+        "RestingBP": 0.005408001502036437,
+        "RestingBP_was_missing": 0.0006805157327630228,
+        "RestingECG": 0.00314976786753333,
+        "ST_Slope": 0.017055812377850116,
+        "ST_Slope_was_missing": 0.0045081865610958494,
+        "Sex": 0.04165460013927618
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 18,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 40.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 466.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 152.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 120.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 54,
+        "y_proba": 1.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 38.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 196.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 166.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 52,
+        "y_proba": 0.5120487809181213,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 34.0,
+          "ChestPainType": "TA",
+          "Cholesterol": 156.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 180.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 50,
+        "y_proba": 0.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 46.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 238.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 140.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 22,
+        "y_proba": 1.0,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.9059851170778276,
+    "fit_seconds": 3.19,
+    "global_importance": {
+      "Age": 0.016140095208764443,
+      "ChestPainType": 0.16189727981567353,
+      "Cholesterol": 0.03204253512553299,
+      "ExerciseAngina": 0.027562174606461133,
+      "ExerciseAngina_was_missing": 0.0012039763242304134,
+      "FastingBS": 0.10922942438447909,
+      "MaxHR": 0.05535256606715168,
+      "MaxHR_was_missing": 0.0015919691082494903,
+      "Oldpeak": 0.013517769094624491,
+      "Oldpeak_was_missing": 0.0013386997788684938,
+      "RestingBP": 0.009444698649847552,
+      "RestingBP_was_missing": 0.001831619386412263,
+      "RestingECG": 0.002916938728991023,
+      "ST_Slope": 0.01806778836165415,
+      "ST_Slope_was_missing": 0.0008799751437095519,
+      "Sex": 0.03339668883011964
+    },
+    "held_out_source": "Hungarian",
+    "model": "xgboost",
+    "n_test_explained": 80,
+    "n_test_full": 294,
+    "sanity": {
+      "treeshap": {
+        "treeshap_expected_value": 0.5851354002952576,
+        "treeshap_mean_abs_per_raw": {
+          "Age": 0.08694055944797582,
+          "ChestPainType": 0.6790618404746056,
+          "Cholesterol": 0.252224896568805,
+          "ExerciseAngina": 0.2751915137749165,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.28092995937913656,
+          "MaxHR": 0.4353072282858193,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.14937080151867121,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.07939587467699312,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.035402843888732605,
+          "ST_Slope": 0.13500587605376496,
+          "ST_Slope_was_missing": 0.0,
+          "Sex": 0.3096635931171477
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.007931605781364369,
+            "ChestPainType": -0.02288652419058665,
+            "Cholesterol": -0.007790432641415081,
+            "ExerciseAngina": -0.0008533728939164945,
+            "ExerciseAngina_was_missing": -5.0814446926349816e-05,
+            "FastingBS": -0.014500634653760044,
+            "MaxHR": -0.010460155731488771,
+            "MaxHR_was_missing": 0.0003753024258425178,
+            "Oldpeak": 0.0031108596556948635,
+            "Oldpeak_was_missing": -0.00026439905385602664,
+            "RestingBP": -0.003586843602660768,
+            "RestingBP_was_missing": -0.0007707977028338876,
+            "RestingECG": 0.0002764806476769203,
+            "ST_Slope": 0.004494059304958595,
+            "ST_Slope_was_missing": -0.0007305650469266436,
+            "Sex": 0.004307214016977902
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.008208489427400075,
+            "ChestPainType": 0.13901075562508688,
+            "Cholesterol": 0.02425210248411791,
+            "ExerciseAngina": 0.02670880171254464,
+            "ExerciseAngina_was_missing": 0.0011531618773040636,
+            "FastingBS": 0.09472878973071905,
+            "MaxHR": 0.04489241033566291,
+            "MaxHR_was_missing": 0.001967271534092008,
+            "Oldpeak": 0.016628628750319355,
+            "Oldpeak_was_missing": 0.0010743007250124672,
+            "RestingBP": 0.005857855047186784,
+            "RestingBP_was_missing": 0.0010608216835783753,
+            "RestingECG": 0.0031934193766679432,
+            "ST_Slope": 0.022561847666612744,
+            "ST_Slope_was_missing": 0.00014941009678290826,
+            "Sex": 0.03770390284709754
+          },
+          "n": 36,
+          "stratum": "50-69"
+        },
+        {
+          "delta_per_feature": {
+            "Age": 0.006489495639298116,
+            "ChestPainType": 0.018725337974116296,
+            "Cholesterol": 0.006373990342975977,
+            "ExerciseAngina": 0.0006982141859316893,
+            "ExerciseAngina_was_missing": 4.157545657610447e-05,
+            "FastingBS": 0.01186415562580366,
+            "MaxHR": 0.0085583092348544,
+            "MaxHR_was_missing": -0.00030706562114387855,
+            "Oldpeak": -0.002545248809204889,
+            "Oldpeak_was_missing": 0.00021632649860947638,
+            "RestingBP": 0.0029346902203588113,
+            "RestingBP_was_missing": 0.0006306526659549988,
+            "RestingECG": -0.00022621143900839,
+            "ST_Slope": -0.003676957613147928,
+            "ST_Slope_was_missing": 0.0005977350383945266,
+            "Sex": -0.003524084195709206
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.02262959084806256,
+            "ChestPainType": 0.18062261778978983,
+            "Cholesterol": 0.03841652546850897,
+            "ExerciseAngina": 0.028260388792392822,
+            "ExerciseAngina_was_missing": 0.0012455517808065179,
+            "FastingBS": 0.12109358001028275,
+            "MaxHR": 0.06391087530200608,
+            "MaxHR_was_missing": 0.0012849034871056117,
+            "Oldpeak": 0.010972520285419602,
+            "Oldpeak_was_missing": 0.0015550262774779702,
+            "RestingBP": 0.012379388870206363,
+            "RestingBP_was_missing": 0.0024622720523672617,
+            "RestingECG": 0.002690727289982633,
+            "ST_Slope": 0.01439083074850622,
+            "ST_Slope_was_missing": 0.0014777101821040785,
+            "Sex": 0.029872604634410434
+          },
+          "n": 44,
+          "stratum": "<50"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.016140095208764443,
+        "ChestPainType": 0.16189727981567353,
+        "Cholesterol": 0.03204253512553299,
+        "ExerciseAngina": 0.027562174606461133,
+        "ExerciseAngina_was_missing": 0.0012039763242304134,
+        "FastingBS": 0.10922942438447909,
+        "MaxHR": 0.05535256606715168,
+        "MaxHR_was_missing": 0.0015919691082494903,
+        "Oldpeak": 0.013517769094624491,
+        "Oldpeak_was_missing": 0.0013386997788684938,
+        "RestingBP": 0.009444698649847552,
+        "RestingBP_was_missing": 0.001831619386412263,
+        "RestingECG": 0.002916938728991023,
+        "ST_Slope": 0.01806778836165415,
+        "ST_Slope_was_missing": 0.0008799751437095519,
+        "Sex": 0.03339668883011964
+      },
+      "overall_n": 80,
+      "skipped_strata": []
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.002266823830354191,
+            "ChestPainType": -0.0320598556855381,
+            "Cholesterol": 0.003112087568553322,
+            "ExerciseAngina": 0.0003087819954403874,
+            "ExerciseAngina_was_missing": 0.00015885077234761326,
+            "FastingBS": -0.018614723069418554,
+            "MaxHR": 0.003289764499680478,
+            "MaxHR_was_missing": -0.0005252085197912971,
+            "Oldpeak": 0.00019332207313543792,
+            "Oldpeak_was_missing": -7.582068635073871e-05,
+            "RestingBP": 0.0023403535269736608,
+            "RestingBP_was_missing": 0.00014676757917432212,
+            "RestingECG": 0.00037083374032792753,
+            "ST_Slope": 0.0009866448625247895,
+            "ST_Slope_was_missing": 0.0002740906185324833,
+            "Sex": -0.02997502268429566
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.013873271378410252,
+            "ChestPainType": 0.12983742413013544,
+            "Cholesterol": 0.03515462269408631,
+            "ExerciseAngina": 0.02787095660190152,
+            "ExerciseAngina_was_missing": 0.0013628270965780267,
+            "FastingBS": 0.09061470131506054,
+            "MaxHR": 0.05864233056683216,
+            "MaxHR_was_missing": 0.0010667605884581931,
+            "Oldpeak": 0.013711091167759929,
+            "Oldpeak_was_missing": 0.0012628790925177551,
+            "RestingBP": 0.011785052176821213,
+            "RestingBP_was_missing": 0.001978386965586585,
+            "RestingECG": 0.0032877724693189505,
+            "ST_Slope": 0.01905443322417894,
+            "ST_Slope_was_missing": 0.0011540657622420352,
+            "Sex": 0.0034216661458239812
+          },
+          "n": 61,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.016140095208764443,
+        "ChestPainType": 0.16189727981567353,
+        "Cholesterol": 0.03204253512553299,
+        "ExerciseAngina": 0.027562174606461133,
+        "ExerciseAngina_was_missing": 0.0012039763242304134,
+        "FastingBS": 0.10922942438447909,
+        "MaxHR": 0.05535256606715168,
+        "MaxHR_was_missing": 0.0015919691082494903,
+        "Oldpeak": 0.013517769094624491,
+        "Oldpeak_was_missing": 0.0013386997788684938,
+        "RestingBP": 0.009444698649847552,
+        "RestingBP_was_missing": 0.001831619386412263,
+        "RestingECG": 0.002916938728991023,
+        "ST_Slope": 0.01806778836165415,
+        "ST_Slope_was_missing": 0.0008799751437095519,
+        "Sex": 0.03339668883011964
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 19,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 52.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 246.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 82.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 4.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 74,
+        "y_proba": 0.959023645315563,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 38.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 196.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 166.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 52,
+        "y_proba": 0.5194655051491339,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 34.0,
+          "ChestPainType": "TA",
+          "Cholesterol": 156.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 180.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 50,
+        "y_proba": 0.11840276456944285,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 260.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 112.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 124.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 36,
+        "y_proba": 0.9564742945748005,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.8126676463347822,
+    "fit_seconds": 2.02,
+    "global_importance": {
+      "Age": 0.0019794510416523596,
+      "ChestPainType": 0.18122964951901804,
+      "Cholesterol": 0.05858711689747208,
+      "ExerciseAngina": 0.03498392594112115,
+      "ExerciseAngina_was_missing": 0.0006187656597136167,
+      "FastingBS": 0.009218501662552798,
+      "MaxHR": 0.06113363086961314,
+      "MaxHR_was_missing": 0.001020587456807767,
+      "Oldpeak": 0.00804549410668955,
+      "Oldpeak_was_missing": 0.0008838327629189669,
+      "RestingBP": 0.007309830676879864,
+      "RestingBP_was_missing": 0.0006343680394835248,
+      "RestingECG": 0.013372967615209489,
+      "ST_Slope": 0.024867131639701372,
+      "ST_Slope_was_missing": 0.00046861922878829027,
+      "Sex": 0.05804170067769267
+    },
+    "held_out_source": "Hungarian",
+    "model": "lr",
+    "n_test_explained": 80,
+    "n_test_full": 294,
+    "sanity": {
+      "lr_basis": {
+        "intercept": -0.16356538168389378,
+        "per_basis": {
+          "ChestPainType_ASY": 0.6452417693671579,
+          "ChestPainType_ATA": 0.12420415193608307,
+          "ChestPainType_NAP": 0.0,
+          "ChestPainType_TA": 0.0,
+          "ExerciseAngina_Missing": 0.0,
+          "ExerciseAngina_N": 0.42071644047012285,
+          "ExerciseAngina_Y": 0.0,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.0843277960736164,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG_LVH": 0.004095102658574315,
+          "RestingECG_Missing": 0.0,
+          "RestingECG_Normal": 0.0,
+          "RestingECG_ST": 0.0,
+          "ST_Slope_Down": 0.0,
+          "ST_Slope_Flat": 0.14527849380618357,
+          "ST_Slope_Missing": 3.923877711497703e-10,
+          "ST_Slope_Up": 0.0009218901133961173,
+          "ST_Slope_was_missing": 3.923877711497703e-10,
+          "Sex_F": 0.17535524980781947,
+          "Sex_M": 0.521004709588115,
+          "x0": 0.014573090768250387,
+          "x0_rcs1": 0.027125434191919134,
+          "x0_rcs2": 0.0,
+          "x1": 0.0,
+          "x1_rcs1": 0.0,
+          "x1_rcs2": 0.09687841275083038,
+          "x2": 0.6601634578264989,
+          "x2_rcs1": 0.0,
+          "x2_rcs2": 0.4338397506485814,
+          "x3": 0.12868610624025784,
+          "x3_rcs1": 0.2903987702037408,
+          "x3_rcs2": 0.0,
+          "x4": 0.14354739522729515,
+          "x4_rcs1": 0.0,
+          "x4_rcs2": 0.39094489460522447
+        },
+        "summed_per_raw": {
+          "Age": 0.040977686972141,
+          "ChestPainType": 0.7694459213032412,
+          "Cholesterol": 0.39234122172098773,
+          "ExerciseAngina": 0.4207164404701225,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.08432779607361648,
+          "MaxHR": 0.4105417040047663,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.25658648117946076,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.09687841275083033,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.004095102658574315,
+          "ST_Slope": 0.14620038431196747,
+          "ST_Slope_was_missing": 3.923877711497703e-10,
+          "Sex": 0.6963599593959342
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.001308788869821532,
+            "ChestPainType": -0.003505709918086103,
+            "Cholesterol": -0.013801306043780888,
+            "ExerciseAngina": -0.004714435492409779,
+            "ExerciseAngina_was_missing": 0.00017173315210163313,
+            "FastingBS": 0.0013603755665603703,
+            "MaxHR": -0.016198000327241786,
+            "MaxHR_was_missing": 0.0006399811805577729,
+            "Oldpeak": 0.00045445297134750345,
+            "Oldpeak_was_missing": -0.0003082904317620623,
+            "RestingBP": 0.0017978725865289468,
+            "RestingBP_was_missing": -0.00017409916706470006,
+            "RestingECG": -0.000717246717780326,
+            "ST_Slope": -0.00021300187164545806,
+            "ST_Slope_was_missing": -0.000186382790142643,
+            "Sex": 0.0038682019508436
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.0006706621718308277,
+            "ChestPainType": 0.17772393960093194,
+            "Cholesterol": 0.04478581085369119,
+            "ExerciseAngina": 0.030269490448711373,
+            "ExerciseAngina_was_missing": 0.0007904988118152498,
+            "FastingBS": 0.010578877229113168,
+            "MaxHR": 0.04493563054237135,
+            "MaxHR_was_missing": 0.00166056863736554,
+            "Oldpeak": 0.008499947078037053,
+            "Oldpeak_was_missing": 0.0005755423311569046,
+            "RestingBP": 0.00910770326340881,
+            "RestingBP_was_missing": 0.00046026887241882474,
+            "RestingECG": 0.012655720897429163,
+            "ST_Slope": 0.024654129768055914,
+            "ST_Slope_was_missing": 0.00028223643864564726,
+            "Sex": 0.06190990262853627
+          },
+          "n": 36,
+          "stratum": "50-69"
+        },
+        {
+          "delta_per_feature": {
+            "Age": 0.0010708272571267078,
+            "ChestPainType": 0.0028683081147977407,
+            "Cholesterol": 0.011291977672184358,
+            "ExerciseAngina": 0.0038572654028807274,
+            "ExerciseAngina_was_missing": -0.00014050894262860898,
+            "FastingBS": -0.0011130345544584884,
+            "MaxHR": 0.013252909358652379,
+            "MaxHR_was_missing": -0.0005236209659109053,
+            "Oldpeak": -0.00037182515837523057,
+            "Oldpeak_was_missing": 0.0002522376259871419,
+            "RestingBP": -0.0014709866617055069,
+            "RestingBP_was_missing": 0.00014244477305293626,
+            "RestingECG": 0.0005868382236384456,
+            "ST_Slope": 0.00017427425861902754,
+            "ST_Slope_was_missing": 0.00015249501011670792,
+            "Sex": -0.0031648925052357446
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.0030502782987790675,
+            "ChestPainType": 0.18409795763381578,
+            "Cholesterol": 0.06987909456965644,
+            "ExerciseAngina": 0.03884119134400188,
+            "ExerciseAngina_was_missing": 0.00047825671708500773,
+            "FastingBS": 0.00810546710809431,
+            "MaxHR": 0.07438654022826552,
+            "MaxHR_was_missing": 0.0004969664908968617,
+            "Oldpeak": 0.007673668948314319,
+            "Oldpeak_was_missing": 0.0011360703889061088,
+            "RestingBP": 0.005838844015174357,
+            "RestingBP_was_missing": 0.0007768128125364611,
+            "RestingECG": 0.013959805838847934,
+            "ST_Slope": 0.0250414058983204,
+            "ST_Slope_was_missing": 0.0006211142389049982,
+            "Sex": 0.05487680817245692
+          },
+          "n": 44,
+          "stratum": "<50"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0019794510416523596,
+        "ChestPainType": 0.18122964951901804,
+        "Cholesterol": 0.05858711689747208,
+        "ExerciseAngina": 0.03498392594112115,
+        "ExerciseAngina_was_missing": 0.0006187656597136167,
+        "FastingBS": 0.009218501662552798,
+        "MaxHR": 0.06113363086961314,
+        "MaxHR_was_missing": 0.001020587456807767,
+        "Oldpeak": 0.00804549410668955,
+        "Oldpeak_was_missing": 0.0008838327629189669,
+        "RestingBP": 0.007309830676879864,
+        "RestingBP_was_missing": 0.0006343680394835248,
+        "RestingECG": 0.013372967615209489,
+        "ST_Slope": 0.024867131639701372,
+        "ST_Slope_was_missing": 0.00046861922878829027,
+        "Sex": 0.05804170067769267
+      },
+      "overall_n": 80,
+      "skipped_strata": []
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.00028347912209247296,
+            "ChestPainType": -0.011346633080411367,
+            "Cholesterol": -0.0008133386468646281,
+            "ExerciseAngina": -0.0012901198697884836,
+            "ExerciseAngina_was_missing": -0.0003338016221468726,
+            "FastingBS": -0.0013273404220760735,
+            "MaxHR": 0.0023500685769464735,
+            "MaxHR_was_missing": -0.0006023820300883826,
+            "Oldpeak": 0.0016644747933818177,
+            "Oldpeak_was_missing": -4.675422985047197e-05,
+            "RestingBP": -0.0014062253761524882,
+            "RestingBP_was_missing": -0.00021043127028053604,
+            "RestingECG": 0.0012995526393442536,
+            "ST_Slope": -0.0013891450234576642,
+            "ST_Slope_was_missing": 2.157756845461113e-05,
+            "Sex": -0.04999264433328134
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.0016959719195598867,
+            "ChestPainType": 0.16988301643860668,
+            "Cholesterol": 0.05777377825060745,
+            "ExerciseAngina": 0.03369380607133267,
+            "ExerciseAngina_was_missing": 0.0002849640375667441,
+            "FastingBS": 0.007891161240476724,
+            "MaxHR": 0.06348369944655961,
+            "MaxHR_was_missing": 0.0004182054267193845,
+            "Oldpeak": 0.009709968900071368,
+            "Oldpeak_was_missing": 0.0008370785330684949,
+            "RestingBP": 0.005903605300727375,
+            "RestingBP_was_missing": 0.00042393676920298877,
+            "RestingECG": 0.014672520254553742,
+            "ST_Slope": 0.023477986616243708,
+            "ST_Slope_was_missing": 0.0004901967972429014,
+            "Sex": 0.008049056344411325
+          },
+          "n": 63,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0019794510416523596,
+        "ChestPainType": 0.18122964951901804,
+        "Cholesterol": 0.05858711689747208,
+        "ExerciseAngina": 0.03498392594112115,
+        "ExerciseAngina_was_missing": 0.0006187656597136167,
+        "FastingBS": 0.009218501662552798,
+        "MaxHR": 0.06113363086961314,
+        "MaxHR_was_missing": 0.001020587456807767,
+        "Oldpeak": 0.00804549410668955,
+        "Oldpeak_was_missing": 0.0008838327629189669,
+        "RestingBP": 0.007309830676879864,
+        "RestingBP_was_missing": 0.0006343680394835248,
+        "RestingECG": 0.013372967615209489,
+        "ST_Slope": 0.024867131639701372,
+        "ST_Slope_was_missing": 0.00046861922878829027,
+        "Sex": 0.05804170067769267
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 17,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 48.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 275.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 150.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 122.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 64,
+        "y_proba": 0.8957895217734144,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 57.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 265.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 145.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 60,
+        "y_proba": 0.5101801859392447,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 56.0,
+          "ChestPainType": "ATA",
+          "Cholesterol": 279.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 150.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 120.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 75,
+        "y_proba": 0.248570441117576,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 47.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 276.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 125.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 24,
+        "y_proba": 0.8933729179234375,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.8215040050761789,
+    "fit_seconds": 121.73,
+    "global_importance": {
+      "Age": 0.0066466577010554796,
+      "ChestPainType": 0.12617198621379125,
+      "Cholesterol": 0.011704295022205909,
+      "ExerciseAngina": 0.0205009835920438,
+      "ExerciseAngina_was_missing": 0.0010704544687965092,
+      "FastingBS": 0.040703510430370834,
+      "MaxHR": 0.024078297682024227,
+      "MaxHR_was_missing": 0.0014761548521133178,
+      "Oldpeak": 0.01951365144285755,
+      "Oldpeak_was_missing": 0.0018649806374207631,
+      "RestingBP": 0.008942005188424695,
+      "RestingBP_was_missing": 0.0015171346946373857,
+      "RestingECG": 0.014410843178734778,
+      "ST_Slope": 0.03169982938616752,
+      "ST_Slope_was_missing": 0.0046269503035294484,
+      "Sex": 0.058481385023391216
+    },
+    "held_out_source": "Hungarian",
+    "model": "ensemble",
+    "n_test_explained": 80,
+    "n_test_full": 294,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0038648933993369245,
+            "ChestPainType": 0.0034261675961203275,
+            "Cholesterol": 0.001928380389768414,
+            "ExerciseAngina": 0.0028362740165478358,
+            "ExerciseAngina_was_missing": -0.00043508752897136597,
+            "FastingBS": 0.0032747887146209187,
+            "MaxHR": -0.004213514073865523,
+            "MaxHR_was_missing": -0.00016213524829033696,
+            "Oldpeak": 0.005376182522826657,
+            "Oldpeak_was_missing": -0.00023106644923758337,
+            "RestingBP": 0.004318123142344371,
+            "RestingBP_was_missing": -0.0009093642077986543,
+            "RestingECG": -0.005591557874660199,
+            "ST_Slope": -0.006063124129417008,
+            "ST_Slope_was_missing": 0.0001283986015489097,
+            "Sex": 0.006865797246973726
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.002781764301718555,
+            "ChestPainType": 0.12959815380991158,
+            "Cholesterol": 0.013632675411974323,
+            "ExerciseAngina": 0.023337257608591636,
+            "ExerciseAngina_was_missing": 0.0006353669398251432,
+            "FastingBS": 0.04397829914499175,
+            "MaxHR": 0.019864783608158704,
+            "MaxHR_was_missing": 0.0013140196038229808,
+            "Oldpeak": 0.024889833965684206,
+            "Oldpeak_was_missing": 0.0016339141881831797,
+            "RestingBP": 0.013260128330769066,
+            "RestingBP_was_missing": 0.0006077704868387313,
+            "RestingECG": 0.00881928530407458,
+            "ST_Slope": 0.025636705256750512,
+            "ST_Slope_was_missing": 0.004755348905078358,
+            "Sex": 0.06534718227036494
+          },
+          "n": 37,
+          "stratum": "50-69"
+        },
+        {
+          "delta_per_feature": {
+            "Age": 0.003325605948266655,
+            "ChestPainType": -0.002948097698987323,
+            "Cholesterol": -0.0016593040563123579,
+            "ExerciseAngina": -0.002440514851448146,
+            "ExerciseAngina_was_missing": 0.0003743776412079196,
+            "FastingBS": -0.0028178414521156867,
+            "MaxHR": 0.003625581877512194,
+            "MaxHR_was_missing": 0.00013951172527308046,
+            "Oldpeak": -0.004626017519641555,
+            "Oldpeak_was_missing": 0.00019882461911140971,
+            "RestingBP": -0.003715594331784691,
+            "RestingBP_was_missing": 0.0007824761788034931,
+            "RestingECG": 0.0048113404968006274,
+            "ST_Slope": 0.005217106809033256,
+            "ST_Slope_was_missing": -0.0001104825176118521,
+            "Sex": -0.005907779026465776
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.009972263649322135,
+            "ChestPainType": 0.12322388851480393,
+            "Cholesterol": 0.010044990965893551,
+            "ExerciseAngina": 0.018060468740595654,
+            "ExerciseAngina_was_missing": 0.0014448321100044288,
+            "FastingBS": 0.03788566897825515,
+            "MaxHR": 0.02770387955953642,
+            "MaxHR_was_missing": 0.0016156665773863982,
+            "Oldpeak": 0.014887633923215994,
+            "Oldpeak_was_missing": 0.002063805256532173,
+            "RestingBP": 0.0052264108566400045,
+            "RestingBP_was_missing": 0.0022996108734408788,
+            "RestingECG": 0.019222183675535406,
+            "ST_Slope": 0.03691693619520078,
+            "ST_Slope_was_missing": 0.004516467785917596,
+            "Sex": 0.05257360599692544
+          },
+          "n": 43,
+          "stratum": "<50"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0066466577010554796,
+        "ChestPainType": 0.12617198621379125,
+        "Cholesterol": 0.011704295022205909,
+        "ExerciseAngina": 0.0205009835920438,
+        "ExerciseAngina_was_missing": 0.0010704544687965092,
+        "FastingBS": 0.040703510430370834,
+        "MaxHR": 0.024078297682024227,
+        "MaxHR_was_missing": 0.0014761548521133178,
+        "Oldpeak": 0.01951365144285755,
+        "Oldpeak_was_missing": 0.0018649806374207631,
+        "RestingBP": 0.008942005188424695,
+        "RestingBP_was_missing": 0.0015171346946373857,
+        "RestingECG": 0.014410843178734778,
+        "ST_Slope": 0.03169982938616752,
+        "ST_Slope_was_missing": 0.0046269503035294484,
+        "Sex": 0.058481385023391216
+      },
+      "overall_n": 80,
+      "skipped_strata": []
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.0011619919191419269,
+            "ChestPainType": -0.006962960010462316,
+            "Cholesterol": -0.0005030146470652152,
+            "ExerciseAngina": -0.003354561649538977,
+            "ExerciseAngina_was_missing": -0.0001251599734305017,
+            "FastingBS": 0.002000179704799772,
+            "MaxHR": -0.0004184605326866715,
+            "MaxHR_was_missing": -0.0005117955016383298,
+            "Oldpeak": 0.0008610676599445678,
+            "Oldpeak_was_missing": -0.0006845350144776634,
+            "RestingBP": -0.0026339166514881803,
+            "RestingBP_was_missing": -0.00020427710825980118,
+            "RestingECG": 0.000570575588947405,
+            "ST_Slope": 0.001590226960674422,
+            "ST_Slope_was_missing": 3.10707081309829e-05,
+            "Sex": -0.0552027572985272
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.007808649620197406,
+            "ChestPainType": 0.11920902620332893,
+            "Cholesterol": 0.011201280375140694,
+            "ExerciseAngina": 0.017146421942504823,
+            "ExerciseAngina_was_missing": 0.0009452944953660075,
+            "FastingBS": 0.042703690135170606,
+            "MaxHR": 0.023659837149337556,
+            "MaxHR_was_missing": 0.0009643593504749879,
+            "Oldpeak": 0.020374719102802117,
+            "Oldpeak_was_missing": 0.0011804456229430997,
+            "RestingBP": 0.006308088536936515,
+            "RestingBP_was_missing": 0.0013128575863775845,
+            "RestingECG": 0.014981418767682183,
+            "ST_Slope": 0.03329005634684194,
+            "ST_Slope_was_missing": 0.004658021011660431,
+            "Sex": 0.003278627724864017
+          },
+          "n": 58,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0066466577010554796,
+        "ChestPainType": 0.12617198621379125,
+        "Cholesterol": 0.011704295022205909,
+        "ExerciseAngina": 0.0205009835920438,
+        "ExerciseAngina_was_missing": 0.0010704544687965092,
+        "FastingBS": 0.040703510430370834,
+        "MaxHR": 0.024078297682024227,
+        "MaxHR_was_missing": 0.0014761548521133178,
+        "Oldpeak": 0.01951365144285755,
+        "Oldpeak_was_missing": 0.0018649806374207631,
+        "RestingBP": 0.008942005188424695,
+        "RestingBP_was_missing": 0.0015171346946373857,
+        "RestingECG": 0.014410843178734778,
+        "ST_Slope": 0.03169982938616752,
+        "ST_Slope_was_missing": 0.0046269503035294484,
+        "Sex": 0.058481385023391216
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 22,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 61.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 108.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 29,
+        "y_proba": 0.9902395009994507,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 55.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 223.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 100.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 122.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 79,
+        "y_proba": 0.5064517259597778,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 48.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 220.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 162.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 132.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 51,
+        "y_proba": 0.12647025287151337,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 75.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 310.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 112.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 55,
+        "y_proba": 0.9617913961410522,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7757985314302561,
+    "fit_seconds": 888.1,
+    "global_importance": {
+      "Age": 0.004008054757240938,
+      "ChestPainType": 0.10272287042939657,
+      "Cholesterol": 0.0404034146662522,
+      "ExerciseAngina": 0.03051647190828834,
+      "ExerciseAngina_was_missing": 0.003357308407435826,
+      "FastingBS": 0.04985974110131888,
+      "MaxHR": 0.0422983305377629,
+      "MaxHR_was_missing": 0.005396668145611602,
+      "Oldpeak": 0.03146449826889169,
+      "Oldpeak_was_missing": 0.010398533209932875,
+      "RestingBP": 0.007587506737568299,
+      "RestingBP_was_missing": 0.0003555020049580982,
+      "RestingECG": 0.003233487496358993,
+      "ST_Slope": 0.05539608134557052,
+      "ST_Slope_was_missing": 0.016833900650755844,
+      "Sex": 0.013220031654048461
+    },
+    "held_out_source": "LongBeachVA",
+    "model": "tabicl",
+    "n_test_explained": 80,
+    "n_test_full": 200,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0005827097860452981,
+            "ChestPainType": -0.00290073551284567,
+            "Cholesterol": 0.0007729967714010383,
+            "ExerciseAngina": 0.0013174533554739278,
+            "ExerciseAngina_was_missing": 0.0005135996306327565,
+            "FastingBS": 0.002207221703475211,
+            "MaxHR": -0.0029731505910102485,
+            "MaxHR_was_missing": 0.0008986292723258448,
+            "Oldpeak": -0.0002990574044478764,
+            "Oldpeak_was_missing": 0.0013890616907474996,
+            "RestingBP": -0.001127145770610856,
+            "RestingBP_was_missing": -0.00010138743055868602,
+            "RestingECG": -0.0002633929256460146,
+            "ST_Slope": -0.003137952301269696,
+            "ST_Slope_was_missing": -0.0021234511534892232,
+            "Sex": 0.0025174177053687956
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.00342534497119564,
+            "ChestPainType": 0.0998221349165509,
+            "Cholesterol": 0.041176411437653236,
+            "ExerciseAngina": 0.03183392526376227,
+            "ExerciseAngina_was_missing": 0.0038709080380685823,
+            "FastingBS": 0.052066962804794094,
+            "MaxHR": 0.03932517994675265,
+            "MaxHR_was_missing": 0.006295297417937447,
+            "Oldpeak": 0.03116544086444381,
+            "Oldpeak_was_missing": 0.011787594900680374,
+            "RestingBP": 0.006460360966957443,
+            "RestingBP_was_missing": 0.0002541145743994122,
+            "RestingECG": 0.0029700945707129786,
+            "ST_Slope": 0.05225812904430083,
+            "ST_Slope_was_missing": 0.01471044949726662,
+            "Sex": 0.015737449359417257
+          },
+          "n": 64,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.004008054757240938,
+        "ChestPainType": 0.10272287042939657,
+        "Cholesterol": 0.0404034146662522,
+        "ExerciseAngina": 0.03051647190828834,
+        "ExerciseAngina_was_missing": 0.003357308407435826,
+        "FastingBS": 0.04985974110131888,
+        "MaxHR": 0.0422983305377629,
+        "MaxHR_was_missing": 0.005396668145611602,
+        "Oldpeak": 0.03146449826889169,
+        "Oldpeak_was_missing": 0.010398533209932875,
+        "RestingBP": 0.007587506737568299,
+        "RestingBP_was_missing": 0.0003555020049580982,
+        "RestingECG": 0.003233487496358993,
+        "ST_Slope": 0.05539608134557052,
+        "ST_Slope_was_missing": 0.016833900650755844,
+        "Sex": 0.013220031654048461
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 8,
+          "stratum": "<50"
+        },
+        {
+          "n": 8,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 5.41753619207443e-05,
+            "ChestPainType": 0.0014392896444783976,
+            "Cholesterol": 0.0013746745451780132,
+            "ExerciseAngina": -0.0011831646916169863,
+            "ExerciseAngina_was_missing": 0.00017670044249662236,
+            "FastingBS": -0.0026400481815865365,
+            "MaxHR": -0.000897857812463522,
+            "MaxHR_was_missing": -0.0003878490118112369,
+            "Oldpeak": -0.0001948955348797174,
+            "Oldpeak_was_missing": 0.0005472912215754144,
+            "RestingBP": 0.0003993424598720159,
+            "RestingBP_was_missing": 1.8710631839899915e-05,
+            "RestingECG": 0.00017018355243994662,
+            "ST_Slope": -0.00010667321459719575,
+            "ST_Slope_was_missing": 0.0007537944726674836,
+            "Sex": -0.009310948555994193
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.004062230119161682,
+            "ChestPainType": 0.10416216007387497,
+            "Cholesterol": 0.04177808921143021,
+            "ExerciseAngina": 0.029333307216671354,
+            "ExerciseAngina_was_missing": 0.003534008849932448,
+            "FastingBS": 0.047219692919732346,
+            "MaxHR": 0.04140047272529938,
+            "MaxHR_was_missing": 0.005008819133800365,
+            "Oldpeak": 0.03126960273401197,
+            "Oldpeak_was_missing": 0.010945824431508289,
+            "RestingBP": 0.007986849197440315,
+            "RestingBP_was_missing": 0.00037421263679799814,
+            "RestingECG": 0.0034036710487989398,
+            "ST_Slope": 0.05528940813097333,
+            "ST_Slope_was_missing": 0.017587695123423328,
+            "Sex": 0.0039090830980542685
+          },
+          "n": 76,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.004008054757240938,
+        "ChestPainType": 0.10272287042939657,
+        "Cholesterol": 0.0404034146662522,
+        "ExerciseAngina": 0.03051647190828834,
+        "ExerciseAngina_was_missing": 0.003357308407435826,
+        "FastingBS": 0.04985974110131888,
+        "MaxHR": 0.0422983305377629,
+        "MaxHR_was_missing": 0.005396668145611602,
+        "Oldpeak": 0.03146449826889169,
+        "Oldpeak_was_missing": 0.010398533209932875,
+        "RestingBP": 0.007587506737568299,
+        "RestingBP_was_missing": 0.0003555020049580982,
+        "RestingECG": 0.003233487496358993,
+        "ST_Slope": 0.05539608134557052,
+        "ST_Slope_was_missing": 0.016833900650755844,
+        "Sex": 0.013220031654048461
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 4,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 63.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 260.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 112.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 0,
+        "y_proba": 1.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 40.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 165.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 125.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 19,
+        "y_proba": 0.5039300918579102,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 63.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": null,
+          "ExerciseAngina": "Missing",
+          "ExerciseAngina_was_missing": 1,
+          "FastingBS": 0.0,
+          "MaxHR": null,
+          "MaxHR_was_missing": 1,
+          "Oldpeak": null,
+          "Oldpeak_was_missing": 1,
+          "RestingBP": null,
+          "RestingBP_was_missing": 1,
+          "RestingECG": "LVH",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 5,
+        "y_proba": 0.06666667014360428,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 66.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 213.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 99.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.3,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 1,
+        "y_proba": 1.0,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.8390658440766856,
+    "fit_seconds": 10.13,
+    "global_importance": {
+      "Age": 0.027215827729243313,
+      "ChestPainType": 0.1542781098977185,
+      "Cholesterol": 0.01432063172438163,
+      "ExerciseAngina": 0.03550261761310536,
+      "ExerciseAngina_was_missing": 0.0008357846875896625,
+      "FastingBS": 0.06895031017216077,
+      "MaxHR": 0.06918755120510861,
+      "MaxHR_was_missing": 0.0005469821723532051,
+      "Oldpeak": 0.038365924257449405,
+      "Oldpeak_was_missing": 0.0,
+      "RestingBP": 0.0071602742190783625,
+      "RestingBP_was_missing": 0.0002695197489741195,
+      "RestingECG": 0.004655462766639003,
+      "ST_Slope": 0.05027672615287049,
+      "ST_Slope_was_missing": 0.00772756778778423,
+      "Sex": 0.0165069432479001
+    },
+    "held_out_source": "LongBeachVA",
+    "model": "xgboost",
+    "n_test_explained": 80,
+    "n_test_full": 200,
+    "sanity": {
+      "treeshap": {
+        "treeshap_expected_value": -2.535304520279169e-05,
+        "treeshap_mean_abs_per_raw": {
+          "Age": 0.11322934851632453,
+          "ChestPainType": 0.7659834646619856,
+          "Cholesterol": 0.115687749767676,
+          "ExerciseAngina": 0.24108299226500093,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.21865178057923912,
+          "MaxHR": 0.35055384919978677,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.24030550504103304,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.03904214047361165,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.0018686886083742137,
+          "ST_Slope": 0.3279413973505143,
+          "ST_Slope_was_missing": 0.041313003213144836,
+          "Sex": 0.25633329898118973
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.0002003594762656491,
+            "ChestPainType": 0.009510696083710163,
+            "Cholesterol": -0.0005503174352477058,
+            "ExerciseAngina": 0.0013790050105981638,
+            "ExerciseAngina_was_missing": 0.00017728766100386767,
+            "FastingBS": 0.0016440157235790287,
+            "MaxHR": -0.0054384310837209265,
+            "MaxHR_was_missing": 0.00011602652140825563,
+            "Oldpeak": -0.0005065835168706762,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.0002894642186261204,
+            "RestingBP_was_missing": 5.717085584299505e-05,
+            "RestingECG": -0.00027343119189813907,
+            "ST_Slope": -0.0006447063836752739,
+            "ST_Slope_was_missing": -0.00037896194582459804,
+            "Sex": 0.00030478573471528006
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.027416187205508962,
+            "ChestPainType": 0.16378880598142867,
+            "Cholesterol": 0.013770314289133924,
+            "ExerciseAngina": 0.03688162262370352,
+            "ExerciseAngina_was_missing": 0.0010130723485935302,
+            "FastingBS": 0.0705943258957398,
+            "MaxHR": 0.06374912012138768,
+            "MaxHR_was_missing": 0.0006630086937614607,
+            "Oldpeak": 0.03785934074057873,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.007449738437704483,
+            "RestingBP_was_missing": 0.00032669060481711455,
+            "RestingECG": 0.004382031574740864,
+            "ST_Slope": 0.049632019769195214,
+            "ST_Slope_was_missing": 0.007348605841959632,
+            "Sex": 0.01681172898261538
+          },
+          "n": 66,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.027215827729243313,
+        "ChestPainType": 0.1542781098977185,
+        "Cholesterol": 0.01432063172438163,
+        "ExerciseAngina": 0.03550261761310536,
+        "ExerciseAngina_was_missing": 0.0008357846875896625,
+        "FastingBS": 0.06895031017216077,
+        "MaxHR": 0.06918755120510861,
+        "MaxHR_was_missing": 0.0005469821723532051,
+        "Oldpeak": 0.038365924257449405,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.0071602742190783625,
+        "RestingBP_was_missing": 0.0002695197489741195,
+        "RestingECG": 0.004655462766639003,
+        "ST_Slope": 0.05027672615287049,
+        "ST_Slope_was_missing": 0.00772756778778423,
+        "Sex": 0.0165069432479001
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 7,
+          "stratum": "<50"
+        },
+        {
+          "n": 7,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.0006978417366472651,
+            "ChestPainType": -0.0005143860671600331,
+            "Cholesterol": 3.656650635097507e-05,
+            "ExerciseAngina": 0.0003043822363046067,
+            "ExerciseAngina_was_missing": 2.143037660486309e-05,
+            "FastingBS": -0.0005102677924779253,
+            "MaxHR": -0.0017924148651674715,
+            "MaxHR_was_missing": 1.402518390649244e-05,
+            "Oldpeak": 0.0006915529394216149,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": -1.761981754913513e-05,
+            "RestingBP_was_missing": -1.3542189130346543e-05,
+            "RestingECG": -3.0320987360089e-05,
+            "ST_Slope": 0.0006512967954074994,
+            "ST_Slope_was_missing": 0.00019814276378933918,
+            "Sex": -0.005964769186119436
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.027913669465890578,
+            "ChestPainType": 0.15376372383055847,
+            "Cholesterol": 0.014357198230732605,
+            "ExerciseAngina": 0.035806999849409965,
+            "ExerciseAngina_was_missing": 0.0008572150641945256,
+            "FastingBS": 0.06844004237968285,
+            "MaxHR": 0.06739513633994114,
+            "MaxHR_was_missing": 0.0005610073562596975,
+            "Oldpeak": 0.03905747719687102,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.007142654401529227,
+            "RestingBP_was_missing": 0.00025597755984377296,
+            "RestingECG": 0.004625141779278914,
+            "ST_Slope": 0.05092802294827799,
+            "ST_Slope_was_missing": 0.007925710551573569,
+            "Sex": 0.010542174061780664
+          },
+          "n": 78,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.027215827729243313,
+        "ChestPainType": 0.1542781098977185,
+        "Cholesterol": 0.01432063172438163,
+        "ExerciseAngina": 0.03550261761310536,
+        "ExerciseAngina_was_missing": 0.0008357846875896625,
+        "FastingBS": 0.06895031017216077,
+        "MaxHR": 0.06918755120510861,
+        "MaxHR_was_missing": 0.0005469821723532051,
+        "Oldpeak": 0.038365924257449405,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.0071602742190783625,
+        "RestingBP_was_missing": 0.0002695197489741195,
+        "RestingECG": 0.004655462766639003,
+        "ST_Slope": 0.05027672615287049,
+        "ST_Slope_was_missing": 0.00772756778778423,
+        "Sex": 0.0165069432479001
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 2,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 62.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 254.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 108.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "ST",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 77,
+        "y_proba": 0.9624435577076075,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 72.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 211.0,
+          "ExerciseAngina": "Missing",
+          "ExerciseAngina_was_missing": 1,
+          "FastingBS": 0.0,
+          "MaxHR": null,
+          "MaxHR_was_missing": 1,
+          "Oldpeak": null,
+          "Oldpeak_was_missing": 1,
+          "RestingBP": null,
+          "RestingBP_was_missing": 1,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 47,
+        "y_proba": 0.5049919149651844,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 49.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 142.0,
+          "ExerciseAngina": "Missing",
+          "ExerciseAngina_was_missing": 1,
+          "FastingBS": 0.0,
+          "MaxHR": null,
+          "MaxHR_was_missing": 1,
+          "Oldpeak": null,
+          "Oldpeak_was_missing": 1,
+          "RestingBP": null,
+          "RestingBP_was_missing": 1,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 46,
+        "y_proba": 0.06020512439755986,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 58.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 458.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 69.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 132.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 34,
+        "y_proba": 0.9574731293591061,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7218036386852862,
+    "fit_seconds": 2.14,
+    "global_importance": {
+      "Age": 0.013899865924546404,
+      "ChestPainType": 0.10879782747403677,
+      "Cholesterol": 0.025005293894250536,
+      "ExerciseAngina": 0.023854566032755375,
+      "ExerciseAngina_was_missing": 0.0,
+      "FastingBS": 0.011420930976512405,
+      "MaxHR": 0.08377646538237334,
+      "MaxHR_was_missing": 0.00011759786119026478,
+      "Oldpeak": 0.030172489669575874,
+      "Oldpeak_was_missing": 0.0002546442835661101,
+      "RestingBP": 0.004665656880144975,
+      "RestingBP_was_missing": 9.164028599375901e-05,
+      "RestingECG": 0.005381189707530974,
+      "ST_Slope": 0.07370786300885769,
+      "ST_Slope_was_missing": 0.03305066098770578,
+      "Sex": 0.018901665824673335
+    },
+    "held_out_source": "LongBeachVA",
+    "model": "lr",
+    "n_test_explained": 80,
+    "n_test_full": 200,
+    "sanity": {
+      "lr_basis": {
+        "intercept": -0.8231184893832661,
+        "per_basis": {
+          "ChestPainType_ASY": 1.070755069340961,
+          "ChestPainType_ATA": 0.016540190507048143,
+          "ChestPainType_NAP": 0.0,
+          "ChestPainType_TA": 0.0,
+          "ExerciseAngina_Missing": 0.0,
+          "ExerciseAngina_N": 0.0,
+          "ExerciseAngina_Y": 0.2533348436489567,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.08554825258425067,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG_LVH": 0.012143435380618928,
+          "RestingECG_Missing": 0.0,
+          "RestingECG_Normal": 0.0,
+          "RestingECG_ST": 0.0,
+          "ST_Slope_Down": 0.0,
+          "ST_Slope_Flat": 0.219042532706807,
+          "ST_Slope_Missing": 0.16848403264885434,
+          "ST_Slope_Up": 0.0,
+          "ST_Slope_was_missing": 0.16848403264885434,
+          "Sex_F": 0.04486401545452734,
+          "Sex_M": 0.3592010177893405,
+          "x0": 0.0,
+          "x0_rcs1": 0.08136149032818793,
+          "x0_rcs2": 0.0,
+          "x1": 0.0,
+          "x1_rcs1": 0.0,
+          "x1_rcs2": 0.06635512716059963,
+          "x2": 0.1936738777955768,
+          "x2_rcs1": 0.0,
+          "x2_rcs2": 0.0735571177639132,
+          "x3": 0.5457330537380379,
+          "x3_rcs1": 0.09377352320618917,
+          "x3_rcs2": 0.0,
+          "x4": 0.0,
+          "x4_rcs1": 0.28709210319245126
+        },
+        "summed_per_raw": {
+          "Age": 0.08136149032818793,
+          "ChestPainType": 1.0872952598480106,
+          "Cholesterol": 0.16506512539130785,
+          "ExerciseAngina": 0.2533348436489567,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.0855482525842507,
+          "MaxHR": 0.4836488263935818,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.28709210319245126,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.06635512716059966,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.012143435380618925,
+          "ST_Slope": 0.387526565355661,
+          "ST_Slope_was_missing": 0.16848403264885442,
+          "Sex": 0.4040650332438682
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0027119283987081765,
+            "ChestPainType": 0.004483405839949078,
+            "Cholesterol": 0.0006731855019881001,
+            "ExerciseAngina": 0.0006436401223143158,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": -6.70251225808726e-05,
+            "MaxHR": -0.0033693232617813262,
+            "MaxHR_was_missing": 2.494500085854102e-05,
+            "Oldpeak": 0.001422873039357151,
+            "Oldpeak_was_missing": -7.683928090737601e-05,
+            "RestingBP": -0.0005512536897081177,
+            "RestingBP_was_missing": 1.9438848544130698e-05,
+            "RestingECG": 0.00035236893926377227,
+            "ST_Slope": -0.0007214520665356772,
+            "ST_Slope_was_missing": -0.0013934327923642506,
+            "Sex": 0.002615231485410662
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.011187937525838227,
+            "ChestPainType": 0.11328123331398585,
+            "Cholesterol": 0.025678479396238636,
+            "ExerciseAngina": 0.02449820615506969,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.011353905853931532,
+            "MaxHR": 0.08040714212059201,
+            "MaxHR_was_missing": 0.0001425428620488058,
+            "Oldpeak": 0.031595362708933025,
+            "Oldpeak_was_missing": 0.00017780500265873408,
+            "RestingBP": 0.004114403190436857,
+            "RestingBP_was_missing": 0.00011107913453788971,
+            "RestingECG": 0.005733558646794746,
+            "ST_Slope": 0.07298641094232201,
+            "ST_Slope_was_missing": 0.03165722819534153,
+            "Sex": 0.021516897310083997
+          },
+          "n": 66,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.013899865924546404,
+        "ChestPainType": 0.10879782747403677,
+        "Cholesterol": 0.025005293894250536,
+        "ExerciseAngina": 0.023854566032755375,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.011420930976512405,
+        "MaxHR": 0.08377646538237334,
+        "MaxHR_was_missing": 0.00011759786119026478,
+        "Oldpeak": 0.030172489669575874,
+        "Oldpeak_was_missing": 0.0002546442835661101,
+        "RestingBP": 0.004665656880144975,
+        "RestingBP_was_missing": 9.164028599375901e-05,
+        "RestingECG": 0.005381189707530974,
+        "ST_Slope": 0.07370786300885769,
+        "ST_Slope_was_missing": 0.03305066098770578,
+        "Sex": 0.018901665824673335
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 6,
+          "stratum": "<50"
+        },
+        {
+          "n": 8,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.0002657324417318224,
+            "ChestPainType": 0.0015136336609371803,
+            "Cholesterol": 0.0002924567021646042,
+            "ExerciseAngina": 9.147070695588594e-05,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": -0.00018113642598730113,
+            "MaxHR": -0.0032839865250979816,
+            "MaxHR_was_missing": -0.00011759786119026478,
+            "Oldpeak": 0.0007732934665784889,
+            "Oldpeak_was_missing": 9.921205853225066e-06,
+            "RestingBP": 0.0001817788394861677,
+            "RestingBP_was_missing": 3.5704007530035984e-06,
+            "RestingECG": -4.240055343226329e-05,
+            "ST_Slope": -3.6888835430320954e-05,
+            "ST_Slope_was_missing": 0.00023532891078590495,
+            "Sex": -0.010740139131901215
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.014165598366278226,
+            "ChestPainType": 0.11031146113497395,
+            "Cholesterol": 0.02529775059641514,
+            "ExerciseAngina": 0.02394603673971126,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.011239794550525104,
+            "MaxHR": 0.08049247885727535,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.030945783136154363,
+            "Oldpeak_was_missing": 0.00026456548941933516,
+            "RestingBP": 0.004847435719631143,
+            "RestingBP_was_missing": 9.521068674676261e-05,
+            "RestingECG": 0.00533878915409871,
+            "ST_Slope": 0.07367097417342737,
+            "ST_Slope_was_missing": 0.033285989898491686,
+            "Sex": 0.00816152669277212
+          },
+          "n": 77,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.013899865924546404,
+        "ChestPainType": 0.10879782747403677,
+        "Cholesterol": 0.025005293894250536,
+        "ExerciseAngina": 0.023854566032755375,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.011420930976512405,
+        "MaxHR": 0.08377646538237334,
+        "MaxHR_was_missing": 0.00011759786119026478,
+        "Oldpeak": 0.030172489669575874,
+        "Oldpeak_was_missing": 0.0002546442835661101,
+        "RestingBP": 0.004665656880144975,
+        "RestingBP_was_missing": 9.164028599375901e-05,
+        "RestingECG": 0.005381189707530974,
+        "ST_Slope": 0.07370786300885769,
+        "ST_Slope_was_missing": 0.03305066098770578,
+        "Sex": 0.018901665824673335
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 3,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 61.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 287.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 150.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 190.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 70,
+        "y_proba": 0.9099111418450457,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 49.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 142.0,
+          "ExerciseAngina": "Missing",
+          "ExerciseAngina_was_missing": 1,
+          "FastingBS": 0.0,
+          "MaxHR": null,
+          "MaxHR_was_missing": 1,
+          "Oldpeak": null,
+          "Oldpeak_was_missing": 1,
+          "RestingBP": null,
+          "RestingBP_was_missing": 1,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 47,
+        "y_proba": 0.5016501198958433,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 68.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": 195.0,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 132.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 150.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "fn",
+        "test_index": 42,
+        "y_proba": 0.13373142943107086,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 75.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": 310.0,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 112.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 55,
+        "y_proba": 0.9098480279191555,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.779732166551973,
+    "fit_seconds": 125.86,
+    "global_importance": {
+      "Age": 0.013017577904019514,
+      "ChestPainType": 0.09209127215457849,
+      "Cholesterol": 0.005382541961969337,
+      "ExerciseAngina": 0.039314812288095205,
+      "ExerciseAngina_was_missing": 0.001372224412868106,
+      "FastingBS": 0.031280023915818696,
+      "MaxHR": 0.04667737787394903,
+      "MaxHR_was_missing": 0.0009836535805403854,
+      "Oldpeak": 0.021448587880933446,
+      "Oldpeak_was_missing": 0.0034880272838485305,
+      "RestingBP": 0.009501539330003592,
+      "RestingBP_was_missing": 0.00939813315991159,
+      "RestingECG": 0.017339750631444634,
+      "ST_Slope": 0.06268031299238289,
+      "ST_Slope_was_missing": 0.04955406236331147,
+      "Sex": 0.013403651403011183
+    },
+    "held_out_source": "LongBeachVA",
+    "model": "ensemble",
+    "n_test_explained": 80,
+    "n_test_full": 200,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.00219910885721121,
+            "ChestPainType": -0.003896320626367855,
+            "Cholesterol": 0.0008881105494393474,
+            "ExerciseAngina": 0.0040770857004369665,
+            "ExerciseAngina_was_missing": -0.0007482652147018236,
+            "FastingBS": 0.0006135017970879952,
+            "MaxHR": -0.005046371721610557,
+            "MaxHR_was_missing": 0.0002269969801247042,
+            "Oldpeak": 0.0013178799626664753,
+            "Oldpeak_was_missing": 0.0008049293731958152,
+            "RestingBP": 0.00038647666045358957,
+            "RestingBP_was_missing": 0.0004162344224187542,
+            "RestingECG": 0.0012951999940553315,
+            "ST_Slope": -0.003081403937346232,
+            "ST_Slope_was_missing": 0.00025687159997400677,
+            "Sex": 0.0007129920678783062
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.010818469046808304,
+            "ChestPainType": 0.08819495152821064,
+            "Cholesterol": 0.006270652511408684,
+            "ExerciseAngina": 0.04339189798853217,
+            "ExerciseAngina_was_missing": 0.0006239591981662824,
+            "FastingBS": 0.03189352571290669,
+            "MaxHR": 0.04163100615233847,
+            "MaxHR_was_missing": 0.0012106505606650896,
+            "Oldpeak": 0.02276646784359992,
+            "Oldpeak_was_missing": 0.004292956657044346,
+            "RestingBP": 0.009888015990457182,
+            "RestingBP_was_missing": 0.009814367582330345,
+            "RestingECG": 0.018634950625499965,
+            "ST_Slope": 0.059598909055036654,
+            "ST_Slope_was_missing": 0.049810933963285474,
+            "Sex": 0.014116643470889489
+          },
+          "n": 65,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.013017577904019514,
+        "ChestPainType": 0.09209127215457849,
+        "Cholesterol": 0.005382541961969337,
+        "ExerciseAngina": 0.039314812288095205,
+        "ExerciseAngina_was_missing": 0.001372224412868106,
+        "FastingBS": 0.031280023915818696,
+        "MaxHR": 0.04667737787394903,
+        "MaxHR_was_missing": 0.0009836535805403854,
+        "Oldpeak": 0.021448587880933446,
+        "Oldpeak_was_missing": 0.0034880272838485305,
+        "RestingBP": 0.009501539330003592,
+        "RestingBP_was_missing": 0.00939813315991159,
+        "RestingECG": 0.017339750631444634,
+        "ST_Slope": 0.06268031299238289,
+        "ST_Slope_was_missing": 0.04955406236331147,
+        "Sex": 0.013403651403011183
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 9,
+          "stratum": "<50"
+        },
+        {
+          "n": 6,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.0003207622624890969,
+            "ChestPainType": 0.0008012986344094891,
+            "Cholesterol": 0.00020970942708971405,
+            "ExerciseAngina": 0.00015394812660485951,
+            "ExerciseAngina_was_missing": 5.346328881304305e-05,
+            "FastingBS": -0.0010299898316655856,
+            "MaxHR": -0.002752829519317157,
+            "MaxHR_was_missing": -0.0001129115266526586,
+            "Oldpeak": 0.0002924902460069642,
+            "Oldpeak_was_missing": 0.00013589716690318946,
+            "RestingBP": 0.0001002820626737691,
+            "RestingBP_was_missing": 0.0003661610322043471,
+            "RestingECG": 0.00020213623712813863,
+            "ST_Slope": 0.0006471527350859763,
+            "ST_Slope_was_missing": 0.0012733918057814195,
+            "Sex": -0.0075891836158311935
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.013338340166508611,
+            "ChestPainType": 0.09289257078898798,
+            "Cholesterol": 0.005592251389059051,
+            "ExerciseAngina": 0.039468760414700065,
+            "ExerciseAngina_was_missing": 0.001425687701681149,
+            "FastingBS": 0.03025003408415311,
+            "MaxHR": 0.04392454835463187,
+            "MaxHR_was_missing": 0.0008707420538877268,
+            "Oldpeak": 0.02174107812694041,
+            "Oldpeak_was_missing": 0.00362392445075172,
+            "RestingBP": 0.009601821392677361,
+            "RestingBP_was_missing": 0.009764294192115937,
+            "RestingECG": 0.017541886868572772,
+            "ST_Slope": 0.06332746572746886,
+            "ST_Slope_was_missing": 0.05082745416909289,
+            "Sex": 0.005814467787179989
+          },
+          "n": 77,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.013017577904019514,
+        "ChestPainType": 0.09209127215457849,
+        "Cholesterol": 0.005382541961969337,
+        "ExerciseAngina": 0.039314812288095205,
+        "ExerciseAngina_was_missing": 0.001372224412868106,
+        "FastingBS": 0.031280023915818696,
+        "MaxHR": 0.04667737787394903,
+        "MaxHR_was_missing": 0.0009836535805403854,
+        "Oldpeak": 0.021448587880933446,
+        "Oldpeak_was_missing": 0.0034880272838485305,
+        "RestingBP": 0.009501539330003592,
+        "RestingBP_was_missing": 0.00939813315991159,
+        "RestingECG": 0.017339750631444634,
+        "ST_Slope": 0.06268031299238289,
+        "ST_Slope_was_missing": 0.04955406236331147,
+        "Sex": 0.013403651403011183
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 3,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 54.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 110.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 130.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 33,
+        "y_proba": 0.9736113548278809,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "NAP",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 122.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "LVH",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 28,
+        "y_proba": 0.5050261616706848,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 62.0,
+          "ChestPainType": "TA",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 143.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 62,
+        "y_proba": 0.09492748230695724,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 141.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 80.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 31,
+        "y_proba": 0.920381486415863,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.6976461716265282,
+    "fit_seconds": 907.51,
+    "global_importance": {
+      "Age": 0.026530638025890847,
+      "ChestPainType": 0.05418454300647284,
+      "Cholesterol": 0.0027548557152584016,
+      "ExerciseAngina": 0.051500685057138715,
+      "ExerciseAngina_was_missing": 0.0,
+      "FastingBS": 0.013171469590989119,
+      "MaxHR": 0.036612543542786466,
+      "MaxHR_was_missing": 0.0,
+      "Oldpeak": 0.07312221876793959,
+      "Oldpeak_was_missing": 0.0013025286833561363,
+      "RestingBP": 0.006101631140376886,
+      "RestingBP_was_missing": 0.0,
+      "RestingECG": 0.00582313442211267,
+      "ST_Slope": 0.04390675439633046,
+      "ST_Slope_was_missing": 0.003169209782078586,
+      "Sex": 0.030237585601588946
+    },
+    "held_out_source": "Switzerland",
+    "model": "tabicl",
+    "n_test_explained": 80,
+    "n_test_full": 123,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.005678098561641514,
+            "ChestPainType": -0.007632282853074823,
+            "Cholesterol": -7.249550287246817e-05,
+            "ExerciseAngina": -0.0012691694717507987,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.00012632012799565842,
+            "MaxHR": 0.0024275777660618184,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.0017229048651739853,
+            "Oldpeak_was_missing": -8.226752163707166e-05,
+            "RestingBP": 0.00014556653662748092,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": -0.0008323821044092742,
+            "ST_Slope": -0.002004561603030426,
+            "ST_Slope_was_missing": -0.0008206998222536673,
+            "Sex": -0.0038863682220096965
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.020852539464249333,
+            "ChestPainType": 0.046552260153398015,
+            "Cholesterol": 0.0026823602123859334,
+            "ExerciseAngina": 0.050231515585387916,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.013297789718984777,
+            "MaxHR": 0.039040121308848284,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.0713993139027656,
+            "Oldpeak_was_missing": 0.0012202611617190646,
+            "RestingBP": 0.006247197677004367,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.004990752317703396,
+            "ST_Slope": 0.041902192793300035,
+            "ST_Slope_was_missing": 0.0023485099598249187,
+            "Sex": 0.02635121737957925
+          },
+          "n": 61,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.026530638025890847,
+        "ChestPainType": 0.05418454300647284,
+        "Cholesterol": 0.0027548557152584016,
+        "ExerciseAngina": 0.051500685057138715,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.013171469590989119,
+        "MaxHR": 0.036612543542786466,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.07312221876793959,
+        "Oldpeak_was_missing": 0.0013025286833561363,
+        "RestingBP": 0.006101631140376886,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.00582313442211267,
+        "ST_Slope": 0.04390675439633046,
+        "ST_Slope_was_missing": 0.003169209782078586,
+        "Sex": 0.030237585601588946
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 17,
+          "stratum": "<50"
+        },
+        {
+          "n": 2,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0019256279974661193,
+            "ChestPainType": 0.0006423087187512472,
+            "Cholesterol": 5.820671771587099e-05,
+            "ExerciseAngina": 0.00017815360134705582,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.0005529218937500874,
+            "MaxHR": 0.0017547199414948492,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.0009221272337757991,
+            "Oldpeak_was_missing": 0.00014472540926179292,
+            "RestingBP": -0.00035442050137986583,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": -4.6538428109692276e-05,
+            "ST_Slope": -0.0016074029042672869,
+            "ST_Slope_was_missing": -9.111947109585392e-05,
+            "Sex": -0.025398346900617964
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.024605010028424728,
+            "ChestPainType": 0.054826851725224085,
+            "Cholesterol": 0.0028130624329742726,
+            "ExerciseAngina": 0.05167883865848577,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.013724391484739206,
+            "MaxHR": 0.038367263484281315,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.07220009153416379,
+            "Oldpeak_was_missing": 0.0014472540926179292,
+            "RestingBP": 0.00574721063899702,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.005776595994002978,
+            "ST_Slope": 0.042299351492063174,
+            "ST_Slope_was_missing": 0.003078090310982732,
+            "Sex": 0.00483923870097098
+          },
+          "n": 72,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.026530638025890847,
+        "ChestPainType": 0.05418454300647284,
+        "Cholesterol": 0.0027548557152584016,
+        "ExerciseAngina": 0.051500685057138715,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.013171469590989119,
+        "MaxHR": 0.036612543542786466,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.07312221876793959,
+        "Oldpeak_was_missing": 0.0013025286833561363,
+        "RestingBP": 0.006101631140376886,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.00582313442211267,
+        "ST_Slope": 0.04390675439633046,
+        "ST_Slope_was_missing": 0.003169209782078586,
+        "Sex": 0.030237585601588946
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 8,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 36.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 125.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 1.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 1,
+        "y_proba": 1.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 59.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 94.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 110.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 50,
+        "y_proba": 0.7616901397705078,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 62.0,
+          "ChestPainType": "TA",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 143.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 62,
+        "y_proba": 0.0,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 141.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 80.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 31,
+        "y_proba": 1.0,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.6048323435934034,
+    "fit_seconds": 9.83,
+    "global_importance": {
+      "Age": 0.05578290505646798,
+      "ChestPainType": 0.06877742506484372,
+      "Cholesterol": 0.009655318969527123,
+      "ExerciseAngina": 0.08811134487727042,
+      "ExerciseAngina_was_missing": 0.0,
+      "FastingBS": 0.02107392650375416,
+      "MaxHR": 0.06830846721051455,
+      "MaxHR_was_missing": 0.0,
+      "Oldpeak": 0.18847712161036617,
+      "Oldpeak_was_missing": 0.0,
+      "RestingBP": 0.013488396305860972,
+      "RestingBP_was_missing": 0.0,
+      "RestingECG": 0.005414577909398144,
+      "ST_Slope": 0.038476114998265434,
+      "ST_Slope_was_missing": 0.002057639985741672,
+      "Sex": 0.039493205517872554
+    },
+    "held_out_source": "Switzerland",
+    "model": "xgboost",
+    "n_test_explained": 80,
+    "n_test_full": 123,
+    "sanity": {
+      "treeshap": {
+        "treeshap_expected_value": -0.03143290430307388,
+        "treeshap_mean_abs_per_raw": {
+          "Age": 0.18522946886951103,
+          "ChestPainType": 0.6143662601127289,
+          "Cholesterol": 0.07387806391925551,
+          "ExerciseAngina": 0.31285339850001037,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.0954899515490979,
+          "MaxHR": 0.2010926715862297,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.5136275847908109,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.03814156727421505,
+          "RestingBP_was_missing": 0.0006110683014412643,
+          "RestingECG": 0.02329263378342148,
+          "ST_Slope": 0.15488744369940832,
+          "ST_Slope_was_missing": 0.0028477446379838512,
+          "Sex": 0.27608618130907414
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0025528459230636305,
+            "ChestPainType": -0.010731746916995875,
+            "Cholesterol": 0.0012753282504618848,
+            "ExerciseAngina": -0.004488691752571813,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.00047499456127782225,
+            "MaxHR": 0.0013893579798120864,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.0009304916132592822,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.00012559123565779144,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.0003237758318194303,
+            "ST_Slope": -0.0019402237283682108,
+            "ST_Slope_was_missing": -9.195421292171714e-05,
+            "Sex": 0.00026217657621942225
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.053230059133404346,
+            "ChestPainType": 0.05804567814784784,
+            "Cholesterol": 0.010930647219989008,
+            "ExerciseAngina": 0.0836226531246986,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.021548921065031982,
+            "MaxHR": 0.06969782519032663,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.1875466299971069,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.013613987541518763,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.005738353741217574,
+            "ST_Slope": 0.036535891269897224,
+            "ST_Slope_was_missing": 0.0019656857728199547,
+            "Sex": 0.039755382094091976
+          },
+          "n": 61,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.05578290505646798,
+        "ChestPainType": 0.06877742506484372,
+        "Cholesterol": 0.009655318969527123,
+        "ExerciseAngina": 0.08811134487727042,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.02107392650375416,
+        "MaxHR": 0.06830846721051455,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.18847712161036617,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.013488396305860972,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.005414577909398144,
+        "ST_Slope": 0.038476114998265434,
+        "ST_Slope_was_missing": 0.002057639985741672,
+        "Sex": 0.039493205517872554
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 17,
+          "stratum": "<50"
+        },
+        {
+          "n": 2,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": 0.002386697361243778,
+            "ChestPainType": 0.0037691240171337514,
+            "Cholesterol": 0.0001672128490371478,
+            "ExerciseAngina": 0.00011097249064047354,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.0009018075371282699,
+            "MaxHR": 0.00323691852756941,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.0052047328177234065,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": -0.0009465862931608126,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.00010207670900630982,
+            "ST_Slope": 0.0010470901048327472,
+            "ST_Slope_was_missing": -0.00027879385812234147,
+            "Sex": -0.028433459680112322
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.058169602417711755,
+            "ChestPainType": 0.07254654908197747,
+            "Cholesterol": 0.00982253181856427,
+            "ExerciseAngina": 0.08822231736791089,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.02197573404088243,
+            "MaxHR": 0.07154538573808396,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.19368185442808958,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.012541810012700159,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.005516654618404454,
+            "ST_Slope": 0.03952320510309818,
+            "ST_Slope_was_missing": 0.0017788461276193304,
+            "Sex": 0.01105974583776023
+          },
+          "n": 73,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.05578290505646798,
+        "ChestPainType": 0.06877742506484372,
+        "Cholesterol": 0.009655318969527123,
+        "ExerciseAngina": 0.08811134487727042,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.02107392650375416,
+        "MaxHR": 0.06830846721051455,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.18847712161036617,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.013488396305860972,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.005414577909398144,
+        "ST_Slope": 0.038476114998265434,
+        "ST_Slope_was_missing": 0.002057639985741672,
+        "Sex": 0.039493205517872554
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 7,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 54.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 110.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 3.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 130.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 33,
+        "y_proba": 0.970410892315794,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 52.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 120.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 130.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 24,
+        "y_proba": 0.5141489837809704,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 62.0,
+          "ChestPainType": "TA",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 143.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 62,
+        "y_proba": 0.022215505755908232,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 141.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 80.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 31,
+        "y_proba": 0.9186744490710081,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.6205595000264316,
+    "fit_seconds": 1.97,
+    "global_importance": {
+      "Age": 0.04942471400827957,
+      "ChestPainType": 0.06942164314393232,
+      "Cholesterol": 0.0004097780570463916,
+      "ExerciseAngina": 0.072616704263756,
+      "ExerciseAngina_was_missing": 0.0,
+      "FastingBS": 0.017547472471142377,
+      "MaxHR": 0.07511949666364251,
+      "MaxHR_was_missing": 0.0,
+      "Oldpeak": 0.16655142935480546,
+      "Oldpeak_was_missing": 0.0,
+      "RestingBP": 0.0010639486507771421,
+      "RestingBP_was_missing": 0.0,
+      "RestingECG": 0.001946055071059695,
+      "ST_Slope": 0.0332782720748666,
+      "ST_Slope_was_missing": 0.0007865096912309608,
+      "Sex": 0.033947893108571096
+    },
+    "held_out_source": "Switzerland",
+    "model": "lr",
+    "n_test_explained": 80,
+    "n_test_full": 123,
+    "sanity": {
+      "lr_basis": {
+        "intercept": -0.3559565226549087,
+        "per_basis": {
+          "ChestPainType_ASY": 0.8716106639110294,
+          "ChestPainType_ATA": 0.0018605062204622186,
+          "ChestPainType_NAP": 0.0,
+          "ChestPainType_TA": 0.0,
+          "ExerciseAngina_Missing": 0.0,
+          "ExerciseAngina_N": 0.2750385435081317,
+          "ExerciseAngina_Y": 0.0,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.09074522286182356,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG_LVH": 0.0,
+          "RestingECG_Missing": 0.0,
+          "RestingECG_Normal": 0.0,
+          "RestingECG_ST": 0.0,
+          "ST_Slope_Down": 0.0,
+          "ST_Slope_Flat": 0.11538682156965537,
+          "ST_Slope_Missing": 0.0,
+          "ST_Slope_Up": 0.0,
+          "ST_Slope_was_missing": 0.0,
+          "Sex_F": 0.057938099706024496,
+          "Sex_M": 0.19935381530225552,
+          "x0": 0.16354062444169468,
+          "x0_rcs1": 0.0,
+          "x0_rcs2": 0.0,
+          "x1": 0.0,
+          "x1_rcs1": 0.0,
+          "x1_rcs2": 0.0,
+          "x2": 8.19192378219004e-17,
+          "x2_rcs1": 0.0,
+          "x2_rcs2": 0.0,
+          "x3": 0.23662076065332788,
+          "x3_rcs1": 0.0,
+          "x3_rcs2": 0.0,
+          "x4": 0.5425895135752243,
+          "x4_rcs1": 0.0
+        },
+        "summed_per_raw": {
+          "Age": 0.1635406244416946,
+          "ChestPainType": 0.8734711701314912,
+          "Cholesterol": 8.191923782190033e-17,
+          "ExerciseAngina": 0.2750385435081316,
+          "ExerciseAngina_was_missing": 0.0,
+          "FastingBS": 0.09074522286182356,
+          "MaxHR": 0.23662076065332788,
+          "MaxHR_was_missing": 0.0,
+          "Oldpeak": 0.5425895135752243,
+          "Oldpeak_was_missing": 0.0,
+          "RestingBP": 0.0,
+          "RestingBP_was_missing": 0.0,
+          "RestingECG": 0.0,
+          "ST_Slope": 0.11538682156965532,
+          "ST_Slope_was_missing": 0.0,
+          "Sex": 0.25729191500828
+        }
+      }
+    },
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.011139655980517332,
+            "ChestPainType": -0.012029722830117051,
+            "Cholesterol": 7.190180637763841e-05,
+            "ExerciseAngina": -0.0021588784402511163,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.0003821014924583234,
+            "MaxHR": 0.0074698576051302895,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.012634722148979705,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": -0.0002046188757692407,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 9.347278304103548e-06,
+            "ST_Slope": 0.00031182121226152465,
+            "ST_Slope_was_missing": -0.0003372627174491301,
+            "Sex": -0.003567903833180959
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.03828505802776224,
+            "ChestPainType": 0.057391920313815264,
+            "Cholesterol": 0.00048167986342403,
+            "ExerciseAngina": 0.07045782582350488,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.0179295739636007,
+            "MaxHR": 0.0825893542687728,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.15391670720582576,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.0008593297750079014,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.0019554023493637985,
+            "ST_Slope": 0.03359009328712812,
+            "ST_Slope_was_missing": 0.0004492469737818307,
+            "Sex": 0.030379989275390137
+          },
+          "n": 61,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.04942471400827957,
+        "ChestPainType": 0.06942164314393232,
+        "Cholesterol": 0.0004097780570463916,
+        "ExerciseAngina": 0.072616704263756,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.017547472471142377,
+        "MaxHR": 0.07511949666364251,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.16655142935480546,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.0010639486507771421,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.001946055071059695,
+        "ST_Slope": 0.0332782720748666,
+        "ST_Slope_was_missing": 0.0007865096912309608,
+        "Sex": 0.033947893108571096
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 17,
+          "stratum": "<50"
+        },
+        {
+          "n": 2,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0022845925367970324,
+            "ChestPainType": 0.0015757454089991019,
+            "Cholesterol": -1.4772234307673226e-05,
+            "ExerciseAngina": 0.00025724025964025954,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 6.0628891542891666e-05,
+            "MaxHR": 0.0026888389819617886,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.00039346411430962736,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": -0.00024377382305418261,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": -0.00036965622550337194,
+            "ST_Slope": 0.002048412268772691,
+            "ST_Slope_was_missing": -0.0002818084139316168,
+            "Sex": -0.02436335485933096
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.04714012147148254,
+            "ChestPainType": 0.07099738855293142,
+            "Cholesterol": 0.0003950058227387184,
+            "ExerciseAngina": 0.07287394452339625,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.017608101362685268,
+            "MaxHR": 0.0778083356456043,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.16615796524049584,
+            "Oldpeak_was_missing": 0.0,
+            "RestingBP": 0.0008201748277229595,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.001576398845556323,
+            "ST_Slope": 0.03532668434363929,
+            "ST_Slope_was_missing": 0.0005047012772993441,
+            "Sex": 0.009584538249240136
+          },
+          "n": 72,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.04942471400827957,
+        "ChestPainType": 0.06942164314393232,
+        "Cholesterol": 0.0004097780570463916,
+        "ExerciseAngina": 0.072616704263756,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.017547472471142377,
+        "MaxHR": 0.07511949666364251,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.16655142935480546,
+        "Oldpeak_was_missing": 0.0,
+        "RestingBP": 0.0010639486507771421,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.001946055071059695,
+        "ST_Slope": 0.0332782720748666,
+        "ST_Slope_was_missing": 0.0007865096912309608,
+        "Sex": 0.033947893108571096
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 8,
+          "stratum": "F"
+        }
+      ]
+    }
+  },
+  {
+    "archetypes": [
+      {
+        "features": {
+          "Age": 70.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 1.0,
+          "MaxHR": 157.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 140.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_high",
+        "test_index": 77,
+        "y_proba": 0.8999378402875801,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 50.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": 0.0,
+          "MaxHR": 120.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.5,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 115.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Flat",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "tp_low",
+        "test_index": 18,
+        "y_proba": 0.5244269320385242,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 50.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "N",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 110.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 0.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 160.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Missing",
+          "ST_Slope_was_missing": 1,
+          "Sex": "F"
+        },
+        "label": "fn",
+        "test_index": 17,
+        "y_proba": 0.044004406004213785,
+        "y_true": 1
+      },
+      {
+        "features": {
+          "Age": 53.0,
+          "ChestPainType": "ASY",
+          "Cholesterol": null,
+          "ExerciseAngina": "Y",
+          "ExerciseAngina_was_missing": 0,
+          "FastingBS": null,
+          "MaxHR": 141.0,
+          "MaxHR_was_missing": 0,
+          "Oldpeak": 2.0,
+          "Oldpeak_was_missing": 0,
+          "RestingBP": 80.0,
+          "RestingBP_was_missing": 0,
+          "RestingECG": "Normal",
+          "ST_Slope": "Down",
+          "ST_Slope_was_missing": 0,
+          "Sex": "M"
+        },
+        "label": "fp",
+        "test_index": 32,
+        "y_proba": 0.8980671012353214,
+        "y_true": 0
+      }
+    ],
+    "expected_value": 0.7393950056608166,
+    "fit_seconds": 129.39,
+    "global_importance": {
+      "Age": 0.0162537013519101,
+      "ChestPainType": 0.07342494646398226,
+      "Cholesterol": 0.0036317707984667392,
+      "ExerciseAngina": 0.05661745472310362,
+      "ExerciseAngina_was_missing": 0.0,
+      "FastingBS": 0.022443458742846405,
+      "MaxHR": 0.027610587497362293,
+      "MaxHR_was_missing": 0.0,
+      "Oldpeak": 0.08464160264253728,
+      "Oldpeak_was_missing": 0.001225572631053703,
+      "RestingBP": 0.022162288670563357,
+      "RestingBP_was_missing": 0.0,
+      "RestingECG": 0.05051063266817538,
+      "ST_Slope": 0.09705740909816132,
+      "ST_Slope_was_missing": 0.009879116844667631,
+      "Sex": 0.03604037328639676
+    },
+    "held_out_source": "Switzerland",
+    "model": "ensemble",
+    "n_test_explained": 80,
+    "n_test_full": 123,
+    "sanity": {},
+    "subgroup_drift_age_band": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0048556512009375035,
+            "ChestPainType": -0.015504831988462975,
+            "Cholesterol": 0.0008567800761018233,
+            "ExerciseAngina": -0.002656292320215123,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": -1.5772934041782122e-05,
+            "MaxHR": 0.002807310288001238,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.0036330566844754164,
+            "Oldpeak_was_missing": -2.8648604319280856e-05,
+            "RestingBP": 0.00028347485499306477,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.0022366344763509183,
+            "ST_Slope": -0.007162786763858703,
+            "ST_Slope_was_missing": 6.827769558517653e-05,
+            "Sex": -0.0038348450532024944
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.011398050150972597,
+            "ChestPainType": 0.057920114475519285,
+            "Cholesterol": 0.0044885508745685625,
+            "ExerciseAngina": 0.0539611624028885,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.022427685808804623,
+            "MaxHR": 0.03041789778536353,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.08100854595806187,
+            "Oldpeak_was_missing": 0.0011969240267344222,
+            "RestingBP": 0.022445763525556422,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.0527472671445263,
+            "ST_Slope": 0.08989462233430262,
+            "ST_Slope_was_missing": 0.009947394540252808,
+            "Sex": 0.03220552823319427
+          },
+          "n": 60,
+          "stratum": "50-69"
+        }
+      ],
+      "grouping_name": "age_band",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0162537013519101,
+        "ChestPainType": 0.07342494646398226,
+        "Cholesterol": 0.0036317707984667392,
+        "ExerciseAngina": 0.05661745472310362,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.022443458742846405,
+        "MaxHR": 0.027610587497362293,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.08464160264253728,
+        "Oldpeak_was_missing": 0.001225572631053703,
+        "RestingBP": 0.022162288670563357,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.05051063266817538,
+        "ST_Slope": 0.09705740909816132,
+        "ST_Slope_was_missing": 0.009879116844667631,
+        "Sex": 0.03604037328639676
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 17,
+          "stratum": "<50"
+        },
+        {
+          "n": 3,
+          "stratum": ">=70"
+        }
+      ]
+    },
+    "subgroup_drift_sex": {
+      "by_stratum": [
+        {
+          "delta_per_feature": {
+            "Age": -0.0006455678097051359,
+            "ChestPainType": 0.0032520349436673535,
+            "Cholesterol": 0.0002950968123763952,
+            "ExerciseAngina": 0.00040549666452804195,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.0004128362021492485,
+            "MaxHR": 0.002702430929146196,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": -0.0019716369274117296,
+            "Oldpeak_was_missing": 0.00013617473678374488,
+            "RestingBP": -5.1927233941415074e-05,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.002776902174506171,
+            "ST_Slope": -0.004906564799343677,
+            "ST_Slope_was_missing": -0.0016685228641956998,
+            "Sex": -0.026225924924059365
+          },
+          "mean_abs_per_feature": {
+            "Age": 0.015608133542204965,
+            "ChestPainType": 0.07667698140764961,
+            "Cholesterol": 0.0039268676108431344,
+            "ExerciseAngina": 0.057022951387631665,
+            "ExerciseAngina_was_missing": 0.0,
+            "FastingBS": 0.022856294944995654,
+            "MaxHR": 0.03031301842650849,
+            "MaxHR_was_missing": 0.0,
+            "Oldpeak": 0.08266996571512555,
+            "Oldpeak_was_missing": 0.001361747367837448,
+            "RestingBP": 0.022110361436621942,
+            "RestingBP_was_missing": 0.0,
+            "RestingECG": 0.053287534842681554,
+            "ST_Slope": 0.09215084429881765,
+            "ST_Slope_was_missing": 0.008210593980471931,
+            "Sex": 0.009814448362337396
+          },
+          "n": 72,
+          "stratum": "M"
+        }
+      ],
+      "grouping_name": "sex",
+      "overall_mean_abs_per_feature": {
+        "Age": 0.0162537013519101,
+        "ChestPainType": 0.07342494646398226,
+        "Cholesterol": 0.0036317707984667392,
+        "ExerciseAngina": 0.05661745472310362,
+        "ExerciseAngina_was_missing": 0.0,
+        "FastingBS": 0.022443458742846405,
+        "MaxHR": 0.027610587497362293,
+        "MaxHR_was_missing": 0.0,
+        "Oldpeak": 0.08464160264253728,
+        "Oldpeak_was_missing": 0.001225572631053703,
+        "RestingBP": 0.022162288670563357,
+        "RestingBP_was_missing": 0.0,
+        "RestingECG": 0.05051063266817538,
+        "ST_Slope": 0.09705740909816132,
+        "ST_Slope_was_missing": 0.009879116844667631,
+        "Sex": 0.03604037328639676
+      },
+      "overall_n": 80,
+      "skipped_strata": [
+        {
+          "n": 8,
+          "stratum": "F"
+        }
+      ]
+    }
+  }
+]

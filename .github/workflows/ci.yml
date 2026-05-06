@@ -113,6 +113,13 @@ jobs:
       # GitHub Actions ubuntu-latest runner.
       - name: Smoke train_v1.py --smoke (3 models, 1 LODO fold)
         run: uv run --project backend python backend/scripts/train_v1.py --smoke
+      # Phase 2.5: smoke the explainability orchestrator end-to-end (1 LODO
+      # fold, smoke KernelSHAP budget = 16 samples, 4 models). Reuses the
+      # smoke-trained artefacts from the previous step. Catches regressions
+      # in the encoder, KernelSHAP wrapper, TreeSHAP/LR-coef sanity paths,
+      # archetype picker, and figure renderer. Runs in ~30s.
+      - name: Smoke compute_explanations.py --smoke (4 models, 1 LODO fold)
+        run: uv run --project backend python backend/scripts/compute_explanations.py --smoke
 
   # ---------------------------------------------------------------- typescript
   lint-ts:
