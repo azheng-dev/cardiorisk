@@ -25,3 +25,7 @@ REPORTS_V1_FIGURES: Final[Path] = REPORTS_V1_DIR / "figures"
 # Phase 2.5 explainability layout (ADR-013).
 REPORTS_V1_EXPLAIN: Final[Path] = REPORTS_V1_DIR / "explainability"
 REPORTS_V1_EXPLAIN_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "explainability"
+
+# Phase 2.6 drift / monitoring layout (ADR-014).
+REPORTS_V1_DRIFT: Final[Path] = REPORTS_V1_DIR / "drift"
+REPORTS_V1_DRIFT_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "drift"

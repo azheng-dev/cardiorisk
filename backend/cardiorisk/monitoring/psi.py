@@ -113,6 +113,33 @@ def psi_from_proportions(
     return float(np.sum((p_cur - p_ref) * np.log(p_cur / p_ref)))
 
 
+def psi_from_counts(
+    *,
+    reference_counts: npt.NDArray[np.int64],
+    current_counts: npt.NDArray[np.int64],
+    epsilon: float = DEFAULT_EPSILON,
+) -> float:
+    """PSI from two integer count vectors over the same bins.
+
+    Used by :mod:`cardiorisk.monitoring.drift` so the persisted reference
+    bin counts in :class:`~cardiorisk.monitoring.reference.NumericReference`
+    can be reused without re-binning. Both empty inputs short-circuit to
+    0.0 (no signal in either direction).
+    """
+    if reference_counts.shape != current_counts.shape:
+        raise ValueError(
+            f"reference and current count vectors must align: "
+            f"{reference_counts.shape} vs {current_counts.shape}"
+        )
+    if reference_counts.size == 0:
+        return 0.0
+    if reference_counts.sum() == 0 or current_counts.sum() == 0:
+        return 0.0
+    p_ref = _proportions_from_bins(reference_counts, epsilon)
+    p_cur = _proportions_from_bins(current_counts, epsilon)
+    return psi_from_proportions(p_ref, p_cur)
+
+
 def psi_numeric(
     *,
     reference: npt.ArrayLike,

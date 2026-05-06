@@ -101,7 +101,9 @@ ignore = [
 "tests/**" = ["S101", "N802", "N803", "N806"]
 # CLI scripts: stdlib `random` is fine for deterministic synthetic-data
 # generation; T201 (print) is fine in a script that prints status to stdout.
-"scripts/**" = ["S311", "T201"]
+# N803/N806 because Phase 2.6 scripts (build_reference.py) bind the
+# sklearn-convention uppercase X for feature matrices in driver bodies.
+"scripts/**" = ["S311", "T201", "N803", "N806"]
 # Sklearn convention uses uppercase X for the feature matrix; we follow it
 # in custom transformers, pipeline factories, calibration wrappers, model
 # wrappers, and anywhere else that mirrors an sklearn estimator API.

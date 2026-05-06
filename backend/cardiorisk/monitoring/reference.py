@@ -132,10 +132,16 @@ def compute_quantile_edges(
     return edges.astype(np.float64)
 
 
-def _bin_counts(
-    samples: npt.NDArray[np.float64], edges: npt.NDArray[np.float64]
+def bin_counts(
+    samples: npt.NDArray[np.float64],
+    edges: npt.NDArray[np.float64],
 ) -> npt.NDArray[np.int64]:
-    """Count samples per bin, clipping out-of-range values into the outer bins."""
+    """Count samples per bin, clipping out-of-range values into the outer bins.
+
+    Public so :mod:`cardiorisk.monitoring.drift` can re-bin a "current"
+    slice against a persisted reference's edges without duplicating the
+    clip-and-count logic.
+    """
     n_bins = int(edges.size) - 1
     if samples.size == 0:
         return np.zeros(n_bins, dtype=np.int64)
@@ -153,7 +159,7 @@ def _build_numeric_reference(
     n_missing = int(np.isnan(raw).sum())
     data = raw[~np.isnan(raw)]
     edges = compute_quantile_edges(data, n_bins=n_bins)
-    counts = _bin_counts(data, edges)
+    counts = bin_counts(data, edges)
     return NumericReference(
         feature=feature,
         edges=edges,
@@ -181,7 +187,7 @@ def _build_prediction_reference(
     n_bins: int,
 ) -> PredictionReference:
     edges = compute_quantile_edges(proba, n_bins=n_bins)
-    counts = _bin_counts(proba, edges)
+    counts = bin_counts(proba, edges)
     mean_val = float(proba.mean()) if proba.size > 0 else float("nan")
     return PredictionReference(edges=edges, counts=counts, n=int(proba.size), mean=mean_val)
 
