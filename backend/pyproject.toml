@@ -111,6 +111,7 @@ ignore = [
 "cardiorisk/eval/**" = ["N803", "N806"]
 "cardiorisk/training/**" = ["N803", "N806"]
 "cardiorisk/explainability/**" = ["N803", "N806"]
+"cardiorisk/monitoring/**" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
