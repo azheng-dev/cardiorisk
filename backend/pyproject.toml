@@ -49,6 +49,17 @@ dependencies = [
     # cross-model headline) + TreeExplainer (XGBoost native sanity-check).
     # ADR-013. MIT-licensed. Pulls numba + cloudpickle + slicer transitively.
     "shap>=0.51,<0.52",
+    # Phase 3.1 corpus ingestion (ADR-015). All MIT-licensed.
+    #   pdfplumber - PDF text extraction with per-page char offsets
+    #   tiktoken   - cl100k_base BPE for the token-window chunker
+    #   jsonschema - validates eval/retrieval/questions.jsonl in CI
+    # spaCy is intentionally NOT added: the Phase 3.1 semantic chunker uses
+    # a regex sentence splitter to keep the dep footprint small. spaCy
+    # graduates if Phase 3.2's retrieval eval shows the regex splitter is
+    # the limiting factor.
+    "pdfplumber>=0.11,<0.13",
+    "tiktoken>=0.8,<0.10",
+    "jsonschema>=4.23,<5",
 ]
 
 [dependency-groups]
@@ -114,6 +125,7 @@ ignore = [
 "cardiorisk/training/**" = ["N803", "N806"]
 "cardiorisk/explainability/**" = ["N803", "N806"]
 "cardiorisk/monitoring/**" = ["N803", "N806"]
+"cardiorisk/rag/**" = ["N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -157,6 +169,12 @@ module = [
   "slicer", "slicer.*",
   "cloudpickle", "cloudpickle.*",
   "scipy", "scipy.*",
+  # Phase 3.1: pdfplumber + tiktoken + jsonschema; jsonschema has
+  # third-party stubs (types-jsonschema) but we don't add another dev
+  # dep just to type one validator call.
+  "pdfplumber", "pdfplumber.*",
+  "tiktoken", "tiktoken.*",
+  "jsonschema", "jsonschema.*",
 ]
 ignore_missing_imports = true
 

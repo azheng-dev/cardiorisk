@@ -1,0 +1,19 @@
+{
+  "_comment": "Synthetic corpus fixture for Phase 3.1 ingestion tests + CI smoke. Two markdown files shaped like the real RACGP Red Book CVD chapter and NVDPA absolute-CVD-risk quick reference. NOT clinical advice; the wording is paraphrased and lightly invented to exercise the chunkers without redistributing copyrighted text. Page breaks via the <!-- page break --> marker exercise the multi-page parse path.",
+  "sources": [
+    {
+      "doc_id": "fixture_racgp_cvd",
+      "title": "Fixture: RACGP-shaped CVD prevention chapter",
+      "publisher": "RACGP",
+      "url": "fixture://corpus_mini/fixture_racgp_cvd.md",
+      "filename": "fixture_racgp_cvd.md"
+    },
+    {
+      "doc_id": "fixture_nvdpa_quickref",
+      "title": "Fixture: NVDPA-shaped quick reference",
+      "publisher": "NVDPA",
+      "url": "fixture://corpus_mini/fixture_nvdpa_quickref.md",
+      "filename": "fixture_nvdpa_quickref.md"
+    }
+  ]
+}

@@ -78,9 +78,11 @@ repos:
       - id: no-raw-data
         name: block raw data files
         description: |
-          Refuses to commit files under data/raw/ or any *.csv outside fixtures/.
-          Raw data (especially anything resembling clinical data) must never enter
-          the public repo. Use a download script and store data in data/raw/ locally.
+          Refuses to commit files under data/raw/, any *.csv outside fixtures/,
+          or any *.pdf outside docs/. Raw data (especially anything resembling
+          clinical data) and copyrighted PDF corpora must never enter the public
+          repo. Use a download script and store data in data/raw/ or
+          data/external/ locally.
         entry: scripts/no_raw_data.sh
         language: script
         pass_filenames: true

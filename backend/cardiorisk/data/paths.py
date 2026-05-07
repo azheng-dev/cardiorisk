@@ -29,3 +29,16 @@ REPORTS_V1_EXPLAIN_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "explainability"
 # Phase 2.6 drift / monitoring layout (ADR-014).
 REPORTS_V1_DRIFT: Final[Path] = REPORTS_V1_DIR / "drift"
 REPORTS_V1_DRIFT_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "drift"
+
+# Phase 3.1 corpus ingestion layout (ADR-015). All gitignored except the
+# sha256 lockfiles in DATA_CHECKSUMS.
+DATA_EXTERNAL: Final[Path] = REPO_ROOT / "data" / "external"
+CORPUS_DIR: Final[Path] = DATA_EXTERNAL / "corpus"
+CORPUS_RAW: Final[Path] = CORPUS_DIR / "raw"
+CORPUS_PARSED: Final[Path] = CORPUS_DIR / "parsed"
+CORPUS_CHUNKS: Final[Path] = CORPUS_DIR / "chunks"
+CORPUS_MANIFEST: Final[Path] = CORPUS_DIR / "manifest.json"
+# Markdown fixture used by --use-fixture (CI + unit tests). PDF-free,
+# network-free; exercises every chunker through the same ParsedDoc
+# schema as the real PDF path.
+FIXTURE_CORPUS_DIR: Final[Path] = REPO_ROOT / "backend" / "tests" / "fixtures" / "corpus_mini"

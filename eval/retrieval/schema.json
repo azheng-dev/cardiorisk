@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cardiorisk.dev/eval/retrieval/question.schema.json",
+  "title": "RetrievalEvalQuestion",
+  "description": "One row of eval/retrieval/questions.jsonl. The Phase 3.2 retrieval eval scores each question against the chunked corpus by hit@1 / hit@5 / MRR; a chunk counts as a hit when its (doc_id, page_range) intersects the expected span and it contains all expected_span_keywords.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "question",
+    "expected_doc_id",
+    "expected_page_range",
+    "expected_span_keywords",
+    "rationale",
+    "source_phase"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^q[0-9]{3}$",
+      "description": "Sequential id like 'q001'. Stable across edits; never recycle."
+    },
+    "question": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Natural-language question a clinician might ask."
+    },
+    "expected_doc_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "doc_id of the source document containing the answer."
+    },
+    "expected_page_range": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1 },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[page_start, page_end] inclusive 1-indexed."
+    },
+    "expected_span_keywords": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "description": "Keywords that must appear in a retrieved chunk's text for it to count as a hit. Case-insensitive substring match. Pick discriminative phrases, not common words."
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Why this question was chosen; what the right answer looks like."
+    },
+    "source_phase": {
+      "type": "string",
+      "enum": ["3.1", "3.2"],
+      "description": "Phase that authored the question. 3.1 ships the seed; 3.2 expands to 50."
+    },
+    "requires_full_corpus": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, the question targets the real RACGP/NVDPA PDFs and is skipped in --use-fixture mode."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "Optional taxonomy: 'risk_assessment', 'pharmacotherapy', 'lifestyle', 'communication', 'reclassifiers', 'follow_up', etc."
+    }
+  }
+}
