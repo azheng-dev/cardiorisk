@@ -1,8 +1,8 @@
 {
   "name": "cardiorisk-frontend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "CardioRisk Co-Pilot frontend. Pre-alpha; Next.js + Tailwind v4 + shadcn/ui land in Phase 5.",
+  "description": "CardioRisk Co-Pilot frontend. Next.js 15 (App Router) + Tailwind v4 + shadcn/ui primitives. Phase 5.1 ships the brand identity + preview page; subsequent sub-phases land the component system + screens.",
   "license": "MIT",
   "type": "module",
   "engines": {
@@ -10,18 +10,42 @@
     "pnpm": ">=10"
   },
   "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "test": "vitest",
     "type-check": "tsc --noEmit"
   },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.469.0",
+    "next": "^15.1.4",
+    "next-themes": "^0.4.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.7.0",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.0",
     "typescript": "5.6.3",
     "vitest": "2.1.4"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "@tailwindcss/oxide", "sharp"]
   }
 }

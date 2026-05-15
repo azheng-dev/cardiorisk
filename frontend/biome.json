@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "ignore": ["node_modules", "dist", ".next", "out", "coverage"]
+    "ignore": ["node_modules", "dist", ".next", "out", "coverage", "next-env.d.ts"]
   },
   "formatter": {
     "enabled": true,
@@ -25,15 +25,21 @@
       },
       "correctness": {
         "noUnusedVariables": "error",
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "useExhaustiveDependencies": "warn"
       },
       "style": {
         "useConst": "error",
-        "useTemplate": "error"
+        "useTemplate": "error",
+        "noNonNullAssertion": "warn"
       },
       "suspicious": {
         "noExplicitAny": "error",
-        "noConsoleLog": "warn"
+        "noConsoleLog": "warn",
+        "noArrayIndexKey": "off"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "warn"
       }
     }
   },
@@ -43,7 +49,8 @@
       "indentWidth": 2,
       "quoteStyle": "double",
       "semicolons": "always",
-      "trailingCommas": "all"
+      "trailingCommas": "all",
+      "jsxQuoteStyle": "double"
     }
   },
   "json": {
