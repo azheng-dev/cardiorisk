@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cardiorisk.dev/eval/generation/case.schema.json",
+  "title": "GenerationEvalCase",
+  "description": "One row of eval/generation/cases.jsonl. The Phase 3.3 citation-mandatory generator scores each case on (a) citation precision (every claim in the answer cites a passage that NLI-entails it), (b) citation recall (the verified answer mentions every expected_keyword from the corpus), (c) hallucination rate (claims that survive NLI but cite no passage that entails them), and (d) refusal accuracy (should_refuse=true cases must produce a 'no relevant guidance found' answer rather than a confidently-cited fabrication).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "question",
+    "expected_doc_ids",
+    "expected_keywords",
+    "rationale",
+    "source_phase",
+    "tags"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^g[0-9]{3}$",
+      "description": "Sequential id like 'g001'. Stable across edits; never recycle."
+    },
+    "question": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Natural-language question a clinician might ask. Phrased as it would be in a chat surface."
+    },
+    "expected_doc_ids": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "doc_ids of source documents whose passages should appear as cited evidence. Empty for should_refuse=true cases. For fixture-only cases the doc_ids start with 'fixture_'."
+    },
+    "expected_keywords": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Keywords whose appearance in the verified (NLI-entailed) answer signals correct content recall. Case-insensitive substring match on the post-verification answer text. Empty for should_refuse=true cases."
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 5,
+      "description": "Why this case was authored; what the right answer looks like; what failure modes it probes."
+    },
+    "source_phase": {
+      "type": "string",
+      "enum": ["3.3"],
+      "description": "Phase that authored the case. Frozen until Phase 6 expands the eval surface."
+    },
+    "requires_full_corpus": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, the case targets the real RACGP/NVDPA PDFs and is skipped in --use-fixture mode."
+    },
+    "should_refuse": {
+      "type": "boolean",
+      "default": false,
+      "description": "Negative-case flag: the right answer is a refusal ('I don't have the supporting guidance for that question'). For these cases the scorer awards points when the answer contains a refusal phrase AND no claim survives NLI verification with a citation. expected_doc_ids and expected_keywords must be empty arrays for refusal cases."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "risk_assessment",
+          "pharmacotherapy",
+          "lifestyle",
+          "communication",
+          "reclassifiers",
+          "follow_up",
+          "refusal"
+        ]
+      },
+      "minItems": 1,
+      "description": "Closed-set taxonomy. Mirrors eval/retrieval/schema.json; 'refusal' replaces 'negative_case' so the generation eval per-tag breakdown distinguishes the two failure modes the system has to handle."
+    }
+  }
+}

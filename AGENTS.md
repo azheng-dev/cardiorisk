@@ -51,14 +51,27 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 dense +
+Current phase:        Phase 3.3 (Citation-mandatory generator + DeBERTa-v3 NLI verifier
+                      + 36-case generation eval) in progress on feat/phase-3-3-citation-
+                      generation. Plan re-cut at Phase 3.2 close-out under the
+                      AGENTS §0 finish-line grant: ship the wiring proof in 3.3
+                      (Mock-LLM + Mock-NLI for the headline + Mock-LLM + DeBERTa-NLI
+                      verifier-comparison archive), defer the real-LLM A/B
+                      (Claude Sonnet 4.5 + GPT-4o-mini) to Phase 6 with budget
+                      guardrails per ADR-017. Pluggable BaseLLMClient + suppression
+                      contract enforced in code; never re-prompt; 3-way reason
+                      taxonomy (no_citation / phantom_citation / not_entailed).
+Last checkpoint:      Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 dense +
                       rank_bm25 sparse + RRF fusion + bge-reranker-v2-m3 cross-encoder
                       + 50-Q hand-curated retrieval eval; in-memory hnswlib graduating
-                      to pgvector in Phase 4) in progress on feat/phase-3-2-retrieval.
-                      Plan approved by user 2026-05-07 with embeddings_scope=open_only
-                      (text-embedding-3-large deferred), vector_index=in-memory now /
-                      pgvector Phase 4, reranker=in-scope (bge-reranker-v2-m3).
-Last checkpoint:      Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolute-CVD-
+                      to pgvector in Phase 4) auto-merged on the AGENTS §0 finish-
+                      line grant (PR #13 squash-merged 2026-05-15; 696 tests pass,
+                      all 7 required CI checks green). Real-corpus headline:
+                      token chunker + no rerank wins (MRR 0.550); reranker
+                      reversed direction vs the fixture eval. Production default
+                      now `with_rerank=False`. Full discussion in ADR-016
+                      §"Amendment 2026-05-15".
+                      Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolute-CVD-
                       risk materials; pdfplumber parse + 3 pluggable chunkers
                       [token-window / regex-semantic / heading-aware hybrid] + manifest;
                       10-Q retrieval eval scaffold deferring 50-Q expansion + chunking
@@ -84,42 +97,55 @@ Last checkpoint:      Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolu
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 3.2 close-out: real-corpus fetch + chunker race + reranker
-                        reversal documented; auto-merge pending CI green on
-                        feat/phase-3-2-retrieval (per user grant of full
-                        commit/merge authority for non-UI phases).
+Open decisions:       - Phase 3.3 PR review + merge approval (auto on CI-green per the
+                        AGENTS §0 finish-line grant; non-UI phase).
+                      - Phase 3.3 result-of-record (Mock-LLM + Mock-NLI on the 12
+                        real-corpus cases = 6 positive + 6 refusal): citation
+                        precision 1.000, keyword recall 0.042, hallucination rate
+                        0.167, refusal accuracy 0.000. Headline is **diagnostic
+                        of MockLLM**, not predictive of the production system; the
+                        real-LLM A/B is deferred to Phase 6 with API keys + budget
+                        guardrails. Verifier-comparison archive (same Mock-LLM run;
+                        DeBERTa-NLI vs Mock-NLI) shows DeBERTa suppresses 7 of
+                        MockLLM's 15 emitted claims (Mock NLI: 1) and pushes
+                        hallucination rate 0.167 → 0.000 — the wiring proof that
+                        the verifier-in-the-loop architecture rejects bad claims
+                        when bad claims arrive. Archive at reports/v1/generation/
+                        nli_deberta/.
+                      - Phase 3.3 binding decisions (ADR-017): bracketed sentence-
+                        trailing citations + structured `__INSUFFICIENT_EVIDENCE__`
+                        refusal sentinel; pluggable BaseLLMClient (Mock for CI;
+                        Anthropic / OpenAI for Phase 6); DeBERTa-v3-large MNLI
+                        (`MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli`)
+                        at entail_threshold=0.5; suppression policy "drop and
+                        audit, never re-prompt" with 3-way reason taxonomy;
+                        36-case eval (24 fixture-positive + 6 refusal + 6 real-
+                        corpus positive). 6 real-corpus positives added as a
+                        Phase 3.3 amendment after the first run yielded 0
+                        positive cases (every original positive was fixture-only
+                        by design).
                       - Phase 3.2 real-corpus headline (10 Qs over 1,834 chunks):
-                        all 6 cells tie at hit@5=0.600; tie-break MRR → no-rerank →
-                        alpha → **token chunker, no rerank** wins (MRR 0.550). The
-                        cross-encoder reranker HURTS hit@1 across all 3 chunkers
-                        on the real corpus (token 0.50→0.30, semantic 0.50→0.40,
-                        hybrid 0.40→0.20) — the OPPOSITE of the fixture-eval finding
-                        (where rerank bought +5 to +35 pp). New production default
-                        is `with_rerank=False`; reranker stays available behind the
-                        flag. ADR-016 §"Amendment 2026-05-15" + docs/research/13
-                        §7 carry the full discussion + the open question (does this
-                        hold at n=100? Phase 6 re-asks with statistical power).
-                      - Phase 3.2.1 (Token-window size sweep 256 / 1024 vs 512)
-                        DROPPED. n=10 is too underpowered to discriminate; running
-                        the sweep would surface a confidently-wrong winner. Re-asked
-                        in Phase 6 once the eval set grows.
-                      - Real-corpus URL drift handled (RACGP restructured chapter
-                        download; cvdcheck.org.au moved to a Next.js front-end +
-                        retired the 2023 Quick Reference Guide PDF). New URLs
-                        pinned in sources.py + lockfiles re-generated; doc_id
-                        renamed nvdpa_2023_quick_reference_guide →
-                        nvdpa_2023_summary_of_recommendations; q045 + q049
-                        re-targeted. ADR-015 §"Amendment 2026-05-15" + ADR-016
-                        §"Amendment 2026-05-15" §4 carry the audit trail. No
-                        Wayback snapshots existed for any of the retired URLs;
-                        live-URL re-resolution was the only path.
-                      - Deferred to Phase 3.3 (citation-mandatory generation):
-                          - NLI verifier: DeBERTa-v3-MNLI vs MoritzLaurer/deberta-v3-large-
-                            zeroshot-v2.0 vs vectara/hallucination_evaluation_model.
-                            Default: DeBERTa-v3-MNLI for the first cut.
-                      - Deferred to Phase 6 (eval harness): LLM choice — Claude Sonnet 4.5
-                        + 1 alternative (per AGENTS §4). Specific second model decided
-                        with Phase 6 cost/quality data.
+                        token chunker + no rerank wins (MRR 0.550). Production
+                        default `with_rerank=False`. ADR-016 §"Amendment
+                        2026-05-15" carries the discussion.
+                      - Phase 3.2.1 (Token-window size sweep) remains DROPPED.
+                        n=10 is too underpowered; re-asked in Phase 6 once the
+                        eval set grows.
+                      - Real-corpus URL drift handled at Phase 3.2 close-out;
+                        ADR-015 §"Amendment 2026-05-15" + ADR-016 §"Amendment
+                        2026-05-15" §4 carry the audit trail.
+                      - Deferred to Phase 6 (eval harness):
+                          - LLM choice — Claude Sonnet 4.5 + GPT-4o-mini
+                            (per AGENTS §4 + ADR-017).
+                          - Real-LLM citation precision / recall / hallucination
+                            / refusal accuracy headline on the 100-case
+                            extension of the Phase 3.3 eval set.
+                          - LLM-judge NLI cross-check on a 50-claim sub-sample;
+                            opens the verifier choice if DeBERTa <85% agrees
+                            (ADR-017 §"Trigger to revisit").
+                          - `entail_threshold` tuning on the 100-case set.
+                          - Suppression-policy revisit if >25% of suppressed
+                            claims are recoverable by a single re-prompt.
                       - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
                         user later requests it; ADR-012 documents the deferral.
                       - Deferred to "future scope" (AGENTS §8): AusCVDRisk calculator
@@ -127,9 +153,12 @@ Open decisions:       - Phase 3.2 close-out: real-corpus fetch + chunker race + 
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(retrieval): Phase 3.2 — hybrid retrieval (BGE-M3 + rank_bm25 +
-                      RRF + bge-reranker-v2-m3) + 50-Q eval matrix (in progress on
-                      feat/phase-3-2-retrieval).
+Last meaningful PR:   feat(rag): Phase 3.3 — citation-mandatory generator + DeBERTa-v3
+                      NLI verifier + 36-case generation eval (in progress on
+                      feat/phase-3-3-citation-generation).
+                      #13 feat(retrieval): Phase 3.2 — hybrid retrieval (BGE-M3 +
+                      rank_bm25 + RRF + bge-reranker-v2-m3) + 50-Q eval matrix +
+                      real-corpus chunker race (auto-merged 2026-05-15).
                       feat(rag): Phase 3.1 — corpus ingestion (pdfplumber + 3-chunker
                       registry + manifest + 10-Q eval scaffold) (merged 2026-05-06).
                       #11 feat(monitoring): Phase 2.6 — drift / monitoring layer (PSI + KS,
@@ -148,7 +177,18 @@ Last meaningful PR:   feat(retrieval): Phase 3.2 — hybrid retrieval (BGE-M3 + 
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 3.2 real-corpus retrieval-eval matrix (bge-m3 dense +
+Last eval run:        Phase 3.3 generation eval (real-corpus mode; Mock-LLM + Mock-NLI;
+                      12 cases = 6 real-corpus positive + 6 refusal). Wall-clock
+                      ~16 s on M4 Pro after weights warm. Outputs:
+                      reports/v1/generation/{per_case,aggregate}.json + 2 figures
+                      under reports/v1/figures/generation/. Headline: cit_prec
+                      1.000, recall 0.042, halluc 0.167, refusal_acc 0.000. The
+                      headline is **diagnostic of MockLLM, not predictive of the
+                      production system**; the real-LLM A/B is Phase 6's job.
+                      Verifier-comparison archive (same Mock-LLM run; DeBERTa-NLI):
+                      DeBERTa suppresses 7 of 15 claims; halluc 0.167 → 0.000.
+                      Archive at reports/v1/generation/nli_deberta/.
+                      Phase 3.2 real-corpus retrieval-eval matrix (bge-m3 dense +
                       rank_bm25 sparse + RRF k=60 + bge-reranker-v2-m3 cross-encoder;
                       3 chunkers x {no-rerank, with-rerank} = 6 cells; 10 real-corpus
                       Qs over 1,834 chunks across the 3 RACGP/NVDPA PDFs; 2,000-
@@ -185,6 +225,201 @@ Branch protection on main (live, set 2026-05-05):
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 3.3 deliverables (in progress on feat/phase-3-3-citation-generation):
+  backend/cardiorisk/rag/generation/__init__.py        package skeleton + module map (generator,
+                                                       LLM, prompts, parser, NLI); documents the
+                                                       suppression policy ("drop, never re-prompt"
+                                                       with 3-way reason taxonomy) and cross-
+                                                       references ADR-017
+  backend/cardiorisk/rag/generation/prompts/citation_required.v1.md
+                                                       LLM prompt template enforcing bracketed
+                                                       sentence-trailing citations + structured
+                                                       __INSUFFICIENT_EVIDENCE__ refusal sentinel;
+                                                       no few-shot (Lost-in-the-Middle rationale
+                                                       in docs/research/14 §4)
+  backend/cardiorisk/rag/generation/prompts.py         file-backed prompt loader + custom mini-
+                                                       renderer (no Jinja2 dep) supporting
+                                                       {{ var }} and {% for x in xs %}; PromptPassage
+                                                       dataclass; raises on unparsed tokens
+  backend/cardiorisk/rag/generation/llm.py             BaseLLMClient Protocol + MockLLMClient
+                                                       (deterministic; picks first sentence of
+                                                       first passage; CI default) +
+                                                       AnthropicLLMClient (claude-sonnet-4) +
+                                                       OpenAILLMClient (gpt-4o-mini); LLMMessage
+                                                       dataclass + deterministic_seed helper;
+                                                       both real clients are runtime-optional
+                                                       (pyproject mypy override accepts missing
+                                                       stubs)
+  backend/cardiorisk/rag/generation/parser.py          parse_answer -> ParsedAnswer{claims,
+                                                       refused}; Claim dataclass with
+                                                       text+citations+unresolved_tokens; sentence-
+                                                       splitter regex (?:(?<=[.!?])|(?<=]))\s+
+                                                       (?=[A-Z]) keeps citations attached to
+                                                       their sentences and splits on closing-
+                                                       bracket-followed-by-uppercase; tracks
+                                                       phantom-citation tokens so the suppression
+                                                       reason can distinguish no_citation vs
+                                                       phantom_citation
+  backend/cardiorisk/rag/generation/nli.py             BaseNLIVerifier Protocol +
+                                                       MockNLIVerifier (Jaccard token-overlap;
+                                                       CI default) + DeBERTaNLIVerifier
+                                                       (MoritzLaurer/DeBERTa-v3-large-mnli-fever-
+                                                       anli-ling-wanli; 3-way entailment / neutral
+                                                       / contradiction; default
+                                                       entail_threshold=0.5); EntailmentResult
+                                                       dataclass
+  backend/cardiorisk/rag/generation/generator.py       CitationGenerator orchestrating retrieval
+                                                       + prompt rendering + LLM + parser + NLI;
+                                                       VerifiedClaim + SuppressedClaim +
+                                                       GeneratedAnswer dataclasses; _verify_claims
+                                                       uses Claim.unresolved_tokens to set
+                                                       reason="phantom_citation" vs "no_citation"
+                                                       vs "not_entailed"; refused=True when
+                                                       ParsedAnswer.refused or "all claims
+                                                       suppressed"
+  backend/cardiorisk/rag/eval_generation/__init__.py   package skeleton + module map (loader,
+                                                       scorer, figures, orchestrator)
+  backend/cardiorisk/rag/eval_generation/loader.py     load_cases(): JSON-Schema-validated
+                                                       loader for eval/generation/cases.jsonl;
+                                                       skip_full_corpus / skip_fixture filters
+                                                       mirroring the retrieval loader; EvalCase
+                                                       dataclass
+  backend/cardiorisk/rag/eval_generation/scorer.py     score_case + aggregate_scores; CaseResult
+                                                       + EvalReport dataclasses; metrics =
+                                                       citation_precision (doc-level) +
+                                                       keyword_recall + hallucination_rate
+                                                       (positive cases only) + refusal_accuracy
+                                                       (refusal cases only); 2,000-resample
+                                                       percentile bootstrap CIs; per-tag subgroup
+                                                       breakdown
+  backend/cardiorisk/rag/eval_generation/figures.py    matplotlib renderers:
+                                                       citation_precision_by_tag.png +
+                                                       hallucination_rate_by_tag.png
+  backend/cardiorisk/rag/eval_generation/orchestrator.py
+                                                       end-to-end driver. Reuses
+                                                       _build_indices_for_strategy from the
+                                                       retrieval orchestrator; loads manifest;
+                                                       builds vector + BM25 indices; instantiates
+                                                       LLM + NLI clients; runs every case;
+                                                       writes per_case + aggregate + 2 figures.
+                                                       default_config (full local; bge-m3 +
+                                                       deberta) + smoke_config (minilm + mock +
+                                                       mock + fixture-only + 500-resample;
+                                                       reports under reports/v1/generation/smoke/)
+  backend/scripts/eval_generation.py                   thin CLI: --smoke / --use-fixture / --llm /
+                                                       --nli / --strategy / --embedder /
+                                                       --reranker / --with-rerank / --top-k /
+                                                       --entail-threshold / --n-resamples /
+                                                       --reports-dir / --figures-dir;
+                                                       CARDIORISK_TORCH_THREADS preamble
+                                                       matches eval_retrieval.py; smoke
+                                                       defaults respect --reports-dir / --figures-
+                                                       dir if explicitly overridden (so the
+                                                       orchestrator subprocess test can write
+                                                       to a tmp dir)
+  backend/tests/test_rag_generation_*.py               5 test modules: prompts (loader + renderer
+                                                       + unparsed-token detection) + llm
+                                                       (mock determinism + missing-API-key
+                                                       guards) + parser (single + multiple
+                                                       citations + phantom + refusal sentinel +
+                                                       sentence-splitting edge cases) + nli
+                                                       (entailment / neutral / contradiction +
+                                                       determinism) + generator (verified vs
+                                                       suppressed claims + reason taxonomy +
+                                                       refusal handling)
+  backend/tests/test_rag_eval_generation_*.py          4 test modules: loader (filtering +
+                                                       schema) + scorer (recall + refusal +
+                                                       hallucination + bootstrap) + orchestrator
+                                                       (end-to-end smoke writing per_case +
+                                                       aggregate + 2 figures; subprocess CLI
+                                                       smoke) + schema (JSON Schema validation
+                                                       on the live cases.jsonl + real-corpus
+                                                       doc_id integrity check)
+  backend/cardiorisk/data/paths.py                     adds REPORTS_V1_GENERATION +
+                                                       REPORTS_V1_GENERATION_FIGURES constants
+  backend/pyproject.toml                               adds anthropic + openai to mypy
+                                                       ignore_missing_imports (runtime-optional);
+                                                       ruff per-file-ignores N803/N806 already
+                                                       cover cardiorisk/rag/**
+  eval/generation/schema.json                          JSON Schema for one generation case
+  eval/generation/cases.jsonl                          36 hand-curated cases: 24 fixture-positive
+                                                       across the 6-tag retrieval taxonomy +
+                                                       6 refusal + 6 real-corpus positive
+                                                       (g031..g036 added as a Phase 3.3
+                                                       amendment after the first run yielded
+                                                       0 positive cases — every original
+                                                       positive was fixture-only by design)
+  eval/generation/README.md                            methodology + metric definitions + file
+                                                       layout + contributor guide
+  reports/v1/generation/per_case.json                  Phase 3.3 headline of record: 12 real-
+                                                       corpus cases (6 positive + 6 refusal);
+                                                       MockLLM + Mock NLI; per-case verified +
+                                                       suppressed + retrieved chunk ids
+  reports/v1/generation/aggregate.json                 cit_prec=1.000 / recall=0.042 / halluc=
+                                                       0.167 / refusal_acc=0.000; per-tag
+                                                       breakdown; 2,000-resample bootstrap CIs
+  reports/v1/generation/nli_deberta/{per_case,aggregate}.json
+                                                       MockLLM + DeBERTa-NLI verifier-comparison
+                                                       archive: DeBERTa suppresses 7 of 15
+                                                       claims (Mock NLI: 1) and pushes
+                                                       hallucination 0.167 → 0.000
+  reports/v1/figures/generation/*.png                  2 figures: citation_precision_by_tag +
+                                                       hallucination_rate_by_tag (Mock NLI
+                                                       headline + nli_deberta/ archive)
+  docs/adr/017-citation-and-nli-verification.md        binding decision: bracketed sentence-
+                                                       trailing citations + __INSUFFICIENT_EVIDENCE__
+                                                       refusal sentinel; pluggable BaseLLMClient
+                                                       (Mock for CI; Anthropic / OpenAI for
+                                                       Phase 6); DeBERTa-v3-large MNLI verifier
+                                                       at entail_threshold=0.5; suppression
+                                                       policy "drop and audit, never re-prompt"
+                                                       with 3-way reason taxonomy; 36-case
+                                                       eval set design; rejected alternatives
+                                                       (trust-the-LLM / Self-RAG / Vectara-
+                                                       hallucination-score / inline XML / JSON-
+                                                       only output / few-shot prompt). Promotes
+                                                       ADR-017 placeholder slot
+  docs/research/14-citation-generation-design.md       opinionated walkthrough: alternatives we
+                                                       rejected (§2); the parser is the contract
+                                                       (§3); prompt-template choices (§4);
+                                                       verifier behaviour + Mock-vs-DeBERTa
+                                                       table (§5); eval-set design (§6); Phase
+                                                       3.2 retrieval-stack assumptions (§7);
+                                                       honest weaknesses block — Mock-LLM
+                                                       headline is diagnostic not predictive,
+                                                       n=6 real-corpus is the hard limit, no
+                                                       multi-LLM A/B in 3.3, no domain-finetuned
+                                                       NLI, suppression policy never re-prompts,
+                                                       doc-level not paragraph-level citation
+                                                       precision (§8); what 3.3 enables for
+                                                       Phase 4 + Phase 5.3 (§9)
+  docs/adr/README.md                                   index entry for ADR-017; placeholder
+                                                       numbering bumped (018 LLM, 019 Brand,
+                                                       020 Deploy/observability)
+  docs/research/README.md                              index entry for 14-citation-generation-
+                                                       design.md + ADR-017 row
+  MODEL_CARD.md                                        new §10 Citation-mandatory generation
+                                                       (Phase 3.3) with Mock-LLM headline +
+                                                       DeBERTa-vs-Mock verifier-comparison
+                                                       table + reproduce steps + honest-
+                                                       weaknesses block; subsequent sections
+                                                       renumbered §11..§14; ADR-017 added to
+                                                       references
+  reports/v1/README.md                                 directory layout updated for the
+                                                       generation/ + nli_deberta/ subtrees
+                                                       and the smoke gitignore; reproduce
+                                                       block extended for Phase 3.2 + 3.3
+  .github/workflows/ci.yml                             adds Phase 3.3 smoke step in test-python:
+                                                       eval_generation.py --smoke --use-fixture
+                                                       --embedder minilm; reuses the cached
+                                                       MiniLM weights from the Phase 3.2 step;
+                                                       ~5 s on ubuntu-latest after warm cache
+  .gitignore                                           reports/v1/generation/smoke/ +
+                                                       reports/v1/figures/generation/smoke/
+                                                       ignored
+  AGENTS.md                                            Phase 3.3 status block + open decisions
+                                                       refreshed + Phase 3.3 deliverables block
 
 Phase 3.2 deliverables (in progress on feat/phase-3-2-retrieval):
   backend/cardiorisk/rag/retrieval/__init__.py   package skeleton + module map; DEFAULT_TOP_K +

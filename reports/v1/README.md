@@ -23,6 +23,19 @@ reports/v1/
 │   ├── hit_at_5_by_cell.png
 │   ├── mrr_by_cell.png
 │   └── per_tag_winning_cell.png
+├── generation/                            (Phase 3.3)
+│   ├── per_case.json                      (12 real-corpus cases: 6 positive + 6 refusal)
+│   ├── aggregate.json                     (citation precision / recall / hallucination / refusal accuracy)
+│   ├── nli_deberta/                       (Mock-LLM + DeBERTa-NLI verifier-comparison archive)
+│   │   ├── per_case.json
+│   │   └── aggregate.json
+│   └── smoke/                             (CI smoke output; gitignored)
+├── figures/generation/                    (Phase 3.3 figures)
+│   ├── citation_precision_by_tag.png
+│   ├── hallucination_rate_by_tag.png
+│   └── nli_deberta/                       (Mock-LLM + DeBERTa-NLI archive figures)
+│       ├── citation_precision_by_tag.png
+│       └── hallucination_rate_by_tag.png
 └── smoke/                                 (CI smoke output; gitignored)
 ```
 
@@ -97,6 +110,21 @@ NaN / inf values are coerced to `null` so the JSON parses anywhere.
 ```bash
 # Full ~30-50 min run on a CPU laptop:
 uv run --project backend python backend/scripts/train_v1.py --full
+
+# Phase 3.2 retrieval eval (~6 min on a CPU laptop after weights are warm):
+uv run --project backend python backend/scripts/fetch_corpus.py
+uv run --project backend python backend/scripts/build_corpus.py
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/build_index.py --embedder bge-m3
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_retrieval.py
+
+# Phase 3.3 generation eval (~25s on a CPU laptop with mock components):
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_generation.py \
+    --llm mock --nli mock --strategy token --embedder bge-m3
+# Verifier-comparison archive (~3 min after weights are warm):
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_generation.py \
+    --llm mock --nli deberta --strategy token --embedder bge-m3 \
+    --reports-dir reports/v1/generation/nli_deberta \
+    --figures-dir reports/v1/figures/generation/nli_deberta
 ```
 
 The driver is deterministic given the pinned `SEED` and pinned

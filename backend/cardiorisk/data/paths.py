@@ -50,3 +50,9 @@ CORPUS_INDEX: Final[Path] = CORPUS_DIR / "index"
 CORPUS_EMBED_CACHE: Final[Path] = CORPUS_DIR / "embed_cache"
 REPORTS_V1_RETRIEVAL: Final[Path] = REPORTS_V1_DIR / "retrieval"
 REPORTS_V1_RETRIEVAL_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "retrieval"
+
+# Phase 3.3 generation eval layout (ADR-017). The reports directory
+# is committed (small JSON + 2 PNGs); the smoke variants under
+# */smoke/ are gitignored to keep CI noise out of git.
+REPORTS_V1_GENERATION: Final[Path] = REPORTS_V1_DIR / "generation"
+REPORTS_V1_GENERATION_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "generation"

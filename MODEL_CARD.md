@@ -223,7 +223,75 @@ CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_
 
 Writes [`reports/v1/retrieval/per_cell.json`](reports/v1/retrieval/per_cell.json), [`reports/v1/retrieval/aggregate.json`](reports/v1/retrieval/aggregate.json), and 3 figures under [`reports/v1/figures/retrieval/`](reports/v1/figures/retrieval/). The `CARDIORISK_TORCH_THREADS` env var lifts the single-thread guard the script otherwise inherits from Phase 2.x's TabICL/XGBoost OpenMP-deadlock workaround (this script never imports those, so 8 threads is safe). CI smoke uses `sentence-transformers/all-MiniLM-L6-v2` (~80 MB, no rerank) against the fixture corpus; ~60 s on `ubuntu-latest`.
 
-## 10. Limitations & out-of-scope
+## 10. Citation-mandatory generation (Phase 3.3)
+
+> The generation layer is the user-facing surface of the retrieval+verification stack. It enforces the AGENTS §3 honesty contract end-to-end: every claim ends in a sentence-trailing bracketed citation, every citation is verified by an NLI model, and every unverified claim is suppressed (never re-prompted). Full design: [ADR-017](docs/adr/017-citation-and-nli-verification.md) and [`docs/research/14-citation-generation-design.md`](docs/research/14-citation-generation-design.md).
+
+**Stack.** `BAAI/bge-m3` retriever (Phase 3.2 stack) → `RetrievalPipeline.retrieve(top_k=5, with_rerank=False)` → `citation_required.v1.md` prompt → pluggable `BaseLLMClient` (Mock for CI; Anthropic / OpenAI for Phase 6) → bracketed-citation parser → `BaseNLIVerifier` (Mock token-overlap for CI; `MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli` for the production verifier). Suppression policy: drop unverified claims with a typed reason (`no_citation` / `phantom_citation` / `not_entailed`), never re-prompt the LLM.
+
+**Phase-3.3 eval headline (Mock-LLM + Mock-NLI; 12 real-corpus cases = 6 positive + 6 refusal).**
+
+| metric | point | 95% CI | n |
+|---|---:|---|---|
+| citation_precision | 1.000 | (denominator constant under MockLLM) | 12 |
+| keyword_recall | 0.042 | [0.000, 0.146] | 12 |
+| hallucination_rate | 0.167 | [0.000, 0.500] | 6 (positive only) |
+| refusal_accuracy | 0.000 | [0.000, 0.000] | 6 (refusal only) |
+
+Source: [`reports/v1/generation/aggregate.json`](reports/v1/generation/aggregate.json) and [`reports/v1/generation/per_case.json`](reports/v1/generation/per_case.json). Figures: [`reports/v1/figures/generation/`](reports/v1/figures/generation/).
+
+**Verifier-comparison archive (same Mock-LLM run; DeBERTa-NLI vs Mock-NLI).** The same 12-case run with the production DeBERTa verifier suppresses 7 of MockLLM's 15 emitted claims (Mock-NLI suppresses 1) and pushes the hallucination rate from 0.167 to 0.000. This is the wiring proof that the verifier-in-the-loop architecture rejects bad claims when bad claims arrive. Archive: [`reports/v1/generation/nli_deberta/`](reports/v1/generation/nli_deberta/).
+
+| | Mock NLI | DeBERTa NLI |
+|---|---:|---:|
+| verified claims | 14 | 8 |
+| suppressed claims | 1 | 7 |
+| citation_precision | 1.000 | 1.000 |
+| keyword_recall | 0.042 | 0.042 |
+| hallucination_rate | 0.167 | 0.000 |
+| refusal_accuracy | 0.000 | 0.000 |
+
+**Reading the table — what these numbers do not say.** The Phase 3.3 headline is **diagnostic of MockLLM, not predictive of the production system.** MockLLM picks the first sentence of the first retrieved passage and emits it with the chunk's chunk_id. So:
+
+- `citation_precision = 1.0` means MockLLM always cites a real chunk_id — not that the answer is correct.
+- `keyword_recall = 0.04` means MockLLM does not actually answer the question — it picks a passage and quotes it.
+- `hallucination_rate = 0.17` (Mock NLI) means 1 of 6 positive cases got a wrong-doc citation; the DeBERTa run drops this to 0 because DeBERTa rejected MockLLM's syntactically-broken claims and forced a refusal-by-suppression.
+- `refusal_accuracy = 0.0` means MockLLM never emits the `__INSUFFICIENT_EVIDENCE__` sentinel (it doesn't know it should). A real LLM with a properly-respected refusal directive should score 6/6.
+
+**Phase 3.3 ships the wiring proof. Phase 6 ships the quality proof.** The Mock-LLM headline is the regression baseline against which Phase 6's Claude Sonnet 4.5 / GPT-4o-mini A/B will be measured.
+
+**Decisions baked into Phase 4 / Phase 5 from this result:**
+
+- **Phase 4 LangGraph guideline-agent contract.** `state.guideline_answer = CitationGenerator.generate(state.normalised_question)`; agent code sees a structured `GeneratedAnswer` with `verified_claims`, `suppressed_claims`, `refused`, `refusal_reason` — no free-text parsing required.
+- **Phase 5.3 letter-editor UI contract.** Verified claims render as the answer body; suppressed claims render in a collapsible "the system rejected the following claims because…" panel with the typed reason. HITL approve / edit / reject persists the verified set, not the raw LLM text.
+- **Phase 6 100-case eval extension.** 36 → 100 cases; real-LLM A/B (Claude Sonnet 4.5 + GPT-4o-mini); LLM-judge NLI cross-check on a 50-claim sub-sample.
+
+**Honest weaknesses (full discussion in [`docs/research/14-citation-generation-design.md`](docs/research/14-citation-generation-design.md) §8):**
+
+- **Mock-LLM headline is diagnostic only.** §8.1.
+- **n=6 real-corpus positives is the hard floor on the per-tag signal.** §8.2.
+- **No multi-LLM A/B in Phase 3.3.** Pluggable `BaseLLMClient` is the contract; Phase 6 ships the comparison. §8.3.
+- **DeBERTa verifier has no medical-domain fine-tune.** General-purpose, not expert. §8.4.
+- **Suppression is "drop, never re-prompt".** Shorter-but-true beats longer-but-some-of-it-fabricated; trade-off documented. §8.5.
+- **Citation precision is doc-level, not paragraph-level.** Pinning the eval to specific chunk ids would silently break under any Phase 3.2.1 chunker change. The NLI verifier covers paragraph-level entailment in production. §8.6.
+- **No latency or cost numbers in Phase 3.3.** Deferred to Phase 6 + Phase 7. §8.7.
+
+**Reproduce.** Real-corpus full run (~25 s after weights are warm; 12 cases):
+
+```bash
+uv run --project backend python backend/scripts/fetch_corpus.py
+uv run --project backend python backend/scripts/build_corpus.py
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/build_index.py --embedder bge-m3
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_generation.py --llm mock --nli mock --strategy token --embedder bge-m3
+# Verifier comparison (DeBERTa NLI; ~3 min after weights are warm):
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_generation.py --llm mock --nli deberta --strategy token --embedder bge-m3 \
+    --reports-dir reports/v1/generation/nli_deberta \
+    --figures-dir reports/v1/figures/generation/nli_deberta
+```
+
+Writes [`reports/v1/generation/per_case.json`](reports/v1/generation/per_case.json), [`reports/v1/generation/aggregate.json`](reports/v1/generation/aggregate.json), and 2 figures under [`reports/v1/figures/generation/`](reports/v1/figures/generation/). CI smoke uses `--smoke` (1 case, mock client, mock verifier, fixture corpus); ~5 s on `ubuntu-latest` with no API key required.
+
+## 11. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -235,11 +303,11 @@ Writes [`reports/v1/retrieval/per_cell.json`](reports/v1/retrieval/per_cell.json
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 11. Honesty caveats specific to the Honours-Ensemble row
+## 12. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 12. Reproducibility
+## 13. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
@@ -250,7 +318,7 @@ The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at s
 - Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
 - CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 13. References
+## 14. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -272,4 +340,5 @@ Architecture decisions:
 - [ADR-013](docs/adr/013-explainability-strategy.md) — explainability strategy (Phase 2.5; with 2026-05-06 amendment recording the wall-clock contingency).
 - [ADR-014](docs/adr/014-drift-monitoring.md) — drift / monitoring strategy (Phase 2.6).
 - [ADR-015](docs/adr/015-corpus-ingestion.md) — corpus ingestion (Phase 3.1).
-- [ADR-016](docs/adr/016-retrieval-stack.md) — retrieval stack (Phase 3.2).
+- [ADR-016](docs/adr/016-retrieval-stack.md) — retrieval stack (Phase 3.2; with 2026-05-15 amendment recording the real-corpus reranker reversal).
+- [ADR-017](docs/adr/017-citation-and-nli-verification.md) — citation-mandatory generation + NLI verification (Phase 3.3).
