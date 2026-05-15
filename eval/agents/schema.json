@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cardiorisk.dev/eval/agents/case.schema.json",
+  "title": "AgentEvalCase",
+  "description": "One row of eval/agents/cases.jsonl. Each case wraps a synthetic PatientInput with the band the v1 risk model is expected to land in plus the per-stage acceptance floors.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "patient",
+    "expected_risk_band",
+    "tag",
+    "rationale"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^a[0-9]{3}$",
+      "description": "Sequential id like 'a001'. Stable across edits; never recycle."
+    },
+    "patient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "Age",
+        "Sex",
+        "ChestPainType",
+        "RestingBP",
+        "Cholesterol",
+        "FastingBS",
+        "RestingECG",
+        "MaxHR",
+        "ExerciseAngina",
+        "Oldpeak",
+        "ST_Slope"
+      ],
+      "properties": {
+        "Age": { "type": "integer", "minimum": 18, "maximum": 120 },
+        "Sex": { "type": "string", "enum": ["M", "F"] },
+        "ChestPainType": { "type": "string", "enum": ["TA", "ATA", "NAP", "ASY"] },
+        "RestingBP": { "type": "integer", "minimum": 60, "maximum": 260 },
+        "Cholesterol": { "type": "integer", "minimum": 0, "maximum": 800 },
+        "FastingBS": { "type": "integer", "enum": [0, 1] },
+        "RestingECG": { "type": "string", "enum": ["Normal", "ST", "LVH"] },
+        "MaxHR": { "type": "integer", "minimum": 50, "maximum": 240 },
+        "ExerciseAngina": { "type": "string", "enum": ["Y", "N"] },
+        "Oldpeak": { "type": "number", "minimum": -3.0, "maximum": 8.0 },
+        "ST_Slope": { "type": "string", "enum": ["Up", "Flat", "Down"] }
+      }
+    },
+    "expected_risk_band": {
+      "type": "string",
+      "enum": ["low", "intermediate", "high"]
+    },
+    "expected_min_verified_claims": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 1
+    },
+    "expected_letter_min_words": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 60
+    },
+    "expected_sanity_flags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "tag": {
+      "type": "string",
+      "enum": [
+        "high_risk",
+        "intermediate_risk",
+        "low_risk",
+        "borderline",
+        "extreme_case",
+        "data_quality",
+        "refusal"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 10
+    }
+  }
+}

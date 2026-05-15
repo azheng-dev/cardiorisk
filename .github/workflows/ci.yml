@@ -186,6 +186,16 @@ jobs:
       # step. Runs in ~5s on ubuntu-latest.
       - name: Smoke eval_generation.py --smoke
         run: uv run --project backend python backend/scripts/eval_generation.py --smoke --use-fixture --embedder minilm
+      # Phase 4: smoke the LangGraph 4-agent orchestration end-to-end (3
+      # cases, MockLLM + always-entail NLI + stub retrieval pipeline,
+      # in-memory checkpointer, mock risk classifier fallback when no
+      # joblib artefact exists). Exercises the full agent surface:
+      # triage -> HITL approve -> risk -> HITL approve -> guideline ->
+      # HITL approve -> letter -> HITL approve -> END. No API keys,
+      # no DeBERTa weights, no joblib artefacts. Runs in ~5s on
+      # ubuntu-latest.
+      - name: Smoke eval_agents.py --smoke
+        run: uv run --project backend python backend/scripts/eval_agents.py --smoke
 
   # ---------------------------------------------------------------- typescript
   lint-ts:

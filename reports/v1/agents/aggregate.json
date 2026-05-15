@@ -1,0 +1,87 @@
+{
+  "config": {
+    "n_cases": 30,
+    "risk_model_name": "tabicl",
+    "risk_held_out_source": "Cleveland",
+    "llm_client_name": "MockLLMClient",
+    "nli_verifier_name": "_AlwaysEntails",
+    "embedder_name": "stub",
+    "reranker_name": "off",
+    "is_smoke": false,
+    "cases_path": "eval/agents/cases.jsonl",
+    "extras": {
+      "wall_clock_s": 33.83
+    }
+  },
+  "aggregate": {
+    "n_cases": 30,
+    "triage_pass_rate": 0.9,
+    "risk_band_match_rate": 0.4666666666666667,
+    "guideline_pass_rate": 1.0,
+    "letter_pass_rate": 1.0,
+    "full_pipeline_pass_rate": 0.4,
+    "median_total_duration_ms": 1034.737,
+    "p95_total_duration_ms": 1066.554,
+    "confusion_matrix": {
+      "low": {
+        "low": 3,
+        "intermediate": 3,
+        "high": 2
+      },
+      "intermediate": {
+        "low": 0,
+        "intermediate": 2,
+        "high": 11
+      },
+      "high": {
+        "low": 0,
+        "intermediate": 0,
+        "high": 9
+      }
+    },
+    "per_tag": {
+      "borderline": {
+        "n": 2,
+        "triage_pass_rate": 1.0,
+        "risk_band_match_rate": 0.0,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      },
+      "data_quality": {
+        "n": 3,
+        "triage_pass_rate": 1.0,
+        "risk_band_match_rate": 0.0,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      },
+      "extreme_case": {
+        "n": 1,
+        "triage_pass_rate": 0.0,
+        "risk_band_match_rate": 1.0,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      },
+      "high_risk": {
+        "n": 8,
+        "triage_pass_rate": 1.0,
+        "risk_band_match_rate": 1.0,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      },
+      "intermediate_risk": {
+        "n": 8,
+        "triage_pass_rate": 1.0,
+        "risk_band_match_rate": 0.25,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      },
+      "low_risk": {
+        "n": 8,
+        "triage_pass_rate": 0.75,
+        "risk_band_match_rate": 0.375,
+        "guideline_pass_rate": 1.0,
+        "letter_pass_rate": 1.0
+      }
+    }
+  }
+}

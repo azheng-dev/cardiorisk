@@ -51,17 +51,41 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 3.3 (Citation-mandatory generator + DeBERTa-v3 NLI verifier
-                      + 36-case generation eval) in progress on feat/phase-3-3-citation-
-                      generation. Plan re-cut at Phase 3.2 close-out under the
-                      AGENTS §0 finish-line grant: ship the wiring proof in 3.3
-                      (Mock-LLM + Mock-NLI for the headline + Mock-LLM + DeBERTa-NLI
-                      verifier-comparison archive), defer the real-LLM A/B
-                      (Claude Sonnet 4.5 + GPT-4o-mini) to Phase 6 with budget
-                      guardrails per ADR-017. Pluggable BaseLLMClient + suppression
-                      contract enforced in code; never re-prompt; 3-way reason
-                      taxonomy (no_citation / phantom_citation / not_entailed).
-Last checkpoint:      Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 dense +
+Current phase:        Phase 4 (LangGraph 4-agent orchestration with HITL gates +
+                      FastAPI surface + 30-case mini-eval) in progress on
+                      feat/phase-4-agents. Plan re-cut at Phase 3.3 close-out
+                      under the AGENTS §0 finish-line grant: 4 agents
+                      (triage / risk / guideline / letter) wired through a
+                      `langgraph>=0.6,<0.7` `StateGraph` with an `interrupt()`
+                      HITL gate after every node; immutable Pydantic
+                      `AgentState` (state schema = API schema = eval schema);
+                      InMemorySaver checkpointer (PostgresSaver graduates in
+                      Phase 7 / 8); FastAPI surface = 3 endpoints + healthz;
+                      30-case auto-approve eval (Mock-LLM + always-entail NLI
+                      + stub retrieval). Headline = triage 0.90 / risk-band
+                      0.467 / guideline 1.0 / letter 1.0 / full_pipeline 0.40
+                      / p95 1067 ms. Risk-band miss is a *modelling* finding
+                      (TabICL-on-Cleveland over-classifies synthetic
+                      intermediates as high under AusCVDRisk 0.05/0.10
+                      thresholds — recapitulates the Phase 2.6 drift study);
+                      Phase 6 will re-evaluate against the Hungarian fold +
+                      recalibrate the bands + add an LLM-judge HITL eval.
+                      Phase 4 binding decisions in ADR-018; design walkthrough
+                      in docs/research/15-agent-design.md.
+Last checkpoint:      Phase 3.3 (Citation-mandatory generator + DeBERTa-v3 NLI verifier
+                      + 36-case generation eval) auto-merged on the AGENTS §0
+                      finish-line grant (PR #14 squash-merged 2026-05-15;
+                      hnswlib SIGILL on ubuntu-latest fixed by pinning
+                      CFLAGS/CXXFLAGS to -march=x86-64-v3 + UV_NO_BINARY_PACKAGE
+                      hnswlib + cache purge). Real-corpus headline (Mock-LLM +
+                      Mock-NLI on 12 cases): citation precision 1.000, keyword
+                      recall 0.042, hallucination rate 0.167, refusal accuracy
+                      0.000. Verifier-comparison archive (Mock-LLM + DeBERTa-NLI
+                      vs Mock-NLI) drops hallucination 0.167 -> 0.000 by
+                      suppressing 7 of 15 syntactically-broken claims — wiring
+                      proof of the verifier-in-the-loop architecture. Real-LLM
+                      A/B (Claude Sonnet 4.5 vs GPT-4o-mini) deferred to Phase 6.
+                      Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 dense +
                       rank_bm25 sparse + RRF fusion + bge-reranker-v2-m3 cross-encoder
                       + 50-Q hand-curated retrieval eval; in-memory hnswlib graduating
                       to pgvector in Phase 4) auto-merged on the AGENTS §0 finish-
@@ -97,33 +121,48 @@ Last checkpoint:      Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 3.3 PR review + merge approval (auto on CI-green per the
+Open decisions:       - Phase 4 PR review + merge approval (auto on CI-green per the
                         AGENTS §0 finish-line grant; non-UI phase).
+                      - Phase 4 result-of-record (Mock-LLM + always-entail NLI +
+                        stub retrieval pipeline + auto-approve harness on 30
+                        cases; tabicl_Cleveland.joblib): triage_pass_rate 0.900,
+                        risk_band_match_rate 0.467, guideline_pass_rate 1.000,
+                        letter_pass_rate 1.000, full_pipeline_pass_rate 0.400,
+                        median_total_duration_ms ≈ 1035, p95_total_duration_ms
+                        ≈ 1067. Confusion matrix shows the model dramatically
+                        over-classifies *intermediate* cases as *high* (11/13).
+                        **The honest reading is that the v1 model is well-
+                        calibrated under LODO across UCI sources but is not
+                        validated for the synthetic case distribution** — the
+                        AusCVDRisk 0.05/0.10 thresholds were calibrated on
+                        Australian primary-care 5-year absolute risk (~5-10%
+                        prevalence) and Cleveland's TabICL was trained on a
+                        ~46% prevalence cohort, so most synthetic cases push
+                        past 0.10 by construction. Recapitulates the Phase 2.6
+                        drift finding (TabICL prediction-PSI 3-4× larger than
+                        XGBoost/LR under input drift). Headline is **diagnostic
+                        of orchestration plumbing + a known modelling finding**,
+                        not predictive of the production system.
+                      - Phase 4 binding decisions (ADR-018): `langgraph>=0.6,<0.7`
+                        StateGraph + `InMemorySaver` + `interrupt()` HITL gates;
+                        Pydantic-immutable `AgentState`; 4 agents (triage / risk /
+                        guideline / letter); `risk` is approve/reject only on
+                        calibration-honesty grounds; in-house 30-LoC
+                        `CircuitBreaker` (3-strikes-and-open-60s) +
+                        tenacity-backed `with_retries`; FastAPI surface = 3
+                        endpoints under /v1/agents + /healthz, no WS / SSE /
+                        auth in Phase 4 (deferred to Phase 5 / 8); 30-case
+                        auto-approve eval; CI smoke = `eval_agents.py --smoke`
+                        (3 cases, ~5 s, no joblib artefact required).
                       - Phase 3.3 result-of-record (Mock-LLM + Mock-NLI on the 12
                         real-corpus cases = 6 positive + 6 refusal): citation
                         precision 1.000, keyword recall 0.042, hallucination rate
                         0.167, refusal accuracy 0.000. Headline is **diagnostic
                         of MockLLM**, not predictive of the production system; the
                         real-LLM A/B is deferred to Phase 6 with API keys + budget
-                        guardrails. Verifier-comparison archive (same Mock-LLM run;
-                        DeBERTa-NLI vs Mock-NLI) shows DeBERTa suppresses 7 of
-                        MockLLM's 15 emitted claims (Mock NLI: 1) and pushes
-                        hallucination rate 0.167 → 0.000 — the wiring proof that
-                        the verifier-in-the-loop architecture rejects bad claims
-                        when bad claims arrive. Archive at reports/v1/generation/
-                        nli_deberta/.
-                      - Phase 3.3 binding decisions (ADR-017): bracketed sentence-
-                        trailing citations + structured `__INSUFFICIENT_EVIDENCE__`
-                        refusal sentinel; pluggable BaseLLMClient (Mock for CI;
-                        Anthropic / OpenAI for Phase 6); DeBERTa-v3-large MNLI
-                        (`MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli`)
-                        at entail_threshold=0.5; suppression policy "drop and
-                        audit, never re-prompt" with 3-way reason taxonomy;
-                        36-case eval (24 fixture-positive + 6 refusal + 6 real-
-                        corpus positive). 6 real-corpus positives added as a
-                        Phase 3.3 amendment after the first run yielded 0
-                        positive cases (every original positive was fixture-only
-                        by design).
+                        guardrails. Verifier-comparison archive at reports/v1/
+                        generation/nli_deberta/ (DeBERTa drops hallucination
+                        0.167 -> 0.000 by suppressing 7 of 15 claims).
                       - Phase 3.2 real-corpus headline (10 Qs over 1,834 chunks):
                         token chunker + no rerank wins (MRR 0.550). Production
                         default `with_rerank=False`. ADR-016 §"Amendment
@@ -146,6 +185,22 @@ Open decisions:       - Phase 3.3 PR review + merge approval (auto on CI-green p
                           - `entail_threshold` tuning on the 100-case set.
                           - Suppression-policy revisit if >25% of suppressed
                             claims are recoverable by a single re-prompt.
+                          - Phase 4 risk-band recalibration: re-evaluate
+                            against the Hungarian fold (lower prevalence,
+                            lower TabICL prediction-PSI) + recalibrate
+                            band thresholds on a larger synthetic case set
+                            (or use percentile-bucket assignment); consider
+                            4-model ensemble voting for the band call.
+                          - Phase 4 judge-as-reviewer eval: LLM-issued HITL
+                            decisions on the 30 -> 100 case extension,
+                            graded against a gold set; measures real-
+                            reviewer-quality, not just orchestration plumbing.
+                          - Phase 4 LLM-drafted letter A/B: parallel branch
+                            in the letter agent (citation-preserving prompt)
+                            + clinical-quality rubric A/B vs the deterministic
+                            template.
+                          - Phase 4 risk-non-editability revisit if reject-
+                            and-restart is unwieldy in practice.
                       - Deferred: Phase 2.4b WOA-Ensemble reconstruction. Only opens if
                         user later requests it; ADR-012 documents the deferral.
                       - Deferred to "future scope" (AGENTS §8): AusCVDRisk calculator
@@ -153,9 +208,12 @@ Open decisions:       - Phase 3.3 PR review + merge approval (auto on CI-green p
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(rag): Phase 3.3 — citation-mandatory generator + DeBERTa-v3
-                      NLI verifier + 36-case generation eval (in progress on
-                      feat/phase-3-3-citation-generation).
+Last meaningful PR:   feat(agents): Phase 4 — LangGraph 4-agent orchestration with HITL
+                      gates + FastAPI surface + 30-case mini-eval (in progress
+                      on feat/phase-4-agents).
+                      #14 feat(rag): Phase 3.3 — citation-mandatory generator +
+                      DeBERTa-v3 NLI verifier + 36-case generation eval
+                      (auto-merged 2026-05-15).
                       #13 feat(retrieval): Phase 3.2 — hybrid retrieval (BGE-M3 +
                       rank_bm25 + RRF + bge-reranker-v2-m3) + 50-Q eval matrix +
                       real-corpus chunker race (auto-merged 2026-05-15).
@@ -177,7 +235,21 @@ Last meaningful PR:   feat(rag): Phase 3.3 — citation-mandatory generator + De
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 3.3 generation eval (real-corpus mode; Mock-LLM + Mock-NLI;
+Last eval run:        Phase 4 agent eval (full 30-case auto-approve harness; Mock-LLM
+                      + always-entail NLI + stub retrieval pipeline;
+                      tabicl_Cleveland.joblib for the risk agent). Wall-clock
+                      ~34 s on M4 Pro. Outputs: reports/v1/agents/{per_case,
+                      aggregate}.json + 3 figures under reports/v1/figures/
+                      agents/. Headline: triage 0.900 / risk_band 0.467 /
+                      guideline 1.000 / letter 1.000 / full_pipeline 0.400 /
+                      median 1035 ms / p95 1067 ms. Confusion matrix shows
+                      11/13 *intermediate* cases predicted *high* under the
+                      AusCVDRisk 0.05/0.10 thresholds; the v1 model is well-
+                      calibrated under LODO across UCI sources but is not
+                      validated for the synthetic case distribution. Phase 6
+                      will re-evaluate against the Hungarian fold and
+                      recalibrate the bands.
+                      Phase 3.3 generation eval (real-corpus mode; Mock-LLM + Mock-NLI;
                       12 cases = 6 real-corpus positive + 6 refusal). Wall-clock
                       ~16 s on M4 Pro after weights warm. Outputs:
                       reports/v1/generation/{per_case,aggregate}.json + 2 figures
@@ -226,7 +298,224 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 3.3 deliverables (in progress on feat/phase-3-3-citation-generation):
+Phase 4 deliverables (in progress on feat/phase-4-agents):
+  backend/cardiorisk/agents/__init__.py                package skeleton + module map; documents the
+                                                       4-agent surface, HITL gate contract, and
+                                                       cross-references ADR-018 + research doc 15
+  backend/cardiorisk/agents/state.py                   AgentState (Pydantic, immutable-ish) +
+                                                       PatientInput + TriageResult / RiskResult /
+                                                       GuidelineResult / LetterResult typed
+                                                       artefacts; AgentStage / DecisionStatus
+                                                       StrEnums; ApprovedDecision / EditedDecision
+                                                       / RejectedDecision discriminated union;
+                                                       AgentDecisionRecord + AuditEntry; helpers
+                                                       append_decision / append_audit return
+                                                       new tuples (state-as-immutable discipline);
+                                                       latest_decision / state_to_dict /
+                                                       state_from_dict for API + checkpoint
+                                                       round-trip
+  backend/cardiorisk/agents/triage.py                  rule-based normaliser: PatientInput ->
+                                                       TriageResult{normalised_patient,
+                                                       sanity_flags, summary}; deterministic;
+                                                       no LLM call; flags include cholesterol_
+                                                       missing_sentinel, age_extreme,
+                                                       resting_bp_extreme, etc.
+  backend/cardiorisk/agents/risk.py                    risk agent: loads models/v1/<model>_
+                                                       <source>.joblib via _ArtefactCache (key
+                                                       includes absolute models_dir to defuse
+                                                       test-pollution between tmp_path and the
+                                                       real artefact dir); deterministic
+                                                       MockRiskClassifier fallback if the
+                                                       artefact is absent; preprocessing applies
+                                                       clean_cholesterol_zero_to_nan +
+                                                       add_missingness_indicators +
+                                                       replace_categorical_missing +
+                                                       coerce_numeric_to_float64 directly
+                                                       (clean_for_modelling refused — it
+                                                       requires the HeartDisease target column);
+                                                       _band Literal["low","intermediate","high"]
+                                                       at 0.05 / 0.10 thresholds (AusCVDRisk
+                                                       per ADR-009); top-6 attribution cap
+                                                       enforced in run_risk
+  backend/cardiorisk/agents/guideline.py               guideline agent: build_question turns
+                                                       PatientInput + RiskResult into a
+                                                       clinician-style question; run_guideline
+                                                       wraps CitationGenerator.generate; passes
+                                                       through GeneratedAnswer; summary
+                                                       distinguishes refused vs verified-claim-
+                                                       count
+  backend/cardiorisk/agents/letter.py                  deterministic letter renderer: takes
+                                                       verified_claims + risk band + top
+                                                       attributions; emits LetterResult{draft,
+                                                       citations, summary}; no LLM call (Phase 6
+                                                       adds the LLM-drafted parallel branch);
+                                                       redacts unsupported claims; normalises
+                                                       white-space; preserves citation chips
+                                                       inline
+  backend/cardiorisk/agents/retries.py                 in-house resilience: TransientAgentError
+                                                       marker class; with_retries[U] (Python
+                                                       3.12 generic-function syntax; tenacity-
+                                                       backed exponential backoff); CircuitBreaker
+                                                       (3-strikes-and-open-60s with deterministic
+                                                       _clock hook for tests); CircuitOpenError
+                                                       raised when the breaker is open
+  backend/cardiorisk/agents/graph.py                   LangGraph wiring: build_graph(...) ->
+                                                       CompiledStateGraph[AgentState, None,
+                                                       AgentState, AgentState]; 8 nodes (4
+                                                       agents + 4 *_review interrupt nodes);
+                                                       _make_review_node uses interrupt() to
+                                                       pause; _route_after_review reads the
+                                                       latest decision and routes
+                                                       continue/edit/reject/END;
+                                                       latest_interrupt(snap) helper; per-stage
+                                                       artefact_payload picker; mypy
+                                                       call-overload suppressions for
+                                                       LangGraph's loose generic surface
+  backend/cardiorisk/api/__init__.py                   package skeleton; exports build_app +
+                                                       schemas
+  backend/cardiorisk/api/schemas.py                    Pydantic API models: CaseCreate,
+                                                       InterruptPayload, CaseStateResponse
+                                                       (with .from_state classmethod that
+                                                       round-trips the AgentState),
+                                                       DecideRequest, DecideResponse
+  backend/cardiorisk/api/server.py                     FastAPI factory: build_app(generator,
+                                                       *, risk_model, risk_held_out_source,
+                                                       checkpointer) -> FastAPI; 3 endpoints
+                                                       under /v1/agents (POST /cases / POST
+                                                       /cases/{id}/decide / GET /cases/{id})
+                                                       + GET /healthz; _config_for(case_id)
+                                                       casts dict to RunnableConfig for mypy;
+                                                       _payload_to_interrupt unwraps the
+                                                       LangGraph Interrupt object into the
+                                                       API-facing schema
+  backend/cardiorisk/agents/eval/__init__.py           package skeleton + module map
+  backend/cardiorisk/agents/eval/loader.py             AgentEvalCase dataclass (id, patient,
+                                                       expected_risk_band, expected_min_
+                                                       verified_claims, expected_letter_
+                                                       min_words, expected_sanity_flags,
+                                                       tag, rationale); load_cases() with
+                                                       JSON-Schema validation, tag_filter,
+                                                       limit, repo_root override
+  backend/cardiorisk/agents/eval/scorer.py             score_case + aggregate_reports; per-
+                                                       stage StageReport + per-case CaseReport
+                                                       + AggregateReport with confusion matrix
+                                                       + per-tag breakdown; sanity_flags_missing
+                                                       / sanity_flags_extra surface; band_match
+                                                       boolean
+  backend/cardiorisk/agents/eval/figures.py            matplotlib renderers: per_stage_pass_
+                                                       rate.png + risk_band_confusion.png +
+                                                       per_tag_pass_rate.png; render_all
+                                                       returns the 3 paths
+  backend/cardiorisk/agents/eval/orchestrator.py       end-to-end driver: EvalConfig dataclass;
+                                                       run_eval drives the LangGraph graph
+                                                       through an auto-approve harness for each
+                                                       case; serialises with state_to_dict;
+                                                       writes per_case + aggregate + 3 figures;
+                                                       --is_smoke nests outputs under smoke/
+  backend/scripts/eval_agents.py                       thin CLI: --smoke / --limit / --tag /
+                                                       --cases-path / --reports-dir /
+                                                       --figures-dir / --risk-model /
+                                                       --risk-source; CARDIORISK_TORCH_THREADS
+                                                       preamble matches eval_generation.py;
+                                                       smoke harness uses _StubPipeline (3
+                                                       fake guideline-shaped chunks) +
+                                                       MockLLMClient + _AlwaysEntails NLI;
+                                                       prints headline JSON to stdout
+  backend/cardiorisk/data/paths.py                     adds REPORTS_V1_AGENTS +
+                                                       REPORTS_V1_AGENTS_FIGURES constants
+  backend/tests/test_agents_*.py                       8 test modules covering state +
+                                                       retries + triage + risk + guideline +
+                                                       letter + graph (end-to-end happy /
+                                                       reject / edit paths) + eval (loader +
+                                                       scorer + figures + orchestrator
+                                                       end-to-end smoke)
+  backend/tests/test_api_server.py                     end-to-end FastAPI tests: healthz +
+                                                       create_case (incl. invalid patient +
+                                                       duplicate ID) + decide (approve /
+                                                       reject / invalid / unknown / after
+                                                       termination) + get_case
+  backend/pyproject.toml                               adds langgraph>=0.6,<0.7 + langgraph-
+                                                       checkpoint>=2.1,<3 + tenacity>=9.0,<11
+                                                       + fastapi>=0.115,<1 +
+                                                       uvicorn[standard]>=0.32,<1 +
+                                                       httpx>=0.28,<1 +
+                                                       pydantic-settings>=2.6,<3; mypy
+                                                       ignore_missing_imports for langgraph +
+                                                       langgraph_checkpoint + langchain_core;
+                                                       pytest filterwarnings for
+                                                       langchain_core._api.deprecation.
+                                                       LangChainPendingDeprecationWarning;
+                                                       ruff per-file-ignores N803/N806
+                                                       for cardiorisk/agents/** +
+                                                       cardiorisk/api/**
+  reports/v1/agents/per_case.json                      30 cases × per-stage results +
+                                                       confusion-matrix tally (committed)
+  reports/v1/agents/aggregate.json                     config + n_cases + 5 pass-rates +
+                                                       confusion matrix + per-tag breakdown
+                                                       + median/p95 duration (committed)
+  reports/v1/figures/agents/*.png                      3 figures: per_stage_pass_rate.png +
+                                                       risk_band_confusion.png +
+                                                       per_tag_pass_rate.png (committed)
+  eval/agents/README.md                                methodology + 30-case design
+                                                       (6 tags used; schema admits a 7th
+                                                       `refusal` tag for Phase 6
+                                                       expansion) + scoring rules +
+                                                       contributor guide
+  eval/agents/schema.json                              JSON Schema for one AgentEvalCase row
+  eval/agents/cases.jsonl                              30 hand-curated cases across 7 tags:
+                                                       8 high_risk + 8 intermediate_risk +
+                                                       8 low_risk + 2 borderline +
+                                                       1 extreme_case + 3 data_quality
+  docs/adr/018-agent-orchestration.md                  binding decision: LangGraph
+                                                       StateGraph + InMemorySaver + interrupt()
+                                                       HITL gates + Pydantic-immutable
+                                                       AgentState + 4-agent surface (risk
+                                                       non-editable on calibration grounds) +
+                                                       in-house CircuitBreaker + 3-endpoint
+                                                       FastAPI surface + 30-case auto-approve
+                                                       eval; rejected alternatives (ReAct /
+                                                       multi-agent autonomy / Temporal / hand-
+                                                       rolled / TypedDict / mutable state /
+                                                       editable risk / no checkpointer / WS-SSE
+                                                       in Phase 4); promotes ADR-018
+                                                       placeholder slot; renumbers ADR-019
+                                                       (LLM choice, Phase 6) / ADR-020 (Brand,
+                                                       Phase 5) / ADR-021 (Deploy, Phase 7-8)
+  docs/research/15-agent-design.md                     opinionated walkthrough: framework
+                                                       choice (LangGraph wins on 3 counts +
+                                                       what it isn't good at + how we route
+                                                       around it); state-as-API-as-eval-schema;
+                                                       HITL contract per stage; in-house
+                                                       circuit-breaker rationale; 3-endpoint
+                                                       REST surface (no WS / SSE / auth in
+                                                       Phase 4); honest reading of the
+                                                       risk-band miss as a Phase 2.6 drift
+                                                       recap, not an orchestration finding;
+                                                       8 honest-weakness sub-sections +
+                                                       what this enables for Phase 5
+  docs/research/README.md                              index entry for 15-agent-design.md +
+                                                       ADR-018 row
+  docs/adr/README.md                                   index updated for ADR-018; placeholder
+                                                       numbering bumped (019 LLM, 020 Brand,
+                                                       021 Deploy)
+  MODEL_CARD.md                                        new §11 Agent orchestration with the
+                                                       headline pass-rate table + confusion
+                                                       matrix + risk-band-miss honesty +
+                                                       reproduce steps + 8 honest-weakness
+                                                       bullets; subsequent sections renumbered
+                                                       §12..§15; ADR-018 added to references
+  .github/workflows/ci.yml                             adds Phase 4 smoke step in test-python:
+                                                       eval_agents.py --smoke (3 cases, no
+                                                       joblib artefact, no API keys,
+                                                       MockLLM + always-entails NLI + stub
+                                                       retrieval; ~5 s on ubuntu-latest)
+  .gitignore                                           reports/v1/agents/smoke/ +
+                                                       reports/v1/figures/agents/smoke/
+                                                       ignored
+  AGENTS.md                                            Phase 4 status block + open decisions
+                                                       refreshed + Phase 4 deliverables block
+
+Phase 3.3 deliverables (PR #14 merged 2026-05-15):
   backend/cardiorisk/rag/generation/__init__.py        package skeleton + module map (generator,
                                                        LLM, prompts, parser, NLI); documents the
                                                        suppression policy ("drop, never re-prompt"
