@@ -33,7 +33,7 @@ export default function HomePage() {
 
       <main className="mx-auto max-w-6xl px-6 py-20 lg:py-28">
         <div className="flex flex-col items-start gap-6">
-          <Badge variant="accent">Phase 5.1 — brand identity preview</Badge>
+          <Badge variant="accent">Phase 5.3 — workflow screens online</Badge>
           <h1 className="font-display font-semibold text-4xl tracking-tighter sm:text-5xl lg:text-6xl">
             An open-source clinical co-pilot
             <span className="block text-[var(--color-accent)]">for cardiovascular risk.</span>
@@ -45,9 +45,12 @@ export default function HomePage() {
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <Button asChild size="lg">
-              <Link href="/brand">View brand system →</Link>
+              <Link href="/cases/new">Try the workflow →</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
+              <Link href="/brand">View brand system</Link>
+            </Button>
+            <Button asChild size="lg" variant="ghost">
               <a
                 href="https://github.com/azheng-dev/cardiorisk/blob/main/MODEL_CARD.md"
                 target="_blank"

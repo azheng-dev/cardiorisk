@@ -25,8 +25,9 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [018](./018-agent-orchestration.md) | 4-agent orchestration with LangGraph + HITL gates + FastAPI surface, with a 30-case mini-eval | Accepted | 4 |
 | [020](./020-brand-and-visual-identity.md) | Brand + visual identity (clinical-teal accent, semantic CSS-variable tokens, Tailwind v4, light + dark first-class) | Accepted | 5.1 |
 | [021](./021-component-system-and-a11y-gate.md) | Component system + a11y gate (Radix primitives + shadcn-pattern catalog + Ladle published catalog + axe-playwright CI gate) | Accepted | 5.2 |
+| [022](./022-workflow-screens.md) | Workflow screens, app shell, and mock-mode client (Next 15 App Router; 5 routes; zod-shared mock client; zustand store) | Accepted | 5.3 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
 - ADR-019: LLM choice + multi-model evaluation (Phase 6).
-- ADR-022: Deploy + observability (Phase 7 / Phase 8).
+- ADR-023: Deploy + observability (Phase 7 / Phase 8).
