@@ -51,28 +51,40 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 4 (LangGraph 4-agent orchestration with HITL gates +
-                      FastAPI surface + 30-case mini-eval) in progress on
-                      feat/phase-4-agents. Plan re-cut at Phase 3.3 close-out
-                      under the AGENTS §0 finish-line grant: 4 agents
-                      (triage / risk / guideline / letter) wired through a
-                      `langgraph>=0.6,<0.7` `StateGraph` with an `interrupt()`
-                      HITL gate after every node; immutable Pydantic
-                      `AgentState` (state schema = API schema = eval schema);
-                      InMemorySaver checkpointer (PostgresSaver graduates in
-                      Phase 7 / 8); FastAPI surface = 3 endpoints + healthz;
-                      30-case auto-approve eval (Mock-LLM + always-entail NLI
-                      + stub retrieval). Headline = triage 0.90 / risk-band
-                      0.467 / guideline 1.0 / letter 1.0 / full_pipeline 0.40
-                      / p95 1067 ms. Risk-band miss is a *modelling* finding
-                      (TabICL-on-Cleveland over-classifies synthetic
-                      intermediates as high under AusCVDRisk 0.05/0.10
-                      thresholds — recapitulates the Phase 2.6 drift study);
-                      Phase 6 will re-evaluate against the Hungarian fold +
-                      recalibrate the bands + add an LLM-judge HITL eval.
-                      Phase 4 binding decisions in ADR-018; design walkthrough
-                      in docs/research/15-agent-design.md.
-Last checkpoint:      Phase 3.3 (Citation-mandatory generator + DeBERTa-v3 NLI verifier
+Current phase:        Phase 5.1 (Brand identity: palette, type, logo, preview page)
+                      pending Gate A user review. NEXT step (no agent work
+                      until the user approves the brand) — the AGENTS §0
+                      finish-line grant carves out UI sign-off as the *only*
+                      step requiring human review; everything else is
+                      auto-merged on CI-green. Phase 5.1 deliverables planned:
+                      brand guide (docs/design/brand.md) with colour palette,
+                      type ramp, spacing scale; one-page brand preview at
+                      frontend/app/(brand)/page.tsx that renders all primitives
+                      side-by-side (light + dark); a logo (SVG, dual-mode);
+                      ADR-019 (binding decision on the brand). User reviews
+                      the preview page, approves or asks for revisions, then
+                      Phase 5.2 (component system) and 5.3 (5 screens) and
+                      5.4 (polish + demo gif) all auto-merge.
+Last checkpoint:      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
+                      FastAPI surface + 30-case mini-eval) auto-merged on the
+                      AGENTS §0 finish-line grant (PR #15 squash-merged
+                      2026-05-15 commit f4b4641; 7/7 required CI checks
+                      green; 788/788 tests pass locally). Headline (Mock-LLM
+                      + always-entail NLI + stub retrieval; tabicl_Cleveland
+                      .joblib; 30-case auto-approve harness): triage 0.900,
+                      risk_band 0.467, guideline 1.000, letter 1.000,
+                      full_pipeline 0.400, median 1035 ms / p95 1067 ms.
+                      Risk-band miss is a *modelling* finding (TabICL-on-
+                      Cleveland over-classifies synthetic intermediates as
+                      high under AusCVDRisk 0.05/0.10 thresholds —
+                      recapitulates the Phase 2.6 drift study); orchestration
+                      succeeds end-to-end on every case. Binding decisions
+                      in ADR-018; design walkthrough in docs/research/15-
+                      agent-design.md; honest reading + reproduce steps in
+                      MODEL_CARD §11. Phase 6 will re-evaluate against the
+                      Hungarian fold + recalibrate the bands + add a judge-
+                      as-reviewer HITL eval.
+                      Phase 3.3 (Citation-mandatory generator + DeBERTa-v3 NLI verifier
                       + 36-case generation eval) auto-merged on the AGENTS §0
                       finish-line grant (PR #14 squash-merged 2026-05-15;
                       hnswlib SIGILL on ubuntu-latest fixed by pinning
@@ -208,9 +220,9 @@ Open decisions:       - Phase 4 PR review + merge approval (auto on CI-green per
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(agents): Phase 4 — LangGraph 4-agent orchestration with HITL
-                      gates + FastAPI surface + 30-case mini-eval (in progress
-                      on feat/phase-4-agents).
+Last meaningful PR:   #15 feat(agents): Phase 4 — LangGraph 4-agent orchestration
+                      with HITL gates + FastAPI surface + 30-case mini-eval
+                      (auto-merged 2026-05-15 commit f4b4641).
                       #14 feat(rag): Phase 3.3 — citation-mandatory generator +
                       DeBERTa-v3 NLI verifier + 36-case generation eval
                       (auto-merged 2026-05-15).
@@ -298,7 +310,7 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 4 deliverables (in progress on feat/phase-4-agents):
+Phase 4 deliverables (PR #15 merged 2026-05-15 commit f4b4641):
   backend/cardiorisk/agents/__init__.py                package skeleton + module map; documents the
                                                        4-agent surface, HITL gate contract, and
                                                        cross-references ADR-018 + research doc 15
