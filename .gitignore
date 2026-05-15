@@ -79,7 +79,10 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# `lib/` is a Python build artefact (`setup.py build_ext --build-lib`).
+# Scope it to the backend so it doesn't swallow `frontend/src/lib/` —
+# which is a real source folder for the shadcn-style helper utilities.
+backend/**/lib/
 lib64/
 parts/
 sdist/
