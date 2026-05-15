@@ -41,7 +41,8 @@ const buttonVariants = cva(
         ghost: "bg-transparent text-[var(--color-fg)] hover:bg-[var(--color-surface-muted)]",
         outline:
           "border border-[var(--color-border-strong)] bg-transparent text-[var(--color-fg)] hover:bg-[var(--color-surface-muted)]",
-        danger: "bg-[var(--color-danger)] text-white shadow-[var(--shadow-soft)] hover:opacity-90",
+        danger:
+          "bg-[var(--color-danger)] text-[var(--color-fg-on-accent)] shadow-[var(--shadow-soft)] hover:opacity-90",
         link: "text-[var(--color-accent)] underline-offset-4 hover:underline",
       },
       size: {

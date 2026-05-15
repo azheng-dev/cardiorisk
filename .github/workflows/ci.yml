@@ -273,3 +273,50 @@ jobs:
       - name: Next.js build
         working-directory: frontend
         run: pnpm build
+
+  # Phase 5.2: axe accessibility gate over the Ladle catalog. Builds the
+  # static catalog (~5s after a warm pnpm cache) and walks every story
+  # x {light, dark} with @axe-core/playwright, failing on any serious or
+  # critical violation. Documented exemptions live in
+  # `frontend/tests/axe/catalog.spec.ts` (currently: cmdk's
+  # aria-required-children/parent rules, manually verified with
+  # VoiceOver). Runs in ~60s on ubuntu-latest after Playwright caches
+  # warm.
+  axe-ts:
+    name: axe-ts
+    runs-on: ubuntu-latest
+    needs: lint-ts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      # Cache the Playwright browser binaries between runs. Keyed on the
+      # @playwright/test version pinned in pnpm-lock.yaml so a bump
+      # invalidates the cache automatically.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('frontend/pnpm-lock.yaml') }}
+      - name: Install Playwright Chromium
+        working-directory: frontend
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build Ladle catalog
+        working-directory: frontend
+        run: pnpm ladle:build
+      - name: axe over catalog
+        working-directory: frontend
+        env:
+          CI: "true"
+        run: pnpm axe

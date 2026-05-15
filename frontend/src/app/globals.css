@@ -57,19 +57,24 @@
   --color-surface-raised: oklch(100% 0 0);
   --color-overlay: oklch(20% 0.02 230 / 0.55);
 
-  /* Foregrounds */
+  /* Foregrounds.
+   * `--color-fg-subtle` is intentionally pushed to ~46% L so it still
+   * clears AA on white surfaces; the visual hierarchy now relies on
+   * weight + size as much as colour. */
   --color-fg: oklch(20% 0.02 230);
-  --color-fg-muted: oklch(43% 0.014 230);
-  --color-fg-subtle: oklch(58% 0.012 230);
+  --color-fg-muted: oklch(38% 0.014 230);
+  --color-fg-subtle: oklch(46% 0.012 230);
   --color-fg-on-accent: oklch(99% 0.005 220);
 
   /* Borders */
   --color-border: oklch(91% 0.008 230);
   --color-border-strong: oklch(82% 0.012 230);
 
-  /* Brand accent — clinical teal. */
-  --color-accent: oklch(54% 0.13 192);
-  --color-accent-hover: oklch(48% 0.13 192);
+  /* Brand accent — clinical teal.
+   * Lightness picked to satisfy WCAG AA (4.5:1) both as background with
+   * `--color-accent-fg` text AND as text on `--color-surface`. */
+  --color-accent: oklch(46% 0.12 192);
+  --color-accent-hover: oklch(40% 0.12 192);
   --color-accent-soft: oklch(94% 0.04 192);
   --color-accent-fg: oklch(99% 0.005 220);
 
@@ -78,34 +83,37 @@
    * Picked to be (a) WCAG-AA legible on both bg + surface, (b) visually
    * non-conflicting with the teal accent, (c) scientifically conventional
    * (red high / amber mid / green low) but desaturated enough not to
-   * scream. */
-  --color-risk-low: oklch(58% 0.13 145);
+   * scream. Lightness <=50% so they pass 4.5:1 against white text and
+   * ~surface bg. */
+  --color-risk-low: oklch(46% 0.13 145);
   --color-risk-low-soft: oklch(94% 0.05 145);
-  --color-risk-intermediate: oklch(67% 0.16 70);
+  --color-risk-intermediate: oklch(50% 0.13 60);
   --color-risk-intermediate-soft: oklch(95% 0.06 80);
-  --color-risk-high: oklch(57% 0.19 25);
+  --color-risk-high: oklch(46% 0.18 25);
   --color-risk-high-soft: oklch(95% 0.04 25);
 
-  /* Status (info/success/warning/danger) — used for toasts, badges */
-  --color-info: oklch(58% 0.13 230);
+  /* Status (info/success/warning/danger) — used for toasts, badges.
+   * Same WCAG-AA target as the accent. The warning hue is unavoidably
+   * dark-amber to clear the contrast bar without flipping to brown. */
+  --color-info: oklch(46% 0.13 230);
   --color-info-soft: oklch(95% 0.04 230);
-  --color-success: oklch(58% 0.13 145);
+  --color-success: oklch(46% 0.13 145);
   --color-success-soft: oklch(94% 0.05 145);
-  --color-warning: oklch(70% 0.15 75);
+  --color-warning: oklch(50% 0.13 60);
   --color-warning-soft: oklch(95% 0.06 80);
-  --color-danger: oklch(57% 0.19 25);
+  --color-danger: oklch(46% 0.18 25);
   --color-danger-soft: oklch(95% 0.04 25);
 
   /* Citation / verifier colours.
    * Verified claim = green-leaning underline; suppressed = amber outline;
    * hallucinated = red outline. Pick distinct hues from the risk palette
    * so the two systems don't visually collide on the dashboard. */
-  --color-citation-verified: oklch(54% 0.1 165);
-  --color-citation-suppressed: oklch(70% 0.13 75);
-  --color-citation-hallucinated: oklch(57% 0.18 25);
+  --color-citation-verified: oklch(46% 0.1 165);
+  --color-citation-suppressed: oklch(50% 0.13 60);
+  --color-citation-hallucinated: oklch(46% 0.18 25);
 
   /* Focus ring — uses accent at high chroma so it survives every bg */
-  --color-focus: oklch(58% 0.18 192);
+  --color-focus: oklch(50% 0.18 192);
 }
 
 /* Dark mode override: toggled via `[data-theme="dark"]` on <html>. */
@@ -117,8 +125,8 @@
   --color-overlay: oklch(10% 0.01 230 / 0.65);
 
   --color-fg: oklch(96% 0.005 220);
-  --color-fg-muted: oklch(75% 0.012 230);
-  --color-fg-subtle: oklch(58% 0.01 230);
+  --color-fg-muted: oklch(82% 0.012 230);
+  --color-fg-subtle: oklch(70% 0.01 230);
   --color-fg-on-accent: oklch(15% 0.014 230);
 
   --color-border: oklch(28% 0.014 230);

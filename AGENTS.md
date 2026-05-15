@@ -51,25 +51,33 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 5.1 (Brand identity: palette, type, logo, preview page)
-                      shipped on feat/phase-5-1-brand and **pending Gate A
-                      user review** per the AGENTS §0 finish-line grant.
-                      Phase 5.1 lands the brand foundation that every Phase
-                      5.x sub-phase composes against: a semantic CSS-variable
-                      token system (zero `dark:` overrides anywhere; Tailwind
-                      v4 `@theme` block), a clinical-teal accent palette
-                      (192°), risk-band + citation-outcome token triplets
-                      pre-named for Phase 5.3, an Inter + JetBrains Mono
-                      type pair, and a small primitives kit (Button / Card /
-                      Badge / Logo / ThemeToggle) sufficient for the brand
-                      preview page. Live previews live at /brand on the
-                      Next.js dev server; static screenshots committed to
-                      docs/design/screenshots/. Binding decisions in
-                      ADR-020; spec doc at docs/design/brand.md. **STOP
-                      for user review** before Phase 5.2 (component
-                      system + Storybook + axe), 5.3 (5 screens), and 5.4
-                      (polish + demo gif), which will all auto-merge.
-Last checkpoint:      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
+Current phase:        Phase 5.2 (Component system + Ladle catalog + axe-playwright
+                      a11y gate) in progress on feat/phase-5-2-component-system,
+                      auto-merge per the AGENTS §0 finish-line grant. Phase 5.2
+                      lifts the Phase 5.3 widget vocabulary forward and locks
+                      it down behind an automated accessibility gate: a 30-
+                      primitive shadcn-style catalog (Radix + cva + Phase 5.1
+                      brand tokens) covering every form / overlay / nav
+                      surface, a 7-primitive domain layer (RiskScoreGauge /
+                      CitationChip / HitlActionBar / AuditTimelineItem /
+                      EmptyState / ErrorState / LoadingState), an 80-story
+                      Ladle catalog (CSF-3, static-buildable, ready for Phase
+                      8 to deploy as /catalog on Vercel), 35 RTL/Vitest unit
+                      tests covering keyboard / focus / state contracts, and
+                      an axe-playwright CI gate that walks every story x
+                      {light, dark} and fails on serious or critical WCAG
+                      violations. Caught + fixed five real WCAG-AA contrast
+                      bugs in the Phase 5.1 palette (accent at L=54% only
+                      hit 4.37:1; pushed to L=46%; same fix applied to
+                      status / risk / fg-muted tokens) and one real Radix
+                      misuse (ScrollArea viewport not keyboard-focusable).
+                      Documented exemption list (cmdk's aria-required-
+                      children/parent only). Binding decisions in ADR-021;
+                      design walkthrough in docs/research/16-component-
+                      system-design.md.
+Last checkpoint:      Phase 5.1 (Brand identity) APPROVED by user 2026-05-15
+                      (PR #17 squash-merged commit 27187e7; Gate A passed).
+                      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
                       FastAPI surface + 30-case mini-eval) auto-merged on the
                       AGENTS §0 finish-line grant (PR #15 squash-merged
                       2026-05-15 commit f4b4641; 7/7 required CI checks
@@ -137,20 +145,42 @@ Last checkpoint:      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - **Phase 5.1 Gate A user review (REQUIRED).** The AGENTS §0
-                        finish-line grant carves out UI sign-off as the only step
-                        requiring human review. The user reviews:
-                          (a) the brand mark + lockup at /brand,
-                          (b) the semantic palette in both themes (especially
-                              the clinical-teal accent and the risk-band
-                              triplets used in Phase 5.3),
-                          (c) the type ramp + the Inter / JetBrains Mono pair,
-                          (d) the component primitives (Button / Card / Badge),
-                          (e) the citation-outcome treatment that the Phase 5.3
-                              letter editor will inherit.
-                        Sign-off triggers Phase 5.2 (Storybook + axe + extended
-                        catalog), 5.3 (5 screens), and 5.4 (polish + demo gif),
-                        all of which auto-merge per the §0 grant.
+Open decisions:       - Phase 5.2 PR review + auto-merge once axe-ts + the existing
+                        7 required checks all go green (no Gate B / human review
+                        required for 5.2 per the AGENTS §0 finish-line grant; UI
+                        Gate B lands at the end of Phase 5.4).
+                      - Branch-protection update on first green axe-ts run on
+                        main: add `axe-ts` to required_status_checks (mirrors
+                        ADR-007 §"Bypass log" discipline; tracked in ADR-021
+                        §"A11y gate").
+                      - Phase 5.2 binding decisions (ADR-021): shadcn-pattern
+                        primitives in `frontend/src/components/ui/*.tsx` on top
+                        of `@radix-ui/*`; domain primitives in
+                        `frontend/src/components/domain/*.tsx`; Ladle 5 catalog
+                        runner (vs Storybook 8); `react-hook-form` + `zod` for
+                        the form layer; `cmdk` for the command palette; `sonner`
+                        for toasts; axe-playwright CI gate over every story x
+                        {light, dark} on serious/critical violations only;
+                        documented exemption list (cmdk's
+                        aria-required-children/parent only, with VoiceOver
+                        verification).
+                      - Phase 5.2 contrast-bug audit (5 fixes): accent / status
+                        / risk-band tokens were all originally L≈54-58% which
+                        only hit 4.37:1 against the surface; pushed every
+                        text-use token to L≤46% (warning to L=50%, intentionally
+                        dark-amber). `--color-fg-muted` 43%->38%, `--color-fg-
+                        subtle` 58%->46%. Danger button switched from literal
+                        `text-white` to `text-[var(--color-fg-on-accent)]` so
+                        dark-mode contrast survives. ScrollArea viewport got
+                        `tabIndex={0}` + visible focus ring (was unreachable
+                        by keyboard).
+                      - Deferred to Phase 5.3 (5 screens): Combobox compositional
+                        recipe (cmdk + Popover); Stepper integration into the
+                        agent-flow chrome; Toast wiring at the FastAPI client.
+                      - Deferred to Phase 5.4 (polish + Gate B walkthrough):
+                        cross-browser axe sweep (Firefox + WebKit); visual-
+                        regression snapshot diff via playwright; Framer Motion
+                        accents; mobile pass.
                       - Phase 4 PR review + merge approval (auto on CI-green per the
                         AGENTS §0 finish-line grant; non-UI phase).
                       - Phase 4 result-of-record (Mock-LLM + always-entail NLI +
@@ -238,9 +268,12 @@ Open decisions:       - **Phase 5.1 Gate A user review (REQUIRED).** The AGENTS 
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(brand): Phase 5.1 — brand identity (palette, type, logo,
-                      preview page) on feat/phase-5-1-brand; **pending Gate A
-                      user review** before merge.
+Last meaningful PR:   feat(ui): Phase 5.2 — shadcn-pattern catalog + Ladle + axe
+                      a11y gate on feat/phase-5-2-component-system; auto-merge
+                      per the AGENTS §0 finish-line grant on CI green.
+                      #17 feat(brand): Phase 5.1 — brand identity (palette, type,
+                      logo, preview page) (Gate A APPROVED + merged 2026-05-15
+                      commit 27187e7).
                       #15 feat(agents): Phase 4 — LangGraph 4-agent orchestration
                       with HITL gates + FastAPI surface + 30-case mini-eval
                       (auto-merged 2026-05-15 commit f4b4641).
@@ -331,7 +364,119 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 5.1 deliverables (in progress on feat/phase-5-1-brand; pending Gate A user review):
+Phase 5.2 deliverables (in progress on feat/phase-5-2-component-system; auto-merge per §0):
+  frontend/package.json                                Adds @radix-ui/{dialog,popover,tooltip,
+                                                       tabs,checkbox,switch,slider,separator,
+                                                       select,toast,avatar,scroll-area,label,
+                                                       radio-group,progress} + react-hook-form
+                                                       + @hookform/resolvers + zod + cmdk +
+                                                       sonner + zustand. devDeps add
+                                                       @ladle/react + @axe-core/playwright +
+                                                       @playwright/test + @testing-library/
+                                                       user-event. Bumps vitest 2.1 -> 3.x +
+                                                       @vitejs/plugin-react 4 -> 5 to align
+                                                       on the Ladle-imposed Vite 6 universe;
+                                                       adds `ladle` / `ladle:build` /
+                                                       `ladle:preview` / `axe` scripts
+  frontend/.ladle/config.mjs                           Ladle config; pins stories glob,
+                                                       defaults, light/dark theme addon,
+                                                       width + RTL + source addons
+  frontend/.ladle/components.tsx                       Global provider; loads globals.css,
+                                                       wires data-theme to the Ladle theme
+                                                       toggle, provides TooltipProvider so
+                                                       Tooltip stories render
+  frontend/playwright.axe.config.ts                    Playwright config dedicated to the
+                                                       axe gate; spins up `pnpm ladle:preview`
+                                                       on port 61000, Chromium-only,
+                                                       reuse-existing in dev / fresh in CI
+  frontend/tests/axe/catalog.spec.ts                   Walks every Ladle story (read from
+                                                       static `meta.json`) x {light, dark}
+                                                       with @axe-core/playwright; fails on
+                                                       serious/critical only; documents the
+                                                       cmdk aria-required-{children,parent}
+                                                       exemptions inline with VoiceOver
+                                                       verification note
+  frontend/src/app/globals.css                         WCAG-AA contrast rebake of the Phase
+                                                       5.1 token system. Light-mode `accent`
+                                                       54%->46% L (was 4.37:1 vs surface,
+                                                       fails AA); status / risk / citation
+                                                       tokens all pushed to L<=46% (warning
+                                                       to L=50%); `fg-muted` 43%->38%,
+                                                       `fg-subtle` 58%->46%; dark-mode
+                                                       `fg-muted` 75%->82%, `fg-subtle` 58%
+                                                       ->70% to match. No visual identity
+                                                       change beyond the tonal lift.
+  frontend/src/components/ui/button.tsx                Phase 5.1 button retained; danger
+                                                       variant switched from literal
+                                                       `text-white` to
+                                                       `text-[var(--color-fg-on-accent)]`
+                                                       so dark-mode contrast survives
+  frontend/src/components/ui/{input,textarea,label,    Form-layer primitives; every input
+   checkbox,switch,slider,radio-group,select,form}.tsx  binds to the brand tokens; Form is
+                                                       the RHF context + accessible
+                                                       label/description/error glue
+  frontend/src/components/ui/{dialog,sheet,popover,    Overlay + nav primitives, all on
+   tooltip,tabs,scroll-area,progress,separator,        @radix-ui/*; ScrollArea viewport
+   skeleton,avatar,table,stepper,command}.tsx          set `tabIndex={0}` so it's
+                                                       keyboard-reachable
+  frontend/src/components/ui/toast.tsx                 Sonner-based Toaster wrapped to
+                                                       react to next-themes; replaces a
+                                                       Radix Toast provider boilerplate
+  frontend/src/components/ui/*.stories.tsx             19 story files covering every
+                                                       primitive variant (~80 stories)
+  frontend/src/components/ui/*.test.tsx                10 RTL/Vitest test files covering
+                                                       keyboard / state / focus contracts
+                                                       (35 frontend tests total after the
+                                                       phase, all green)
+  frontend/src/components/domain/risk-score-gauge.tsx  Circular dial with band-coloured
+                                                       arc + accessible label (a11y
+                                                       walk via role="img" + aria-label)
+  frontend/src/components/domain/citation-chip.tsx     Inline citation pill; click reveals
+                                                       a Popover with the cited span + NLI
+                                                       verdict + entailment probability +
+                                                       optional source URL
+  frontend/src/components/domain/hitl-action-bar.tsx   Approve / Edit / Reject control
+                                                       bar that gates each LangGraph node
+                                                       transition; Edit + Reject reveal an
+                                                       inline note field that's required
+                                                       before submit (audit-log invariant)
+  frontend/src/components/domain/audit-timeline-item.tsx Single timeline row; <time> with
+                                                       ISO datetime; per-decision colour
+                                                       token + icon
+  frontend/src/components/domain/states.tsx            EmptyState / ErrorState / LoadingState
+                                                       trio rendered as semantic <output>
+                                                       elements (axe-friendly status surface)
+  frontend/src/components/domain/*.stories.tsx         5 domain story files
+  frontend/src/components/domain/*.test.tsx            2 domain test files
+   (RiskScoreGauge + HitlActionBar)
+  docs/adr/021-component-system-and-a11y-gate.md       Binding decision: shadcn-pattern +
+                                                       Radix + Ladle + axe-playwright;
+                                                       documented exemption list; promotes
+                                                       ADR-021 placeholder slot
+  docs/research/16-component-system-design.md          Opinionated walkthrough: catalog
+                                                       choice, runner choice, the 5
+                                                       contrast bugs the gate caught with
+                                                       the receipts, behavioural-test
+                                                       contract, honest weaknesses,
+                                                       reproduce
+  docs/research/README.md                              Index entry for 16-component-
+                                                       system-design.md + ADR-021 row
+  docs/adr/README.md                                   ADR-021 entry; ADR-022 placeholder
+                                                       (Deploy + observability) bumped
+  .github/workflows/ci.yml                             New `axe-ts` job: builds the Ladle
+                                                       catalog, caches Playwright browsers,
+                                                       runs axe over every story x theme;
+                                                       ~60s on ubuntu-latest after warm
+                                                       cache
+  .gitignore                                           `frontend/test-results/` +
+                                                       `frontend/playwright-report/` +
+                                                       `frontend/.playwright-cache/`
+                                                       ignored (storybook-static/ already
+                                                       covered by the Phase 5.1 entry)
+  AGENTS.md                                            Phase 5.2 status block + open
+                                                       decisions block + deliverables block
+
+Phase 5.1 deliverables (merged 2026-05-15 commit 27187e7; Gate A APPROVED):
   frontend/package.json                                Next.js 15 + React 19 + Tailwind v4 +
                                                        next-themes + lucide-react + radix-ui
                                                        Slot + class-variance-authority +
