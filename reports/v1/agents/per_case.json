@@ -1,0 +1,1757 @@
+[
+  {
+    "id": "a001",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 3391.07,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9798874855041504,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 1.356,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.014,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 3392.4500000000003,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a002",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.008,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1043.355,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9407948851585388,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1043.555,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a003",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1024.412,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9683891534805298,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.175,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1024.606,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a004",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1042.454,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9774205684661865,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.155,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1042.627,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a005",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1029.3110000000001,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9464618563652039,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.148,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1029.476,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a006",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1039.279,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.83600252866745,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1039.467,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a007",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1046.111,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.8461758494377136,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.147,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1046.275,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a008",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1042.927,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9513670206069946,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.163,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1043.107,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a009",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1026.145,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.4683102071285248,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.14400000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.009000000000000001,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.3029999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a010",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "intermediate",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1066.376,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "intermediate",
+        "probability": 0.05661161616444588,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.161,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1066.554,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a011",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1023.6510000000001,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.5716666579246521,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.154,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.8220000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a012",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "intermediate",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1021.0729999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "intermediate",
+        "probability": 0.0993558019399643,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.146,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1021.2349999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a013",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1044.946,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.25949838757514954,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.145,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1045.107,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a014",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1048.983,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.5666755437850952,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.159,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1049.1589999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a015",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1042.587,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.40520623326301575,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.15,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1042.752,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a016",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1034.2420000000002,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.12132275849580765,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.152,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1034.4110000000003,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a017",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1060.819,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.03804151713848114,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.147,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1060.983,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a018",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1036.301,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.05337036773562431,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.148,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1036.465,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a019",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1023.2959999999999,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.07541997730731964,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.145,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.458,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a020",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": false,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [],
+        "missing_expected_flags": [
+          "age_outside_training_range"
+        ]
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1034.567,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.08201302587985992,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.152,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1034.737,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [
+      "age_outside_training_range"
+    ]
+  },
+  {
+    "id": "a021",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1031.036,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.03329591453075409,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.14400000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1031.1960000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a022",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1023.671,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.1000184491276741,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.157,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.845,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a023",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.009000000000000001,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1026.125,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.12385005503892899,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.147,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.291,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a024",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": false,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [],
+        "missing_expected_flags": [
+          "age_outside_training_range"
+        ]
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1051.127,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.038283925503492355,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.14400000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1051.287,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [
+      "age_outside_training_range"
+    ]
+  },
+  {
+    "id": "a025",
+    "tag": "data_quality",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "cholesterol_missing_sentinel"
+        ],
+        "observed_flags": [
+          "cholesterol_missing_sentinel"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1022.0229999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.7914597392082214,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.158,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1022.1979999999999,
+    "sanity_flags_observed": [
+      "cholesterol_missing_sentinel"
+    ],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a026",
+    "tag": "data_quality",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "resting_bp_extreme"
+        ],
+        "observed_flags": [
+          "resting_bp_extreme"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1034.975,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.6107099652290344,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.14400000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1035.136,
+    "sanity_flags_observed": [
+      "resting_bp_extreme"
+    ],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a027",
+    "tag": "data_quality",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "oldpeak_negative"
+        ],
+        "observed_flags": [
+          "oldpeak_negative"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1030.9550000000002,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.42915040254592896,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.146,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1031.1170000000002,
+    "sanity_flags_observed": [
+      "oldpeak_negative"
+    ],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a028",
+    "tag": "extreme_case",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": false,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range",
+          "resting_bp_extreme"
+        ],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": [
+          "resting_bp_extreme"
+        ]
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1019.9359999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9667282104492188,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.145,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1020.098,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [
+      "resting_bp_extreme"
+    ]
+  },
+  {
+    "id": "a029",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1035.915,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.32907962799072266,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.156,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1036.087,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  },
+  {
+    "id": "a030",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1030.5629999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.1704997718334198,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.147,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.7259999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": []
+  }
+]

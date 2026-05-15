@@ -72,6 +72,28 @@ dependencies = [
     "rank-bm25>=0.2,<0.3",
     "sentence-transformers>=3.2,<6.0",
     "FlagEmbedding>=1.3,<2",
+    # Phase 4 agentic stack (ADR-018). All MIT / BSD / Apache-2.0.
+    #   langgraph         - StateGraph + interrupt/resume primitives
+    #                       (HITL pattern). 0.6 line locks the
+    #                       checkpointer + interrupt API we wire to.
+    #   langgraph-checkpoint
+    #                     - in-memory MemorySaver checkpointer; deferred
+    #                       Postgres checkpointer comes with Phase 8.
+    #   fastapi           - HTTP surface for the agent graph
+    #   uvicorn[standard] - ASGI dev server + websockets/h2/uvloop extras
+    #                       (only used by `serve_api.py`; not imported
+    #                       in the test path)
+    #   pydantic-settings - env-var-driven config (AGENTS §5)
+    #   tenacity          - retries + backoff for the LLM/NLI hot path
+    #   httpx             - FastAPI's TestClient transport (test-only
+    #                       runtime path; the dev group below pins it)
+    "langgraph>=0.6,<0.7",
+    "langgraph-checkpoint>=2.1,<3",
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.32,<1",
+    "pydantic-settings>=2.6,<3",
+    "tenacity>=9.0,<11",
+    "httpx>=0.28,<1",
 ]
 
 [dependency-groups]
@@ -203,6 +225,11 @@ module = [
   # pinning anthropic/openai versions in pyproject.toml.
   "anthropic", "anthropic.*",
   "openai", "openai.*",
+  # Phase 4: langgraph + langgraph-checkpoint emit some types but
+  # not enough surface for strict-mode mypy at the call sites we use.
+  # Same disposition as the LangChain stack.
+  "langgraph", "langgraph.*",
+  "langgraph_checkpoint", "langgraph_checkpoint.*",
 ]
 ignore_missing_imports = true
 
@@ -231,6 +258,14 @@ filterwarnings = [
   # still runs with the available members. Suppressed only for the
   # specific message; any other sklearn UserWarning still fails tests.
   "ignore:The least populated class in y has only:UserWarning:sklearn.model_selection._split",
+  # Phase 4 langgraph: JsonPlusSerializer fires a
+  # LangChainPendingDeprecationWarning at import time about an
+  # `allowed_objects` argument that defaults to "messages" today and
+  # will require an explicit value in a future release. Surface it in
+  # an upgrade note when langgraph cuts the breaking change; today
+  # the default we get is what we want (rich JSON+ serialiser for
+  # MemorySaver state).
+  "ignore::langchain_core._api.deprecation.LangChainPendingDeprecationWarning",
 ]
 
 # ------------------------------------------------------------------- coverage

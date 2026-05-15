@@ -291,7 +291,71 @@ CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_
 
 Writes [`reports/v1/generation/per_case.json`](reports/v1/generation/per_case.json), [`reports/v1/generation/aggregate.json`](reports/v1/generation/aggregate.json), and 2 figures under [`reports/v1/figures/generation/`](reports/v1/figures/generation/). CI smoke uses `--smoke` (1 case, mock client, mock verifier, fixture corpus); ~5 s on `ubuntu-latest` with no API key required.
 
-## 11. Limitations & out-of-scope
+## 11. Agent orchestration (Phase 4)
+
+> The agent layer is the end-to-end clinical workflow on top of the v1 risk model (§3) and the citation-mandatory generator (§10). A (synthetic) patient payload becomes a triage check, a risk score with attributions, a verified guideline answer, and a referral letter draft — with a structured human-in-the-loop (HITL) decision (approve / edit / reject) gating every transition. Full design: [ADR-018](docs/adr/018-agent-orchestration.md) and [`docs/research/15-agent-design.md`](docs/research/15-agent-design.md).
+
+**Stack.** `langgraph>=0.6,<0.7` `StateGraph` + `InMemorySaver` checkpointer (`PostgresSaver` graduates with the rest of the deploy stack in Phase 7 / 8) + `interrupt()` HITL gates between every agent transition + Pydantic-immutable `AgentState` (the state schema *is* the FastAPI request/response schema *is* the eval schema). Four agents — `triage` (rule-based normalisation + sanity-flag emitter), `risk` (joblib loader + calibrated band + top-k attributions; deterministic mock fallback when no artefact is present), `guideline` (wraps the Phase 3.3 `CitationGenerator`), `letter` (deterministic template renderer over verified claims) — wired by `backend/cardiorisk/agents/graph.py`. Resilience = `tenacity`-backed `with_retries` + an in-house 30-LoC `CircuitBreaker` (3 consecutive `TransientAgentError` failures → open for 60 s; deterministic clock hook for tests). FastAPI surface = `POST /v1/agents/cases` (kicks off; pauses at the first interrupt) + `POST /v1/agents/cases/{case_id}/decide` (resumes with a structured `Decision`) + `GET /v1/agents/cases/{case_id}` (reads the latest checkpointed state) + `GET /healthz`. No WebSocket / SSE / auth in Phase 4 (deferred to Phase 5 / 8).
+
+**HITL contract.** Every stage exposes `approve` / `edit` / `reject` with one exception: **`risk` is approve / reject only.** The calibrated probability is not user-editable on calibration-honesty grounds; if the *inputs* were wrong, the reviewer edits at triage and re-runs; if the *output* is judged wrong, the reviewer rejects with a structured reason. See ADR-018 §3.
+
+**Phase-4 eval headline (Mock-LLM + always-entail NLI + stub retrieval; 30-case auto-approve harness; `tabicl_Cleveland.joblib`; AusCVDRisk thresholds 0.05 / 0.10).**
+
+| metric | point | n |
+|---|---:|---:|
+| triage_pass_rate | 0.900 | 30 |
+| risk_band_match_rate | 0.467 | 30 |
+| guideline_pass_rate | 1.000 | 30 |
+| letter_pass_rate | 1.000 | 30 |
+| **full_pipeline_pass_rate** | **0.400** | **30** |
+| median_total_duration_ms | ≈ 1035 | 30 |
+| p95_total_duration_ms | ≈ 1067 | 30 |
+
+Source: [`reports/v1/agents/aggregate.json`](reports/v1/agents/aggregate.json) and [`reports/v1/agents/per_case.json`](reports/v1/agents/per_case.json). Figures: [`reports/v1/figures/agents/`](reports/v1/figures/agents/).
+
+**Risk-band confusion matrix (predicted ↓ vs expected →):**
+
+| expected \ predicted | low | intermediate | high |
+|---|---:|---:|---:|
+| **low** | 3 | 3 | 2 |
+| **intermediate** | 0 | 2 | **11** |
+| **high** | 0 | 0 | 9 |
+
+**Reading the table — what these numbers do and don't say.** The Phase 4 eval is **the orchestration proof, not the quality proof.**
+
+- `triage_pass_rate = 0.90` means 27/30 cases produced exactly the expected sanity flags. The 3 misses are 1 `extreme_case` (the rules don't catch every adversarial vital sign — by design) + 2 `low_risk` benign-extra-flag mismatches in the eval-set catalogue. Not orchestration bugs.
+- `risk_band_match_rate = 0.467` is **the dominant headline gap and is *not* an orchestration finding.** The model dramatically over-classifies *intermediate* cases as *high* (11/13). Likely reading: (a) **threshold mismatch** — AusCVDRisk's 0.05 / 0.10 thresholds were calibrated on Australian primary-care 5-year absolute risk (~5–10% prevalence in the 40–74 age band); the model is trained on UCI HFP (Cleveland prev=0.46), so applying those thresholds to a model fit on a much higher-prevalence population pushes most cases past 0.10 by construction. (b) **distribution shift** — Phase 2.6 ([`docs/research/11-drift-design.md`](docs/research/11-drift-design.md)) showed TabICL translates input distribution shift into 3–4× larger predicted-probability shifts than calibrated linear/tree models. The synthetic cases sit in a feature region the Cleveland fold's training distribution didn't fully cover. **The honest reading is that the v1 model is well-calibrated under LODO across UCI sources but is not validated for the synthetic case distribution.** Phase 6 will (1) re-evaluate against the Hungarian-fold artefact (lower prevalence, lower TabICL prediction-PSI); (2) re-calibrate the band thresholds on a larger synthetic case set (or use percentile-bucket assignment); (3) consider 4-model ensemble voting for the band call.
+- `guideline_pass_rate = 1.0` and `letter_pass_rate = 1.0` are **diagnostic of the smoke harness.** Mock-LLM picks the first sentence of the first retrieved passage; always-entails NLI verifies every claim with `p_entail = 0.99`. Both pass-rates are *guaranteed* under this harness. Phase 6 ships the production headline with DeBERTa NLI + Claude Sonnet 4.5 / GPT-4o-mini.
+- `full_pipeline_pass_rate = 0.40` is the AND of the four per-stage rates — dominated by the risk-band miss. *Orchestrationally* the pipeline succeeds end-to-end on every case (no agent crashes, no checkpoint corruption, no HITL-routing failures across 30 cases).
+
+**Decisions baked into Phase 5 / Phase 6 from this result:**
+
+- **Phase 5 React UI binds to the FastAPI schema, not LangGraph.** The state schema *is* the API schema; the UI doesn't need to know LangGraph exists. ADR-018 §6.
+- **Phase 5.3 risk dashboard surfaces both the raw probability and the band**, with a callout to the model card §11 explaining when the band may overshoot. Reviewers will see the band as advisory until Phase 6 ships the recalibration.
+- **Phase 6 risk-agent revisit.** Hungarian fold + threshold recalibration + 4-model ensemble voting; eval grows from 30 to 100 cases; auto-approve harness gets a *judge-as-reviewer* companion (LLM issues HITL decisions, graded against a gold set).
+- **Phase 6 guideline/letter agents swap to a real LLM.** Mock-LLM headline is the regression baseline; Claude Sonnet 4.5 + GPT-4o-mini A/B is the Phase 6 deliverable.
+- **Phase 7 swaps `InMemorySaver` for `PostgresSaver`** (Supabase) per ADR-021 (placeholder). Sets the per-case latency SLO + adds a global deadline.
+
+**Honest weaknesses (full discussion in [`docs/research/15-agent-design.md`](docs/research/15-agent-design.md) §8):**
+
+- **30 cases is too small for stable per-tag CIs** — `borderline` is n=2; `extreme_case` is n=1. Phase 6 grows to 100. §8.1.
+- **The risk agent's calibration is not validated for synthetic cases.** Recapitulated in detail in §8.2 of the research doc. The eval surfaces it; Phase 6 fixes it.
+- **The auto-approve harness validates plumbing, not HITL quality.** Real reviewer behaviour (edit / reject / approve) is not exercised. §8.3.
+- **LangGraph 0.6 is a 2024–2025 framework** with API churn; pinned `>=0.6,<0.7` upper bound is the safety belt. §8.4.
+- **No global per-case deadline in Phase 4** — duration distribution is reported; SLO + deadline land in Phase 7. §8.5.
+- **The `letter` agent is a deterministic template renderer.** Citation-preserving, deterministic, free; doesn't read like a clinician-drafted referral. Phase 6 ships an LLM-drafted parallel branch and A/Bs them. §8.6.
+- **The `_ArtefactCache` is a process-local singleton** — reload requires a process restart. Phase 7 deploy story handles refresh; Phase 4 doesn't. §8.7.
+- **No multi-reviewer HITL.** Single-reviewer state advancement. Phase 6 may revisit if inter-reviewer disagreement is the dominant failure mode. §8.8.
+
+**Reproduce.** Full 30-case run (~35 s on a recent CPU; uses the v1 TabICL Cleveland artefact if present, mock-classifier fallback if not):
+
+```bash
+uv run --project backend python backend/scripts/eval_agents.py
+```
+
+Writes [`reports/v1/agents/per_case.json`](reports/v1/agents/per_case.json), [`reports/v1/agents/aggregate.json`](reports/v1/agents/aggregate.json), and 3 figures under [`reports/v1/figures/agents/`](reports/v1/figures/agents/). The CLI also exposes `--smoke` (3 cases, ~5 s, the CI default — no joblib artefact required), `--limit N`, `--tag <tag>`, `--risk-model {tabicl,xgboost,lr,ensemble}`, and `--risk-source {Cleveland,Hungarian,LongBeachVA,Switzerland}`. The FastAPI surface runs locally with `uv run --project backend uvicorn cardiorisk.api:build_app --factory --reload`; the OpenAPI spec is at `/docs`.
+
+## 12. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -303,11 +367,11 @@ Writes [`reports/v1/generation/per_case.json`](reports/v1/generation/per_case.js
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 12. Honesty caveats specific to the Honours-Ensemble row
+## 13. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 13. Reproducibility
+## 14. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
@@ -318,7 +382,7 @@ The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at s
 - Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
 - CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 14. References
+## 15. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -342,3 +406,4 @@ Architecture decisions:
 - [ADR-015](docs/adr/015-corpus-ingestion.md) — corpus ingestion (Phase 3.1).
 - [ADR-016](docs/adr/016-retrieval-stack.md) — retrieval stack (Phase 3.2; with 2026-05-15 amendment recording the real-corpus reranker reversal).
 - [ADR-017](docs/adr/017-citation-and-nli-verification.md) — citation-mandatory generation + NLI verification (Phase 3.3).
+- [ADR-018](docs/adr/018-agent-orchestration.md) — 4-agent orchestration with LangGraph + HITL gates + FastAPI surface (Phase 4).

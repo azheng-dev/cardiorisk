@@ -56,3 +56,10 @@ REPORTS_V1_RETRIEVAL_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "retrieval"
 # */smoke/ are gitignored to keep CI noise out of git.
 REPORTS_V1_GENERATION: Final[Path] = REPORTS_V1_DIR / "generation"
 REPORTS_V1_GENERATION_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "generation"
+
+# Phase 4 agent eval layout (ADR-018). 30-case eval over synthetic
+# patients; per-case + aggregate JSONs + 3 figures (success-rate
+# by stage, latency p50/p95, suppression-by-stage). Smoke variants
+# under */smoke/ are gitignored.
+REPORTS_V1_AGENTS: Final[Path] = REPORTS_V1_DIR / "agents"
+REPORTS_V1_AGENTS_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "agents"

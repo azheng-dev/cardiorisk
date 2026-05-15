@@ -22,9 +22,10 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [015](./015-corpus-ingestion.md) | Corpus ingestion (RACGP + NVDPA scope; pdfplumber over pymupdf; 3-chunker registry; manifest-as-derived; eval-set at repo root) | Proposed | 3.1 |
 | [016](./016-retrieval-stack.md) | Retrieval stack for v1 (BGE-M3 dense + rank_bm25 sparse + RRF fusion + BGE reranker, in-memory hnswlib graduating to pgvector in Phase 4) | Accepted (with 2026-05-15 amendment) | 3.2 |
 | [017](./017-citation-and-nli-verification.md) | Citation-mandatory generation + NLI verification (DeBERTa-v3-MNLI default, Mock-LLM for CI, real-LLM A/B deferred to Phase 6) | Accepted | 3.3 |
+| [018](./018-agent-orchestration.md) | 4-agent orchestration with LangGraph + HITL gates + FastAPI surface, with a 30-case mini-eval | Accepted | 4 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-018: LLM choice + multi-model evaluation (Phase 6).
-- ADR-019: Brand + visual identity (Phase 5).
-- ADR-020: Deploy + observability (Phase 7 / Phase 8).
+- ADR-019: LLM choice + multi-model evaluation (Phase 6).
+- ADR-020: Brand + visual identity (Phase 5).
+- ADR-021: Deploy + observability (Phase 7 / Phase 8).
