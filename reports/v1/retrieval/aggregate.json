@@ -1,0 +1,46 @@
+{
+  "config": {
+    "strategies": [
+      "token",
+      "semantic",
+      "hybrid"
+    ],
+    "rerank_conditions": [
+      false,
+      true
+    ],
+    "embedder": "bge-m3",
+    "reranker": "bge-reranker-v2-m3",
+    "use_fixture": false,
+    "top_k": 5,
+    "per_leg_k": 50,
+    "smoke": false,
+    "n_resamples": 2000
+  },
+  "n_cells": 6,
+  "winning_cell": {
+    "label": "token_norerank",
+    "chunker": "token",
+    "with_rerank": false,
+    "hit_at_1": 0.5,
+    "hit_at_5": 0.6,
+    "mrr": 0.55,
+    "ci_hit_at_5": {
+      "point": 0.6,
+      "lower": 0.3,
+      "upper": 0.9,
+      "n_resamples": 2000,
+      "alpha": 0.05
+    }
+  },
+  "per_chunker_max_hit_at_5": {
+    "token": 0.6,
+    "semantic": 0.6,
+    "hybrid": 0.6
+  },
+  "rerank_lift": {
+    "token": 0.0,
+    "semantic": 0.0,
+    "hybrid": 0.0
+  }
+}

@@ -134,6 +134,27 @@ jobs:
       # chunker, and the eval-set JSON Schema validator. Runs in ~5s.
       - name: Smoke build_corpus.py --use-fixture --strategy all
         run: uv run --project backend python backend/scripts/build_corpus.py --use-fixture --strategy all
+      # Phase 3.2: cache the MiniLM-L6 weights between CI runs. The
+      # smoke embedder for retrieval is sentence-transformers/all-
+      # MiniLM-L6-v2 (~80 MB); without caching, every CI run pays the
+      # full HF Hub download. Cache key is just the model name (the
+      # weights are immutable on the Hub).
+      - name: Cache HuggingFace MiniLM-L6 weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-cache-minilm-l6-v2-v1
+      # Phase 3.2: smoke the retrieval index builder + eval orchestrator
+      # against the markdown fixture (no PDFs, no full bge-m3 weights,
+      # no reranker). Uses sentence-transformers/all-MiniLM-L6-v2 (~80
+      # MB) as the smoke embedder. Exercises the full pipeline plumbing:
+      # embedder + hnswlib + rank_bm25 + RRF + scorer + report writer +
+      # figure renderer. Runs in ~60s on ubuntu-latest after the cache
+      # is warm.
+      - name: Smoke build_index.py --use-fixture --embedder minilm
+        run: uv run --project backend python backend/scripts/build_index.py --use-fixture --strategy all --embedder minilm
+      - name: Smoke eval_retrieval.py --smoke --embedder minilm
+        run: uv run --project backend python backend/scripts/eval_retrieval.py --smoke --use-fixture --embedder minilm
 
   # ---------------------------------------------------------------- typescript
   lint-ts:

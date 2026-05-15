@@ -51,14 +51,20 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolute-CVD-
+Current phase:        Phase 3.2 (Hybrid retrieval + chunker-winner eval: BGE-M3 dense +
+                      rank_bm25 sparse + RRF fusion + bge-reranker-v2-m3 cross-encoder
+                      + 50-Q hand-curated retrieval eval; in-memory hnswlib graduating
+                      to pgvector in Phase 4) in progress on feat/phase-3-2-retrieval.
+                      Plan approved by user 2026-05-07 with embeddings_scope=open_only
+                      (text-embedding-3-large deferred), vector_index=in-memory now /
+                      pgvector Phase 4, reranker=in-scope (bge-reranker-v2-m3).
+Last checkpoint:      Phase 3.1 (Corpus ingestion: RACGP Red Book + NVDPA absolute-CVD-
                       risk materials; pdfplumber parse + 3 pluggable chunkers
                       [token-window / regex-semantic / heading-aware hybrid] + manifest;
                       10-Q retrieval eval scaffold deferring 50-Q expansion + chunking
-                      A/B + embeddings choice to Phase 3.2) in progress on
-                      feat/phase-3-1-corpus-ingestion. Plan approved by user 2026-05-06
-                      with corpus_scope=racgp_nvdpa (AusCVDRisk + eTG out of scope).
-Last checkpoint:      Phase 2.6 (Drift / monitoring: input-feature PSI+KS + prediction-
+                      A/B + embeddings choice to Phase 3.2) accepted by user (merged
+                      2026-05-06).
+                      Phase 2.6 (Drift / monitoring: input-feature PSI+KS + prediction-
                       drift PSI on calibrated predict_proba; per-fold combined-pool
                       reference; report-only) accepted by user (PR #11 merged
                       2026-05-06; commit a339b15). Headline: every fold has 5-8 of 11
@@ -78,16 +84,35 @@ Last checkpoint:      Phase 2.6 (Drift / monitoring: input-feature PSI+KS + pred
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 3.1 PR review + merge approval (after CI green on
-                        feat/phase-3-1-corpus-ingestion).
-                      - Deferred to Phase 3.2 (chunking + embeddings + retrieval):
-                          - Chunking winner: token-window vs regex-semantic vs heading-
-                            aware hybrid. Phase 3.1 ships all three side-by-side; the
-                            50-Q hand-curated retrieval eval set picks one.
-                          - Embeddings model: bge-m3 (open) vs text-embedding-3-large
-                            (proprietary). Decide with Phase 3.2 retrieval eval data.
-                          - 50-Q retrieval eval set expansion (Phase 3.1 ships a 10-Q
-                            scaffold + JSON Schema; Phase 3.2 grows it to 50).
+Open decisions:       - Phase 3.2 close-out: real-corpus fetch + chunker race + reranker
+                        reversal documented; auto-merge pending CI green on
+                        feat/phase-3-2-retrieval (per user grant of full
+                        commit/merge authority for non-UI phases).
+                      - Phase 3.2 real-corpus headline (10 Qs over 1,834 chunks):
+                        all 6 cells tie at hit@5=0.600; tie-break MRR → no-rerank →
+                        alpha → **token chunker, no rerank** wins (MRR 0.550). The
+                        cross-encoder reranker HURTS hit@1 across all 3 chunkers
+                        on the real corpus (token 0.50→0.30, semantic 0.50→0.40,
+                        hybrid 0.40→0.20) — the OPPOSITE of the fixture-eval finding
+                        (where rerank bought +5 to +35 pp). New production default
+                        is `with_rerank=False`; reranker stays available behind the
+                        flag. ADR-016 §"Amendment 2026-05-15" + docs/research/13
+                        §7 carry the full discussion + the open question (does this
+                        hold at n=100? Phase 6 re-asks with statistical power).
+                      - Phase 3.2.1 (Token-window size sweep 256 / 1024 vs 512)
+                        DROPPED. n=10 is too underpowered to discriminate; running
+                        the sweep would surface a confidently-wrong winner. Re-asked
+                        in Phase 6 once the eval set grows.
+                      - Real-corpus URL drift handled (RACGP restructured chapter
+                        download; cvdcheck.org.au moved to a Next.js front-end +
+                        retired the 2023 Quick Reference Guide PDF). New URLs
+                        pinned in sources.py + lockfiles re-generated; doc_id
+                        renamed nvdpa_2023_quick_reference_guide →
+                        nvdpa_2023_summary_of_recommendations; q045 + q049
+                        re-targeted. ADR-015 §"Amendment 2026-05-15" + ADR-016
+                        §"Amendment 2026-05-15" §4 carry the audit trail. No
+                        Wayback snapshots existed for any of the retired URLs;
+                        live-URL re-resolution was the only path.
                       - Deferred to Phase 3.3 (citation-mandatory generation):
                           - NLI verifier: DeBERTa-v3-MNLI vs MoritzLaurer/deberta-v3-large-
                             zeroshot-v2.0 vs vectara/hallucination_evaluation_model.
@@ -102,7 +127,12 @@ Open decisions:       - Phase 3.1 PR review + merge approval (after CI green on
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   #11 feat(monitoring): Phase 2.6 — drift / monitoring layer (PSI + KS,
+Last meaningful PR:   feat(retrieval): Phase 3.2 — hybrid retrieval (BGE-M3 + rank_bm25 +
+                      RRF + bge-reranker-v2-m3) + 50-Q eval matrix (in progress on
+                      feat/phase-3-2-retrieval).
+                      feat(rag): Phase 3.1 — corpus ingestion (pdfplumber + 3-chunker
+                      registry + manifest + 10-Q eval scaffold) (merged 2026-05-06).
+                      #11 feat(monitoring): Phase 2.6 — drift / monitoring layer (PSI + KS,
                       per-fold reference, report-only) (merged 2026-05-06).
                       #10 feat(explain): Phase 2.5 — KernelSHAP cross-model explainability +
                       sanity checks (merged 2026-05-06).
@@ -118,7 +148,21 @@ Last meaningful PR:   #11 feat(monitoring): Phase 2.6 — drift / monitoring lay
                       branch-protection policy ADR + workflow hardening (merged 41b697f).
                       #3 docs(research): Phase 1 critical review + v1 risk-model design
                       (merged 4553c61). #1 chore(repo): bootstrap (merged 2e2d648).
-Last eval run:        Phase 2.6 full LODO drift sweep on data/processed/combined.parquet
+Last eval run:        Phase 3.2 real-corpus retrieval-eval matrix (bge-m3 dense +
+                      rank_bm25 sparse + RRF k=60 + bge-reranker-v2-m3 cross-encoder;
+                      3 chunkers x {no-rerank, with-rerank} = 6 cells; 10 real-corpus
+                      Qs over 1,834 chunks across the 3 RACGP/NVDPA PDFs; 2,000-
+                      resample percentile bootstrap CIs; CARDIORISK_TORCH_THREADS=8
+                      to lift the Phase-2.x single-thread guard since this script
+                      does not import TabICL/XGBoost). Wall-clock ~6 min on M4 Pro
+                      after weights warm. Outputs: reports/v1/retrieval/{per_cell,
+                      aggregate}.json (committed) + 3 figures under reports/v1/
+                      figures/retrieval/. Headline: all 6 cells tie at hit@5=0.600;
+                      tie-break by MRR → no-rerank → alpha → token chunker, no
+                      rerank wins (MRR 0.550). Reranker HURTS hit@1 across all 3
+                      chunkers on real corpus (opposite of fixture finding).
+                      Production default flips to with_rerank=False.
+                      Phase 2.6 full LODO drift sweep on data/processed/combined.parquet
                       (4 sources x 4 models — TabICL/XGBoost/LR/Honours-Ensemble — x
                       per-feature PSI + KS sanity + prediction-drift PSI; 10 quantile
                       bins; per-fold combined-pool reference; held-out source as the
@@ -142,7 +186,203 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 3.1 deliverables (in progress on feat/phase-3-1-corpus-ingestion):
+Phase 3.2 deliverables (in progress on feat/phase-3-2-retrieval):
+  backend/cardiorisk/rag/retrieval/__init__.py   package skeleton + module map; DEFAULT_TOP_K +
+                                                 DEFAULT_PER_LEG_K constants + DEFAULT_CHUNKER
+                                                 sentinel; documents the dense-only-head bge-m3
+                                                 use, the in-memory hnswlib choice, and the
+                                                 Phase-4 pgvector graduation path
+  backend/cardiorisk/rag/retrieval/embed.py      BaseEmbedder Protocol + MockEmbedder (hash-based,
+                                                 deterministic) + MiniLMEmbedder (sentence-
+                                                 transformers all-MiniLM-L6-v2, 384-d) +
+                                                 BGEM3Embedder (FlagEmbedding BGEM3FlagModel,
+                                                 1024-d). EmbedCache writes per-chunk .npy under
+                                                 data/external/corpus/embed_cache/<embedder>/
+                                                 with atomic .part->rename via an open file
+                                                 handle (sidesteps np.save's auto-suffix
+                                                 footgun). L2-normalised outputs throughout
+  backend/cardiorisk/rag/retrieval/index.py      HNSWIndex thin wrapper (cosine, M=16,
+                                                 ef_construction=200, ef=max(2*top_k, 50)).
+                                                 build/save/load/search/__len__; numpy-backed
+                                                 ids.json sidecar so chunk_ids round-trip
+                                                 across save/load
+  backend/cardiorisk/rag/retrieval/bm25.py       BM25Index wrapper around rank_bm25.BM25Okapi.
+                                                 Custom tokeniser: lowercase + whitespace +
+                                                 vendored 53-word English stopword list
+                                                 (preserves clinical negations like 'not',
+                                                 'no'). joblib-backed save/load; returns all
+                                                 scores (no positive-score filter) so small-
+                                                 corpus IDF=0 cases still rank
+  backend/cardiorisk/rag/retrieval/rrf.py        rrf_fuse(rankings, k=60). Pure-Python; score-
+                                                 scale-free; deterministic tie-break by chunk_id.
+                                                 Returns (chunk_id, score) sorted desc
+  backend/cardiorisk/rag/retrieval/rerank.py     BaseReranker Protocol + MockReranker (token-
+                                                 overlap) + BGEReranker. BGEReranker uses
+                                                 sentence_transformers.CrossEncoder over
+                                                 BAAI/bge-reranker-v2-m3 (FlagEmbedding's
+                                                 FlagReranker uses Tokenizer.prepare_for_model
+                                                 which was removed in transformers 5.x; the
+                                                 CrossEncoder path is current)
+  backend/cardiorisk/rag/retrieval/pipeline.py   RetrievalPipeline.retrieve(query, top_k,
+                                                 with_rerank). Vector + BM25 fan-out at
+                                                 per_leg_k=50; RRF fuses; optional cross-
+                                                 encoder rerank; returns RetrievedChunk
+                                                 dataclasses with rrf_score + (optional)
+                                                 rerank_score breakdown
+  backend/cardiorisk/rag/eval_retrieval/__init__.py  package skeleton + module map for the eval
+                                                     orchestrator
+  backend/cardiorisk/rag/eval_retrieval/loader.py    load_questions(): reads + JSON-Schema-
+                                                     validates eval/retrieval/questions.jsonl;
+                                                     supports skip_full_corpus (CI / fixture
+                                                     mode) AND skip_fixture (real-corpus mode)
+                                                     filters. Fixture Qs identified by
+                                                     expected_doc_id starting with "fixture_".
+                                                     Without skip_fixture the real-corpus run
+                                                     would cap at hit@5=10/50=0.20.
+  backend/cardiorisk/rag/eval_retrieval/scorer.py    score_question (per-Q hit/rank with
+                                                     expected_no_hit inversion logic) +
+                                                     aggregate_scores (hit@1 / hit@5 / MRR +
+                                                     2,000-resample bootstrap CIs + per-tag
+                                                     subgroup breakdown). Hit definition:
+                                                     (doc_id, page-range overlap) AND every
+                                                     keyword case-insensitive substring.
+                                                     Negative-case Qs flip to "no top-k chunk
+                                                     contains all keywords"
+  backend/cardiorisk/rag/eval_retrieval/figures.py   matplotlib renderers: hit_at_5_by_cell.png
+                                                     + mrr_by_cell.png (bar charts with
+                                                     bootstrap-CI error bars) +
+                                                     per_tag_winning_cell.png
+  backend/cardiorisk/rag/eval_retrieval/orchestrator.py  end-to-end driver. Loads manifest,
+                                                         builds vector + BM25 indices per
+                                                         strategy (with embed cache reuse),
+                                                         runs the full {chunker x rerank}
+                                                         matrix, writes per_cell.json +
+                                                         aggregate.json + 3 figures.
+                                                         default_config (full local) +
+                                                         smoke_config (1 chunker, MiniLM,
+                                                         no rerank, 500-resample, fixture
+                                                         only)
+  backend/cardiorisk/data/paths.py               adds CORPUS_INDEX + CORPUS_EMBED_CACHE +
+                                                 REPORTS_V1_RETRIEVAL +
+                                                 REPORTS_V1_RETRIEVAL_FIGURES constants
+  backend/scripts/build_index.py                 thin CLI; --strategy {token,semantic,hybrid,all}
+                                                 + --embedder {bge-m3,minilm,mock} +
+                                                 --use-fixture pass-through. OpenMP-guard
+                                                 preamble matches compute_explanations.py
+  backend/scripts/eval_retrieval.py              thin CLI; --smoke + --use-fixture +
+                                                 --rerank {both,on,off} + --strategies +
+                                                 --embedder + --reranker + --top-k +
+                                                 --per-leg-k + --n-resamples. OpenMP guard
+                                                 preamble HONOURS the optional
+                                                 CARDIORISK_TORCH_THREADS env var (was a hard
+                                                 torch.set_num_threads(1) before the Phase
+                                                 3.2 close-out; the env override lifts it
+                                                 to ~5x faster local rerank since this
+                                                 script never imports TabICL/XGBoost so the
+                                                 OpenMP-deadlock risk that motivated the
+                                                 hard cap doesn't apply)
+  backend/tests/test_rag_retrieval_*.py          5 test modules: embed (cache + atomic
+                                                 write + L2-normalisation + determinism) +
+                                                 index (build + search + save/load round-
+                                                 trip + recall@k) + bm25 (tokeniser +
+                                                 stopwords + scoring + save/load) + rrf
+                                                 (closed-form math + tie-break) + rerank
+                                                 (mock-token-overlap + protocol) +
+                                                 pipeline (end-to-end with mock components)
+  backend/tests/test_rag_eval_*.py               2 test modules: scorer (hit/miss for
+                                                 standard + negative-case Qs + bootstrap
+                                                 determinism) + orchestrator (end-to-end
+                                                 smoke writing per_cell + aggregate + 3
+                                                 figures + JSON schema sanity)
+  backend/pyproject.toml                         adds hnswlib>=0.8,<0.9 + rank-bm25>=0.2,<0.3 +
+                                                 sentence-transformers>=3.2,<6.0 +
+                                                 FlagEmbedding>=1.3,<2; mypy
+                                                 ignore_missing_imports for hnswlib +
+                                                 rank_bm25 + sentence_transformers +
+                                                 FlagEmbedding + transformers
+  eval/retrieval/schema.json                     adds expected_no_hit (default false) +
+                                                 closed-set tags enum (risk_assessment,
+                                                 pharmacotherapy, lifestyle,
+                                                 communication, reclassifiers,
+                                                 follow_up, negative_case);
+                                                 source_phase enum extended to ["3.1","3.2"]
+  eval/retrieval/questions.jsonl                 grew from 10 to 50 hand-curated Qs:
+                                                 27 new fixture Qs across the 6-tag
+                                                 taxonomy + 5 negative-case Qs +
+                                                 8 new requires_full_corpus:true Qs.
+                                                 Distribution: ~6 Qs per tag + 5 negative
+  backend/cardiorisk/rag/ingest/sources.py       URL audit: RACGP Red Book URL re-resolved
+                                                 to /getattachment/<guid>/...aspx (old
+                                                 /red-book/...pdf was 404); NVDPA full
+                                                 guideline URL re-resolved to CloudFront
+                                                 (cvdcheck.org.au moved to a Next.js
+                                                 front-end); Quick Reference Guide retired
+                                                 in the rebuild — doc_id renamed to
+                                                 nvdpa_2023_summary_of_recommendations;
+                                                 cross-references ADR-015 amendment
+  reports/v1/retrieval/per_cell.json             6 cells (3 chunkers x 2 rerank conditions)
+                                                 over 10 real-corpus Qs; hit@1 / hit@5 /
+                                                 MRR + bootstrap CIs + per-tag subgroup
+                                                 breakdown (committed)
+  reports/v1/retrieval/aggregate.json            config + winning_cell (token, no rerank;
+                                                 hit@5=0.600, MRR=0.550) +
+                                                 per_chunker_max + rerank_lift (committed)
+  reports/v1/figures/retrieval/*.png             3 figures: hit_at_5_by_cell +
+                                                 mrr_by_cell + per_tag_winning_cell
+                                                 (committed; real-corpus headline)
+  docs/adr/015-corpus-ingestion.md               +Amendment 2026-05-15 (real-corpus URL
+                                                 audit: 3 URL changes + doc_id rename;
+                                                 lessons-recorded for Phase 4)
+  docs/adr/016-retrieval-stack.md                binding decision: bge-m3 dense + rank_bm25
+                                                 sparse + RRF (k=60) + bge-reranker-v2-m3
+                                                 cross-encoder + in-memory hnswlib
+                                                 graduating to pgvector in Phase 4 +
+                                                 50-Q eval matrix; +Amendment 2026-05-15
+                                                 (real-corpus chunker race resolved →
+                                                 token, no rerank; reranker REVERSED on
+                                                 real corpus → default with_rerank=False;
+                                                 Phase 3.2.1 token-window-size sweep
+                                                 dropped; URL audit cross-reference;
+                                                 fixture/real-corpus split via skip_fixture
+                                                 loader flag)
+  docs/research/13-retrieval-design.md           +§7 backfilled with real-corpus headline
+                                                 numbers (6 cells x 10 Qs; per-tag
+                                                 breakdown for winning cell; fixture
+                                                 sanity-check archive); +§8 honest
+                                                 weaknesses extended (n=10 hard limit,
+                                                 reranker-direction-reversed open question);
+                                                 +§8.5 real-corpus URL-audit narrative
+  docs/research/README.md                        index entry for 13-retrieval-design.md
+                                                 + ADR-016 row
+  docs/adr/README.md                             index updated for ADR-016 (placeholder
+                                                 numbering bumped: 017 Citation+NLI,
+                                                 018 LLM, 019 Brand)
+  MODEL_CARD.md                                  §9 Retrieval rewritten around real-corpus
+                                                 headline (token chunker + no rerank wins;
+                                                 fixture eval relegated to sanity-check);
+                                                 reranker-reversal documented under
+                                                 "Reading the table"; reproduce steps now
+                                                 include CARDIORISK_TORCH_THREADS=8 + the
+                                                 fetch_corpus + build_corpus + build_index
+                                                 sequence
+  data/checksums/corpus_*.sha256                 3 lockfiles regenerated against the new
+                                                 URLs (RACGP Red Book + NVDPA 2023 full
+                                                 guideline + NVDPA 2023 Summary of
+                                                 recommendations)
+  .github/workflows/ci.yml                       adds Phase 3.2 smoke step in test-python:
+                                                 build_index.py + eval_retrieval.py with
+                                                 --use-fixture + --embedder minilm; HF
+                                                 cache via actions/cache keyed by
+                                                 hf-cache-minilm-l6-v2-v1 (~60s on
+                                                 ubuntu-latest after warm cache)
+  .gitignore                                     reports/v1/retrieval/smoke/ +
+                                                 reports/v1/figures/retrieval/smoke/
+                                                 ignored; data/external/* already covers
+                                                 the index/ + embed_cache/ paths
+  AGENTS.md                                      Phase 3.2 status block + open decisions
+                                                 refreshed + Phase 3.2 deliverables block
+
+Phase 3.1 deliverables (merged 2026-05-06):
   backend/cardiorisk/rag/__init__.py             package skeleton + module map; documents the
                                                  ingest-only scope (no retrieval, no generator)
                                                  and cross-references ADR-015

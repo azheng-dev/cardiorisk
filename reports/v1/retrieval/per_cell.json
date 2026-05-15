@@ -1,0 +1,406 @@
+{
+  "config": {
+    "strategies": [
+      "token",
+      "semantic",
+      "hybrid"
+    ],
+    "rerank_conditions": [
+      false,
+      true
+    ],
+    "embedder": "bge-m3",
+    "reranker": "bge-reranker-v2-m3",
+    "use_fixture": false,
+    "top_k": 5,
+    "per_leg_k": 50,
+    "smoke": false,
+    "n_resamples": 2000
+  },
+  "cells": [
+    {
+      "label": "token_norerank",
+      "chunker": "token",
+      "with_rerank": false,
+      "embedder": "bge-m3",
+      "reranker": null,
+      "n_questions": 10,
+      "hit_at_1": 0.5,
+      "hit_at_5": 0.6,
+      "mrr": 0.55,
+      "ci_hit_at_1": {
+        "point": 0.5,
+        "lower": 0.2,
+        "upper": 0.8,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.55,
+        "lower": 0.25,
+        "upper": 0.8,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.8,
+          "hit_at_5": 1.0,
+          "mrr": 0.9,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    },
+    {
+      "label": "token_rerank",
+      "chunker": "token",
+      "with_rerank": true,
+      "embedder": "bge-m3",
+      "reranker": "bge-reranker-v2-m3",
+      "n_questions": 10,
+      "hit_at_1": 0.3,
+      "hit_at_5": 0.6,
+      "mrr": 0.3783333333333333,
+      "ci_hit_at_1": {
+        "point": 0.3,
+        "lower": 0.0,
+        "upper": 0.6,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.3783333333333333,
+        "lower": 0.13991666666666666,
+        "upper": 0.645,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.4,
+          "hit_at_5": 1.0,
+          "mrr": 0.5566666666666666,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    },
+    {
+      "label": "semantic_norerank",
+      "chunker": "semantic",
+      "with_rerank": false,
+      "embedder": "bge-m3",
+      "reranker": null,
+      "n_questions": 10,
+      "hit_at_1": 0.5,
+      "hit_at_5": 0.6,
+      "mrr": 0.5333333333333333,
+      "ci_hit_at_1": {
+        "point": 0.5,
+        "lower": 0.2,
+        "upper": 0.8,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.5333333333333333,
+        "lower": 0.23333333333333334,
+        "upper": 0.8,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.8,
+          "hit_at_5": 1.0,
+          "mrr": 0.8666666666666668,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    },
+    {
+      "label": "semantic_rerank",
+      "chunker": "semantic",
+      "with_rerank": true,
+      "embedder": "bge-m3",
+      "reranker": "bge-reranker-v2-m3",
+      "n_questions": 10,
+      "hit_at_1": 0.5,
+      "hit_at_5": 0.6,
+      "mrr": 0.52,
+      "ci_hit_at_1": {
+        "point": 0.5,
+        "lower": 0.2,
+        "upper": 0.8,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.52,
+        "lower": 0.24,
+        "upper": 0.82,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.8,
+          "hit_at_5": 1.0,
+          "mrr": 0.8400000000000001,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    },
+    {
+      "label": "hybrid_norerank",
+      "chunker": "hybrid",
+      "with_rerank": false,
+      "embedder": "bge-m3",
+      "reranker": null,
+      "n_questions": 10,
+      "hit_at_1": 0.4,
+      "hit_at_5": 0.6,
+      "mrr": 0.4666666666666666,
+      "ci_hit_at_1": {
+        "point": 0.4,
+        "lower": 0.1,
+        "upper": 0.7,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.4666666666666666,
+        "lower": 0.19999999999999998,
+        "upper": 0.7333333333333333,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.6,
+          "hit_at_5": 1.0,
+          "mrr": 0.7333333333333333,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 1.0,
+          "hit_at_5": 1.0,
+          "mrr": 1.0,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    },
+    {
+      "label": "hybrid_rerank",
+      "chunker": "hybrid",
+      "with_rerank": true,
+      "embedder": "bge-m3",
+      "reranker": "bge-reranker-v2-m3",
+      "n_questions": 10,
+      "hit_at_1": 0.2,
+      "hit_at_5": 0.6,
+      "mrr": 0.32333333333333336,
+      "ci_hit_at_1": {
+        "point": 0.2,
+        "lower": 0.0,
+        "upper": 0.5,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_hit_at_5": {
+        "point": 0.6,
+        "lower": 0.3,
+        "upper": 0.9,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "ci_mrr": {
+        "point": 0.32333333333333336,
+        "lower": 0.12,
+        "upper": 0.5700000000000001,
+        "n_resamples": 2000,
+        "alpha": 0.05
+      },
+      "per_tag": {
+        "lifestyle": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 2.0
+        },
+        "risk_assessment": {
+          "hit_at_1": 0.4,
+          "hit_at_5": 1.0,
+          "mrr": 0.6066666666666667,
+          "n": 5.0
+        },
+        "pharmacotherapy": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        },
+        "reclassifiers": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 1.0,
+          "mrr": 0.2,
+          "n": 1.0
+        },
+        "communication": {
+          "hit_at_1": 0.0,
+          "hit_at_5": 0.0,
+          "mrr": 0.0,
+          "n": 1.0
+        }
+      }
+    }
+  ]
+}
