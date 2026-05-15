@@ -84,6 +84,15 @@ jobs:
     name: test-python
     runs-on: ubuntu-latest
     needs: lint-python
+    # The hnswlib==0.8.x prebuilt manylinux wheel uses CPU intrinsics
+    # (AVX / AVX2 / AVX-512) that are absent on some GitHub Actions
+    # ubuntu-latest runners; `import hnswlib` then crashes the
+    # interpreter at pytest-collection time with SIGILL ("Fatal Python
+    # error: Illegal instruction"). Force uv to compile hnswlib from
+    # source on the runner so the binary matches the CPU it runs on.
+    # All other deps stay on the cached wheel path.
+    env:
+      UV_NO_BINARY_PACKAGE: hnswlib
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
