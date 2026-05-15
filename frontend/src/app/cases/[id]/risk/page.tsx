@@ -8,6 +8,8 @@ import { AppShell } from "@/components/app-shell/app-shell";
 import { CaseLoader } from "@/components/app-shell/case-loader";
 import { HitlActionBar } from "@/components/domain/hitl-action-bar";
 import { RiskScoreGauge } from "@/components/domain/risk-score-gauge";
+import { RiskScreenSkeleton } from "@/components/domain/screen-skeletons";
+import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -46,7 +48,9 @@ export default function RiskDashboardPage({
   const { id } = use(params);
   return (
     <AppShell caseId={id}>
-      <CaseLoader caseId={id}>{(snap) => <RiskView snap={snap} />}</CaseLoader>
+      <CaseLoader caseId={id} skeleton={<RiskScreenSkeleton />}>
+        {(snap) => <RiskView snap={snap} />}
+      </CaseLoader>
     </AppShell>
   );
 }
@@ -77,7 +81,7 @@ function RiskView({ snap }: { snap: CaseSnapshot }) {
     : PIPELINE.length;
 
   return (
-    <div className="flex flex-col gap-6">
+    <PageFade className="flex flex-col gap-6">
       <Stepper steps={stepperSteps} current={currentIdx} className="overflow-x-auto" />
 
       <header className="flex flex-col gap-3">
@@ -195,6 +199,6 @@ function RiskView({ snap }: { snap: CaseSnapshot }) {
         Approving advances the workflow.{" "}
         <ArrowRight className="-mt-0.5 inline size-3" aria-hidden /> Guideline
       </p>
-    </div>
+    </PageFade>
   );
 }

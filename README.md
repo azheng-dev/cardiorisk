@@ -10,7 +10,34 @@ The system takes a synthetic patient profile, runs a calibrated tabular ML risk 
 
 ## Status
 
-`pre-alpha` — Phase 0 (bootstrap) in progress. No product code yet. See [AGENTS.md](./AGENTS.md) for the full phased roadmap and current status block.
+`alpha` — Phases 0–4 shipped (bootstrap, research, v1 risk model, RAG, citation-mandatory generator, LangGraph orchestration). Phase 5 (UI) is in progress; Phase 5.4 ships the polished workflow, mobile shell, and the page-level accessibility gate. See [AGENTS.md](./AGENTS.md) for the full phased roadmap and current status block.
+
+## Workflow walkthrough
+
+The Phase 5 UI walks a clinician through the four agent stages with a HITL gate after every one. Screenshots below are captured against the in-process mock (`NEXT_PUBLIC_AGENT_MOCK=true`) so they match exactly what a clean clone renders. Every shot is also captured in dark mode under `docs/design/screenshots/<screen>-dark.png`.
+
+| Stage | Screen | What it shows |
+| --- | --- | --- |
+| Triage | [`/cases/new`](./docs/design/screenshots/new-case-light.png) | Synthetic patient input form mapped 1:1 to the HFP schema; sample patient + reset controls. |
+| Risk | [`/cases/[id]/risk`](./docs/design/screenshots/risk-light.png) | Calibrated 5-year probability + AusCVDRisk band + top-5 KernelSHAP attributions on the calibrated model. |
+| Guideline | [`/cases/[id]/guideline`](./docs/design/screenshots/guideline-light.png) | Citation-mandatory RAG answer with per-claim NLI verdicts (supported / suppressed / uncited). |
+| Letter | [`/cases/[id]/letter`](./docs/design/screenshots/letter-light.png) | Edit-in-place specialist referral draft surfacing only the verified claims; redactions are flagged. |
+| Audit | [`/cases/[id]/audit`](./docs/design/screenshots/audit-light.png) | Per-stage timing, retries, and HITL approve / edit / reject decisions captured by the LangGraph wrapper. |
+
+To run the UI locally:
+
+```bash
+cd frontend
+pnpm install
+NEXT_PUBLIC_AGENT_MOCK=true pnpm dev
+```
+
+To regenerate the screenshots after a UI change:
+
+```bash
+cd frontend
+pnpm screenshots
+```
 
 ## Why this exists
 
@@ -31,7 +58,7 @@ To demonstrate, in a single shipped artefact:
 
 ## Getting started
 
-This repo is in pre-alpha — public surfaces are intentionally minimal. A reproducible install will land at the end of Phase 2. For now:
+A reproducible install ships in Phase 8. The current alpha runs end-to-end against an in-process mock so the UI is fully usable without any backend.
 
 ```bash
 # clone

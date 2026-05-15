@@ -8,7 +8,9 @@ import { AppShell } from "@/components/app-shell/app-shell";
 import { CaseLoader } from "@/components/app-shell/case-loader";
 import { CitationChip } from "@/components/domain/citation-chip";
 import { HitlActionBar } from "@/components/domain/hitl-action-bar";
+import { LetterScreenSkeleton } from "@/components/domain/screen-skeletons";
 import { EmptyState } from "@/components/domain/states";
+import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,7 +33,9 @@ export default function LetterPage({
   const { id } = use(params);
   return (
     <AppShell caseId={id}>
-      <CaseLoader caseId={id}>{(snap) => <LetterView snap={snap} />}</CaseLoader>
+      <CaseLoader caseId={id} skeleton={<LetterScreenSkeleton />}>
+        {(snap) => <LetterView snap={snap} />}
+      </CaseLoader>
     </AppShell>
   );
 }
@@ -76,7 +80,7 @@ function LetterView({ snap }: { snap: CaseSnapshot }) {
   }
 
   return (
-    <div className="flex flex-col gap-6">
+    <PageFade className="flex flex-col gap-6">
       <header className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="accent">
@@ -204,6 +208,6 @@ function LetterView({ snap }: { snap: CaseSnapshot }) {
         disabled={decide.pending}
         onDecide={(d) => void decide.run(d).then(() => router.push(`/cases/${snap.case_id}/audit`))}
       />
-    </div>
+    </PageFade>
   );
 }

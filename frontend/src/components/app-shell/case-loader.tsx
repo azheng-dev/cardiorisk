@@ -12,12 +12,17 @@ import { useCaseStore } from "@/lib/agents/store";
  * yields a ready snapshot to the inner render-prop. Centralises the
  * loading / error / not-found UX so every screen renders the same
  * states with the same copy.
+ *
+ * Per-screen layouts pass a `skeleton` so the loading state matches
+ * the real layout — no jump when the snapshot lands.
  */
 export function CaseLoader({
   caseId,
+  skeleton,
   children,
 }: {
   caseId: string;
+  skeleton?: React.ReactNode;
   children: (snap: CaseSnapshot) => React.ReactNode;
 }) {
   const { active, loading, error, load } = useCaseStore();
@@ -27,7 +32,7 @@ export function CaseLoader({
   }, [caseId, load]);
 
   if (loading && !active) {
-    return <LoadingState rows={5} label={`Loading case ${caseId}…`} />;
+    return skeleton ?? <LoadingState rows={5} label={`Loading case ${caseId}…`} />;
   }
   if (error && !active) {
     return (

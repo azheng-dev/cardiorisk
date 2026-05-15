@@ -8,7 +8,9 @@ import { AppShell } from "@/components/app-shell/app-shell";
 import { CaseLoader } from "@/components/app-shell/case-loader";
 import { CitationChip } from "@/components/domain/citation-chip";
 import { HitlActionBar } from "@/components/domain/hitl-action-bar";
+import { GuidelineScreenSkeleton } from "@/components/domain/screen-skeletons";
 import { EmptyState } from "@/components/domain/states";
+import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,7 +25,9 @@ export default function GuidelinePage({
   const { id } = use(params);
   return (
     <AppShell caseId={id}>
-      <CaseLoader caseId={id}>{(snap) => <GuidelineView snap={snap} />}</CaseLoader>
+      <CaseLoader caseId={id} skeleton={<GuidelineScreenSkeleton />}>
+        {(snap) => <GuidelineView snap={snap} />}
+      </CaseLoader>
     </AppShell>
   );
 }
@@ -48,7 +52,7 @@ function GuidelineView({ snap }: { snap: CaseSnapshot }) {
   const uncited = claims.filter((c) => c.verdict === "uncited");
 
   return (
-    <div className="flex flex-col gap-6">
+    <PageFade className="flex flex-col gap-6">
       <header className="flex flex-col gap-3">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="info">
@@ -147,7 +151,7 @@ function GuidelineView({ snap }: { snap: CaseSnapshot }) {
         Approving advances the workflow.{" "}
         <ArrowRight className="-mt-0.5 inline size-3" aria-hidden /> Letter
       </p>
-    </div>
+    </PageFade>
   );
 }
 

@@ -24,10 +24,17 @@ const LABELS: Record<ThemeChoice, string> = {
 /**
  * Theme rotator. Click cycles light -> dark -> system -> light.
  *
+ * The displayed icon reflects the **stored choice** (`theme`), not the
+ * resolved colour scheme — so a user who explicitly picked "system"
+ * sees the Monitor glyph regardless of whether their OS resolved it
+ * to light or dark. The next-step label uses the *next* choice in the
+ * cycle so screen readers announce "Switch to dark theme" / "Switch
+ * to system theme" deterministically.
+ *
  * SSR safety: next-themes can't know the resolved theme until after
- * hydration, so the icon is hidden on the first server render to avoid
- * a hydration mismatch and a flash. Empty <span> placeholder reserves
- * the layout slot.
+ * hydration, so the icon is hidden on the first server render to
+ * avoid a hydration mismatch and a flash. Empty <span> placeholder
+ * reserves the layout slot.
  */
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -35,8 +42,6 @@ export function ThemeToggle() {
   useEffect(() => setMounted(true), []);
 
   const current: ThemeChoice = theme === "dark" ? "dark" : theme === "light" ? "light" : "system";
-  // ORDER is a non-empty const tuple so the modulo lookup always
-  // resolves; assert non-undefined to satisfy noUncheckedIndexedAccess.
   const next: ThemeChoice = ORDER[(ORDER.indexOf(current) + 1) % ORDER.length] as ThemeChoice;
   const Icon = ICONS[current];
 
@@ -44,7 +49,8 @@ export function ThemeToggle() {
     <Button
       variant="ghost"
       size="icon"
-      aria-label={`Switch to ${LABELS[next].toLowerCase()}`}
+      aria-label={`Theme: ${LABELS[current].toLowerCase()}. Switch to ${LABELS[next].toLowerCase()}.`}
+      title={`Switch to ${LABELS[next].toLowerCase()}`}
       onClick={() => setTheme(next)}
     >
       {mounted ? <Icon className="size-4" aria-hidden /> : <span className="size-4" />}
