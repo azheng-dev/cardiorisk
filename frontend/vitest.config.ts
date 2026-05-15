@@ -14,5 +14,8 @@ export default defineConfig({
     environment: "jsdom",
     include: ["src/**/*.test.ts", "src/**/*.test.tsx", "tests/**/*.test.ts", "tests/**/*.test.tsx"],
     setupFiles: ["./vitest.setup.ts"],
+    env: {
+      NEXT_PUBLIC_AGENT_MOCK: "true",
+    },
   },
 });

@@ -51,31 +51,43 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 5.2 (Component system + Ladle catalog + axe-playwright
-                      a11y gate) in progress on feat/phase-5-2-component-system,
-                      auto-merge per the AGENTS §0 finish-line grant. Phase 5.2
-                      lifts the Phase 5.3 widget vocabulary forward and locks
-                      it down behind an automated accessibility gate: a 30-
-                      primitive shadcn-style catalog (Radix + cva + Phase 5.1
-                      brand tokens) covering every form / overlay / nav
-                      surface, a 7-primitive domain layer (RiskScoreGauge /
-                      CitationChip / HitlActionBar / AuditTimelineItem /
-                      EmptyState / ErrorState / LoadingState), an 80-story
-                      Ladle catalog (CSF-3, static-buildable, ready for Phase
-                      8 to deploy as /catalog on Vercel), 35 RTL/Vitest unit
-                      tests covering keyboard / focus / state contracts, and
-                      an axe-playwright CI gate that walks every story x
-                      {light, dark} and fails on serious or critical WCAG
-                      violations. Caught + fixed five real WCAG-AA contrast
-                      bugs in the Phase 5.1 palette (accent at L=54% only
-                      hit 4.37:1; pushed to L=46%; same fix applied to
-                      status / risk / fg-muted tokens) and one real Radix
-                      misuse (ScrollArea viewport not keyboard-focusable).
-                      Documented exemption list (cmdk's aria-required-
-                      children/parent only). Binding decisions in ADR-021;
-                      design walkthrough in docs/research/16-component-
-                      system-design.md.
-Last checkpoint:      Phase 5.1 (Brand identity) APPROVED by user 2026-05-15
+Current phase:        Phase 5.3 (Workflow screens) in progress on
+                      feat/phase-5-3-screens, auto-merge per the AGENTS §0
+                      finish-line grant. Phase 5.3 lands the five product
+                      surfaces that exercise the Phase 4 LangGraph agents:
+                      `/cases/new` (patient input form, react-hook-form +
+                      zod-resolver against the same `patientInputSchema` the
+                      backend validates against, "Load sample patient"
+                      ergonomics), `/cases/[id]/risk` (RiskScoreGauge +
+                      top-5 SHAP-style attribution bars + triage summary +
+                      stepper), `/cases/[id]/guideline` (tabs split the
+                      generated answer from per-claim CitationChip audit;
+                      summary tiles for supported / suppressed / uncited
+                      claims), `/cases/[id]/letter` (monospace draft with
+                      edit-in-place + copy-to-clipboard + always-visible
+                      "Redacted claims" panel), and `/cases/[id]/audit`
+                      (AuditTimelineItem stack of HITL decisions + a stage-
+                      execution table). All screens hang off a persistent
+                      AppShell (left workflow nav + Synthetic-data-only
+                      banner). Agent surface lives behind a single typed
+                      client (`lib/agents/client.ts`) with two modes: an
+                      in-process MockStore (`NEXT_PUBLIC_AGENT_MOCK=true`,
+                      default in `.env.example`) that returns objects
+                      satisfying the same zod `caseSnapshotSchema` the live
+                      API does, and a `fetch`-against-`NEXT_PUBLIC_API_BASE_URL`
+                      live mode for Phase 8. zustand `useCaseStore` is the
+                      single source of truth for the active snapshot; side
+                      nav, stepper and HITL bar all read its `next_stage`.
+                      Three new contract tests in `lib/agents/agents.test.ts`
+                      (38 tests total; 35 from Phase 5.2). Type-check + Biome
+                      + Next build + axe-on-stories all green. Binding
+                      decisions in ADR-022; design walkthrough in
+                      docs/research/17-screens-design.md.
+Last checkpoint:      Phase 5.2 (Component system + Ladle catalog + axe-playwright
+                      a11y gate) auto-merged on the AGENTS §0 finish-line grant
+                      (PR #18 squash-merged 08f320b; axe-ts now a required
+                      status check on main).
+                      Phase 5.1 (Brand identity) APPROVED by user 2026-05-15
                       (PR #17 squash-merged commit 27187e7; Gate A passed).
                       Phase 4 (LangGraph 4-agent orchestration with HITL gates +
                       FastAPI surface + 30-case mini-eval) auto-merged on the
@@ -145,14 +157,36 @@ Last checkpoint:      Phase 5.1 (Brand identity) APPROVED by user 2026-05-15
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 5.2 PR review + auto-merge once axe-ts + the existing
-                        7 required checks all go green (no Gate B / human review
-                        required for 5.2 per the AGENTS §0 finish-line grant; UI
-                        Gate B lands at the end of Phase 5.4).
-                      - Branch-protection update on first green axe-ts run on
-                        main: add `axe-ts` to required_status_checks (mirrors
-                        ADR-007 §"Bypass log" discipline; tracked in ADR-021
-                        §"A11y gate").
+Open decisions:       - Phase 5.3 PR review + auto-merge once the existing 8 required
+                        checks all go green (no Gate B / human review required
+                        for 5.3 per the AGENTS §0 finish-line grant; Gate B
+                        lands at the end of Phase 5.4 with the full UI walkthrough).
+                      - Phase 5.3 binding decisions (ADR-022): 5 routes
+                        (`/cases/new` + `/cases/[id]/{risk,guideline,letter,
+                        audit}`); zod-shared agent client with
+                        `NEXT_PUBLIC_AGENT_MOCK` flag; in-process MockStore for
+                        local dev / CI; live mode flips to `fetch` against
+                        `NEXT_PUBLIC_API_BASE_URL` (wired in Phase 8); zustand
+                        `useCaseStore` as the single source of truth for the
+                        active snapshot; `useDecide` adapter between the
+                        Phase-5.2 `HitlActionBar` decision shape and the API's
+                        `DecideRequest`; persistent AppShell (left workflow nav
+                        + Synthetic-data-only banner) on every `/cases/*` route.
+                        Three new contract tests in `lib/agents/agents.test.ts`
+                        lock the mock against the live schema and the HITL
+                        state-machine invariants.
+                      - Phase 5.3 frontend env-var contract: `NEXT_PUBLIC_AGENT_MOCK`
+                        (`true` in `.env.example` + Vitest, `false` in Vercel
+                        production) + `NEXT_PUBLIC_API_BASE_URL` (empty in
+                        `.env.example`, set to the Railway deployment URL in
+                        Phase 8). Both surface in the new-case page banner so
+                        a reviewer always knows which surface they're hitting.
+                      - Deferred to Phase 5.4: page-level axe-playwright sweep
+                        across the 5 new routes; Framer Motion stage transitions;
+                        loading-state skeleton variants per screen; mobile pass
+                        on the dashboard side panel; demo screencast / GIF for
+                        the README; theme-toggle "switch to ..." copy bug from
+                        Phase 5.1 review.
                       - Phase 5.2 binding decisions (ADR-021): shadcn-pattern
                         primitives in `frontend/src/components/ui/*.tsx` on top
                         of `@radix-ui/*`; domain primitives in
@@ -174,13 +208,14 @@ Open decisions:       - Phase 5.2 PR review + auto-merge once axe-ts + the exist
                         dark-mode contrast survives. ScrollArea viewport got
                         `tabIndex={0}` + visible focus ring (was unreachable
                         by keyboard).
-                      - Deferred to Phase 5.3 (5 screens): Combobox compositional
-                        recipe (cmdk + Popover); Stepper integration into the
-                        agent-flow chrome; Toast wiring at the FastAPI client.
+                      - Phase 5.3 picked up: Stepper integrated into the risk
+                        dashboard agent-flow chrome. Combobox + Toast recipes
+                        deferred to Phase 5.4 (no screen needed them yet).
                       - Deferred to Phase 5.4 (polish + Gate B walkthrough):
                         cross-browser axe sweep (Firefox + WebKit); visual-
                         regression snapshot diff via playwright; Framer Motion
-                        accents; mobile pass.
+                        accents; mobile pass; page-level axe across the 5
+                        Phase-5.3 routes.
                       - Phase 4 PR review + merge approval (auto on CI-green per the
                         AGENTS §0 finish-line grant; non-UI phase).
                       - Phase 4 result-of-record (Mock-LLM + always-entail NLI +
@@ -268,9 +303,14 @@ Open decisions:       - Phase 5.2 PR review + auto-merge once axe-ts + the exist
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(ui): Phase 5.2 — shadcn-pattern catalog + Ladle + axe
-                      a11y gate on feat/phase-5-2-component-system; auto-merge
-                      per the AGENTS §0 finish-line grant on CI green.
+Last meaningful PR:   feat(ui): Phase 5.3 — workflow screens (input / risk /
+                      guideline / letter / audit + AppShell + zod-shared
+                      mock client + zustand store) on feat/phase-5-3-screens;
+                      auto-merge per the AGENTS §0 finish-line grant on CI
+                      green.
+                      #18 feat(ui): Phase 5.2 — shadcn-pattern catalog + Ladle +
+                      axe a11y gate (auto-merged 2026-05-15 commit 08f320b;
+                      axe-ts now a required status check on main).
                       #17 feat(brand): Phase 5.1 — brand identity (palette, type,
                       logo, preview page) (Gate A APPROVED + merged 2026-05-15
                       commit 27187e7).
@@ -358,11 +398,116 @@ Last eval run:        Phase 4 agent eval (full 30-case auto-approve harness; Moc
 Branch protection on main (live, set 2026-05-05):
   required_approving_review_count: 0     (solo phase; see ADR-007)
   required_status_checks:                secret-scan, lint-python, type-check-python,
-                                         test-python, lint-ts, type-check-ts, test-ts
+                                         test-python, lint-ts, type-check-ts, test-ts,
+                                         axe-ts (added 2026-05-15 with Phase 5.2)
   required_signatures:                   true
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 5.3 deliverables (in progress on feat/phase-5-3-screens; auto-merge per §0):
+  frontend/src/lib/agents/schema.ts                    Zod mirror of the Phase 4 Pydantic
+                                                       AgentState surface: PatientInput,
+                                                       TriageResult, RiskResult,
+                                                       GuidelineResult (with embedded
+                                                       GeneratedAnswer + claim list +
+                                                       NLI verdict per claim), LetterResult,
+                                                       AuditEntry, AgentDecisionRecord,
+                                                       and the assembled CaseSnapshot. The
+                                                       same schema validates both mock and
+                                                       live API responses.
+  frontend/src/lib/agents/mock-fixture.ts              Deterministic single-case fixture
+                                                       (58-y-o male, ASY chest-pain, ST_Slope
+                                                       Flat) returning a calibrated
+                                                       19.3% probability + 5 SHAP-style
+                                                       attributions + 3 NLI-supported
+                                                       guideline citations + a referral
+                                                       letter draft + a 4-row audit log.
+  frontend/src/lib/agents/client.ts                    Single typed agent client (startCase,
+                                                       getCase, decideCase). MockStore
+                                                       branch fires when
+                                                       NEXT_PUBLIC_AGENT_MOCK=true; live
+                                                       branch fetches against
+                                                       NEXT_PUBLIC_API_BASE_URL. Both
+                                                       branches parse responses through
+                                                       caseSnapshotSchema, so a regression
+                                                       in either fails identically.
+  frontend/src/lib/agents/store.ts                     `useCaseStore` (zustand): single
+                                                       active CaseSnapshot + loading +
+                                                       error + start/load/decide/reset.
+  frontend/src/lib/agents/use-decide.ts                Adapter between Phase 5.2's
+                                                       HitlActionBar `kind: approve|edit|
+                                                       reject` shape and the API's
+                                                       `status: approved|edited|rejected`
+                                                       DecideRequest. Surfaces a `pending`
+                                                       flag for inline button disabling.
+  frontend/src/lib/agents/agents.test.ts               3 contract tests against the mock
+                                                       store: schema parseability,
+                                                       4-stage advance, reject short-
+                                                       circuit. Lock the mock to the same
+                                                       contract the live API exposes.
+  frontend/src/components/app-shell/app-shell.tsx      Persistent shell: top bar (Logo +
+                                                       Synthetic-data-only banner + brand /
+                                                       GitHub / theme toggle) + left
+                                                       workflow nav. Renders aria-current
+                                                       on the active route. Lazy stage nav
+                                                       items are gated on a caseId.
+  frontend/src/components/app-shell/case-loader.tsx    Render-prop wrapper that loads the
+                                                       active snapshot into the store and
+                                                       handles the loading / error /
+                                                       not-found states centrally.
+  frontend/src/app/cases/new/page.tsx                  Patient input form with
+                                                       react-hook-form + zod-resolver
+                                                       wired to patientInputSchema; "Load
+                                                       sample patient" ergonomics; mock
+                                                       and error banners; Triage CTA
+                                                       routes to /cases/{id}/risk.
+  frontend/src/app/cases/[id]/risk/page.tsx            Risk dashboard. Stepper across the
+                                                       4 stages + RiskScoreGauge + top-5
+                                                       SHAP-style bars + triage summary +
+                                                       suggested-action card + HITL bar.
+  frontend/src/app/cases/[id]/guideline/page.tsx       Guideline panel. Tabs split the
+                                                       generated answer from the per-claim
+                                                       audit; CitationChips inline +
+                                                       summary tiles for supported /
+                                                       suppressed / uncited.
+  frontend/src/app/cases/[id]/letter/page.tsx          Letter editor. Monospace pre-block
+                                                       with edit-in-place mode + copy-to-
+                                                       clipboard + always-visible
+                                                       "Redacted claims" panel + citations
+                                                       re-used in the letter.
+  frontend/src/app/cases/[id]/audit/page.tsx           Audit log. KPI tiles (wall time +
+                                                       retries + errors) + AuditTimelineItem
+                                                       stack of HITL decisions + a stage-
+                                                       execution table.
+  frontend/src/app/page.tsx                            Home-page CTA flipped to
+                                                       /cases/new ("Try the workflow ->")
+                                                       + Phase-5.3 badge.
+  frontend/.env.example                                Documents NEXT_PUBLIC_AGENT_MOCK
+                                                       (default: true) +
+                                                       NEXT_PUBLIC_API_BASE_URL (set in
+                                                       Vercel during Phase 8).
+  frontend/vitest.config.ts                            `env: { NEXT_PUBLIC_AGENT_MOCK:
+                                                       "true" }` so the contract tests
+                                                       hit the mock store deterministically.
+  docs/adr/022-workflow-screens.md                     Binding decision: Phase 5.3 IA +
+                                                       state + mock-vs-live + per-screen
+                                                       contracts; rejected alternatives
+                                                       (mega-page, TanStack, RSC); Phase
+                                                       5.4 follow-ups.
+  docs/research/17-screens-design.md                   Opinionated walkthrough: route-per-
+                                                       stage rationale, mock-vs-live
+                                                       fork analysis, zustand-vs-TanStack,
+                                                       per-screen design notes, honest
+                                                       weaknesses.
+  docs/adr/README.md                                   Index entry for ADR-022;
+                                                       placeholder ADR-023 set aside for
+                                                       Phase 7 / 8 deploy + observability.
+  docs/research/README.md                              Index entry for research note 17 +
+                                                       ADR-022.
+  AGENTS.md                                            Phase 5.3 status block + open
+                                                       decisions refreshed + Phase 5.3
+                                                       deliverables block.
 
 Phase 5.2 deliverables (in progress on feat/phase-5-2-component-system; auto-merge per §0):
   frontend/package.json                                Adds @radix-ui/{dialog,popover,tooltip,
