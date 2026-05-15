@@ -195,6 +195,14 @@ module = [
   "sentence_transformers", "sentence_transformers.*",
   "FlagEmbedding", "FlagEmbedding.*",
   "transformers", "transformers.*",
+  # Phase 3.3: anthropic + openai are optional runtime deps (the
+  # MockLLMClient is the CI default so we never install the SDKs in
+  # CI). The wrappers lazy-import them inside __init__ so missing
+  # packages only surface when someone actually constructs the real
+  # client; the mypy ignore lets the static check pass without
+  # pinning anthropic/openai versions in pyproject.toml.
+  "anthropic", "anthropic.*",
+  "openai", "openai.*",
 ]
 ignore_missing_imports = true
 

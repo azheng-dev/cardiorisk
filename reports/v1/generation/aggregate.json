@@ -1,0 +1,88 @@
+{
+  "config": {
+    "strategy": "token",
+    "embedder": "bge-m3",
+    "reranker": "bge-reranker-v2-m3",
+    "with_rerank": false,
+    "llm": "mock",
+    "nli": "mock",
+    "prompt_template": "citation_required.v1.md",
+    "use_fixture": false,
+    "top_k": 5,
+    "entail_threshold": 0.5,
+    "smoke": false,
+    "n_resamples": 2000
+  },
+  "n_cases": 12,
+  "n_positive": 6,
+  "n_refusal": 6,
+  "citation_precision": 1.0,
+  "keyword_recall": 0.041666666666666664,
+  "hallucination_rate": 0.16666666666666666,
+  "refusal_accuracy": 0.0,
+  "ci_keyword_recall": {
+    "point": 0.041666666666666664,
+    "lower": 0.0,
+    "upper": 0.125,
+    "n_resamples": 2000,
+    "alpha": 0.05
+  },
+  "ci_hallucination_rate": {
+    "point": 0.16666666666666666,
+    "lower": 0.0,
+    "upper": 0.5,
+    "n_resamples": 2000,
+    "alpha": 0.05
+  },
+  "ci_refusal_accuracy": {
+    "point": 0.0,
+    "lower": 0.0,
+    "upper": 0.0,
+    "n_resamples": 2000,
+    "alpha": 0.05
+  },
+  "per_tag": {
+    "refusal": {
+      "n": 6.0,
+      "keyword_recall": 0.0,
+      "citation_precision": 1.0,
+      "hallucination_rate": null,
+      "refusal_accuracy": 0.0
+    },
+    "lifestyle": {
+      "n": 2.0,
+      "keyword_recall": 0.0,
+      "citation_precision": 1.0,
+      "hallucination_rate": 1.0,
+      "refusal_accuracy": 0.0
+    },
+    "pharmacotherapy": {
+      "n": 4.0,
+      "keyword_recall": 0.0,
+      "citation_precision": 1.0,
+      "hallucination_rate": 0.0,
+      "refusal_accuracy": 0.0
+    },
+    "follow_up": {
+      "n": 2.0,
+      "keyword_recall": 0.0,
+      "citation_precision": 1.0,
+      "hallucination_rate": 0.0,
+      "refusal_accuracy": 0.0
+    },
+    "communication": {
+      "n": 3.0,
+      "keyword_recall": 0.16666666666666666,
+      "citation_precision": 1.0,
+      "hallucination_rate": 0.0,
+      "refusal_accuracy": 0.0
+    },
+    "risk_assessment": {
+      "n": 2.0,
+      "keyword_recall": 0.0,
+      "citation_precision": 1.0,
+      "hallucination_rate": 0.0,
+      "refusal_accuracy": null
+    }
+  }
+}

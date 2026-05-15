@@ -1,0 +1,446 @@
+{
+  "config": {
+    "strategy": "token",
+    "embedder": "bge-m3",
+    "reranker": "bge-reranker-v2-m3",
+    "with_rerank": false,
+    "llm": "mock",
+    "nli": "deberta",
+    "prompt_template": "citation_required.v1.md",
+    "use_fixture": false,
+    "top_k": 5,
+    "entail_threshold": 0.5,
+    "smoke": false,
+    "n_resamples": 2000
+  },
+  "cases": [
+    {
+      "id": "g025",
+      "tags": [
+        "refusal",
+        "lifestyle"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "heart healthy\nindependent of energy intake restriction, with no\nevidence of harm.183 eating \u2013 National Heart Foundation of Australia\n5. companion publications: theNational guide to a preventive health assessment for Aboriginal and Torres\nStrait Islander people(https://www.racgp.org.au/clinical-resources/clinical-guidelines/key-racgp-g.",
+      "raw_llm_text": "heart healthy\nindependent of energy intake restriction, with no\nevidence of harm.183 eating \u2013 National Heart Foundation of Australia\n5. [933b41078d23edf8] companion publications: theNational guide to a preventive health assessment for Aboriginal and Torres\nStrait Islander people(https://www.racgp.org.au/clinical-resources/clinical-guidelines/key-racgp-g. [a9da5ada9eabf139]",
+      "verified_claims": [
+        {
+          "text": "heart healthy\nindependent of energy intake restriction, with no\nevidence of harm.183 eating \u2013 National Heart Foundation of Australia\n5. companion publications: theNational guide to a preventive health assessment for Aboriginal and Torres\nStrait Islander people(https://www.racgp.org.au/clinical-resources/clinical-guidelines/key-racgp-g.",
+          "headline_chunk_id": "933b41078d23edf8",
+          "headline_score": 0.75537109375,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "933b41078d23edf8",
+        "a9da5ada9eabf139",
+        "23d10c6ce4be2b85",
+        "8f6ef43b931b12f7",
+        "ef2108684b9977bc"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g026",
+      "tags": [
+        "refusal",
+        "pharmacotherapy"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "\u2013 Injury prevention\nProfessor, Family Violence Prevention, Royal Women\u2019s Hospital and University of Melbourne Director,\nSafer Families Centre of Research Excellence Associate Professor Caroline Johnso. pressure target may promote adherence\nto treatment, consider setting a target Resources\nbased on individual CVD risk factors, in\n1.",
+      "raw_llm_text": "\u2013 Injury prevention\nProfessor, Family Violence Prevention, Royal Women\u2019s Hospital and University of Melbourne Director,\nSafer Families Centre of Research Excellence Associate Professor Caroline Johnso. [8f6ef43b931b12f7] pressure target may promote adherence\nto treatment, consider setting a target Resources\nbased on individual CVD risk factors, in\n1. [41f846130d81c880]",
+      "verified_claims": [
+        {
+          "text": "\u2013 Injury prevention\nProfessor, Family Violence Prevention, Royal Women\u2019s Hospital and University of Melbourne Director,\nSafer Families Centre of Research Excellence Associate Professor Caroline Johnso. pressure target may promote adherence\nto treatment, consider setting a target Resources\nbased on individual CVD risk factors, in\n1.",
+          "headline_chunk_id": "41f846130d81c880",
+          "headline_score": 0.51220703125,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "8f6ef43b931b12f7",
+        "41f846130d81c880",
+        "4a726c056618def1",
+        "2f0cefd3c151efa0",
+        "ef2108684b9977bc"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g027",
+      "tags": [
+        "refusal",
+        "pharmacotherapy"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "pc/zwaa093\n229. the potential harms.",
+      "raw_llm_text": "pc/zwaa093\n229. [70faa14537ce6e4b] the potential harms. [0a0efb140ea6b26f]",
+      "verified_claims": [
+        {
+          "text": "pc/zwaa093\n229. the potential harms.",
+          "headline_chunk_id": "0a0efb140ea6b26f",
+          "headline_score": 0.5224609375,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "70faa14537ce6e4b",
+        "0a0efb140ea6b26f",
+        "ef2108684b9977bc",
+        "41fe537cd875481e",
+        "e063bc95527e8838"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g028",
+      "tags": [
+        "refusal",
+        "follow_up"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "",
+      "raw_llm_text": ". [87e30bd35c39d48f] CVD risk assessment frequency and intervals\nusing the Aus CVD Risk Calculator\nRecommendations\nStrength Certainty of evidence\nIntervals between reassessments of CVD risk using the Australian Conditiona. [d620f76360058e3e]",
+      "verified_claims": [],
+      "suppressed_claims": [
+        {
+          "text": ".",
+          "cited_chunk_ids": [
+            "87e30bd35c39d48f"
+          ],
+          "best_entailment": 0.460205078125,
+          "reason": "no_passage_entails"
+        },
+        {
+          "text": "CVD risk assessment frequency and intervals\nusing the Aus CVD Risk Calculator\nRecommendations\nStrength Certainty of evidence\nIntervals between reassessments of CVD risk using the Australian Conditiona.",
+          "cited_chunk_ids": [
+            "d620f76360058e3e"
+          ],
+          "best_entailment": 0.395263671875,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "87e30bd35c39d48f",
+        "d620f76360058e3e",
+        "7ba5b3dbc7a2a282",
+        "8d9ce76a616e3fe5",
+        "87c6a40c0300d854"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g029",
+      "tags": [
+        "refusal",
+        "pharmacotherapy"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ. Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate.",
+      "raw_llm_text": "at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ. [aea5231b9bf6a0cf] Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate. [dd938d234757e9c6]",
+      "verified_claims": [
+        {
+          "text": "at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ.",
+          "headline_chunk_id": "aea5231b9bf6a0cf",
+          "headline_score": 0.56591796875,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        },
+        {
+          "text": "Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate.",
+          "headline_chunk_id": "dd938d234757e9c6",
+          "headline_score": 0.73046875,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "aea5231b9bf6a0cf",
+        "dd938d234757e9c6",
+        "a112eb2888cd20fe",
+        "87e30bd35c39d48f",
+        "6a26bf4273df8714"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g030",
+      "tags": [
+        "refusal",
+        "communication"
+      ],
+      "should_refuse": true,
+      "refused": false,
+      "verified_text": "may be further influenced by clinical conditions. on\nunderstanding and acceptance of risk, health negative health outcomes.",
+      "raw_llm_text": "may be further influenced by clinical conditions. [02ddcbbd84386a37] on\nunderstanding and acceptance of risk, health negative health outcomes. [bd1690e1efccd63a]",
+      "verified_claims": [
+        {
+          "text": "may be further influenced by clinical conditions. on\nunderstanding and acceptance of risk, health negative health outcomes.",
+          "headline_chunk_id": "bd1690e1efccd63a",
+          "headline_score": 0.5029296875,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "02ddcbbd84386a37",
+        "bd1690e1efccd63a",
+        "7df0f29e0f4c36b6",
+        "dd938d234757e9c6",
+        "46010d8d6efe0888"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g031",
+      "tags": [
+        "lifestyle"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "",
+      "raw_llm_text": "prevention\ncompared with usual, lower or no intake of\nomega-3 fatty acids. [31b5994d4b560af4] fish to reduce risk of coronary Strong Low\nheart disease (CHD) and death due to CHD. [e7f4e3f827fb1343]",
+      "verified_claims": [],
+      "suppressed_claims": [
+        {
+          "text": "prevention\ncompared with usual, lower or no intake of\nomega-3 fatty acids. fish to reduce risk of coronary Strong Low\nheart disease (CHD) and death due to CHD.",
+          "cited_chunk_ids": [
+            "31b5994d4b560af4",
+            "e7f4e3f827fb1343"
+          ],
+          "best_entailment": 0.467041015625,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "31b5994d4b560af4",
+        "e7f4e3f827fb1343",
+        "a9da5ada9eabf139",
+        "9e63b2f9ac392311",
+        "dde32e00c7f9549c"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g032",
+      "tags": [
+        "risk_assessment"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "",
+      "raw_llm_text": ") or stroke in a first-degree female relative aged <65 years or a first-degree male\nrelative aged <55 years. [8da1c258b32cfa24] female relative aged <65 years or a first-degree male\nrelative aged <55 years. [8d9ce76a616e3fe5]",
+      "verified_claims": [],
+      "suppressed_claims": [
+        {
+          "text": ") or stroke in a first-degree female relative aged <65 years or a first-degree male\nrelative aged <55 years. female relative aged <65 years or a first-degree male\nrelative aged <55 years.",
+          "cited_chunk_ids": [
+            "8da1c258b32cfa24",
+            "8d9ce76a616e3fe5"
+          ],
+          "best_entailment": 0.474609375,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "8da1c258b32cfa24",
+        "8d9ce76a616e3fe5",
+        "6a26bf4273df8714",
+        "87c6a40c0300d854",
+        "4a49f87aa26e80a5"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g033",
+      "tags": [
+        "risk_assessment"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "",
+      "raw_llm_text": "D) or stroke in a first-degree female relative aged <65 years or a first-\ndegree male relative aged <55 years. [3c9a9c1beb6d8bac] hypercholesterolaemia (FH).13\nResources\n1. [c9e5394129d45daf]",
+      "verified_claims": [],
+      "suppressed_claims": [
+        {
+          "text": "D) or stroke in a first-degree female relative aged <65 years or a first-\ndegree male relative aged <55 years. hypercholesterolaemia (FH).13\nResources\n1.",
+          "cited_chunk_ids": [
+            "3c9a9c1beb6d8bac",
+            "c9e5394129d45daf"
+          ],
+          "best_entailment": 0.463623046875,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "3c9a9c1beb6d8bac",
+        "c9e5394129d45daf",
+        "af6df0c066127e67",
+        "eb5118f72f3a2867",
+        "7604b1b3fdd0c88b"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g034",
+      "tags": [
+        "pharmacotherapy"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "to a person. at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ.",
+      "raw_llm_text": "to a person. [ef2108684b9977bc] at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ. [aea5231b9bf6a0cf]",
+      "verified_claims": [
+        {
+          "text": "to a person. at lower levels of risk.216\nstroke or MI (the risks of which are reduced by\nA systematic review of the published, peer reviewed BP-lowering and lipid-modifying medicines)\nliterature relating to differ.",
+          "headline_chunk_id": "aea5231b9bf6a0cf",
+          "headline_score": 0.64892578125,
+          "supporting_chunk_ids": [
+            "ef2108684b9977bc"
+          ],
+          "supporting_scores": [
+            0.5029296875
+          ]
+        }
+      ],
+      "suppressed_claims": [],
+      "retrieved_chunk_ids": [
+        "ef2108684b9977bc",
+        "aea5231b9bf6a0cf",
+        "7513933574e205f8",
+        "6cfda5372a55dd66",
+        "63766032c10944e9"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g035",
+      "tags": [
+        "communication",
+        "follow_up"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "",
+      "raw_llm_text": "\u2013 Injury prevention\nProfessor, Family Violence Prevention, Royal Women\u2019s Hospital and University of Melbourne Director,\nSafer Families Centre of Research Excellence Associate Professor Caroline Johnso. [8f6ef43b931b12f7] 2017;318(9):845\u201358. [23992374700a60ab]",
+      "verified_claims": [],
+      "suppressed_claims": [
+        {
+          "text": "\u2013 Injury prevention\nProfessor, Family Violence Prevention, Royal Women\u2019s Hospital and University of Melbourne Director,\nSafer Families Centre of Research Excellence Associate Professor Caroline Johnso. 2017;318(9):845\u201358.",
+          "cited_chunk_ids": [
+            "8f6ef43b931b12f7",
+            "23992374700a60ab"
+          ],
+          "best_entailment": 0.488525390625,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "8f6ef43b931b12f7",
+        "23992374700a60ab",
+        "cfd7cdf71e2d034b",
+        "de22266078d0226d",
+        "a9da5ada9eabf139"
+      ],
+      "metrics": {
+        "keyword_recall": 0.0,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    },
+    {
+      "id": "g036",
+      "tags": [
+        "communication"
+      ],
+      "should_refuse": false,
+      "refused": false,
+      "verified_text": "Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate.",
+      "raw_llm_text": "risk in cardiovascular disease. [050a52cf6d9ed0fb] Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate. [dd938d234757e9c6]",
+      "verified_claims": [
+        {
+          "text": "Moderate\ndetermined using the Australian cardiovascular disease risk calculator),\nconsider prescribing lipid-modifying medicines to reduce CVD risk,\nunless contraindicated or clinically inappropriate.",
+          "headline_chunk_id": "dd938d234757e9c6",
+          "headline_score": 0.73046875,
+          "supporting_chunk_ids": [],
+          "supporting_scores": []
+        }
+      ],
+      "suppressed_claims": [
+        {
+          "text": "risk in cardiovascular disease.",
+          "cited_chunk_ids": [
+            "050a52cf6d9ed0fb"
+          ],
+          "best_entailment": 0.484375,
+          "reason": "no_passage_entails"
+        }
+      ],
+      "retrieved_chunk_ids": [
+        "050a52cf6d9ed0fb",
+        "dd938d234757e9c6",
+        "5c4f3602cd03670d",
+        "eb5118f72f3a2867",
+        "717d19557d181e09"
+      ],
+      "metrics": {
+        "keyword_recall": 0.5,
+        "citation_precision": 1.0,
+        "hallucination": false
+      }
+    }
+  ]
+}
