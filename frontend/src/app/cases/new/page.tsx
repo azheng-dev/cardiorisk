@@ -9,6 +9,7 @@ import type { z } from "zod";
 
 import { AppShell } from "@/components/app-shell/app-shell";
 import { ErrorState } from "@/components/domain/states";
+import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -92,7 +93,7 @@ export default function NewCasePage() {
 
   return (
     <AppShell>
-      <div className="flex flex-col gap-6">
+      <PageFade className="flex flex-col gap-6">
         <header className="flex flex-col gap-3">
           <Badge variant="accent">
             <Stethoscope className="size-3.5" aria-hidden /> Stage 1 — Triage
@@ -161,17 +162,17 @@ export default function NewCasePage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Sex at birth</FormLabel>
-                      <FormControl>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="M">Male</SelectItem>
-                            <SelectItem value="F">Female</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="M">Male</SelectItem>
+                          <SelectItem value="F">Female</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -268,17 +269,17 @@ export default function NewCasePage() {
                   render={({ field }) => (
                     <FormItem className="sm:col-span-2 lg:col-span-1">
                       <FormLabel>Fasting blood sugar &gt; 120 mg/dL</FormLabel>
-                      <FormControl>
-                        <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3">
+                        <FormControl>
                           <Switch
                             checked={field.value === 1}
                             onCheckedChange={(v) => field.onChange(v ? 1 : 0)}
                           />
-                          <span className="text-[var(--color-fg-muted)] text-sm">
-                            {field.value === 1 ? "Hyperglycaemic" : "Normoglycaemic"}
-                          </span>
-                        </div>
-                      </FormControl>
+                        </FormControl>
+                        <span className="text-[var(--color-fg-muted)] text-sm">
+                          {field.value === 1 ? "Hyperglycaemic" : "Normoglycaemic"}
+                        </span>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -300,19 +301,19 @@ export default function NewCasePage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Chest-pain type</FormLabel>
-                      <FormControl>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <FormControl>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="TA">Typical angina (TA)</SelectItem>
-                            <SelectItem value="ATA">Atypical angina (ATA)</SelectItem>
-                            <SelectItem value="NAP">Non-anginal pain (NAP)</SelectItem>
-                            <SelectItem value="ASY">Asymptomatic (ASY)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="TA">Typical angina (TA)</SelectItem>
+                          <SelectItem value="ATA">Atypical angina (ATA)</SelectItem>
+                          <SelectItem value="NAP">Non-anginal pain (NAP)</SelectItem>
+                          <SelectItem value="ASY">Asymptomatic (ASY)</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -323,18 +324,18 @@ export default function NewCasePage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Resting ECG</FormLabel>
-                      <FormControl>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <FormControl>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Normal">Normal</SelectItem>
-                            <SelectItem value="ST">ST-T wave abnormality</SelectItem>
-                            <SelectItem value="LVH">Left-ventricular hypertrophy</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Normal">Normal</SelectItem>
+                          <SelectItem value="ST">ST-T wave abnormality</SelectItem>
+                          <SelectItem value="LVH">Left-ventricular hypertrophy</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -375,18 +376,18 @@ export default function NewCasePage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>ST-segment slope (peak exercise)</FormLabel>
-                      <FormControl>
-                        <Select value={field.value} onValueChange={field.onChange}>
+                      <Select value={field.value} onValueChange={field.onChange}>
+                        <FormControl>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Up">Up</SelectItem>
-                            <SelectItem value="Flat">Flat</SelectItem>
-                            <SelectItem value="Down">Down</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="Up">Up</SelectItem>
+                          <SelectItem value="Flat">Flat</SelectItem>
+                          <SelectItem value="Down">Down</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -427,7 +428,7 @@ export default function NewCasePage() {
             </Card>
           </form>
         </Form>
-      </div>
+      </PageFade>
     </AppShell>
   );
 }

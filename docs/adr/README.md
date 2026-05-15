@@ -26,8 +26,9 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [020](./020-brand-and-visual-identity.md) | Brand + visual identity (clinical-teal accent, semantic CSS-variable tokens, Tailwind v4, light + dark first-class) | Accepted | 5.1 |
 | [021](./021-component-system-and-a11y-gate.md) | Component system + a11y gate (Radix primitives + shadcn-pattern catalog + Ladle published catalog + axe-playwright CI gate) | Accepted | 5.2 |
 | [022](./022-workflow-screens.md) | Workflow screens, app shell, and mock-mode client (Next 15 App Router; 5 routes; zod-shared mock client; zustand store) | Accepted | 5.3 |
+| [023](./023-ui-polish-and-page-axe.md) | UI polish + page-level axe gate (Sheet-backed mobile shell; per-screen skeletons; Framer Motion page transitions; `axe:pages` CI job over the 5 routes; form-control a11y fix; dark-mode contrast fix) | Accepted | 5.4 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
 - ADR-019: LLM choice + multi-model evaluation (Phase 6).
-- ADR-023: Deploy + observability (Phase 7 / Phase 8).
+- ADR-024: Deploy + observability (Phase 7 / Phase 8).

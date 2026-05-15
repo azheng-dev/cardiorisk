@@ -6,6 +6,8 @@ import { use } from "react";
 import { AppShell } from "@/components/app-shell/app-shell";
 import { CaseLoader } from "@/components/app-shell/case-loader";
 import { AuditTimelineItem } from "@/components/domain/audit-timeline-item";
+import { AuditScreenSkeleton } from "@/components/domain/screen-skeletons";
+import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -29,7 +31,9 @@ export default function AuditPage({
   const { id } = use(params);
   return (
     <AppShell caseId={id}>
-      <CaseLoader caseId={id}>{(snap) => <AuditView snap={snap} />}</CaseLoader>
+      <CaseLoader caseId={id} skeleton={<AuditScreenSkeleton />}>
+        {(snap) => <AuditView snap={snap} />}
+      </CaseLoader>
     </AppShell>
   );
 }
@@ -54,7 +58,7 @@ function AuditView({ snap }: { snap: CaseSnapshot }) {
   }));
 
   return (
-    <div className="flex flex-col gap-6">
+    <PageFade className="flex flex-col gap-6">
       <header className="flex flex-col gap-3">
         <Badge variant="neutral">
           <History className="size-3.5" aria-hidden /> Audit log
@@ -115,7 +119,7 @@ function AuditView({ snap }: { snap: CaseSnapshot }) {
             Per-stage timings, retries, and any error captured by the LangGraph execution wrapper.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="overflow-x-auto">
           <Table>
             <TableCaption>From `AgentState.audit` (Phase 4 schema).</TableCaption>
             <TableHeader>
@@ -147,7 +151,7 @@ function AuditView({ snap }: { snap: CaseSnapshot }) {
           </Table>
         </CardContent>
       </Card>
-    </div>
+    </PageFade>
   );
 }
 

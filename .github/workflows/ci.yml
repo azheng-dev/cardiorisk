@@ -320,3 +320,43 @@ jobs:
         env:
           CI: "true"
         run: pnpm axe
+
+  # Phase 5.4: axe accessibility gate over the 5 Phase-5.3 workflow
+  # routes themselves (composed screens, not isolated primitives). Boots
+  # the Next.js production build with NEXT_PUBLIC_AGENT_MOCK=true so the
+  # mock case populates every screen deterministically, then walks each
+  # route through @axe-core/playwright in both colorScheme: "light" and
+  # colorScheme: "dark". Documented exemptions match the Ladle gate
+  # (cmdk aria-required-children/parent). Runs in ~60s after caches warm.
+  axe-pages:
+    name: axe-pages
+    runs-on: ubuntu-latest
+    needs: lint-ts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - name: Install
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('frontend/pnpm-lock.yaml') }}
+      - name: Install Playwright Chromium
+        working-directory: frontend
+        run: pnpm exec playwright install --with-deps chromium
+      - name: axe over screens
+        working-directory: frontend
+        env:
+          CI: "true"
+        run: pnpm axe:pages

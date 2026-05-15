@@ -51,39 +51,54 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 5.3 (Workflow screens) in progress on
-                      feat/phase-5-3-screens, auto-merge per the AGENTS §0
-                      finish-line grant. Phase 5.3 lands the five product
-                      surfaces that exercise the Phase 4 LangGraph agents:
-                      `/cases/new` (patient input form, react-hook-form +
-                      zod-resolver against the same `patientInputSchema` the
-                      backend validates against, "Load sample patient"
-                      ergonomics), `/cases/[id]/risk` (RiskScoreGauge +
-                      top-5 SHAP-style attribution bars + triage summary +
-                      stepper), `/cases/[id]/guideline` (tabs split the
-                      generated answer from per-claim CitationChip audit;
-                      summary tiles for supported / suppressed / uncited
-                      claims), `/cases/[id]/letter` (monospace draft with
-                      edit-in-place + copy-to-clipboard + always-visible
-                      "Redacted claims" panel), and `/cases/[id]/audit`
-                      (AuditTimelineItem stack of HITL decisions + a stage-
-                      execution table). All screens hang off a persistent
-                      AppShell (left workflow nav + Synthetic-data-only
-                      banner). Agent surface lives behind a single typed
-                      client (`lib/agents/client.ts`) with two modes: an
-                      in-process MockStore (`NEXT_PUBLIC_AGENT_MOCK=true`,
-                      default in `.env.example`) that returns objects
-                      satisfying the same zod `caseSnapshotSchema` the live
-                      API does, and a `fetch`-against-`NEXT_PUBLIC_API_BASE_URL`
-                      live mode for Phase 8. zustand `useCaseStore` is the
-                      single source of truth for the active snapshot; side
-                      nav, stepper and HITL bar all read its `next_stage`.
-                      Three new contract tests in `lib/agents/agents.test.ts`
-                      (38 tests total; 35 from Phase 5.2). Type-check + Biome
-                      + Next build + axe-on-stories all green. Binding
-                      decisions in ADR-022; design walkthrough in
-                      docs/research/17-screens-design.md.
-Last checkpoint:      Phase 5.2 (Component system + Ladle catalog + axe-playwright
+Current phase:        Phase 5.4 (UI polish, motion, mobile shell, page-level
+                      axe gate) in progress on feat/phase-5-4-polish, auto-merge
+                      per the AGENTS §0 finish-line grant. Polish pass on top
+                      of Phase 5.3 with five additions: (1) AppShell collapses
+                      below `lg:` to a hamburger that opens the same workflow
+                      nav inside a `Sheet`, reusing the Phase 5.2 primitive so
+                      focus trap + escape-to-close + `aria-modal` come for
+                      free; (2) per-screen loading skeletons in
+                      `screen-skeletons.tsx` (RiskScreenSkeleton +
+                      GuidelineScreenSkeleton + LetterScreenSkeleton +
+                      AuditScreenSkeleton) wired through `CaseLoader.skeleton`
+                      so the layout no longer jumps when the snapshot lands;
+                      (3) `PageFade` Framer-Motion wrapper (~40 LOC) on every
+                      screen at 150 ms / 4 px y-offset, no-op when
+                      `prefers-reduced-motion` is set; (4) page-level axe
+                      gate (`pnpm axe:pages`) walking the 5 Phase-5.3 routes
+                      against the Next production build with
+                      `NEXT_PUBLIC_AGENT_MOCK=true` in both `colorScheme:
+                      "light"` and `colorScheme: "dark"`; (5) screenshot
+                      pipeline (`pnpm screenshots`) capturing all 5 routes ×
+                      both themes into `docs/design/screenshots/` and a new
+                      README "Workflow walkthrough" section. The page-level
+                      gate caught two real bugs that Phase 5.2 missed: the
+                      primary button at 2.2:1 contrast under
+                      `prefers-color-scheme: dark` because the media-query
+                      block in `globals.css` was only mirroring half the
+                      dark token set (fixed by mirroring the full set,
+                      including `--color-accent-fg`), and `button-name`
+                      failures on Radix Select / Switch wrapped by
+                      `react-hook-form`'s FormControl because the Slot was
+                      landing on the *wrapper* not the trigger (fixed by
+                      emitting a stable `formLabelId` from `useFormField`
+                      and binding `aria-labelledby` from `FormControl`, then
+                      restructuring each affected field so `FormControl`
+                      wraps the actual `SelectTrigger` / `Switch`). Theme-
+                      toggle copy now describes both the resolved current
+                      theme and the destination. New CI job `axe-pages`
+                      runs on every PR; ready to add to main branch
+                      protection once PR #20 lands. Type-check + Biome +
+                      Vitest (38 tests) + Next build + Ladle axe + page
+                      axe (12 routes × themes) all green. Binding decisions
+                      in ADR-023; design walkthrough in docs/research/
+                      18-ui-polish-design.md.
+Last checkpoint:      Phase 5.3 (Workflow screens — 5 routes + AppShell +
+                      mock-mode client + zustand store + HITL wiring + 3
+                      contract tests) auto-merged on the AGENTS §0 finish-
+                      line grant (PR #19 squash-merged c9a2c3a).
+                      Phase 5.2 (Component system + Ladle catalog + axe-playwright
                       a11y gate) auto-merged on the AGENTS §0 finish-line grant
                       (PR #18 squash-merged 08f320b; axe-ts now a required
                       status check on main).
@@ -157,10 +172,36 @@ Last checkpoint:      Phase 5.2 (Component system + Ladle catalog + axe-playwrig
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 5.3 PR review + auto-merge once the existing 8 required
-                        checks all go green (no Gate B / human review required
-                        for 5.3 per the AGENTS §0 finish-line grant; Gate B
-                        lands at the end of Phase 5.4 with the full UI walkthrough).
+Open decisions:       - Phase 5.4 PR review + auto-merge once the existing 8 required
+                        checks all go green plus the new `axe-pages` job;
+                        Gate B (full UI walkthrough by user) lands once
+                        the PR merges.
+                      - Phase 5.4 binding decisions (ADR-023): mobile shell
+                        via `Sheet` (collapse below `lg:`), per-screen
+                        loading skeletons in `screen-skeletons.tsx` wired
+                        through `CaseLoader.skeleton`, `PageFade` wrapper
+                        using `framer-motion` with `prefers-reduced-motion`
+                        honoured, page-level axe gate (`axe:pages`) over
+                        the Next.js production build with
+                        `NEXT_PUBLIC_AGENT_MOCK=true` walking each of the
+                        5 routes × {light, dark}. Page-axe gate caught two
+                        real bugs Phase 5.2 missed: primary-button 2.2:1
+                        contrast under `prefers-color-scheme: dark` (dark
+                        media-query block was only mirroring half the
+                        token set), and `button-name` failures on Radix
+                        Select / Switch wrapped by `react-hook-form`
+                        FormControl (Slot was landing on the wrapper, not
+                        the trigger). Both fixed; same documented exemption
+                        list as ADR-021 (cmdk only). `axe-pages` to be
+                        added to main branch protection after PR #20 lands.
+                      - Phase 5.4 screenshot pipeline: `pnpm screenshots`
+                        (a third Playwright config) captures all 5 routes
+                        × both themes at 2× DPR into
+                        `docs/design/screenshots/<screen>-<theme>.png`;
+                        not in CI, purely a developer utility for
+                        refreshing the README walkthrough; outputs are
+                        tracked so a fresh clone renders the README
+                        correctly.
                       - Phase 5.3 binding decisions (ADR-022): 5 routes
                         (`/cases/new` + `/cases/[id]/{risk,guideline,letter,
                         audit}`); zod-shared agent client with
@@ -303,11 +344,13 @@ Open decisions:       - Phase 5.3 PR review + auto-merge once the existing 8 req
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(ui): Phase 5.3 — workflow screens (input / risk /
+Last meaningful PR:   feat(ui): Phase 5.4 — UI polish + page-level axe gate +
+                      mobile shell + skeletons + motion + screenshots on
+                      feat/phase-5-4-polish; auto-merge per the AGENTS §0
+                      finish-line grant on CI green.
+                      #19 feat(ui): Phase 5.3 — workflow screens (input / risk /
                       guideline / letter / audit + AppShell + zod-shared
-                      mock client + zustand store) on feat/phase-5-3-screens;
-                      auto-merge per the AGENTS §0 finish-line grant on CI
-                      green.
+                      mock client + zustand store) (squash-merged c9a2c3a).
                       #18 feat(ui): Phase 5.2 — shadcn-pattern catalog + Ladle +
                       axe a11y gate (auto-merged 2026-05-15 commit 08f320b;
                       axe-ts now a required status check on main).
@@ -404,6 +447,98 @@ Branch protection on main (live, set 2026-05-05):
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 5.4 deliverables (in progress on feat/phase-5-4-polish; auto-merge per §0):
+  frontend/src/components/app-shell/app-shell.tsx     Mobile-aware shell: sidebar inline above
+                                                       `lg:`, hamburger-opened `Sheet` below.
+                                                       Reuses Phase 5.2 Sheet primitive
+                                                       (focus trap + escape-to-close +
+                                                       `aria-modal` for free)
+  frontend/src/components/app-shell/case-loader.tsx   Now accepts a `skeleton` prop so each
+                                                       per-screen layout supplies its own
+                                                       loading placeholder
+  frontend/src/components/domain/screen-skeletons.tsx 4 custom layouts (RiskScreenSkeleton,
+                                                       GuidelineScreenSkeleton, LetterScreenSkeleton,
+                                                       AuditScreenSkeleton) modelled on the
+                                                       real-screen shape; eliminates layout
+                                                       shift when the snapshot lands
+  frontend/src/components/motion/page-fade.tsx        Framer Motion wrapper (~40 LOC); 150 ms
+                                                       opacity + 4 px y-offset; no-op when
+                                                       `prefers-reduced-motion` is set
+  frontend/src/app/cases/new/page.tsx                 PageFade wrap + Select / Switch /
+                                                       FormControl restructure so
+                                                       `aria-labelledby` lands on the trigger
+  frontend/src/app/cases/[id]/risk/page.tsx           PageFade wrap + RiskScreenSkeleton wired
+                                                       through CaseLoader; Stepper label cap fix
+  frontend/src/app/cases/[id]/guideline/page.tsx      PageFade wrap + GuidelineScreenSkeleton
+  frontend/src/app/cases/[id]/letter/page.tsx         PageFade wrap + LetterScreenSkeleton
+  frontend/src/app/cases/[id]/audit/page.tsx          PageFade wrap + AuditScreenSkeleton +
+                                                       `overflow-x-auto` on the stage table for
+                                                       narrow viewports
+  frontend/src/components/ui/form.tsx                 `useFormField()` now emits a stable
+                                                       `formLabelId`; FormLabel sets
+                                                       `id={formLabelId}` and FormControl
+                                                       binds `aria-labelledby={formLabelId}`
+                                                       so Radix Slot lands the prop on the
+                                                       actual interactive element
+  frontend/src/components/theme-toggle.tsx            `aria-label` / `title` now describe both
+                                                       the resolved current theme and the
+                                                       destination so screen-reader users
+                                                       always know where the click goes
+  frontend/src/app/globals.css                        `@media (prefers-color-scheme: dark)
+                                                       :root:not([data-theme])` block now
+                                                       mirrors the **full** dark token set
+                                                       including `--color-accent-fg`. Fixes the
+                                                       2.2:1 primary-button contrast bug under
+                                                       OS-dark + system theme mode
+  frontend/playwright.pages.config.ts                 Page-axe Playwright config; web server
+                                                       rebuilds with `NEXT_PUBLIC_AGENT_MOCK=
+                                                       true` (env vars are inlined at build
+                                                       time); `chromium-light` + `chromium-dark`
+                                                       projects; localhost:61001
+  frontend/tests/axe-pages/screens.spec.ts            6 specs (home / new-case / risk /
+                                                       guideline / letter / audit) × 2 themes
+                                                       = 12 axe runs; documented exemptions
+                                                       match the Phase 5.2 Ladle gate
+  frontend/playwright.screens.config.ts               Screenshot-capture Playwright config;
+                                                       same mock-rebuild approach as
+                                                       page-axe; localhost:61002; 2× DPR
+  frontend/tests/screenshots/workflow.spec.ts         3 specs × 2 themes; walks the workflow
+                                                       once via in-page navigation (mock
+                                                       store is in-memory; second `page.goto`
+                                                       wipes state) and captures
+                                                       <screen>-<theme>.png for the README
+  frontend/package.json                               Adds `framer-motion@^12`; new scripts
+                                                       `axe:pages` and `screenshots`
+  .github/workflows/ci.yml                            New `axe-pages` job mirroring `axe-ts`:
+                                                       Playwright Chromium cache, then
+                                                       `pnpm axe:pages`. ~60s after caches warm
+  docs/design/screenshots/{home,new-case,risk,        12 fresh PNGs (1 per route × 2 themes)
+  guideline,letter,audit}-{light,dark}.png            captured against the mock build at
+                                                       2× DPR; tracked in git so README
+                                                       renders correctly from a clean clone
+  docs/adr/023-ui-polish-and-page-axe.md              Binding decision: Sheet-backed mobile
+                                                       shell, per-screen skeletons, PageFade
+                                                       motion, page-axe gate, screenshot
+                                                       pipeline, the 6 documented bug fixes
+  docs/research/18-ui-polish-design.md                Opinionated walkthrough: responsive
+                                                       shell decision, skeleton vs Suspense,
+                                                       motion budget, what the page-axe gate
+                                                       caught (with screenshots referenced),
+                                                       honest weaknesses
+  docs/adr/README.md                                  ADR-023 row added; placeholder
+                                                       numbering bumped (deploy slot now
+                                                       ADR-024)
+  docs/research/README.md                             Research note 18 row + ADR-023 row added
+  README.md                                           New "Workflow walkthrough" section
+                                                       above the fold with the 5-screen
+                                                       table + 12 captured screenshots; status
+                                                       updated from `pre-alpha` to `alpha`;
+                                                       run-the-UI block; refresh-screenshots
+                                                       block
+  AGENTS.md                                           Phase 5.4 status block + open decisions
+                                                       refreshed + Phase 5.4 deliverables
+                                                       block
 
 Phase 5.3 deliverables (in progress on feat/phase-5-3-screens; auto-merge per §0):
   frontend/src/lib/agents/schema.ts                    Zod mirror of the Phase 4 Pydantic

@@ -162,7 +162,13 @@
 
 /* Respect prefers-color-scheme when no explicit theme has been set
  * (next-themes adds `data-theme` only after hydration). Avoids the
- * cold-start flash of light theme on a system-dark device. */
+ * cold-start flash of light theme on a system-dark device.
+ *
+ * Mirror the FULL `[data-theme="dark"]` token set here. Partial
+ * mirrors are a contrast-bug factory — e.g. flipping `--color-accent`
+ * to its dark-mode lighter shade without flipping `--color-accent-fg`
+ * leaves white text on a pale teal background (2.2:1 — fails WCAG AA).
+ * Caught by the Phase 5.4 page-level axe gate. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
@@ -170,12 +176,40 @@
     --color-surface: oklch(18% 0.014 230);
     --color-surface-muted: oklch(21% 0.014 230);
     --color-surface-raised: oklch(23% 0.014 230);
+    --color-overlay: oklch(10% 0.01 230 / 0.65);
     --color-fg: oklch(96% 0.005 220);
-    --color-fg-muted: oklch(75% 0.012 230);
-    --color-fg-subtle: oklch(58% 0.01 230);
+    --color-fg-muted: oklch(82% 0.012 230);
+    --color-fg-subtle: oklch(70% 0.01 230);
+    --color-fg-on-accent: oklch(15% 0.014 230);
     --color-border: oklch(28% 0.014 230);
     --color-border-strong: oklch(38% 0.014 230);
+
     --color-accent: oklch(75% 0.13 192);
+    --color-accent-hover: oklch(82% 0.13 192);
+    --color-accent-soft: oklch(28% 0.06 192);
+    --color-accent-fg: oklch(15% 0.014 230);
+
+    --color-risk-low: oklch(72% 0.13 145);
+    --color-risk-low-soft: oklch(28% 0.06 145);
+    --color-risk-intermediate: oklch(78% 0.14 70);
+    --color-risk-intermediate-soft: oklch(30% 0.06 75);
+    --color-risk-high: oklch(72% 0.16 25);
+    --color-risk-high-soft: oklch(28% 0.07 25);
+
+    --color-info: oklch(72% 0.13 230);
+    --color-info-soft: oklch(28% 0.06 230);
+    --color-success: oklch(72% 0.13 145);
+    --color-success-soft: oklch(28% 0.06 145);
+    --color-warning: oklch(78% 0.14 75);
+    --color-warning-soft: oklch(30% 0.06 75);
+    --color-danger: oklch(72% 0.16 25);
+    --color-danger-soft: oklch(28% 0.07 25);
+
+    --color-citation-verified: oklch(72% 0.11 165);
+    --color-citation-suppressed: oklch(78% 0.13 75);
+    --color-citation-hallucinated: oklch(72% 0.16 25);
+
+    --color-focus: oklch(78% 0.18 192);
   }
 }
 
