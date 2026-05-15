@@ -265,3 +265,11 @@ jobs:
       - name: Vitest
         working-directory: frontend
         run: pnpm test --run
+      # Phase 5.1: ensure the brand preview + landing pages stay
+      # buildable in CI. `next build` exercises both the static
+      # generator and the Tailwind v4 PostCSS pipeline; it caught a
+      # regression class that vitest + tsc miss (e.g. broken `next/font`
+      # wiring, invalid `@theme` syntax). ~20s on ubuntu-latest.
+      - name: Next.js build
+        working-directory: frontend
+        run: pnpm build

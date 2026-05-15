@@ -52,19 +52,23 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 
 ```
 Current phase:        Phase 5.1 (Brand identity: palette, type, logo, preview page)
-                      pending Gate A user review. NEXT step (no agent work
-                      until the user approves the brand) — the AGENTS §0
-                      finish-line grant carves out UI sign-off as the *only*
-                      step requiring human review; everything else is
-                      auto-merged on CI-green. Phase 5.1 deliverables planned:
-                      brand guide (docs/design/brand.md) with colour palette,
-                      type ramp, spacing scale; one-page brand preview at
-                      frontend/app/(brand)/page.tsx that renders all primitives
-                      side-by-side (light + dark); a logo (SVG, dual-mode);
-                      ADR-019 (binding decision on the brand). User reviews
-                      the preview page, approves or asks for revisions, then
-                      Phase 5.2 (component system) and 5.3 (5 screens) and
-                      5.4 (polish + demo gif) all auto-merge.
+                      shipped on feat/phase-5-1-brand and **pending Gate A
+                      user review** per the AGENTS §0 finish-line grant.
+                      Phase 5.1 lands the brand foundation that every Phase
+                      5.x sub-phase composes against: a semantic CSS-variable
+                      token system (zero `dark:` overrides anywhere; Tailwind
+                      v4 `@theme` block), a clinical-teal accent palette
+                      (192°), risk-band + citation-outcome token triplets
+                      pre-named for Phase 5.3, an Inter + JetBrains Mono
+                      type pair, and a small primitives kit (Button / Card /
+                      Badge / Logo / ThemeToggle) sufficient for the brand
+                      preview page. Live previews live at /brand on the
+                      Next.js dev server; static screenshots committed to
+                      docs/design/screenshots/. Binding decisions in
+                      ADR-020; spec doc at docs/design/brand.md. **STOP
+                      for user review** before Phase 5.2 (component
+                      system + Storybook + axe), 5.3 (5 screens), and 5.4
+                      (polish + demo gif), which will all auto-merge.
 Last checkpoint:      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
                       FastAPI surface + 30-case mini-eval) auto-merged on the
                       AGENTS §0 finish-line grant (PR #15 squash-merged
@@ -133,7 +137,21 @@ Last checkpoint:      Phase 4 (LangGraph 4-agent orchestration with HITL gates +
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 4 PR review + merge approval (auto on CI-green per the
+Open decisions:       - **Phase 5.1 Gate A user review (REQUIRED).** The AGENTS §0
+                        finish-line grant carves out UI sign-off as the only step
+                        requiring human review. The user reviews:
+                          (a) the brand mark + lockup at /brand,
+                          (b) the semantic palette in both themes (especially
+                              the clinical-teal accent and the risk-band
+                              triplets used in Phase 5.3),
+                          (c) the type ramp + the Inter / JetBrains Mono pair,
+                          (d) the component primitives (Button / Card / Badge),
+                          (e) the citation-outcome treatment that the Phase 5.3
+                              letter editor will inherit.
+                        Sign-off triggers Phase 5.2 (Storybook + axe + extended
+                        catalog), 5.3 (5 screens), and 5.4 (polish + demo gif),
+                        all of which auto-merge per the §0 grant.
+                      - Phase 4 PR review + merge approval (auto on CI-green per the
                         AGENTS §0 finish-line grant; non-UI phase).
                       - Phase 4 result-of-record (Mock-LLM + always-entail NLI +
                         stub retrieval pipeline + auto-approve harness on 30
@@ -220,7 +238,10 @@ Open decisions:       - Phase 4 PR review + merge approval (auto on CI-green per
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   #15 feat(agents): Phase 4 — LangGraph 4-agent orchestration
+Last meaningful PR:   feat(brand): Phase 5.1 — brand identity (palette, type, logo,
+                      preview page) on feat/phase-5-1-brand; **pending Gate A
+                      user review** before merge.
+                      #15 feat(agents): Phase 4 — LangGraph 4-agent orchestration
                       with HITL gates + FastAPI surface + 30-case mini-eval
                       (auto-merged 2026-05-15 commit f4b4641).
                       #14 feat(rag): Phase 3.3 — citation-mandatory generator +
@@ -309,6 +330,146 @@ Branch protection on main (live, set 2026-05-05):
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 5.1 deliverables (in progress on feat/phase-5-1-brand; pending Gate A user review):
+  frontend/package.json                                Next.js 15 + React 19 + Tailwind v4 +
+                                                       next-themes + lucide-react + radix-ui
+                                                       Slot + class-variance-authority +
+                                                       clsx + tailwind-merge; devDeps add
+                                                       @tailwindcss/postcss + @testing-
+                                                       library/{react,jest-dom} + jsdom +
+                                                       postcss + @vitejs/plugin-react (4.x
+                                                       to keep compat with vite 5 inside
+                                                       vitest 2.x)
+  frontend/next.config.ts                              reactStrictMode + no typedRoutes
+                                                       (deferred to Phase 5.3 once a
+                                                       full route map exists)
+  frontend/postcss.config.mjs                          Tailwind v4 PostCSS plugin wiring
+  frontend/tsconfig.json                               jsx=preserve + next plugin + @/* path
+                                                       alias; verbatimModuleSyntax dropped
+                                                       (incompatible with the next plugin
+                                                       at this stage)
+  frontend/biome.json                                  ignore next-env.d.ts; React/Next-
+                                                       friendly linter overrides
+                                                       (useExhaustiveDependencies=warn,
+                                                       noNonNullAssertion=warn,
+                                                       noArrayIndexKey=off);
+                                                       jsxQuoteStyle=double
+  frontend/vitest.config.ts                            adds @vitejs/plugin-react so JSX
+                                                       compiles inside vitest; jsdom
+                                                       environment; setup file pulls in
+                                                       jest-dom matchers
+  frontend/vitest.setup.ts                             single-line @testing-library/jest-dom
+                                                       import (no per-file boilerplate)
+  frontend/src/app/globals.css                         BRAND TOKEN SOURCE OF TRUTH. Tailwind
+                                                       v4 @theme block: type scale (Inter
+                                                       + JetBrains Mono), radii, shadows,
+                                                       and the full semantic palette
+                                                       (surface / fg / accent / risk-low/
+                                                       intermediate/high + soft pairs /
+                                                       status / citation-verified/
+                                                       suppressed/hallucinated / focus).
+                                                       Light + dark each defined once
+                                                       (`:root` and `:root[data-theme=
+                                                       "dark"]`); zero `dark:` overrides
+                                                       anywhere in the codebase. Honors
+                                                       `prefers-color-scheme: dark` for
+                                                       cold-start and `prefers-reduced-
+                                                       motion: reduce` for transitions
+  frontend/src/app/layout.tsx                          loads Inter + JetBrains Mono via
+                                                       next/font (display=swap); wires the
+                                                       ThemeProvider; OG metadata + theme-
+                                                       color viewport pair
+  frontend/src/app/page.tsx                            landing page (hero + Phase 5.1
+                                                       badge + synthetic-data warning
+                                                       banner + CTAs to /brand and the
+                                                       MODEL_CARD)
+  frontend/src/app/brand/page.tsx                      Gate A review surface. Renders
+                                                       Logo (3 variants), the full
+                                                       semantic palette grid (6 groups +
+                                                       neutral scale), the type ramp
+                                                       (8 rows), the radii + shadow
+                                                       reference, every Button variant +
+                                                       size, every Badge variant, the 3
+                                                       risk-band sample cards, and the
+                                                       3 citation-outcome sample cards
+  frontend/src/app/brand/tokens.ts                     static reference data for the
+                                                       palette/type/radius/shadow swatches
+                                                       (label + token name only — every
+                                                       colour is read live from the CSS
+                                                       custom property)
+  frontend/src/components/theme-provider.tsx           next-themes wrapper:
+                                                       attribute=data-theme +
+                                                       defaultTheme=system + enableSystem
+                                                       + disableTransitionOnChange
+  frontend/src/components/theme-toggle.tsx             3-state rotator (light -> dark ->
+                                                       system) using lucide icons; SSR-
+                                                       safe (icon hidden until mounted to
+                                                       avoid hydration mismatch)
+  frontend/src/components/brand/logo.tsx               geometric monogram (broken C +
+                                                       QRS waveform) authored as inline
+                                                       SVG using currentColor; mark /
+                                                       wordmark / lockup variants in
+                                                       sm/md/lg sizes
+  frontend/src/components/ui/button.tsx                six variants (primary / secondary /
+                                                       outline / ghost / danger / link)
+                                                       and four sizes (sm/md/lg/icon);
+                                                       built on cva + radix Slot for the
+                                                       asChild escape hatch; defaults to
+                                                       type=button to avoid accidental
+                                                       form submits
+  frontend/src/components/ui/card.tsx                  Card / CardHeader / CardTitle /
+                                                       CardDescription / CardContent /
+                                                       CardFooter — same shape as the
+                                                       shadcn pattern so Phase 5.2 can
+                                                       drop in the rest of the catalog
+  frontend/src/components/ui/badge.tsx                 9 variants (neutral, accent, info,
+                                                       success, warning, danger,
+                                                       risk-low/intermediate/high) with
+                                                       1:1 token mapping
+  frontend/src/lib/cn.ts                               clsx + twMerge helper used by
+                                                       every primitive
+  frontend/src/components/ui/button.test.tsx           6 tests: render, default type,
+                                                       click forwarding, all six variants,
+                                                       disabled state, lg size class
+  frontend/src/components/ui/badge.test.tsx            3 tests: text content, every risk-
+                                                       band variant binds the right token,
+                                                       neutral fallback
+  frontend/src/components/brand/logo.test.tsx          6 tests: lockup default, mark-only,
+                                                       wordmark-only, sm/md/lg sizes
+  docs/design/brand.md                                 spec doc mirroring globals.css
+                                                       (semantic palette tables for both
+                                                       themes; type / radius / shadow /
+                                                       motion / accessibility contracts);
+                                                       links to live screenshots
+  docs/design/screenshots/                             6 PNGs captured against the
+                                                       compiled `next start` build at
+                                                       1024 px wide: landing-{light,dark},
+                                                       brand-{light,dark} (hero), brand-
+                                                       components-{light,dark}
+  docs/adr/020-brand-and-visual-identity.md            binding decision: clinical-teal
+                                                       accent (192°) + semantic CSS-
+                                                       variable tokens + Tailwind v4
+                                                       + light/dark first-class + initial
+                                                       primitives kit; rejected
+                                                       alternatives (clinical-cobalt,
+                                                       brutalist, dark: overrides,
+                                                       skip-the-preview-page); honest
+                                                       weakness (deliberately
+                                                       conservative for the category)
+  docs/adr/README.md                                   ADR-020 row added; placeholder
+                                                       list trimmed (021 was Brand;
+                                                       Brand is now ADR-020 since the
+                                                       phase shipped first)
+  .github/workflows/ci.yml                             adds `pnpm build` step to the
+                                                       test-ts job — exercises the
+                                                       Tailwind v4 PostCSS pipeline +
+                                                       static prerender; ~20 s on
+                                                       ubuntu-latest
+  AGENTS.md                                            Phase 5.1 status block + Phase
+                                                       5.1 deliverables block (this
+                                                       block); Gate A review prompt
+                                                       added under Open decisions
 
 Phase 4 deliverables (PR #15 merged 2026-05-15 commit f4b4641):
   backend/cardiorisk/agents/__init__.py                package skeleton + module map; documents the
