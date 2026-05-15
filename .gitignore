@@ -136,6 +136,11 @@ storybook-static/
 # Tracking it in git creates noise on every developer machine; the file is
 # pure type augmentation and gets recreated on demand.
 frontend/next-env.d.ts
+# Playwright outputs (axe job logs / traces / screenshots). The CI gate
+# only needs the exit code; reports are noise on disk.
+frontend/test-results/
+frontend/playwright-report/
+frontend/.playwright-cache/
 
 # --- Notebooks --------------------------------------------------------------
 .ipynb_checkpoints/
