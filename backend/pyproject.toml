@@ -60,6 +60,18 @@ dependencies = [
     "pdfplumber>=0.11,<0.13",
     "tiktoken>=0.8,<0.10",
     "jsonschema>=4.23,<5",
+    # Phase 3.2 retrieval stack (ADR-016). All MIT / Apache-2.0 / BSD-3.
+    #   hnswlib              - in-memory HNSW vector index (graduates to
+    #                          pgvector in Phase 4 behind the same interface)
+    #   rank-bm25            - BM25Okapi sparse leg of the hybrid retriever
+    #   sentence-transformers- bge-m3 dense embedder (and the MiniLM-L6
+    #                          CI-smoke embedder); also pulled by
+    #                          FlagEmbedding transitively
+    #   FlagEmbedding        - canonical bge-m3 + bge-reranker-v2-m3 wrappers
+    "hnswlib>=0.8,<0.9",
+    "rank-bm25>=0.2,<0.3",
+    "sentence-transformers>=3.2,<6.0",
+    "FlagEmbedding>=1.3,<2",
 ]
 
 [dependency-groups]
@@ -175,6 +187,14 @@ module = [
   "pdfplumber", "pdfplumber.*",
   "tiktoken", "tiktoken.*",
   "jsonschema", "jsonschema.*",
+  # Phase 3.2: hnswlib (no stubs upstream), rank_bm25 (no stubs),
+  # sentence-transformers (transitive transformers + tokenizers stubs
+  # exist but aren't comprehensive at the surface we use), FlagEmbedding.
+  "hnswlib", "hnswlib.*",
+  "rank_bm25", "rank_bm25.*",
+  "sentence_transformers", "sentence_transformers.*",
+  "FlagEmbedding", "FlagEmbedding.*",
+  "transformers", "transformers.*",
 ]
 ignore_missing_imports = true
 

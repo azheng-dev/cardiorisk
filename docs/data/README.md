@@ -109,11 +109,11 @@ Used by the Phase 3 RAG layer. Source PDFs live under `data/external/corpus/raw/
 
 | Source | Publisher | Pinned in |
 |---|---|---|
-| RACGP Red Book — CVD prevention chapter | RACGP | [`corpus_racgp_redbook_cvd.sha256`](../../data/checksums/corpus_racgp_redbook_cvd.sha256) (written on first fetch) |
-| Australian Guideline for assessing and managing CVD risk (2023, full document) | NVDPA | `corpus_nvdpa_2023_full_guideline.sha256` (written on first fetch) |
-| Australian CVD Risk Assessment 2023 — Quick reference guide | NVDPA | `corpus_nvdpa_2023_quick_reference.sha256` (written on first fetch) |
+| RACGP Red Book — Guidelines for preventive activities in general practice (CVD chapter) | RACGP | [`corpus_racgp_redbook_cvd.sha256`](../../data/checksums/corpus_racgp_redbook_cvd.sha256) (written on first fetch) |
+| Australian Guideline for assessing and managing CVD risk (2023, full document) | NVDPA / Heart Foundation | [`corpus_nvdpa_2023_full_guideline.sha256`](../../data/checksums/corpus_nvdpa_2023_full_guideline.sha256) (written on first fetch) |
+| Australian CVD Risk Assessment 2023 — Summary of recommendations | NVDPA / Heart Foundation | [`corpus_nvdpa_2023_summary_of_recommendations.sha256`](../../data/checksums/corpus_nvdpa_2023_summary_of_recommendations.sha256) (written on first fetch) |
 
-The complete source list lives in [`backend/cardiorisk/rag/ingest/sources.py`](../../backend/cardiorisk/rag/ingest/sources.py). The decision rationale (parser choice, chunking strategy, manifest contract, eval-set location) is documented in [ADR-015](../adr/015-corpus-ingestion.md) and [docs/research/12-corpus-ingestion-design.md](../research/12-corpus-ingestion-design.md).
+The complete source list lives in [`backend/cardiorisk/rag/ingest/sources.py`](../../backend/cardiorisk/rag/ingest/sources.py). The decision rationale (parser choice, chunking strategy, manifest contract, eval-set location) is documented in [ADR-015](../adr/015-corpus-ingestion.md) and [docs/research/12-corpus-ingestion-design.md](../research/12-corpus-ingestion-design.md). The 2026-05-15 URL-resolution audit (RACGP restructured chapter download; cvdcheck.org.au moved to a Next.js front-end and the 2023 Quick Reference Guide PDF was retired in favour of the Summary of recommendations) is documented in the [ADR-015 amendment](../adr/015-corpus-ingestion.md#amendment-2026-05-15-real-corpus-url-audit) and [docs/research/13-retrieval-design.md §8.5](../research/13-retrieval-design.md).
 
 #### Fetching + building
 
@@ -129,7 +129,25 @@ uv run --project backend python backend/scripts/build_corpus.py
 uv run --project backend python backend/scripts/build_corpus.py --strategy token
 ```
 
-CI runs both scripts in `--use-fixture` mode against the markdown fixture under [`backend/tests/fixtures/corpus_mini/`](../../backend/tests/fixtures/corpus_mini/), with no network and no PDFs, so the ingest layer is exercised end-to-end on every PR. Phase 3.2's retrieval eval (50-Q expansion + chunking A/B + embeddings choice) reads the manifest produced by `build_corpus.py`.
+CI runs both scripts in `--use-fixture` mode against the markdown fixture under [`backend/tests/fixtures/corpus_mini/`](../../backend/tests/fixtures/corpus_mini/), with no network and no PDFs, so the ingest layer is exercised end-to-end on every PR.
+
+## Phase 3.2 — derived retrieval artefacts (gitignored)
+
+Phase 3.2 builds two derived stores under `data/external/corpus/`, both gitignored (the `data/external/*` ignore covers them):
+
+- `index/<embedder_name>/<strategy>/{vector.bin, ids.json, bm25.pkl}` — per-(embedder × chunker) vector + BM25 indices written by `backend/scripts/build_index.py`. The `vector.bin` is an `hnswlib.Index` save-file; `ids.json` is the parallel array of `chunk_id`s; `bm25.pkl` is a `joblib.dump` of the `BM25Index` (corpus tokens + the fitted `BM25Okapi`).
+- `embed_cache/<embedder_name>/<chunk_id>.npy` — per-chunk embedding cache, atomically written via `EmbedCache._save_atomic`. Re-running `build_index.py` against the same chunks is effectively free after the first encode.
+
+The eval orchestrator ([`backend/cardiorisk/rag/eval_retrieval/orchestrator.py`](../../backend/cardiorisk/rag/eval_retrieval/orchestrator.py)) re-builds indices in-process on every run; `build_index.py` is for maintainers who want to rebuild once and sweep the eval matrix multiple times.
+
+Reproduce the Phase-3.2 eval result-of-record:
+
+```bash
+uv run --project backend python backend/scripts/build_index.py --embedder bge-m3
+uv run --project backend python backend/scripts/eval_retrieval.py --use-fixture --rerank both
+```
+
+Writes [`reports/v1/retrieval/per_cell.json`](../../reports/v1/retrieval/per_cell.json) + [`reports/v1/retrieval/aggregate.json`](../../reports/v1/retrieval/aggregate.json) + 3 figures under [`reports/v1/figures/retrieval/`](../../reports/v1/figures/retrieval/) (all committed). CI smoke uses `--smoke --embedder minilm` against the fixture; outputs go to `reports/v1/retrieval/smoke/` (gitignored).
 
 ## Future datasets
 

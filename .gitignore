@@ -46,6 +46,8 @@ reports/v1/explainability/smoke/
 reports/v1/figures/explainability/smoke/
 reports/v1/drift/smoke/
 reports/v1/figures/drift/smoke/
+reports/v1/retrieval/smoke/
+reports/v1/figures/retrieval/smoke/
 models/v1/smoke/
 !models/v1/README.md
 !reports/v1/README.md

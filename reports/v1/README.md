@@ -15,6 +15,14 @@ reports/v1/
 │   ├── xgboost_<source>_dca.png
 │   ├── lr_<source>_reliability.png
 │   └── lr_<source>_dca.png
+├── retrieval/                             (Phase 3.2)
+│   ├── per_cell.json                      (3 chunkers x {no-rerank, with-rerank} = 6 cells)
+│   ├── aggregate.json                     (winning_cell + per_chunker_max + rerank_lift)
+│   └── smoke/                             (CI smoke output; gitignored)
+├── figures/retrieval/                     (Phase 3.2 figures)
+│   ├── hit_at_5_by_cell.png
+│   ├── mrr_by_cell.png
+│   └── per_tag_winning_cell.png
 └── smoke/                                 (CI smoke output; gitignored)
 ```
 

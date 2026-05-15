@@ -1,7 +1,7 @@
 # ADR-015: Corpus ingestion (RACGP + NVDPA scope; pdfplumber over pymupdf; 3-chunker registry; manifest-as-derived; eval-set at repo root)
 
-- **Status:** Proposed
-- **Date:** 2026-05-06
+- **Status:** Accepted (with 2026-05-15 amendment — see end)
+- **Date:** 2026-05-06; amended 2026-05-15
 - **Phase:** 3.1
 - **Supersedes / amends:** none. Extends the v1 surface defined by ADR-006 / ADR-008 / ADR-010 / ADR-014.
 
@@ -113,3 +113,23 @@ Re-open this ADR if any of the following surface:
 - Phase 3.3's citation layer needs structural metadata pdfplumber doesn't expose (table cells, list-item parent context).
 - The corpus grows past O(20) PDFs (revisit per-source serial fetch; consider parallel fetch + retry / backoff).
 - A reviewer wants the AusCVDRisk calculator logic in scope (write a separate ADR for that ingestion path; it's a different shape — not a PDF corpus).
+
+---
+
+## Amendment 2026-05-15 (real-corpus URL audit)
+
+The Phase-3.1 `CORPUS_SOURCES` URLs all returned 404 by 2026-05-15 (RACGP restructured the chapter download; cvdcheck.org.au moved to a Next.js front-end after July 2023 and the underlying PDF paths changed). The fetch contract still holds — the `fetch_one` first-run-pin behaviour wrote new lockfiles cleanly when the new URLs were resolved — but the URL audit is itself a Phase-3.2 deliverable worth recording.
+
+**Three URL changes:**
+
+| doc_id | Action |
+|---|---|
+| `racgp_redbook_cvd` | URL re-resolved to `racgp.org.au/getattachment/9755764e-…/Guidelines-for-preventive-activities-in-general-practice.aspx` |
+| `nvdpa_2023_australian_cvd_risk_guideline` | URL re-resolved to `d35rj4ptypp2hd.cloudfront.net/pdf/Guideline-for-assessing-and-managing-CVD-risk_20230522.pdf` |
+| `nvdpa_2023_quick_reference_guide` → `nvdpa_2023_summary_of_recommendations` | doc_id renamed; new URL is the CloudFront-hosted Summary-of-recommendations PDF (the 2023 Quick Reference Guide PDF was retired in the rebuild). Two eval Qs (q045, q049) re-targeted accordingly. |
+
+The full audit trail is in `docs/research/13-retrieval-design.md` §8.5 ("Real-corpus URL audit (2026-05-15)"). Internet Archive snapshots were checked first per the original Phase-3.2 risk-mitigation note; **no Wayback snapshots existed** for any of the retired URLs, so live-URL re-resolution was the only path.
+
+**Operational lesson, recorded for Phase 4 / Phase 6:** RACGP and Heart Foundation / NVDPA URLs drift roughly annually. The fetcher's lockfile-pin behaviour catches *content* changes (sha256 mismatch → loud failure); it does *not* catch URL drift (the URL just 404s and the user re-runs `fetch_corpus.py`). For a deployed system this is acceptable — the operator notices fast, edits `sources.py`, re-pins lockfiles. For a future "we'll just snapshot the corpus and pin to a content-addressed mirror" approach, see Phase 6.
+
+**No code-contract changes.** The 3-chunker registry, the manifest schema, the AGPL-purity rule on parser choice, and the eval-set-at-repo-root layout all stand unchanged. The amendment is a URL + doc_id rename; everything downstream (chunkers, manifest, embedder cache) absorbs both via the existing `doc_id`-keyed contracts.

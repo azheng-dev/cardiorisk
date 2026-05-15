@@ -73,10 +73,17 @@ CORPUS_SOURCES: Final[tuple[CorpusSource, ...]] = (
             "practice (10th edn): Cardiovascular disease prevention chapter"
         ),
         publisher="RACGP",
+        # Direct PDF download surfaced from the RACGP "Cardiovascular disease
+        # (CVD) risk" chapter page; see ADR-015 (Phase 3.2 amendment) for the
+        # URL-resolution audit that swapped the previous
+        # ``red-book/prevention-of-cardiovascular-disease.pdf`` path (now
+        # 404). The ``getattachment/<guid>/...aspx`` URL is the canonical
+        # download surface RACGP exposes for the full Red Book PDF as of
+        # 2026-05-15.
         url=(
-            "https://www.racgp.org.au/clinical-resources/clinical-guidelines/"
-            "key-racgp-guidelines/view-all-racgp-guidelines/red-book/"
-            "prevention-of-cardiovascular-disease.pdf"
+            "https://www.racgp.org.au/getattachment/"
+            "9755764e-25f8-4799-bbca-29ddaf8c6d65/"
+            "Guidelines-for-preventive-activities-in-general-practice.aspx"
         ),
         out_filename="racgp_redbook_cvd.pdf",
         checksum_filename="corpus_racgp_redbook_cvd.sha256",
@@ -88,25 +95,36 @@ CORPUS_SOURCES: Final[tuple[CorpusSource, ...]] = (
             "disease risk (2023, NVDPA / Heart Foundation)"
         ),
         publisher="NVDPA",
+        # cvdcheck.org.au moved to a Next.js front-end after July 2023 and
+        # the original ``sites/default/files/2023-07/...`` paths are 404.
+        # PDFs are now hosted on the CloudFront origin
+        # ``d35rj4ptypp2hd.cloudfront.net`` and surfaced through JS. See
+        # ADR-015 amendment for the URL-resolution audit.
         url=(
-            "https://www.cvdcheck.org.au/sites/default/files/2023-07/"
-            "AustCVDRisk_FullGuideline_2023.pdf"
+            "https://d35rj4ptypp2hd.cloudfront.net/pdf/"
+            "Guideline-for-assessing-and-managing-CVD-risk_20230522.pdf"
         ),
         out_filename="nvdpa_2023_australian_cvd_risk_guideline.pdf",
         checksum_filename="corpus_nvdpa_2023_full_guideline.sha256",
     ),
     CorpusSource(
-        doc_id="nvdpa_2023_quick_reference_guide",
+        doc_id="nvdpa_2023_summary_of_recommendations",
         title=(
-            "Australian CVD Risk Assessment 2023 — Quick reference guide (NVDPA / Heart Foundation)"
+            "Australian CVD Risk Assessment 2023 — Summary of "
+            "recommendations (NVDPA / Heart Foundation)"
         ),
         publisher="NVDPA",
+        # The 2023 ``QuickReferenceGuide`` PDF was retired with the cvdcheck
+        # site rebuild; the ``Summary-of-recommendations`` PDF is the
+        # current quick-reference-shaped surface (~310 KB; one-page-per
+        # recommendation block, identical citation discipline to the full
+        # guideline).
         url=(
-            "https://www.cvdcheck.org.au/sites/default/files/2023-07/"
-            "AustCVDRisk_QuickReferenceGuide_2023.pdf"
+            "https://d35rj4ptypp2hd.cloudfront.net/pdf/"
+            "CVD-Risk-Guideline-Document-Summary-of-recommendations.pdf"
         ),
-        out_filename="nvdpa_2023_quick_reference_guide.pdf",
-        checksum_filename="corpus_nvdpa_2023_quick_reference.sha256",
+        out_filename="nvdpa_2023_summary_of_recommendations.pdf",
+        checksum_filename="corpus_nvdpa_2023_summary_of_recommendations.sha256",
     ),
 )
 

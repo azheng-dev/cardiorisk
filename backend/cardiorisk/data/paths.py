@@ -42,3 +42,11 @@ CORPUS_MANIFEST: Final[Path] = CORPUS_DIR / "manifest.json"
 # network-free; exercises every chunker through the same ParsedDoc
 # schema as the real PDF path.
 FIXTURE_CORPUS_DIR: Final[Path] = REPO_ROOT / "backend" / "tests" / "fixtures" / "corpus_mini"
+
+# Phase 3.2 retrieval layout (ADR-016). All gitignored.
+#   index/<strategy>/{vector.bin, bm25.pkl, ids.json}
+#   embed_cache/<embedder_name>/<chunk_id>.npy
+CORPUS_INDEX: Final[Path] = CORPUS_DIR / "index"
+CORPUS_EMBED_CACHE: Final[Path] = CORPUS_DIR / "embed_cache"
+REPORTS_V1_RETRIEVAL: Final[Path] = REPORTS_V1_DIR / "retrieval"
+REPORTS_V1_RETRIEVAL_FIGURES: Final[Path] = REPORTS_V1_FIGURES / "retrieval"

@@ -176,7 +176,54 @@ Operational reading: if any of these models were deployed, **TabICL and the Ense
 
 Reproduce: `uv run --project backend python backend/scripts/compute_drift.py` (full sweep ~30 s) writes [`reports/v1/drift/per_fold.json`](reports/v1/drift/per_fold.json), [`reports/v1/drift/aggregate.json`](reports/v1/drift/aggregate.json), and 16 dashboard PNGs (one per model × fold) to [`reports/v1/figures/drift/`](reports/v1/figures/drift/). Each dashboard shows the PSI bar across all features, an ECDF overlay for the top-3 drifted numerics, and a `predict_proba` histogram overlay.
 
-## 9. Limitations & out-of-scope
+## 9. Retrieval (Phase 3.2)
+
+> The retrieval layer is the foundation Phase 3.3's citation-mandatory generator sits on. The eval below picks a winning chunker × rerank cell from the matrix `{token, semantic, heading-aware-hybrid} × {no-rerank, with-rerank}` and reports `hit@1`, `hit@5`, `MRR` with 2,000-resample bootstrap CIs. Full design: [ADR-016](docs/adr/016-retrieval-stack.md) and [`docs/research/13-retrieval-design.md`](docs/research/13-retrieval-design.md).
+
+**Stack.** `BAAI/bge-m3` dense embedder (1024-d, MIT-equivalent licence) + `rank_bm25.BM25Okapi` sparse retriever + Reciprocal Rank Fusion (`k=60`) + optional `BAAI/bge-reranker-v2-m3` cross-encoder. Vector index is in-memory `hnswlib` (cosine, `M=16`, `ef_construction=200`); pgvector graduates with the rest of the agentic stack in Phase 4. Real-corpus headline = **token chunker + no rerank**; see "Reading the table" below for why the reranker is *off* by default on the real corpus despite winning on the fixture.
+
+**Real-corpus eval (10 Qs over 1,834 chunks).** The Phase 3.2 eval set is 50 hand-curated Qs at [`eval/retrieval/questions.jsonl`](eval/retrieval/questions.jsonl); 40 target the markdown fixture corpus, 10 target the real RACGP Red Book + NVDPA 2023 guideline + Summary-of-recommendations PDFs. The orchestrator splits on `expected_doc_id`: the real-corpus run loads only the 10 real-corpus Qs (the 40 fixture Qs are guaranteed misses against the real corpus). Real-corpus headline:
+
+| Cell | hit@1 | hit@5 | MRR | 95% CI hit@5 |
+|---|---:|---:|---:|---|
+| **token, no rerank** | **0.500** | **0.600** | **0.550** | **[0.30, 0.90]** |
+| token, with rerank | 0.300 | 0.600 | 0.378 | [0.30, 0.90] |
+| semantic, no rerank | 0.500 | 0.600 | 0.533 | [0.30, 0.90] |
+| semantic, with rerank | 0.400 | 0.600 | 0.470 | [0.30, 0.90] |
+| hybrid, no rerank | 0.400 | 0.600 | 0.467 | [0.30, 0.90] |
+| hybrid, with rerank | 0.200 | 0.600 | 0.323 | [0.30, 0.90] |
+
+Source: [`reports/v1/retrieval/per_cell.json`](reports/v1/retrieval/per_cell.json) and [`reports/v1/retrieval/aggregate.json`](reports/v1/retrieval/aggregate.json). Figures: [`reports/v1/figures/retrieval/`](reports/v1/figures/retrieval/).
+
+**Fixture eval (40 Qs over 10 hybrid chunks).** The fixture eval was the Phase 3.2 result-of-record before the real corpus was fetched; it stays in the suite as a CI-friendly smoke and a sanity check on the pipeline wiring. Headline (rerun via `eval_retrieval.py --use-fixture`): all 3 chunkers tie at `hit@5 = 1.0` once the reranker is on; reranker buys +5 to +35 pp on hit@1; hybrid chunker is the only cell with meaningful chunk count (10 vs 2 for token / semantic) on the fixture. Numbers archived in `reports/v1/retrieval/smoke/` after a smoke run; the real-corpus result is the headline of record.
+
+**Reading the table.** All six real-corpus cells tie at `hit@5 = 0.600` (6 of 10 expected documents land in the top 5). On `hit@1` and `MRR`, **no-rerank wins on every chunker**: token (0.50 → 0.30), semantic (0.50 → 0.40), hybrid (0.40 → 0.20) — the cross-encoder hurts top-1 precision across the board on the real corpus. This is the **opposite** of the fixture finding (where rerank lifted hit@1 by +35 pp on token / semantic and +5 pp on hybrid). The likely interpretation: the fixture passages are short and lexically-aligned, so the cross-encoder mostly re-confirms the RRF top candidate; the real-corpus passages (~512 tokens, dense Australian-clinical prose) are long enough that the cross-encoder picks a semantically-related-but-not-doc-matching chunk over the keyword-match-perfect one. With n=10 the 95% CIs `[0.30, 0.90]` overlap heavily — the rerank-hurts effect is real *in direction* across all 3 chunkers but the per-cell magnitude is statistically indistinguishable.
+
+**Decisions baked into Phase 3.3 from this result:**
+
+- **Production default `with_rerank = False`.** The Phase 3.3 generator calls `RetrievalPipeline.retrieve(..., with_rerank=False)` by default; the cross-encoder stays available behind a flag for downstream maintainers who want to A/B it on a larger eval set.
+- **Token-window chunker is the v1 production chunker.** It ties on hit@5 and wins on MRR (0.550 vs 0.533 semantic / 0.467 hybrid).
+- **The deferred-to-Phase-3.2.1 token-window-size sweep (256 / 1024 vs 512) is dropped.** With n=10 the eval is too underpowered to discriminate; running the sweep would give a confidently-wrong winner.
+
+**Honest weaknesses (full discussion in [`docs/research/13-retrieval-design.md`](docs/research/13-retrieval-design.md) §8):**
+
+- **n=10 is the hard limit on the real-corpus signal** until the eval set grows. Every CI in this table is `[0.30, 0.90]` wide (the bootstrap floor at this n). Any single Q toggling its hit moves the headline by 10 pp.
+- **No proprietary-model A/B.** `text-embedding-3-large` would lift hit@5 by an unknown margin; the deferral is documented in ADR-016 §"Trigger to revisit".
+- **In-memory hnswlib only.** Phase 4's pgvector graduation is the production design; the file structure today reflects the Phase-3.2 eval surface, not the deploy surface.
+- **Reranker counter-intuitive result.** The on-fixture vs on-real divergence is a real Phase 3.2 finding; ADR-016 §"Amendment 2026-05-15 (real-corpus rerank-hurts result)" documents both the surface decision (default off) and the open question (does this hold at n=100? Phase 6 will rerun with a much larger Q set and decide for the production deploy).
+
+**Reproduce.** Real-corpus full run (~6 min after weights are warm; 6 cells × 10 real Qs):
+
+```bash
+uv run --project backend python backend/scripts/fetch_corpus.py
+uv run --project backend python backend/scripts/build_corpus.py
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/build_index.py --embedder bge-m3
+CARDIORISK_TORCH_THREADS=8 uv run --project backend python backend/scripts/eval_retrieval.py
+```
+
+Writes [`reports/v1/retrieval/per_cell.json`](reports/v1/retrieval/per_cell.json), [`reports/v1/retrieval/aggregate.json`](reports/v1/retrieval/aggregate.json), and 3 figures under [`reports/v1/figures/retrieval/`](reports/v1/figures/retrieval/). The `CARDIORISK_TORCH_THREADS` env var lifts the single-thread guard the script otherwise inherits from Phase 2.x's TabICL/XGBoost OpenMP-deadlock workaround (this script never imports those, so 8 threads is safe). CI smoke uses `sentence-transformers/all-MiniLM-L6-v2` (~80 MB, no rerank) against the fixture corpus; ~60 s on `ubuntu-latest`.
+
+## 10. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -188,11 +235,11 @@ Reproduce: `uv run --project backend python backend/scripts/compute_drift.py` (f
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 10. Honesty caveats specific to the Honours-Ensemble row
+## 11. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 11. Reproducibility
+## 12. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
@@ -203,7 +250,7 @@ The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at s
 - Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
 - CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 12. References
+## 13. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -224,3 +271,5 @@ Architecture decisions:
 - [ADR-012](docs/adr/012-honours-baseline-reproduction.md) — Honours-baseline reproduction (Phase 2.4).
 - [ADR-013](docs/adr/013-explainability-strategy.md) — explainability strategy (Phase 2.5; with 2026-05-06 amendment recording the wall-clock contingency).
 - [ADR-014](docs/adr/014-drift-monitoring.md) — drift / monitoring strategy (Phase 2.6).
+- [ADR-015](docs/adr/015-corpus-ingestion.md) — corpus ingestion (Phase 3.1).
+- [ADR-016](docs/adr/016-retrieval-stack.md) — retrieval stack (Phase 3.2).

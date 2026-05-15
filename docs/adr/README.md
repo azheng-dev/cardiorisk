@@ -20,10 +20,10 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [013](./013-explainability-strategy.md) | Explainability strategy (KernelSHAP-everywhere headline + native sanity-checks + sum-back LR + Spearman cross-model agreement) | Accepted | 2.5 |
 | [014](./014-drift-monitoring.md) | Drift / monitoring strategy (PSI + KS, per-fold combined-pool reference, report-only) | Accepted | 2.6 |
 | [015](./015-corpus-ingestion.md) | Corpus ingestion (RACGP + NVDPA scope; pdfplumber over pymupdf; 3-chunker registry; manifest-as-derived; eval-set at repo root) | Proposed | 3.1 |
+| [016](./016-retrieval-stack.md) | Retrieval stack for v1 (BGE-M3 dense + rank_bm25 sparse + RRF fusion + BGE reranker, in-memory hnswlib graduating to pgvector in Phase 4) | Proposed | 3.2 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-016: Embeddings + retrieval architecture (Phase 3.2).
 - ADR-017: Citation + NLI verification approach (Phase 3.3).
 - ADR-018: LLM choice + multi-model evaluation (Phase 6).
 - ADR-019: Brand + visual identity (Phase 5).
