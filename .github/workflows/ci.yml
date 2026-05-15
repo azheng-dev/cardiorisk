@@ -84,15 +84,23 @@ jobs:
     name: test-python
     runs-on: ubuntu-latest
     needs: lint-python
-    # The hnswlib==0.8.x prebuilt manylinux wheel uses CPU intrinsics
-    # (AVX / AVX2 / AVX-512) that are absent on some GitHub Actions
-    # ubuntu-latest runners; `import hnswlib` then crashes the
-    # interpreter at pytest-collection time with SIGILL ("Fatal Python
-    # error: Illegal instruction"). Force uv to compile hnswlib from
-    # source on the runner so the binary matches the CPU it runs on.
-    # All other deps stay on the cached wheel path.
+    # hnswlib-0.8.x ships sdist-only on PyPI; uv compiles it from source.
+    # The default hnswlib setup.py passes `-march=native`, which bakes in
+    # whichever AVX/AVX-512 intrinsics the *build* runner happens to
+    # support. uv's wheel cache then persists that built wheel across
+    # CI jobs — and a later runner without those intrinsics crashes the
+    # interpreter at `import hnswlib` with SIGILL ("Fatal Python error:
+    # Illegal instruction"). Two mitigations stacked here:
+    #   1. CXXFLAGS/CFLAGS pin the hnswlib build to the x86-64-v3 ISA
+    #      (Haswell baseline: AVX2 + SSE4.2 — supported on every Azure
+    #      D-series runner GitHub Actions provisions).
+    #   2. UV_NO_BINARY_PACKAGE=hnswlib forces a fresh source build
+    #      (instead of pulling a stale wheel from the cache that may
+    #      have been built with -march=native on a fancier runner).
     env:
       UV_NO_BINARY_PACKAGE: hnswlib
+      CFLAGS: "-O3 -march=x86-64-v3"
+      CXXFLAGS: "-O3 -march=x86-64-v3"
     steps:
       - uses: actions/checkout@v4
       - name: Install uv
@@ -101,6 +109,12 @@ jobs:
           enable-cache: true
       - name: Set up Python
         run: uv python install 3.12
+      - name: Purge any stale hnswlib wheel from uv cache
+        # Belt-and-braces: even with UV_NO_BINARY_PACKAGE, an older
+        # cached install can shortcut the build. `uv cache clean
+        # hnswlib` drops just the hnswlib entry; the rest of the
+        # cache is untouched and CI stays fast.
+        run: uv cache clean hnswlib || true
       - name: Sync deps
         working-directory: backend
         run: uv sync --frozen --all-extras
