@@ -103,6 +103,16 @@ dependencies = [
     # who already pay can `pip install anthropic openai` separately.
     "google-genai>=1.0,<3",
     "openai>=2.0,<3",
+    # Phase 7 observability stack (ADR-024, free-tier only).
+    #   langfuse - Langfuse Cloud Hobby SDK v3+/v4 (OTel-native rewrite;
+    #              v2 is end-of-life as of 2026-03 and not API-compatible).
+    #              We pin >=3.0 to require the new ``from langfuse import
+    #              get_client, observe`` surface and <5 to keep major
+    #              version bumps explicit.
+    #   sentry-sdk[fastapi] - Sentry error tracking with FastAPI + Starlette
+    #              integrations bundled. Free tier (5K errors / month).
+    "langfuse>=3.0,<5",
+    "sentry-sdk[fastapi]>=2.18,<3",
 ]
 
 [dependency-groups]
@@ -244,6 +254,12 @@ module = [
   # static-check call sites read; same disposition as openai/anthropic.
   "google", "google.*",
   "google.genai", "google.genai.*",
+  # Phase 7: langfuse + sentry. Both ship type stubs but they're
+  # incomplete at the surface we use (Langfuse's start_observation
+  # returns a generic span, Sentry's before_send hook signature uses
+  # typed dicts). Disposition mirrors the LangGraph stack.
+  "langfuse", "langfuse.*",
+  "sentry_sdk", "sentry_sdk.*",
 ]
 ignore_missing_imports = true
 

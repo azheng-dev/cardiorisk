@@ -43,6 +43,7 @@ from langgraph.graph.state import CompiledStateGraph
 from langgraph.types import interrupt
 from pydantic import ValidationError
 
+from cardiorisk.observability import observe_node
 from cardiorisk.rag.generation.generator import CitationGenerator
 
 from .guideline import run_guideline
@@ -92,6 +93,7 @@ def _audit(
 
 # ----------------------------------------------------------------- agent nodes
 def _make_triage_node() -> Callable[[AgentState], dict[str, Any]]:
+    @observe_node(stage="triage")
     def triage_node(state: AgentState) -> dict[str, Any]:
         started = _now_utc()
         try:
@@ -117,6 +119,7 @@ def _make_risk_node(
     model_name: str,
     held_out_source: str,
 ) -> Callable[[AgentState], dict[str, Any]]:
+    @observe_node(stage="risk")
     def risk_node(state: AgentState) -> dict[str, Any]:
         if state.triage is None:
             return {
@@ -139,6 +142,7 @@ def _make_risk_node(
 
 
 def _make_guideline_node(*, generator: CitationGenerator) -> Callable[[AgentState], dict[str, Any]]:
+    @observe_node(stage="guideline")
     def guideline_node(state: AgentState) -> dict[str, Any]:
         if state.triage is None or state.risk is None:
             return {
@@ -179,6 +183,7 @@ def _make_guideline_node(*, generator: CitationGenerator) -> Callable[[AgentStat
 
 
 def _make_letter_node() -> Callable[[AgentState], dict[str, Any]]:
+    @observe_node(stage="letter")
     def letter_node(state: AgentState) -> dict[str, Any]:
         if state.triage is None or state.risk is None or state.guideline is None:
             return {

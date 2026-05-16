@@ -2,7 +2,7 @@
 
 > **Reading order.** This card is the user-facing summary of [`docs/research/08-v1-model-results.md`](docs/research/08-v1-model-results.md) (Phase 2.3b + 2.4 LODO results), [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md) (Honours-baseline honesty discussion), and [`docs/research/10-explainability.md`](docs/research/10-explainability.md) (Phase 2.5 KernelSHAP + cross-model agreement). Read those for the per-fold tables, per-subgroup audit, decision-curve analysis, bootstrap CIs, and per-(model × fold) SHAP figures.
 >
-> **Status.** Phase 2.5 deliverable. v1 = the four-model risk-prediction stack the rest of the CardioRisk Co-Pilot system is built on. Numbers below are produced verbatim by `backend/scripts/train_v1.py` and `backend/scripts/compute_explanations.py` from `data/processed/combined.parquet` (the Heart Failure Prediction dataset's underlying UCI sources combined under the HFP schema).
+> **Status.** Phase 2.5 deliverable for the modelling content (§1-§10); Phase 4 + 6 deliverable for the agent-eval headline (§11-§12); Phase 7 deliverable for the observability + latency-budget content (§13). v1 = the four-model risk-prediction stack the rest of the CardioRisk Co-Pilot system is built on. Numbers below are produced verbatim by `backend/scripts/train_v1.py`, `backend/scripts/compute_explanations.py`, and `backend/scripts/eval_agents.py` from `data/processed/combined.parquet` (the Heart Failure Prediction dataset's underlying UCI sources combined under the HFP schema).
 >
 > **TL;DR.** The cardiovascular-risk module ships **four** binary classifiers — TabICL (TFM), L1 LR with restricted-cubic-spline expansion, XGBoost, and a faithful PyTorch port of the Honours team's 4-net mean-averaged Ensemble — evaluated under Leave-One-Domain-Out CV across the four UCI sources, with post-hoc calibration on a within-fold calibration slice, bootstrap CIs, subgroup audits, decision-curve analysis at the AusCVDRisk thresholds, and KernelSHAP-headline cross-model explainability with TreeSHAP / analytic-LR sanity checks. **TabICL is the headline model by AUROC, AUPRC, Brier, and calibration slope. L1 LR is the strongest white-box.** XGBoost suffers from isotonic-on-small-slice calibration collapse (slope 0.21). The Honours-Ensemble is reproduced honestly — without the WOA feature-selection layer (because the WOA code is not in the supplied archive); see §3 below and [ADR-012](docs/adr/012-honours-baseline-reproduction.md). The four models **agree on feature importance** at aggregate Spearman ρ ≥ 0.81 across all six pairwise comparisons (§5).
 
@@ -402,7 +402,50 @@ uv run --project backend python backend/scripts/eval_agents.py \
 
 The job exits non-zero (and fails the PR) if any of the nine tracked metrics drifts by more than ±2 percentage points in the wrong direction. The lower-is-better axis (`mean_hallucination_rate`) fails on increases; the eight higher-is-better metrics fail on decreases. Missing-baseline metrics (new fields not yet in the baseline) record as `fail=False` so the gate is silent on metric additions. The baseline is refreshed in the same PR as whatever motivated the refresh.
 
-## 13. Limitations & out-of-scope
+## 13. Phase-7 observability + cost
+
+Phase 7 wires the free-tier observability stack — **Langfuse Cloud Hobby** (LLM-shaped traces with prompt + completion + token counts + USD cost + per-node spans) + **Sentry Free** (FastAPI + Next.js error tracking with a recursive `patient`-key scrubber on every SDK) + **Vercel Web Analytics + Speed Insights** (frontend RUM). Every observability hook is **no-op when its key is unset** so CI runs with both keys deliberately blank and never makes a network call. Full methodology + rationale in [ADR-024](docs/adr/024-observability-free-tier.md); opinionated walkthrough in [`docs/research/20-observability-design.md`](docs/research/20-observability-design.md).
+
+### Per-case `trace_id` round-trip
+
+A `trace_id` field rides on `AgentState` (Pydantic, default `None`; round-tripped by `state_to_dict` / `state_from_dict`) and is exposed end-to-end:
+
+1. **Backend.** Every `POST /v1/agents/cases` wraps the agent run in `start_root_span(case_id)`, which returns the Langfuse-issued UUIDv4 when the key is set or mints a deterministic `mock-trace-<6-hex>` sentinel when it isn't. The handler writes the trace ID into the response body **and** as the `X-Trace-Id` HTTP response header. Subsequent `GET /v1/agents/cases/{id}` and `POST /v1/agents/cases/{id}/decide` calls return the same trace ID so the UI can refresh it after every HITL decision.
+2. **Frontend.** `caseSnapshotSchema` (zod) accepts `trace_id: z.string().nullable().optional()` so neither side of the contract is brittle. The audit screen renders an "Open in Langfuse" deep-link button when **both** a real trace ID is present **and** `NEXT_PUBLIC_LANGFUSE_TRACE_URL_BASE` is set in the environment; otherwise it renders a muted "Local mock — no remote trace" badge.
+
+### p95 latency budget gate (added to the Phase 6 regression gate)
+
+The Phase 6 regression gate gains two additional metrics, both checked with a **multiplicative** ±20% tolerance (independent from the ±2 pp band used by the pass-rate metrics):
+
+| Metric | Direction | Tolerance |
+|---|---|---|
+| `median_total_duration_ms` | latency (lower better; multiplicative) | ±20% |
+| `p95_total_duration_ms` | latency (lower better; multiplicative) | ±20% |
+
+The band is ±20% rather than ±2 pp because latency variance is multiplicative, not additive — a ±2 pp band on a 1156 ms baseline ≈ "fail at +23 ms", which is the CI runner noise floor. The CLI exposes both knobs with `--regression-tolerance-pp` (default 2.0) + `--latency-regression-tolerance-pct` (default 0.20). See ADR-024 §5 for the binding rationale and the honest trade-off that ±20% intentionally absorbs the Langfuse / Sentry SDK-import overhead the same PR introduces (+127 ms median on `baseline_mock.json`).
+
+### Reproducing the live observability stack
+
+```bash
+LANGFUSE_PUBLIC_KEY=... \
+LANGFUSE_SECRET_KEY=... \
+LANGFUSE_HOST=https://cloud.langfuse.com \
+SENTRY_DSN=... \
+GEMINI_API_KEY=... \
+  uv run --project backend python backend/scripts/eval_agents.py \
+    --llm gemini --judge gemini \
+    --reports-dir reports/v1/agents/gemini
+```
+
+Traces flow to Langfuse Cloud (50 K observations / month, 30-day retention), errors to Sentry (5 K errors / month, `patient`-key-scrubbed before send). The frontend auto-mounts `@vercel/analytics` + `@vercel/speed-insights` so web vitals (LCP / FID / INP / CLS) land on every Vercel-deployed page view.
+
+### Honest weaknesses
+
+- **Langfuse Hobby retains traces for 30 days.** Headline traces from a long-ago demo disappear. The mock baseline is the system of record; Langfuse is the live drilldown.
+- **No APM on the FastAPI app on the free tier.** Sentry's performance traces are sampled at 0.1 by default — enough to spot outliers, not enough to build operational dashboards. The eval-harness latency gate (`median` + `p95` with the ±20% band) is the operational guard.
+- **The ±20% latency band intentionally hides the Phase 7 SDK-import bump.** The right next step is to tighten back towards ±10% in Phase 8 once the SDK overhead is the steady state.
+
+## 14. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -414,11 +457,11 @@ The job exits non-zero (and fails the PR) if any of the nine tracked metrics dri
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 14. Honesty caveats specific to the Honours-Ensemble row
+## 15. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 15. Reproducibility
+## 16. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
@@ -429,7 +472,7 @@ The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at s
 - Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
 - CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 16. References
+## 17. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -455,3 +498,4 @@ Architecture decisions:
 - [ADR-017](docs/adr/017-citation-and-nli-verification.md) — citation-mandatory generation + NLI verification (Phase 3.3).
 - [ADR-018](docs/adr/018-agent-orchestration.md) — 4-agent orchestration with LangGraph + HITL gates + FastAPI surface (Phase 4).
 - [ADR-019](docs/adr/019-phase-6-eval-harness.md) — Phase-6 eval harness (100 cases + 4 new metrics + LLM-judge + free-tier-only LLM stack + ±2 pp regression gate).
+- [ADR-024](docs/adr/024-observability-free-tier.md) — Phase-7 free-tier observability stack + multiplicative ±20% p95 latency budget gate.

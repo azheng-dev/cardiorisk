@@ -45,6 +45,11 @@ from cardiorisk.data.paths import (
     REPORTS_V1_AGENTS,
     REPORTS_V1_AGENTS_FIGURES,
 )
+from cardiorisk.observability import (
+    flush_langfuse,
+    new_trace_id,
+    start_root_span,
+)
 from cardiorisk.rag.generation.generator import CitationGenerator
 from cardiorisk.rag.generation.llm import UsageTotals
 
@@ -82,26 +87,37 @@ def _run_case(
     risk_model_name: str,
     risk_held_out_source: str,
 ) -> AgentState:
-    """Run one case through a fresh graph + auto-approve every gate."""
-    graph = build_graph(
-        generator=generator,
-        risk_model_name=risk_model_name,
-        risk_held_out_source=risk_held_out_source,
-    )
-    config = cast(RunnableConfig, {"configurable": {"thread_id": case.id}})
-    init = AgentState(case_id=case.id, patient=case.patient).model_dump()
-    graph.invoke(cast(Any, init), config=config)
+    """Run one case through a fresh graph + auto-approve every gate.
 
-    approve = ApproveDecision().model_dump()
-    # Up to 4 gates: triage, risk, guideline, letter.
-    for _ in range(4):
+    Wraps the whole case run in a Langfuse root span (Phase 7) so the
+    100-case batch produces 100 sibling traces in the Langfuse UI,
+    each tagged with the case id and stamped with the trace_id on
+    the returned ``AgentState``. No-op when Langfuse is disabled.
+    """
+    with start_root_span(name=f"agent_eval_case[{case.id}]", case_id=case.id) as trace_id:
+        graph = build_graph(
+            generator=generator,
+            risk_model_name=risk_model_name,
+            risk_held_out_source=risk_held_out_source,
+        )
+        config = cast(RunnableConfig, {"configurable": {"thread_id": case.id}})
+        init = AgentState(
+            case_id=case.id,
+            patient=case.patient,
+            trace_id=trace_id or new_trace_id(),
+        ).model_dump()
+        graph.invoke(cast(Any, init), config=config)
+
+        approve = ApproveDecision().model_dump()
+        # Up to 4 gates: triage, risk, guideline, letter.
+        for _ in range(4):
+            snap = graph.get_state(config)
+            if latest_interrupt(snap) is None:
+                break
+            graph.invoke(Command(resume=approve), config=config)
+
         snap = graph.get_state(config)
-        if latest_interrupt(snap) is None:
-            break
-        graph.invoke(Command(resume=approve), config=config)
-
-    snap = graph.get_state(config)
-    return state_from_dict(snap.values)
+        return state_from_dict(snap.values)
 
 
 def _serialise_aggregate(
@@ -132,6 +148,7 @@ def run_eval(
     judge: BaseJudge | None = None,
     regression_baseline_path: Path | None = None,
     regression_tolerance_pp: float = 2.0,
+    latency_regression_tolerance_pct: float = 0.20,
 ) -> dict[str, Any]:
     """Run the full eval and persist per-case + aggregate reports + figures.
 
@@ -236,6 +253,7 @@ def run_eval(
             current_summary=summary,
             baseline_path=regression_baseline_path,
             tolerance_pp=regression_tolerance_pp,
+            latency_tolerance_pct=latency_regression_tolerance_pct,
         )
 
     (out_dir / "per_case.json").write_text(
@@ -247,6 +265,11 @@ def run_eval(
         encoding="utf-8",
     )
     render_all(aggregate, fig_dir)
+
+    # Force-flush Langfuse so short-lived CLI runs (CI smoke, local
+    # eval) don't lose pending events when the process exits before
+    # the background thread drains. No-op when Langfuse is disabled.
+    flush_langfuse()
 
     return summary
 
@@ -283,6 +306,16 @@ REGRESSION_METRICS_LOWER_IS_BETTER: tuple[tuple[tuple[str, ...], str], ...] = (
     (("aggregate", "mean_hallucination_rate"), "mean_hallucination_rate"),
 )
 
+#: Latency metrics — checked with a **multiplicative** tolerance band
+#: rather than the percentage-point band the other metrics use (latency
+#: variance is multiplicative, not additive — a 100 ms baseline + 20 pp
+#: would mean "fail at +20 ms" which is uselessly tight). Phase 7
+#: budget per ADR-024: ±20% around the locked mock baseline.
+REGRESSION_METRICS_LATENCY: tuple[tuple[tuple[str, ...], str], ...] = (
+    (("aggregate", "median_total_duration_ms"), "median_total_duration_ms"),
+    (("aggregate", "p95_total_duration_ms"), "p95_total_duration_ms"),
+)
+
 
 def _read_path(payload: dict[str, Any], path: tuple[str, ...]) -> float | None:
     cur: Any = payload
@@ -300,23 +333,41 @@ def check_regression(
     current_summary: dict[str, Any],
     baseline_path: Path,
     tolerance_pp: float = 2.0,
+    latency_tolerance_pct: float = 0.20,
 ) -> dict[str, Any]:
     """Diff the current summary against a previously-saved baseline and
     return a dict the CLI can fail on.
+
+    Two tolerance bands are applied:
+
+    - ``tolerance_pp`` (default 2 pp) — the additive band used by
+      every pass-rate-shaped metric in :data:`REGRESSION_METRICS` +
+      :data:`REGRESSION_METRICS_LOWER_IS_BETTER`. A 5 pp drop in
+      ``triage_pass_rate`` fails the gate; a 1.5 pp drop does not.
+    - ``latency_tolerance_pct`` (default 0.20 = ±20 %) — the
+      **multiplicative** band used by every latency metric in
+      :data:`REGRESSION_METRICS_LATENCY`. A baseline median of
+      1029 ms with a 20 % band fails the gate at >1235 ms but
+      accommodates the Langfuse / Sentry SDK overhead (~50-100 ms
+      expected) introduced by Phase 7. See ADR-024.
 
     Output shape::
 
         {
             "baseline_path": "...",
             "tolerance_pp": 2.0,
+            "latency_tolerance_pct": 0.20,
             "failed": bool,
             "deltas": {
                 "<metric>": {
                     "current": float,
                     "baseline": float,
-                    "delta_pp": float,
+                    "delta_pp": float | None,    # for rate metrics
+                    "delta_pct": float | None,   # for latency metrics
                     "fail": bool,
-                    "direction": "higher_is_better" | "lower_is_better"
+                    "direction": "higher_is_better"
+                                 | "lower_is_better"
+                                 | "latency"
                 },
                 ...
             }
@@ -333,6 +384,7 @@ def check_regression(
     baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
 
     tol = abs(tolerance_pp) / 100.0
+    latency_tol = abs(latency_tolerance_pct)
     deltas: dict[str, dict[str, Any]] = {}
     failed = False
 
@@ -384,9 +436,41 @@ def check_regression(
         if is_fail:
             failed = True
 
+    for path, label in REGRESSION_METRICS_LATENCY:
+        cur = _read_path(current_summary, path)
+        base = _read_path(baseline, path)
+        if cur is None or base is None:
+            deltas[label] = {
+                "current": cur,
+                "baseline": base,
+                "delta_pct": None,
+                "fail": False,
+                "direction": "latency",
+            }
+            continue
+        # Multiplicative band. Improvements (negative delta_pct) never
+        # fail the gate. A zero baseline pins the metric at exactly
+        # zero too — any positive new value is flagged.
+        if base <= 0:
+            is_fail = cur > 0
+            delta_pct = float("inf") if cur > 0 else 0.0
+        else:
+            delta_pct = (cur - base) / base
+            is_fail = delta_pct > latency_tol
+        deltas[label] = {
+            "current": round(cur, 4),
+            "baseline": round(base, 4),
+            "delta_pct": (None if delta_pct == float("inf") else round(delta_pct * 100.0, 4)),
+            "fail": is_fail,
+            "direction": "latency",
+        }
+        if is_fail:
+            failed = True
+
     return {
         "baseline_path": str(baseline_path),
         "tolerance_pp": tolerance_pp,
+        "latency_tolerance_pct": latency_tolerance_pct,
         "failed": failed,
         "deltas": deltas,
     }
@@ -394,6 +478,7 @@ def check_regression(
 
 __all__ = [
     "REGRESSION_METRICS",
+    "REGRESSION_METRICS_LATENCY",
     "REGRESSION_METRICS_LOWER_IS_BETTER",
     "EvalConfig",
     "check_regression",

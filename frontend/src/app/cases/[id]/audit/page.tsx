@@ -1,6 +1,6 @@
 "use client";
 
-import { Activity, AlertOctagon, History } from "lucide-react";
+import { Activity, AlertOctagon, ExternalLink, History } from "lucide-react";
 import { use } from "react";
 
 import { AppShell } from "@/components/app-shell/app-shell";
@@ -9,6 +9,7 @@ import { AuditTimelineItem } from "@/components/domain/audit-timeline-item";
 import { AuditScreenSkeleton } from "@/components/domain/screen-skeletons";
 import { PageFade } from "@/components/motion/page-fade";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -22,6 +23,16 @@ import {
 import type { CaseSnapshot } from "@/lib/agents/schema";
 
 const ACTOR = "AZ";
+
+const LANGFUSE_TRACE_URL_BASE =
+  typeof process !== "undefined" ? process.env.NEXT_PUBLIC_LANGFUSE_TRACE_URL_BASE : undefined;
+
+function langfuseTraceUrl(traceId: string | null | undefined): string | null {
+  if (!traceId || !LANGFUSE_TRACE_URL_BASE) return null;
+  if (traceId.startsWith("mock-trace-")) return null;
+  const base = LANGFUSE_TRACE_URL_BASE.replace(/\/$/, "");
+  return `${base}/trace/${encodeURIComponent(traceId)}`;
+}
 
 export default function AuditPage({
   params,
@@ -57,6 +68,9 @@ function AuditView({ snap }: { snap: CaseSnapshot }) {
     ...(d.note ? { note: d.note } : {}),
   }));
 
+  const langfuseUrl = langfuseTraceUrl(snap.trace_id);
+  const isMockTrace = snap.trace_id?.startsWith("mock-trace-") ?? true;
+
   return (
     <PageFade className="flex flex-col gap-6">
       <header className="flex flex-col gap-3">
@@ -71,6 +85,23 @@ function AuditView({ snap }: { snap: CaseSnapshot }) {
           the order in which the reviewer made decisions; the stage table reflects how the agents
           themselves executed.
         </p>
+        <div className="flex flex-wrap items-center gap-3 text-[var(--color-fg-muted)] text-sm">
+          {snap.trace_id ? (
+            <span className="font-mono text-xs">
+              trace: <span className="text-[var(--color-fg)]">{snap.trace_id}</span>
+            </span>
+          ) : null}
+          {langfuseUrl ? (
+            <Button asChild variant="outline" size="sm">
+              <a href={langfuseUrl} rel="noreferrer noopener" target="_blank">
+                <ExternalLink className="size-3.5" aria-hidden />
+                Open in Langfuse
+              </a>
+            </Button>
+          ) : isMockTrace ? (
+            <Badge variant="neutral">Local mock — no remote trace</Badge>
+          ) : null}
+        </div>
       </header>
 
       <div className="grid gap-3 sm:grid-cols-3">

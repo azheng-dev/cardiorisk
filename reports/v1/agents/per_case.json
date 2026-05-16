@@ -11,7 +11,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -22,7 +22,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 2836.424,
+      "duration_ms": 3310.073,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -33,7 +33,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 1.117,
+      "duration_ms": 1.165,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -44,7 +44,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.018000000000000002,
+      "duration_ms": 0.02,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -52,7 +52,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 2837.569,
+    "total_duration_ms": 3311.269,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -91,7 +91,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1028.277,
+      "duration_ms": 1145.555,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -102,7 +102,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.203,
+      "duration_ms": 0.186,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -121,7 +121,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.501,
+    "total_duration_ms": 1145.7620000000002,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -149,7 +149,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -162,7 +162,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1036.3700000000001,
+      "duration_ms": 1175.267,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -173,7 +173,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.187,
+      "duration_ms": 0.176,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -184,7 +184,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -192,7 +192,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.574,
+    "total_duration_ms": 1175.46,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -222,7 +222,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -233,7 +233,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1035.965,
+      "duration_ms": 1149.668,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -244,7 +244,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.182,
+      "duration_ms": 0.232,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -255,7 +255,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -263,7 +263,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.165,
+    "total_duration_ms": 1149.917,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -291,7 +291,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -302,7 +302,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1026.979,
+      "duration_ms": 1210.616,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -313,7 +313,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17200000000000001,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -324,7 +324,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -332,7 +332,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1027.17,
+    "total_duration_ms": 1210.808,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -371,7 +371,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1031.241,
+      "duration_ms": 1146.7540000000001,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -382,7 +382,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.18000000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -393,7 +393,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -401,7 +401,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.442,
+    "total_duration_ms": 1146.949,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -429,7 +429,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -440,7 +440,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1017.8149999999999,
+      "duration_ms": 1148.7320000000002,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -451,7 +451,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -462,7 +462,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -470,7 +470,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1018.0039999999999,
+    "total_duration_ms": 1148.9270000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -498,7 +498,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -509,7 +509,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1031.832,
+      "duration_ms": 1154.411,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -520,7 +520,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16699999999999998,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -531,7 +531,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -539,7 +539,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1032.017,
+    "total_duration_ms": 1154.598,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -567,7 +567,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -578,7 +578,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1040.43,
+      "duration_ms": 1137.2169999999999,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -600,7 +600,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -608,7 +608,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1040.616,
+    "total_duration_ms": 1137.406,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -636,7 +636,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -647,7 +647,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1023.312,
+      "duration_ms": 1161.807,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "intermediate",
@@ -658,7 +658,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.195,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -669,7 +669,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -677,7 +677,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.499,
+    "total_duration_ms": 1162.02,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -705,7 +705,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -716,7 +716,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.474,
+      "duration_ms": 1184.0349999999999,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -727,7 +727,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.19699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -746,7 +746,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.662,
+    "total_duration_ms": 1184.2499999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -774,7 +774,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -785,7 +785,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1036.728,
+      "duration_ms": 1144.746,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "intermediate",
@@ -796,7 +796,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.166,
+      "duration_ms": 0.188,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -815,7 +815,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.91,
+    "total_duration_ms": 1144.951,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -843,7 +843,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -854,7 +854,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1020.189,
+      "duration_ms": 1151.992,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -865,7 +865,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16799999999999998,
+      "duration_ms": 0.204,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -876,7 +876,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.017,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -884,7 +884,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.38,
+    "total_duration_ms": 1152.215,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -912,7 +912,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -923,7 +923,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1018.0290000000001,
+      "duration_ms": 1163.7,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -934,7 +934,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.18000000000000002,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -945,7 +945,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.015000000000000001,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -953,7 +953,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1018.2290000000002,
+    "total_duration_ms": 1163.886,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -981,7 +981,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -992,7 +992,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1028.1899999999998,
+      "duration_ms": 1166.434,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1003,7 +1003,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17200000000000001,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1014,7 +1014,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1022,7 +1022,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.3809999999999,
+    "total_duration_ms": 1166.632,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -1050,7 +1050,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1061,7 +1061,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.014,
+      "duration_ms": 1140.485,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1072,7 +1072,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.178,
+      "duration_ms": 0.182,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1083,7 +1083,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1091,7 +1091,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.2079999999999,
+    "total_duration_ms": 1140.685,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -1119,7 +1119,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1130,7 +1130,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1028.114,
+      "duration_ms": 1190.176,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -1141,7 +1141,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.16699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1152,7 +1152,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1160,7 +1160,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.305,
+    "total_duration_ms": 1190.3629999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1188,7 +1188,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1199,7 +1199,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1033.489,
+      "duration_ms": 1181.53,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1210,7 +1210,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1221,7 +1221,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1229,7 +1229,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1033.676,
+    "total_duration_ms": 1181.715,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1268,7 +1268,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.45,
+      "duration_ms": 1247.641,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1279,7 +1279,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1298,7 +1298,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.635,
+    "total_duration_ms": 1247.828,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1326,7 +1326,7 @@
     "triage": {
       "stage": "triage",
       "passed": false,
-      "duration_ms": 0.006,
+      "duration_ms": 0.014,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1341,7 +1341,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1044.455,
+      "duration_ms": 1170.94,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1352,7 +1352,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.21800000000000003,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1371,7 +1371,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1044.6409999999998,
+    "total_duration_ms": 1171.182,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [
       "age_outside_training_range"
@@ -1401,7 +1401,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1412,7 +1412,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1030.959,
+      "duration_ms": 1147.597,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -1423,7 +1423,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.184,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1434,7 +1434,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1442,7 +1442,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.159,
+    "total_duration_ms": 1147.783,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1470,7 +1470,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1481,7 +1481,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1031.063,
+      "duration_ms": 1164.262,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -1492,7 +1492,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.186,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1511,7 +1511,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.2530000000002,
+    "total_duration_ms": 1164.4669999999999,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1539,7 +1539,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1550,7 +1550,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1024.484,
+      "duration_ms": 1157.934,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -1561,7 +1561,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.16799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1572,7 +1572,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1580,7 +1580,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1024.672,
+    "total_duration_ms": 1158.123,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -1608,7 +1608,7 @@
     "triage": {
       "stage": "triage",
       "passed": false,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1623,7 +1623,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1046.242,
+      "duration_ms": 1163.785,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -1645,7 +1645,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1653,7 +1653,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1046.433,
+    "total_duration_ms": 1163.978,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [
       "age_outside_training_range"
@@ -1683,7 +1683,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1698,7 +1698,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.0310000000001,
+      "duration_ms": 1132.682,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1709,7 +1709,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.203,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1720,7 +1720,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1728,7 +1728,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.2170000000001,
+    "total_duration_ms": 1132.905,
     "sanity_flags_observed": [
       "cholesterol_missing_sentinel"
     ],
@@ -1758,7 +1758,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1773,7 +1773,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1033.953,
+      "duration_ms": 1184.572,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1784,7 +1784,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1795,7 +1795,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.015000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1803,7 +1803,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.1399999999999,
+    "total_duration_ms": 1184.7669999999998,
     "sanity_flags_observed": [
       "resting_bp_extreme"
     ],
@@ -1833,7 +1833,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1848,7 +1848,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1021.0649999999999,
+      "duration_ms": 1139.497,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1859,7 +1859,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16699999999999998,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1870,7 +1870,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1878,7 +1878,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1021.2489999999999,
+    "total_duration_ms": 1139.6870000000001,
     "sanity_flags_observed": [
       "oldpeak_negative"
     ],
@@ -1908,7 +1908,7 @@
     "triage": {
       "stage": "triage",
       "passed": false,
-      "duration_ms": 0.008,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1926,7 +1926,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1027.415,
+      "duration_ms": 1144.66,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -1937,7 +1937,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.178,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1956,7 +1956,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1027.613,
+    "total_duration_ms": 1144.852,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -1988,7 +1988,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1999,7 +1999,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.551,
+      "duration_ms": 1180.8300000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -2010,7 +2010,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17200000000000001,
+      "duration_ms": 0.174,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2029,7 +2029,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.74,
+    "total_duration_ms": 1181.0220000000002,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -2057,7 +2057,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2068,7 +2068,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1019.2900000000001,
+      "duration_ms": 1160.614,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -2079,7 +2079,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.165,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2090,7 +2090,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2098,7 +2098,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1019.484,
+    "total_duration_ms": 1160.795,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -2126,7 +2126,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2137,7 +2137,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1031.13,
+      "duration_ms": 1160.904,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2148,7 +2148,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.192,
+      "duration_ms": 0.195,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2159,7 +2159,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2167,7 +2167,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.3410000000001,
+    "total_duration_ms": 1161.118,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2206,7 +2206,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1048.6109999999999,
+      "duration_ms": 1176.009,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2217,7 +2217,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.177,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2228,7 +2228,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2236,7 +2236,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1048.799,
+    "total_duration_ms": 1176.203,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2275,7 +2275,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1035.076,
+      "duration_ms": 1144.494,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2286,7 +2286,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.177,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2297,7 +2297,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2305,7 +2305,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1035.272,
+    "total_duration_ms": 1144.683,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2333,7 +2333,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2344,7 +2344,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1045.715,
+      "duration_ms": 1156.231,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2355,7 +2355,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.182,
+      "duration_ms": 0.175,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2366,7 +2366,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.020999999999999998,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2374,7 +2374,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1045.924,
+    "total_duration_ms": 1156.425,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2402,7 +2402,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2413,7 +2413,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1029.039,
+      "duration_ms": 1139.805,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2424,7 +2424,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.191,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2435,7 +2435,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2443,7 +2443,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1029.248,
+    "total_duration_ms": 1139.9930000000002,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2471,7 +2471,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2482,7 +2482,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1025.185,
+      "duration_ms": 1256.957,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2493,7 +2493,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.193,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2504,7 +2504,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2512,7 +2512,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1025.3719999999998,
+    "total_duration_ms": 1257.1670000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2540,7 +2540,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2551,7 +2551,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1030.6709999999998,
+      "duration_ms": 1146.547,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2562,7 +2562,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.182,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2573,7 +2573,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2581,7 +2581,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.87,
+    "total_duration_ms": 1146.734,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2609,7 +2609,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2620,7 +2620,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1022.9399999999999,
+      "duration_ms": 1150.1809999999998,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2631,7 +2631,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.183,
+      "duration_ms": 0.20900000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2642,7 +2642,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2650,7 +2650,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.14,
+    "total_duration_ms": 1150.407,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2678,7 +2678,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2689,7 +2689,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1040.1180000000002,
+      "duration_ms": 1173.417,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2700,7 +2700,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.18000000000000002,
+      "duration_ms": 0.2,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2711,7 +2711,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2719,7 +2719,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1040.3170000000002,
+    "total_duration_ms": 1173.638,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2747,7 +2747,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2758,7 +2758,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1028.1860000000001,
+      "duration_ms": 1192.0049999999999,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2769,7 +2769,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.176,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2780,7 +2780,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2788,7 +2788,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.3770000000002,
+    "total_duration_ms": 1192.2019999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2816,7 +2816,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2829,7 +2829,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1022.6170000000001,
+      "duration_ms": 1151.278,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2840,7 +2840,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16799999999999998,
+      "duration_ms": 0.19799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2851,7 +2851,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2859,7 +2859,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1022.802,
+    "total_duration_ms": 1151.497,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -2889,7 +2889,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -2900,7 +2900,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1030.458,
+      "duration_ms": 1152.8039999999999,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2911,7 +2911,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2922,7 +2922,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2930,7 +2930,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.66,
+    "total_duration_ms": 1152.992,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -2969,7 +2969,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1032.864,
+      "duration_ms": 1152.874,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -2980,7 +2980,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.165,
+      "duration_ms": 0.19799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -2991,7 +2991,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -2999,7 +2999,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1033.048,
+    "total_duration_ms": 1153.09,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -3027,7 +3027,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3038,7 +3038,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1066.3229999999999,
+      "duration_ms": 1173.748,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -3049,7 +3049,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.17200000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3060,7 +3060,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3068,7 +3068,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1066.524,
+    "total_duration_ms": 1173.939,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -3096,7 +3096,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3109,7 +3109,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1017.2289999999999,
+      "duration_ms": 1155.417,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -3120,7 +3120,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16699999999999998,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3131,7 +3131,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.016,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3139,7 +3139,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1017.4179999999999,
+    "total_duration_ms": 1155.608,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -3169,7 +3169,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3180,7 +3180,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1025.643,
+      "duration_ms": 1160.329,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -3191,7 +3191,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.189,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3202,7 +3202,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3210,7 +3210,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1025.849,
+    "total_duration_ms": 1160.517,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_plus_bp",
@@ -3238,7 +3238,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3251,7 +3251,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1034.342,
+      "duration_ms": 1149.229,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -3262,7 +3262,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.203,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3281,7 +3281,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.539,
+    "total_duration_ms": 1149.449,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -3311,7 +3311,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3322,7 +3322,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1039.624,
+      "duration_ms": 1169.661,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "low",
@@ -3333,7 +3333,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.18100000000000002,
+      "duration_ms": 0.185,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3352,7 +3352,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1039.821,
+    "total_duration_ms": 1169.865,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3380,7 +3380,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3391,7 +3391,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1025.283,
+      "duration_ms": 1153.8390000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3413,7 +3413,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3421,7 +3421,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1025.4679999999998,
+    "total_duration_ms": 1154.0240000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3449,7 +3449,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3460,7 +3460,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1041.639,
+      "duration_ms": 1147.631,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3471,7 +3471,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.195,
+      "duration_ms": 0.22699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3490,7 +3490,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1041.8519999999999,
+    "total_duration_ms": 1147.8770000000002,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3518,7 +3518,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3529,7 +3529,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1017.0349999999999,
+      "duration_ms": 1144.5890000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3540,7 +3540,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16799999999999998,
+      "duration_ms": 0.177,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3551,7 +3551,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3559,7 +3559,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1017.2199999999998,
+    "total_duration_ms": 1144.7830000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3587,7 +3587,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3598,7 +3598,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1031.216,
+      "duration_ms": 1138.663,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3609,7 +3609,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.188,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3620,7 +3620,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3628,7 +3628,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.4119999999998,
+    "total_duration_ms": 1138.872,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3656,7 +3656,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.012,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3667,7 +3667,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1034.267,
+      "duration_ms": 1163.901,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3678,7 +3678,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.183,
+      "duration_ms": 0.18100000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3689,7 +3689,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3697,7 +3697,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.467,
+    "total_duration_ms": 1164.107,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3725,7 +3725,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3736,7 +3736,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1055.301,
+      "duration_ms": 1144.039,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3747,7 +3747,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.16799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3758,7 +3758,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3766,7 +3766,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1055.491,
+    "total_duration_ms": 1144.225,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3794,7 +3794,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3805,7 +3805,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1029.709,
+      "duration_ms": 1174.34,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3816,7 +3816,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.176,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3827,7 +3827,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3835,7 +3835,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1029.8990000000001,
+    "total_duration_ms": 1174.533,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3863,7 +3863,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3874,7 +3874,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1038.41,
+      "duration_ms": 1147.98,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3885,7 +3885,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.183,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3896,7 +3896,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.015000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3904,7 +3904,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1038.6100000000001,
+    "total_duration_ms": 1148.181,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -3932,7 +3932,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -3943,7 +3943,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1043.7749999999999,
+      "duration_ms": 1176.786,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -3954,7 +3954,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.174,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -3965,7 +3965,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -3973,7 +3973,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1043.966,
+    "total_duration_ms": 1176.9850000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4001,7 +4001,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4012,7 +4012,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1036.999,
+      "duration_ms": 1155.181,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4023,7 +4023,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.16699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4042,7 +4042,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1037.186,
+    "total_duration_ms": 1155.366,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4070,7 +4070,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4081,7 +4081,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1029.8529999999998,
+      "duration_ms": 1139.206,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4092,7 +4092,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.18100000000000002,
+      "duration_ms": 0.17200000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4103,7 +4103,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4111,7 +4111,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.051,
+    "total_duration_ms": 1139.398,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4139,7 +4139,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4150,7 +4150,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1041.2559999999999,
+      "duration_ms": 1234.951,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4161,7 +4161,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.176,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4172,7 +4172,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.023,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4180,7 +4180,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1041.4419999999998,
+    "total_duration_ms": 1235.156,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4208,7 +4208,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4219,7 +4219,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1018.098,
+      "duration_ms": 1149.9440000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4230,7 +4230,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.206,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4241,7 +4241,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4249,7 +4249,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1018.2869999999999,
+    "total_duration_ms": 1150.1700000000003,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4277,7 +4277,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4288,7 +4288,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1032.872,
+      "duration_ms": 1151.7379999999998,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4299,7 +4299,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.187,
+      "duration_ms": 0.16699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4310,7 +4310,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4318,7 +4318,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1033.076,
+    "total_duration_ms": 1151.9249999999997,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4346,7 +4346,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.011,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4357,7 +4357,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1039.776,
+      "duration_ms": 1153.511,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -4368,7 +4368,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4379,7 +4379,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4387,7 +4387,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1039.963,
+    "total_duration_ms": 1153.711,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4415,7 +4415,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4426,7 +4426,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1027.618,
+      "duration_ms": 1171.952,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "intermediate",
@@ -4437,7 +4437,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4456,7 +4456,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1027.8029999999999,
+    "total_duration_ms": 1172.141,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "statin_consider",
@@ -4484,7 +4484,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4495,7 +4495,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1010.7230000000001,
+      "duration_ms": 1169.901,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -4506,7 +4506,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.185,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4517,7 +4517,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4525,7 +4525,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1010.9090000000001,
+    "total_duration_ms": 1170.105,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4553,7 +4553,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.013,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4564,7 +4564,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1021.1239999999999,
+      "duration_ms": 1136.345,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -4575,7 +4575,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.175,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4586,7 +4586,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4594,7 +4594,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1021.31,
+    "total_duration_ms": 1136.5430000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4633,7 +4633,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1030.579,
+      "duration_ms": 1163.596,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -4644,7 +4644,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4655,7 +4655,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4663,7 +4663,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.769,
+    "total_duration_ms": 1163.782,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4691,7 +4691,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4702,7 +4702,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1017.1410000000001,
+      "duration_ms": 1158.094,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -4713,7 +4713,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.252,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4732,7 +4732,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1017.3270000000001,
+    "total_duration_ms": 1158.364,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4760,7 +4760,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4771,7 +4771,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1025.179,
+      "duration_ms": 1148.914,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -4782,7 +4782,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4793,7 +4793,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4801,7 +4801,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1025.365,
+    "total_duration_ms": 1149.108,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4829,7 +4829,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4840,7 +4840,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1033.6019999999999,
+      "duration_ms": 1135.395,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -4851,7 +4851,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -4862,7 +4862,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4870,7 +4870,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1033.7979999999998,
+    "total_duration_ms": 1135.583,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4898,7 +4898,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.008,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -4909,7 +4909,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.214,
+      "duration_ms": 1147.693,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -4931,7 +4931,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -4939,7 +4939,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.4010000000001,
+    "total_duration_ms": 1147.878,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -4978,7 +4978,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1020.745,
+      "duration_ms": 1146.0349999999999,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -4989,7 +4989,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.196,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5008,7 +5008,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.934,
+    "total_duration_ms": 1146.2489999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5036,7 +5036,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5047,7 +5047,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1028.65,
+      "duration_ms": 1164.984,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -5058,7 +5058,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.16799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5069,7 +5069,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5077,7 +5077,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.835,
+    "total_duration_ms": 1165.1689999999999,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5116,7 +5116,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1036.733,
+      "duration_ms": 1159.012,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -5127,7 +5127,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.188,
+      "duration_ms": 0.19,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5138,7 +5138,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5146,7 +5146,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.94,
+    "total_duration_ms": 1159.2169999999999,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5174,7 +5174,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5185,7 +5185,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1020.5519999999999,
+      "duration_ms": 1145.8539999999998,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -5196,7 +5196,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.175,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5207,7 +5207,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5215,7 +5215,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.7439999999999,
+    "total_duration_ms": 1146.0409999999997,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5243,7 +5243,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5254,7 +5254,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1026.759,
+      "duration_ms": 1140.205,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -5265,7 +5265,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.178,
+      "duration_ms": 0.18000000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5276,7 +5276,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5284,7 +5284,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.954,
+    "total_duration_ms": 1140.4019999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5312,7 +5312,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5323,7 +5323,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1059.0759999999998,
+      "duration_ms": 1177.948,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -5334,7 +5334,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.184,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5345,7 +5345,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5353,7 +5353,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1059.2779999999998,
+    "total_duration_ms": 1178.135,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5392,7 +5392,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1034.5420000000001,
+      "duration_ms": 1156.56,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -5403,7 +5403,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.277,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5414,7 +5414,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5422,7 +5422,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.729,
+    "total_duration_ms": 1156.854,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5461,7 +5461,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1037.782,
+      "duration_ms": 1202.043,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -5472,7 +5472,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16799999999999998,
+      "duration_ms": 0.221,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5483,7 +5483,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.013,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5491,7 +5491,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1037.9679999999998,
+    "total_duration_ms": 1202.2839999999999,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5519,7 +5519,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5530,7 +5530,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.5040000000001,
+      "duration_ms": 1158.931,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -5541,7 +5541,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16799999999999998,
+      "duration_ms": 0.217,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5552,7 +5552,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5560,7 +5560,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.688,
+    "total_duration_ms": 1159.169,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5588,7 +5588,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5599,7 +5599,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.422,
+      "duration_ms": 1175.315,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -5610,7 +5610,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.19,
+      "duration_ms": 0.206,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5621,7 +5621,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5629,7 +5629,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.629,
+    "total_duration_ms": 1175.54,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_only",
@@ -5668,7 +5668,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1030.4560000000001,
+      "duration_ms": 1144.217,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -5679,7 +5679,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.178,
+      "duration_ms": 0.211,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5690,7 +5690,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5698,7 +5698,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.653,
+    "total_duration_ms": 1144.4460000000001,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -5726,7 +5726,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5737,7 +5737,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1014.3420000000001,
+      "duration_ms": 1166.416,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -5748,7 +5748,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.21000000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5759,7 +5759,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.014,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5767,7 +5767,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1014.5370000000001,
+    "total_duration_ms": 1166.6499999999999,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -5795,7 +5795,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.009000000000000001,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5806,7 +5806,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.791,
+      "duration_ms": 1182.444,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -5817,7 +5817,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.27599999999999997,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5828,7 +5828,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.014,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5836,7 +5836,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.9959999999999,
+    "total_duration_ms": 1182.74,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -5864,7 +5864,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5875,7 +5875,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1021.508,
+      "duration_ms": 1148.7620000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -5886,7 +5886,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5897,7 +5897,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5905,7 +5905,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1021.6980000000001,
+    "total_duration_ms": 1148.9500000000003,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -5933,7 +5933,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -5944,7 +5944,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1019.422,
+      "duration_ms": 1143.259,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -5955,7 +5955,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.18000000000000002,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -5966,7 +5966,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.014,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -5974,7 +5974,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1019.628,
+    "total_duration_ms": 1143.448,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -6002,7 +6002,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6013,7 +6013,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1020.611,
+      "duration_ms": 1146.329,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -6024,7 +6024,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.171,
+      "duration_ms": 0.202,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6043,7 +6043,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.799,
+    "total_duration_ms": 1146.549,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -6071,7 +6071,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.012,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6082,7 +6082,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1025.9389999999999,
+      "duration_ms": 1183.733,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -6093,7 +6093,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17200000000000001,
+      "duration_ms": 0.21000000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6104,7 +6104,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6112,7 +6112,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.127,
+    "total_duration_ms": 1183.965,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -6140,7 +6140,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6151,7 +6151,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1019.0120000000001,
+      "duration_ms": 1210.561,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -6162,7 +6162,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.174,
+      "duration_ms": 0.196,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6173,7 +6173,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6181,7 +6181,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1019.2040000000001,
+    "total_duration_ms": 1210.774,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "lifestyle_plus_review",
@@ -6209,7 +6209,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.01,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6225,7 +6225,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1020.216,
+      "duration_ms": 1150.377,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -6236,7 +6236,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17,
+      "duration_ms": 0.206,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6255,7 +6255,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.404,
+    "total_duration_ms": 1150.604,
     "sanity_flags_observed": [
       "cholesterol_missing_sentinel",
       "age_outside_training_range"
@@ -6286,7 +6286,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6301,7 +6301,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1026.4180000000001,
+      "duration_ms": 1167.95,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -6312,7 +6312,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.199,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6331,7 +6331,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.603,
+    "total_duration_ms": 1168.1670000000001,
     "sanity_flags_observed": [
       "resting_bp_extreme"
     ],
@@ -6361,7 +6361,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.005,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6376,7 +6376,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1047.807,
+      "duration_ms": 1144.315,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -6406,7 +6406,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1048.003,
+    "total_duration_ms": 1144.51,
     "sanity_flags_observed": [
       "cholesterol_missing_sentinel"
     ],
@@ -6436,7 +6436,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.011,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6451,7 +6451,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1033.771,
+      "duration_ms": 1187.152,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -6462,7 +6462,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.202,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6473,7 +6473,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6481,7 +6481,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1033.991,
+    "total_duration_ms": 1187.346,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -6511,7 +6511,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6526,7 +6526,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1029.115,
+      "duration_ms": 1156.7559999999999,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -6537,7 +6537,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.179,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6556,7 +6556,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1029.317,
+    "total_duration_ms": 1156.9529999999997,
     "sanity_flags_observed": [
       "resting_bp_extreme"
     ],
@@ -6586,7 +6586,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6601,7 +6601,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1027.886,
+      "duration_ms": 1138.0529999999999,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -6612,7 +6612,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.186,
+      "duration_ms": 0.174,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6623,7 +6623,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6631,7 +6631,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1028.09,
+    "total_duration_ms": 1138.245,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -6676,7 +6676,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1027.573,
+      "duration_ms": 1147.9140000000002,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -6687,7 +6687,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.217,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6698,7 +6698,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.013,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6706,7 +6706,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1027.7620000000002,
+    "total_duration_ms": 1148.1490000000001,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -6736,7 +6736,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -6751,7 +6751,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1030.5420000000001,
+      "duration_ms": 1149.9109999999998,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -6762,7 +6762,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.16899999999999998,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6773,7 +6773,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -6781,7 +6781,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.7300000000002,
+    "total_duration_ms": 1150.1079999999997,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
@@ -6811,7 +6811,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6822,7 +6822,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1032.337,
+      "duration_ms": 1152.411,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -6833,7 +6833,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.185,
+      "duration_ms": 0.16699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6844,7 +6844,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 20,
@@ -6852,7 +6852,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1032.539,
+    "total_duration_ms": 1152.595,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "refusal_no_recommendation",
@@ -6880,7 +6880,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6891,7 +6891,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1091.3120000000001,
+      "duration_ms": 1153.4070000000002,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -6902,7 +6902,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.17300000000000001,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6913,7 +6913,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 20,
@@ -6921,7 +6921,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1091.5010000000002,
+    "total_duration_ms": 1153.594,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "refusal_no_recommendation",
@@ -6949,7 +6949,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -6960,7 +6960,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1072.843,
+      "duration_ms": 1156.105,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -6971,7 +6971,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.19,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -6990,7 +6990,7 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1073.0520000000001,
+    "total_duration_ms": 1156.296,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [],
     "expected_recommendation_family": "refusal_no_recommendation",

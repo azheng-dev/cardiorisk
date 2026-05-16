@@ -130,6 +130,37 @@ A regression on a new metric (not yet in the baseline) is recorded but
 does not fail the gate; the baseline must be refreshed in the same PR
 that adds the metric.
 
+### p95 latency budget gate (Phase 7)
+
+Two additional metrics are checked with a **multiplicative** tolerance
+(default ±20%) rather than the ±2 pp additive band used by the
+pass-rate metrics above:
+
+| Metric | Direction | Tolerance |
+|---|---|---|
+| `median_total_duration_ms` | latency (lower is better, multiplicative) | ±20% |
+| `p95_total_duration_ms` | latency (lower is better, multiplicative) | ±20% |
+
+The gate fires when `current > baseline * (1 + 0.20)` on either axis;
+improvements never fail. The ±20% band is wider than the rate-metric
+±2 pp band because **latency variance is multiplicative, not additive**
+— a ±2 pp band on a 1156 ms baseline would mean "fail at +23 ms",
+which is the typical noise floor on a CI runner.
+
+The CLI exposes both knobs:
+
+```bash
+uv run --project backend python backend/scripts/eval_agents.py \
+  --regression-check reports/v1/agents/baseline_mock.json \
+  --regression-tolerance-pp 2.0 \
+  --latency-regression-tolerance-pct 0.20
+```
+
+See [ADR-024 §5](docs/adr/024-observability-free-tier.md) for the
+binding decision and the rationale for the band size (including the
+honest trade-off that ±20% intentionally absorbs the Langfuse /
+Sentry SDK-import overhead introduced in the same PR).
+
 ## Headline results (locked, mock pipeline)
 
 Run: `uv run --project backend python backend/scripts/eval_agents.py`
@@ -138,7 +169,7 @@ on commit `<this-PR-merge-sha>`, machine: Ubuntu latest, no API keys.
 | Metric | Value |
 |---|---|
 | Cases | 100 |
-| Wall-clock (median / p95 per case) | 1029 ms / 1055 ms |
+| Wall-clock (median / p95 per case) | 1156 ms / 1204 ms |
 | Triage pass rate | **0.97** |
 | Risk band match rate | 0.43 |
 | Guideline pass rate | 1.00 |
@@ -152,6 +183,13 @@ on commit `<this-PR-merge-sha>`, machine: Ubuntu latest, no API keys.
 | Judge mean letter quality | 5.00 / 5 |
 | Judge mean recommendation alignment | 2.64 / 5 |
 | Total USD cost | $0.00 (mock floor) |
+
+> **Note on the latency numbers.** Phase 7 added the Langfuse + Sentry
+> SDK import path, which lifts wall-clock by ~10-15% even when both
+> keys are unset (the SDKs install module-level fixtures regardless).
+> The pass-rate metrics are unchanged from Phase 6; the +127 ms median
+> shift is the one-time SDK-import bump. See ADR-024 §5 for the full
+> trade-off discussion.
 
 **How to read this table.** The mock pipeline is the *floor*, not the
 ceiling. The `MockLLMClient` cites the literal chunks it sees and never
@@ -250,25 +288,26 @@ stable.
 
 ## Future work (deferred to later phases)
 
-- **Phase 7**: Langfuse Cloud Hobby + Sentry wired in; per-case
-  Langfuse trace ID added to the per-case JSON; latency-budget gate
-  added to CI (p95 vs baseline).
 - **Phase 8**: live Gemini cell automated via a manual-trigger
   GitHub Actions workflow (uses `secrets.GEMINI_API_KEY`), with the
   resulting `aggregate.json` pushed back to the repo on the main
   branch for the headline numbers to live alongside the mock baseline.
+- **Phase 8**: tighten the latency band from ±20% back towards ±10%
+  once the post-Phase-7 Langfuse / Sentry SDK overhead is the steady
+  state (see ADR-024 §5 honest-trade-off block).
 - **Future**: human inter-rater κ on a 30-case sample to calibrate
   the LLM judge. Out of scope for the v1 portfolio milestone; will
   open if Phase 9 (post-launch) generates real user feedback.
 
 ## References
 
-- AGENTS.md §7 Phase 6 + Phase 7 deferrals
+- AGENTS.md §7 Phase 6 + Phase 7
 - ADR-019 (Phase-6 eval harness)
-- ADR-024 (free-tier deploy → constrains LLM choice)
+- ADR-024 (free-tier observability stack + p95 latency budget gate)
 - ADR-017 (citation + NLI contract)
 - ADR-018 (4-agent orchestration)
-- `docs/research/19-phase-6-eval-design.md` (opinionated walkthrough)
+- `docs/research/19-phase-6-eval-design.md` (Phase 6 walkthrough)
+- `docs/research/20-observability-design.md` (Phase 7 walkthrough)
 - `backend/cardiorisk/agents/eval/{scorer,judge,orchestrator}.py`
 - `backend/scripts/{generate_agent_cases,eval_agents}.py`
 - `reports/v1/agents/{aggregate.json, baseline_mock.json}`

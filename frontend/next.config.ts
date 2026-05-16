@@ -1,3 +1,4 @@
+import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -13,4 +14,23 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Wrap with Sentry's Next config helper so the build process can:
+// 1. Discover instrumentation files (instrumentation-client.ts,
+//    sentry.server.config.ts, sentry.edge.config.ts).
+// 2. Wire source-map upload IF a SENTRY_AUTH_TOKEN is set in CI/Vercel.
+// 3. Inject the Sentry router transition handler for App Router.
+//
+// All Sentry-specific behaviour is env-var gated: without
+// SENTRY_AUTH_TOKEN, the build still succeeds and emits maps — they
+// just aren't uploaded. Without SENTRY_DSN at runtime, every init is
+// a no-op.
+export default withSentryConfig(nextConfig, {
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  silent: !process.env.CI,
+  // Don't fail the build because we lack a token in non-prod
+  // environments (every PR preview, every CI run without secrets).
+  disableLogger: true,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  telemetry: false,
+});

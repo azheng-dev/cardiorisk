@@ -49,4 +49,13 @@ describe("agent client (mock mode)", () => {
     expect(active?.next_stage).toBeNull();
     expect(active?.decisions.at(-1)?.note).toBe("out of scope");
   });
+
+  it("attaches a trace_id to every snapshot (Phase 7 contract)", async () => {
+    const snap = await useCaseStore.getState().start(SAMPLE_PATIENT);
+    // Mock store mints a "mock-trace-<padded>" id so the audit screen
+    // can show a muted "Local mock — no remote trace" badge instead
+    // of a broken Langfuse deep-link.
+    expect(snap.trace_id).toMatch(/^mock-trace-/);
+    expect(() => caseSnapshotSchema.parse(snap)).not.toThrow();
+  });
 });

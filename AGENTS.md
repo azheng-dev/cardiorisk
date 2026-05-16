@@ -51,22 +51,49 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 7 (Observability + cost) about to start; re-plan
-                      kicked off per AGENTS §0 rule 2 against the latest
-                      main. Free-tier observability stack locked
-                      2026-05-16: Langfuse Cloud Hobby (LLM-call traces +
-                      per-case cost rollup; 50k events / month free),
-                      Sentry Free (FastAPI + Next error tracking; 5k
-                      errors / month), Vercel Web Analytics + Speed
-                      Insights (frontend RUM). Phase-6 cost-accounting
-                      hooks (UsageTotals + estimate_cost_usd) will feed
-                      Langfuse generation spans; the per-case JSONs
-                      already carry the LLM+judge USD totals from PR #21.
-                      p95-latency budget gate planned against the locked
-                      mock-pipeline baseline (1.07 s / 100 cases) with a
-                      ±20% tolerance, mirroring the ADR-019 ±2 pp pattern.
+Current phase:        Phase 8 (Deploy + promote) about to start; re-plan
+                      kicked off per AGENTS §0 rule 2 against the post-
+                      Phase-7 main. Free-tier observability stack live
+                      end-to-end as of Phase 7 (PR #24): Langfuse Cloud
+                      Hobby spans on every LangGraph node + every LLM
+                      call via @observe_node + record_generation;
+                      per-case `trace_id` minted by start_root_span (or
+                      `mock-trace-<6-hex>` when LANGFUSE_PUBLIC_KEY is
+                      unset) round-trips AgentState -> API
+                      (X-Trace-Id header + response body) -> zod schema
+                      -> audit-screen "Open in Langfuse" deep-link;
+                      sentry-sdk[fastapi] + @sentry/nextjs v8 on both
+                      surfaces with a recursive patient-key scrubber on
+                      every SDK; @vercel/analytics + @vercel/speed-
+                      insights mounted in the App-Router layout; new
+                      REGRESSION_METRICS_LATENCY (median +
+                      p95_total_duration_ms with multiplicative ±20%
+                      tolerance) extends check_regression; the locked
+                      mock baseline at reports/v1/agents/baseline_mock
+                      .json was refreshed in the same PR (median
+                      1029 -> 1156 ms, p95 1055 -> 1204 ms — the
+                      SDK-import overhead, all rate metrics unchanged).
+                      FastAPI surface now under /v1/agents/* with
+                      optional case_id + auto-approved triage on
+                      create + flat DecideRequest matching the
+                      frontend client; CORSMiddleware added. CI
+                      `agent-eval-mock (regression gate)` already runs
+                      the extended gate; no new required check.
 
-Last checkpoint:      Phase 6 (100-case agent eval harness with 4 new metrics —
+Last checkpoint:      Phase 7 (Observability + cost) auto-merged on
+                      the AGENTS §0 finish-line grant (PR #24 squash-
+                      merged 2026-05-16; non-UI phase; no required CI
+                      check added — the latency budget rides on the
+                      existing agent-eval-mock job). Headline: end-to-
+                      end observability stack live, trace IDs round-
+                      trip cleanly, /v1/agents API contract fixed
+                      against the Phase 5.3 frontend client, latency
+                      gate active at ±20% multiplicative tolerance.
+                      Binding decisions in ADR-024; design walkthrough
+                      in docs/research/20-observability-design.md; new
+                      §13 in MODEL_CARD and new "Observability"
+                      subsection in README.
+                      Phase 6 (100-case agent eval harness with 4 new metrics —
                       citation precision/recall, recommendation correctness,
                       hallucination rate — + LLM-as-judge layer with two
                       1-5 Likert axes + cost accounting per LLM call +
@@ -199,22 +226,33 @@ Last checkpoint:      Phase 6 (100-case agent eval harness with 4 new metrics �
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 7 (Langfuse Cloud Hobby + Sentry Free + Vercel
-                        Speed Insights + per-case Langfuse trace ID + p95
-                        latency budget gate against baseline_mock.json) is
-                        the in-flight phase; re-planning kicked off
-                        2026-05-16 per AGENTS §0 rule 2.
+Open decisions:       - Phase 8 (Deploy + promote — Vercel Hobby frontend
+                        with mock-mode default + HF Spaces Docker
+                        backend + Supabase Free Postgres + live-mode
+                        feature flag + NLI swap from DeBERTa-v3-large
+                        to cross-encoder/nli-deberta-v3-small to fit
+                        HF Spaces 16 GB RAM + README final pass +
+                        screencast + writeup) is the in-flight phase;
+                        re-planning kicked off 2026-05-16 per AGENTS
+                        §0 rule 2. ADR-025 will land with the binding
+                        deploy decisions (cold-start mitigation,
+                        "warming up" UI banner, secrets management,
+                        Supabase RLS for audit log).
                       - Live Gemini cell numbers (run locally with
-                        `--llm gemini --judge gemini`; ~$0.05 per full 100-case
-                        run inside the free tier) will be appended to
-                        reports/v1/agents/gemini/ when the user runs the
-                        Gemini headline; planned for inclusion in the
-                        Phase 7 PR so the Langfuse spans show real
-                        production-LLM traces, not just mock.
-                      - Phase 8 (ADR-024 + Vercel + HF Spaces Docker + Supabase
-                        Free + .env.example expansion + README final pass)
-                        is the last MVP phase; mock-mode default + live-mode
-                        toggle baked in.
+                        `--llm gemini --judge gemini`; ~$0.05 per full
+                        100-case run inside the free tier) will be
+                        appended to reports/v1/agents/gemini/ when the
+                        user runs the Gemini headline; planned for
+                        inclusion in the Phase 8 PR so the deployed
+                        Langfuse dashboard shows real production-LLM
+                        traces, not just mock.
+                      - Phase 8 latency-band tightening: the Phase-7
+                        ±20% band intentionally absorbs the
+                        Langfuse / Sentry SDK-import overhead (+127 ms
+                        median); revisit and tighten back towards ±10%
+                        once the post-Phase-7 main is the steady
+                        state (see ADR-024 §5 honest-trade-off block
+                        and EVAL.md "Future work" note).
                       - **Architecture pivot 2026-05-16: free-tier only.** Locked
                         constraint per user (see §4): every hosted service in
                         the production-deployed stack must run on a permanent
@@ -398,7 +436,26 @@ Open decisions:       - Phase 7 (Langfuse Cloud Hobby + Sentry Free + Vercel
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   #21 feat(eval): Phase 6 — 100-case agent eval harness +
+Last meaningful PR:   #24 feat(observability): Phase 7 — free-tier
+                      observability stack (Langfuse Cloud Hobby + Sentry
+                      Free + Vercel Web Analytics + Speed Insights) +
+                      per-case trace_id round-trip (AgentState -> API
+                      -> zod schema -> audit deep-link with a
+                      `mock-trace-*` deterministic fallback) + PII
+                      scrubber on every Sentry SDK + /v1/agents API
+                      contract fix matching the Phase 5.3 frontend
+                      client (optional case_id, auto-approved triage,
+                      flat DecideRequest) + multiplicative ±20% p95
+                      latency budget gate extending check_regression
+                      + refreshed baseline_mock.json (squash-merged
+                      2026-05-16).
+                      #23 fix(ci): de-flake axe-pages gate by waiting for
+                      next-themes hydration (squash-merged 2026-05-16
+                      commit 4243f54).
+                      #22 chore(docs): refresh AGENTS.md after PR #21
+                      squash-merge (squash-merged 2026-05-16
+                      commit 68387af).
+                      #21 feat(eval): Phase 6 — 100-case agent eval harness +
                       LLM-as-judge + cost accounting + free-tier-only LLM
                       stack [Mock + Gemini 2.5 Flash + opt-in Groq] +
                       ±2 pp regression gate against baseline_mock.json +
@@ -512,6 +569,218 @@ Branch protection on main (live, set 2026-05-05):
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
+
+Phase 7 deliverables (PR #24 squash-merged 2026-05-16; non-UI phase; no required CI check added):
+  backend/cardiorisk/settings.py                       new central Settings(BaseSettings); reads
+                                                       APP_ENV / LANGFUSE_* / SENTRY_DSN /
+                                                       SUPABASE_* / NEXT_PUBLIC_* from .env +
+                                                       os.environ; `langfuse_enabled` +
+                                                       `sentry_enabled` properties for
+                                                       conditional no-op behaviour
+  backend/cardiorisk/observability/__init__.py         new package skeleton exporting
+                                                       get_langfuse_client, observe_node,
+                                                       record_generation, start_root_span,
+                                                       new_trace_id, init_sentry, scrub_patient
+  backend/cardiorisk/observability/langfuse.py         new wrappers; v3+/v4 Langfuse SDK
+                                                       (`get_client` + `@observe` pattern);
+                                                       lazy import; returns None / no-op
+                                                       decorator when LANGFUSE_PUBLIC_KEY is
+                                                       unset; `start_root_span` ctx manager
+                                                       opens/closes per-case trace; `new_trace_id`
+                                                       mints `mock-trace-<6-hex>` via
+                                                       secrets.token_hex(6) as deterministic
+                                                       fallback so the UI always has a trace_id
+                                                       to render
+  backend/cardiorisk/observability/sentry.py           new wrappers; sentry-sdk[fastapi]
+                                                       integration; `init_sentry(app)` returns
+                                                       early without SENTRY_DSN; `scrub_patient`
+                                                       recursively walks event tree and
+                                                       replaces values at `patient`-shaped
+                                                       keys with `<scrubbed>` (registered as
+                                                       `before_send`)
+  backend/cardiorisk/agents/state.py                   AgentState gains `trace_id: str | None
+                                                       = None`; state_to_dict /
+                                                       state_from_dict round-trip it
+  backend/cardiorisk/agents/graph.py                   every `_make_*_node` wrapped with
+                                                       `@observe_node(stage="...")` so each
+                                                       agent execution becomes a child span
+                                                       under the per-case root trace
+  backend/cardiorisk/rag/generation/llm.py             every client.generate() now also calls
+                                                       record_generation(model, prompt,
+                                                       completion, input_tokens, output_tokens,
+                                                       cost_usd, client_name) after
+                                                       self.usage.add(...); MockLLMClient,
+                                                       GeminiLLMClient, GroqLLMClient,
+                                                       AnthropicLLMClient, OpenAILLMClient
+                                                       all wired
+  backend/cardiorisk/agents/eval/orchestrator.py       _run_case wraps each case in
+                                                       start_root_span(case_id) and assigns
+                                                       the generated trace_id to AgentState;
+                                                       falls back to new_trace_id() when
+                                                       Langfuse is disabled; flush_langfuse()
+                                                       at end of run_eval so short-lived CLI
+                                                       processes don't drop spans; new
+                                                       REGRESSION_METRICS_LATENCY tuple
+                                                       (median + p95 ms); check_regression
+                                                       extended with `latency_tolerance_pct`
+                                                       parameter (default 0.20) and a new
+                                                       "latency" direction tag; tolerance is
+                                                       multiplicative (`current > baseline *
+                                                       (1 + tol)`); improvements never fail;
+                                                       zero baseline fails on any positive
+                                                       new value
+  backend/cardiorisk/api/schemas.py                    CaseCreate.case_id becomes optional
+                                                       (backend mints `c{8-hex}` when absent);
+                                                       new FlatDecisionRecord matches frontend
+                                                       shape; CaseStateResponse adds top-level
+                                                       `status` + `next_stage` + `trace_id`
+                                                       fields + flat `decisions` list (instead
+                                                       of nested), derived in `.from_state`;
+                                                       DecideRequest accepts flat {stage,
+                                                       status, note?} shape matching what
+                                                       the frontend client sends today
+  backend/cardiorisk/api/server.py                     API_PREFIX bumped /v1 -> /v1/agents
+                                                       (matches `frontend/src/lib/agents/
+                                                       client.ts`); CORSMiddleware added (origins
+                                                       from settings); init_sentry(app) called
+                                                       on startup; create_case now mints
+                                                       case_id when absent, wraps the run in
+                                                       start_root_span, auto-approves the
+                                                       triage stage so the UI lands on the
+                                                       risk gate (matches Phase 5.3 flow),
+                                                       and sets the `X-Trace-Id` response
+                                                       header; decide + get_case also set
+                                                       the header on every response
+  backend/scripts/eval_agents.py                       CLI gains `--latency-regression-
+                                                       tolerance-pct <float>` (default 0.20);
+                                                       passes through to run_eval; failure
+                                                       message prints `delta_pct=X%` for
+                                                       latency-direction misses (vs
+                                                       `delta_pp=X` for the rate-direction
+                                                       misses)
+  backend/tests/test_settings.py                       new: defaults, env-var overrides,
+                                                       langfuse_enabled + sentry_enabled
+                                                       property behaviour
+  backend/tests/test_observability_langfuse.py        new: no-op-without-keys contract;
+                                                       mock-client behaviour; new_trace_id
+                                                       determinism; start_root_span + flush
+                                                       semantics
+  backend/tests/test_observability_sentry.py          new: init_sentry no-op without DSN;
+                                                       scrub_patient covers nested dicts,
+                                                       list-of-dicts, mixed structures, and
+                                                       top-level non-dict `patient` values
+  backend/tests/test_agents_eval_regression.py        extends with 6 latency-band tests
+                                                       (within-band passes, above-band fails,
+                                                       improvement never fails, custom
+                                                       tolerance honoured, zero-baseline
+                                                       handled, missing-baseline-latency-
+                                                       metric doesn't fail). All 15 tests
+                                                       green
+  backend/tests/test_api_server.py                    rewritten for new /v1/agents prefix,
+                                                       optional case_id, auto-approved
+                                                       triage, flat DecideRequest, new
+                                                       CaseStateResponse shape, and
+                                                       X-Trace-Id header verification
+  backend/tests/test_rag_generation_llm.py            extended with record_generation
+                                                       integration tests
+  backend/pyproject.toml                              adds langfuse>=3.0,<5 + sentry-sdk
+                                                       [fastapi]>=2.18,<3; mypy
+                                                       ignore_missing_imports for `langfuse`
+                                                       + `sentry_sdk`
+  frontend/src/lib/agents/schema.ts                    caseSnapshotSchema gains
+                                                       `trace_id: z.string().nullable()
+                                                       .optional()`
+  frontend/src/lib/agents/mock-fixture.ts              makeMockCase mints a deterministic
+                                                       `mock-trace-<hex>` so the UI always
+                                                       has a trace_id to render even in
+                                                       mock mode
+  frontend/src/lib/agents/agents.test.ts               new contract test asserting
+                                                       snap.trace_id is present and matches
+                                                       the `mock-trace-` prefix in mock mode
+  frontend/src/app/cases/[id]/audit/page.tsx           imports ExternalLink + Button; new
+                                                       LANGFUSE_TRACE_URL_BASE constant
+                                                       (from NEXT_PUBLIC_LANGFUSE_TRACE_URL
+                                                       _BASE); renders the trace_id with
+                                                       either an "Open in Langfuse" button
+                                                       (real trace ID + URL base set) or
+                                                       a "Local mock — no remote trace"
+                                                       badge (mock sentinel)
+  frontend/src/app/layout.tsx                          mounts <Analytics /> +
+                                                       <SpeedInsights /> from
+                                                       @vercel/analytics/next +
+                                                       @vercel/speed-insights/next; auto
+                                                       no-ops outside Vercel
+  frontend/instrumentation.ts                          new: Next.js 15 instrumentation hook
+                                                       loading the appropriate Sentry config
+                                                       per runtime (nodejs / edge)
+  frontend/instrumentation-client.ts                   new: client-side Sentry init; PII
+                                                       scrubber mirrors backend scrub_patient
+                                                       contract
+  frontend/sentry.server.config.ts                     new: server-side Sentry init; same
+                                                       PII scrubber
+  frontend/sentry.edge.config.ts                       new: edge-runtime Sentry init (no
+                                                       scrubber — no edge route touches
+                                                       patient state today)
+  frontend/next.config.ts                              nextConfig now wrapped with
+                                                       withSentryConfig from @sentry/nextjs
+                                                       for build-time optimisations + source
+                                                       map upload (no-op without auth token)
+  frontend/.env.example                                adds NEXT_PUBLIC_LANGFUSE_TRACE_URL
+                                                       _BASE, NEXT_PUBLIC_SENTRY_DSN +
+                                                       _TRACES_SAMPLE_RATE,
+                                                       NEXT_PUBLIC_APP_RELEASE + _ENV,
+                                                       SENTRY_{ORG,PROJECT,AUTH_TOKEN,DSN,
+                                                       TRACES_SAMPLE_RATE}
+  frontend/package.json                                adds @sentry/nextjs@^8 +
+                                                       @vercel/analytics@^1.4 +
+                                                       @vercel/speed-insights@^1.0
+  reports/v1/agents/baseline_mock.json                 refreshed in this PR with the post-
+                                                       Phase-7 SDK-import baseline (median
+                                                       1029 -> 1156 ms, p95 1055 -> 1204 ms;
+                                                       all 9 rate metrics unchanged). The
+                                                       gate now protects against future
+                                                       *real* drift, not the one-time SDK
+                                                       bump
+  docs/adr/024-observability-free-tier.md              new: binding decision (Langfuse Cloud
+                                                       Hobby + Sentry Free + Vercel
+                                                       Analytics/Speed Insights; trace_id
+                                                       source = Langfuse; PII scrubber on
+                                                       every Sentry SDK; env-var gating;
+                                                       ±20% multiplicative latency band)
+                                                       with full rejected-alternatives
+                                                       matrix (LangSmith, OTel + Honeycomb
+                                                       / Grafana Cloud, Helicone, self-host
+                                                       Langfuse, W3C traceparent, ±10%
+                                                       band, gating on APP_ENV); promotes
+                                                       the ADR-024 placeholder slot
+  docs/research/20-observability-design.md             new: opinionated walkthrough; why
+                                                       two products not three; trace-ID
+                                                       round-trip rationale; PII-scrubber
+                                                       deny-list contract; ±20% band sizing
+                                                       discussion; honest-weaknesses block
+  docs/adr/README.md                                   ADR-024 row added; placeholder
+                                                       numbering bumped (Phase 8 deploy
+                                                       slot now ADR-025)
+  docs/research/README.md                              research note 20 row + ADR-024 row
+                                                       added
+  EVAL.md                                              new "p95 latency budget gate" sub-
+                                                       section; headline median/p95 numbers
+                                                       refreshed (1029/1055 ms -> 1156/
+                                                       1204 ms with the SDK-overhead note);
+                                                       Future-work note about tightening
+                                                       back to ±10% in Phase 8; References
+                                                       updated for ADR-024 + research 20
+  MODEL_CARD.md                                        new §13 "Phase-7 observability +
+                                                       cost"; subsequent sections
+                                                       renumbered §14..§17; ADR-024 added
+                                                       to References; top-of-file Status
+                                                       block now mentions Phase 7
+  README.md                                            new "Observability" subsection
+                                                       above Disclaimer; MODEL_CARD link
+                                                       added to documentation map
+  AGENTS.md                                            Phase 7 status block (this block)
+                                                       + Phase 8 in-flight refresh in
+                                                       Open decisions
 
 Phase 6 deliverables (PR #21 squash-merged 5c52c4f 2026-05-16):
   eval/agents/schema.json                              adds `expected_recommendation_family`

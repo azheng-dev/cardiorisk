@@ -40,6 +40,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import Any, Final, Protocol, runtime_checkable
 
+from cardiorisk.observability import record_generation
+
 #: Default upper-bound token budget for one LLM call.
 DEFAULT_MAX_TOKENS: Final[int] = 512
 #: Sampling temperature. The generator runs effectively-greedy because
@@ -208,6 +210,15 @@ class MockLLMClient:
         input_tokens = sum(len(m.content.split()) for m in messages)
         output_tokens = len(text.split())
         self.usage.add(input_tokens=input_tokens, output_tokens=output_tokens, cost_usd=0.0)
+        record_generation(
+            model="mock-llm",
+            prompt=body,
+            completion=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=0.0,
+            client_name=self.name,
+        )
         return text
 
 
@@ -289,6 +300,15 @@ class GeminiLLMClient:
             output_tokens = _approx_tokens(text)
         cost = estimate_cost_usd(self._model, input_tokens, output_tokens)
         self.usage.add(input_tokens=input_tokens, output_tokens=output_tokens, cost_usd=cost)
+        record_generation(
+            model=self._model,
+            prompt=contents,
+            completion=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=cost,
+            client_name=self.name,
+        )
         return text
 
 
@@ -346,6 +366,15 @@ class GroqLLMClient:
             output_tokens = _approx_tokens(text)
         cost = estimate_cost_usd(self._model, input_tokens, output_tokens)
         self.usage.add(input_tokens=input_tokens, output_tokens=output_tokens, cost_usd=cost)
+        record_generation(
+            model=self._model,
+            prompt="\n\n".join(m.content for m in messages),
+            completion=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=cost,
+            client_name=self.name,
+        )
         return text
 
 
@@ -407,6 +436,15 @@ class AnthropicLLMClient:
             output_tokens = _approx_tokens(text)
         cost = estimate_cost_usd(self._model, input_tokens, output_tokens)
         self.usage.add(input_tokens=input_tokens, output_tokens=output_tokens, cost_usd=cost)
+        record_generation(
+            model=self._model,
+            prompt="\n\n".join(m.content for m in messages),
+            completion=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=cost,
+            client_name=self.name,
+        )
         return text
 
 
@@ -461,6 +499,15 @@ class OpenAILLMClient:
             output_tokens = _approx_tokens(text)
         cost = estimate_cost_usd(self._model, input_tokens, output_tokens)
         self.usage.add(input_tokens=input_tokens, output_tokens=output_tokens, cost_usd=cost)
+        record_generation(
+            model=self._model,
+            prompt="\n\n".join(m.content for m in messages),
+            completion=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            cost_usd=cost,
+            client_name=self.name,
+        )
         return text
 
 

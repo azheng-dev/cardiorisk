@@ -28,7 +28,8 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [021](./021-component-system-and-a11y-gate.md) | Component system + a11y gate (Radix primitives + shadcn-pattern catalog + Ladle published catalog + axe-playwright CI gate) | Accepted | 5.2 |
 | [022](./022-workflow-screens.md) | Workflow screens, app shell, and mock-mode client (Next 15 App Router; 5 routes; zod-shared mock client; zustand store) | Accepted | 5.3 |
 | [023](./023-ui-polish-and-page-axe.md) | UI polish + page-level axe gate (Sheet-backed mobile shell; per-screen skeletons; Framer Motion page transitions; `axe:pages` CI job over the 5 routes; form-control a11y fix; dark-mode contrast fix) | Accepted | 5.4 |
+| [024](./024-observability-free-tier.md) | Free-tier observability stack + p95 latency budget gate (Langfuse Cloud Hobby + Sentry Free + Vercel Web Analytics + Speed Insights; per-case `trace_id` round-trip from `AgentState` → API → zod → audit deep-link; PII scrubber on both Sentry SDKs; `REGRESSION_METRICS_LATENCY` with multiplicative ±20% tolerance) | Accepted | 7 |
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-024: Free-tier deploy architecture (Phase 8). Will lock the **Vercel Hobby + Hugging Face Spaces Docker + Supabase Free + Gemini API + Langfuse Cloud Hobby + Sentry Free** combination. Documents the rejected paid alternatives (Railway / Fly.io / Anthropic / OpenAI) and the cold-start mitigation (mock-mode default + warming-up banner). Binding for all of Phase 8.
+- ADR-025: Free-tier deploy architecture (Phase 8). Will lock the **Vercel Hobby + Hugging Face Spaces Docker + Supabase Free + Gemini API + Langfuse Cloud Hobby + Sentry Free** combination. Documents the rejected paid alternatives (Railway / Fly.io / Anthropic / OpenAI) and the cold-start mitigation (mock-mode default + warming-up banner). Binding for all of Phase 8.

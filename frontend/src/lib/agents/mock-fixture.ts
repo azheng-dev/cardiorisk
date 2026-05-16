@@ -28,6 +28,10 @@ export function makeMockCase(caseId: string, patient: PatientInput): CaseSnapsho
     case_id: caseId,
     status: "awaiting_decision",
     next_stage: "risk",
+    // Deterministic per-case mock sentinel — the audit screen
+    // checks this prefix and shows a muted "Local mock — no remote
+    // trace" badge instead of a broken Langfuse deep-link.
+    trace_id: `mock-trace-${caseId.padEnd(16, "0").slice(0, 16)}`,
     patient,
     triage: {
       normalised_patient: patient,
