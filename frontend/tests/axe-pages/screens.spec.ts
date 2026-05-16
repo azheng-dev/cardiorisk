@@ -21,16 +21,38 @@ const EXEMPTED_RULE_IDS = new Set<string>([
   "aria-required-parent",
 ]);
 
+/**
+ * Wait for `next-themes` to set `data-theme` on `<html>`. Without this,
+ * axe can sample computed styles in a brief hydration window where some
+ * tokens come from the `@media (prefers-color-scheme: dark)` block and
+ * others from the explicit `[data-theme="dark"]` block, producing
+ * false-positive contrast failures (e.g. light-mode `--color-accent`
+ * background under dark-mode `--color-fg-on-accent` text → 1.71:1 on
+ * the submit button; reproducible on `chromium-dark` /cases/new under
+ * load).
+ */
+async function waitForThemeReady(page: Page): Promise<void> {
+  await page.waitForFunction(
+    () => {
+      const t = document.documentElement.dataset.theme;
+      return t === "light" || t === "dark";
+    },
+    { timeout: 10_000 },
+  );
+}
+
 async function startMockCase(page: Page): Promise<string> {
   await page.goto("/cases/new");
-  // The "Triage & score risk" submit button leads to /cases/[id]/risk.
+  await waitForThemeReady(page);
   await page.getByRole("button", { name: /Triage & score risk/i }).click();
   await page.waitForURL(/\/cases\/.+\/risk$/);
+  await waitForThemeReady(page);
   const m = page.url().match(/\/cases\/([^/]+)\//);
   return m?.[1] ?? "mock-001";
 }
 
 async function runAxe(page: Page, label: string) {
+  await waitForThemeReady(page);
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     .analyze();
