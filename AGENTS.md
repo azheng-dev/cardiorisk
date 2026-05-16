@@ -51,26 +51,32 @@ A senior AI engineer or eng manager at Heidi (Australian medical AI scribe), or 
 ## 2. Current status (live — agent updates this every session)
 
 ```
-Current phase:        Phase 6 (100-case agent eval harness with 4 new metrics —
+Current phase:        Phase 7 (Observability + cost) about to start; re-plan
+                      kicked off per AGENTS §0 rule 2 against the latest
+                      main. Free-tier observability stack locked
+                      2026-05-16: Langfuse Cloud Hobby (LLM-call traces +
+                      per-case cost rollup; 50k events / month free),
+                      Sentry Free (FastAPI + Next error tracking; 5k
+                      errors / month), Vercel Web Analytics + Speed
+                      Insights (frontend RUM). Phase-6 cost-accounting
+                      hooks (UsageTotals + estimate_cost_usd) will feed
+                      Langfuse generation spans; the per-case JSONs
+                      already carry the LLM+judge USD totals from PR #21.
+                      p95-latency budget gate planned against the locked
+                      mock-pipeline baseline (1.07 s / 100 cases) with a
+                      ±20% tolerance, mirroring the ADR-019 ±2 pp pattern.
+
+Last checkpoint:      Phase 6 (100-case agent eval harness with 4 new metrics —
                       citation precision/recall, recommendation correctness,
                       hallucination rate — + LLM-as-judge layer with two
                       1-5 Likert axes + cost accounting per LLM call +
                       free-tier-only LLM stack [Mock + Gemini 2.5 Flash +
                       opt-in Groq Llama-3.3-70B] per ADR-024 + ±2 pp
                       regression gate against baseline_mock.json + CI
-                      `agent-eval-mock` job) in progress on
-                      feat/phase-6-eval-harness, auto-merge per the
-                      AGENTS §0 finish-line grant. ADR-019 binding;
-                      research note 19 with the alternatives-we-rejected
-                      walkthrough; EVAL.md filled in end-to-end;
-                      MODEL_CARD §12 with the headline mock-pipeline
-                      table; AGENTS.md §4 rewritten to bake in the
-                      free-tier-only constraint (ADR-024 placeholder
-                      already in docs/adr/README.md from the 2026-05-16
-                      architecture-pivot session). All 68 new tests +
-                      835 existing tests pass; ruff + mypy strict clean.
-
-Last checkpoint:      Phase 5.4 (UI polish, motion, mobile shell, page-level
+                      `agent-eval-mock (regression gate)` job) auto-merged
+                      on the AGENTS §0 finish-line grant (PR #21 squash-
+                      merged 5c52c4f; new check now required on main).
+                      Phase 5.4 (UI polish, motion, mobile shell, page-level
                       axe gate) auto-merged on the AGENTS §0 finish-line grant
                       (PR #20 squash-merged b4750fd; `axe-pages` now a
                       required check on main; Gate B [full UI walkthrough]
@@ -193,19 +199,18 @@ Last checkpoint:      Phase 5.4 (UI polish, motion, mobile shell, page-level
                       Phase 2.1 (data ingestion + EDA) accepted by user (PR #5 merged 2026-05-05).
                       Phase 1 verdict + v1 risk-model design accepted by user (PR #3 merged 2026-05-05).
                       Phase 0 scaffolding accepted by user (PR #1 merged 2026-05-05).
-Open decisions:       - Phase 6 PR review + auto-merge once `agent-eval-mock`
-                        + existing 9 required checks go green; baseline_mock.json
-                        is the locked reference, refreshed in the same PR
-                        whenever a tracked metric intentionally moves.
+Open decisions:       - Phase 7 (Langfuse Cloud Hobby + Sentry Free + Vercel
+                        Speed Insights + per-case Langfuse trace ID + p95
+                        latency budget gate against baseline_mock.json) is
+                        the in-flight phase; re-planning kicked off
+                        2026-05-16 per AGENTS §0 rule 2.
                       - Live Gemini cell numbers (run locally with
                         `--llm gemini --judge gemini`; ~$0.05 per full 100-case
                         run inside the free tier) will be appended to
                         reports/v1/agents/gemini/ when the user runs the
-                        Gemini headline before Phase 7 starts.
-                      - Phase 7 (Langfuse Cloud Hobby + Sentry Free + Vercel
-                        Speed Insights + per-case Langfuse trace ID + p95
-                        latency budget gate against baseline_mock.json) is
-                        next; will re-plan at the start per AGENTS §0 rule 2.
+                        Gemini headline; planned for inclusion in the
+                        Phase 7 PR so the Langfuse spans show real
+                        production-LLM traces, not just mock.
                       - Phase 8 (ADR-024 + Vercel + HF Spaces Docker + Supabase
                         Free + .env.example expansion + README final pass)
                         is the last MVP phase; mock-mode default + live-mode
@@ -393,13 +398,13 @@ Open decisions:       - Phase 6 PR review + auto-merge once `agent-eval-mock`
 Open issues:          - None active. ADR-007 §"Bypass log" still records the two PR #1 / #3
                       REST-endpoint merges from Phase 1; the workflow fix in PR #4 removed the
                       root cause and every PR since (#4..#11) merged via standard gh pr merge.
-Last meaningful PR:   feat(eval): Phase 6 — 100-case agent eval harness +
+Last meaningful PR:   #21 feat(eval): Phase 6 — 100-case agent eval harness +
                       LLM-as-judge + cost accounting + free-tier-only LLM
                       stack [Mock + Gemini 2.5 Flash + opt-in Groq] +
                       ±2 pp regression gate against baseline_mock.json +
-                      CI `agent-eval-mock` job on feat/phase-6-eval-
-                      harness; auto-merge per the AGENTS §0 finish-line
-                      grant on CI green.
+                      CI `agent-eval-mock (regression gate)` job (squash-
+                      merged 5c52c4f 2026-05-16; new check now required
+                      on main).
                       #20 feat(ui): Phase 5.4 — UI polish + page-level axe gate +
                       mobile shell + skeletons + motion + screenshots
                       (squash-merged b4750fd; `axe-pages` now a required
@@ -500,14 +505,15 @@ Branch protection on main (live, set 2026-05-05):
                                          test-python, lint-ts, type-check-ts, test-ts,
                                          axe-ts (added 2026-05-15 with Phase 5.2),
                                          axe-pages (added 2026-05-16 with Phase 5.4),
-                                         agent-eval-mock (to be added once Phase 6
-                                         PR lands on main with a green run)
+                                         "agent-eval-mock (regression gate)" (added
+                                         2026-05-16 once PR #21 landed; protects
+                                         baseline_mock.json)
   required_signatures:                   true
   required_linear_history:               true
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 6 deliverables (in progress on feat/phase-6-eval-harness; auto-merge per §0):
+Phase 6 deliverables (PR #21 squash-merged 5c52c4f 2026-05-16):
   eval/agents/schema.json                              adds `expected_recommendation_family`
                                                        enum (statin / lifestyle / specialist /
                                                        monitor / none) used by the new
@@ -716,177 +722,6 @@ Phase 6 deliverables (in progress on feat/phase-6-eval-harness; auto-merge per �
                                                        stack already updated 2026-05-16
                                                        to bake in the free-tier-only
                                                        constraint
-
-Phase 6 deliverables (in progress on feat/phase-6-eval-harness; auto-merge per §0):
-  eval/agents/cases.jsonl                                100-case stratified eval set (grew from 30):
-                                                         deterministic generation via
-                                                         backend/scripts/generate_agent_cases.py;
-                                                         5 risk-band cells x stratified
-                                                         age/sex/diabetes; every case has
-                                                         expected_recommendation_family
-                                                         (one of pharmacotherapy /
-                                                         lifestyle / shared_decision /
-                                                         reassess) for the new
-                                                         recommendation-correctness scorer
-  eval/agents/schema.json                                bumped to v2: adds
-                                                         expected_recommendation_family enum;
-                                                         relaxes id pattern to ^a[0-9]{3,4}$
-                                                         to accommodate the new 100-case
-                                                         numbering
-  backend/scripts/generate_agent_cases.py                deterministic 100-case generator
-                                                         (seeded RNG; idempotent; --check-only
-                                                         flag for CI; backfills the original
-                                                         30 cases with expected_recommendation_
-                                                         family, then synthesises 70 more
-                                                         from age/sex/feature pools)
-  backend/cardiorisk/agents/eval/scorer.py               adds 4 Phase-6 metrics:
-                                                         citation_precision (cited chunks
-                                                         that survived NLI / all cited
-                                                         chunks), citation_recall (cited
-                                                         chunks that match the expected
-                                                         retrieval set / |expected|),
-                                                         recommendation_correctness
-                                                         (letter contains a keyword from
-                                                         the expected family table),
-                                                         hallucination_rate (cases that
-                                                         emitted a letter despite NLI
-                                                         suppression or generator refusal);
-                                                         RECOMMENDATION_FAMILY_KEYWORDS
-                                                         table + HALLUCINATION_SUPPRESSION_
-                                                         REASONS set committed inline
-  backend/cardiorisk/rag/generation/llm.py               UsageTotals dataclass (calls,
-                                                         prompt_tokens, completion_tokens,
-                                                         usd_cost) + estimate_cost_usd
-                                                         dispatcher + PRICE_TABLE_USD_PER_1K
-                                                         (mock=0, gemini-2.5-flash, groq-
-                                                         llama-3.3-70b-versatile, claude-
-                                                         sonnet-4.5, gpt-4o-mini).
-                                                         GeminiLLMClient (google-genai SDK)
-                                                         + GroqLLMClient (openai SDK against
-                                                         Groq endpoint) added. Mock /
-                                                         Anthropic / OpenAI clients
-                                                         retrofitted with UsageTotals.
-                                                         BaseLLMClient Protocol gains
-                                                         `usage` property
-  backend/cardiorisk/agents/eval/judge.py                NEW. LLM-as-judge module:
-                                                         JudgeScore dataclass (1-5 Likert
-                                                         on letter_quality + recommendation_
-                                                         alignment; pass = ≥4 on both),
-                                                         BaseJudge Protocol, MockJudge
-                                                         (deterministic keyword logic;
-                                                         CI floor), GeminiJudge + GroqJudge
-                                                         (live; JSON-mode prompt with
-                                                         robust parser), JUDGE_PROMPT_
-                                                         TEMPLATE, JudgeAggregate roll-up,
-                                                         get_judge factory
-  backend/cardiorisk/agents/eval/orchestrator.py         wires the judge + UsageTotals
-                                                         + 4 new metrics into per_case /
-                                                         aggregate reports; new
-                                                         regression_baseline_path +
-                                                         regression_tolerance_pp params;
-                                                         check_regression() compares
-                                                         current run vs baseline_mock.json
-                                                         on 6 tracked metrics with the
-                                                         ±2 pp tolerance (or +2 pp for
-                                                         hallucination_rate); returns
-                                                         (passed, [drops]) tuple; raises
-                                                         on missing-baseline-metric so
-                                                         schema drift is loud
-  backend/scripts/eval_agents.py                         CLI extended: --llm {mock,gemini,
-                                                         groq,anthropic,openai},
-                                                         --judge {mock,gemini,groq,none},
-                                                         --regression-check PATH,
-                                                         --regression-tolerance-pp FLOAT
-                                                         (default 2.0); summary table
-                                                         prints all 7 Phase-6 metrics +
-                                                         per-LLM/judge UsageTotals +
-                                                         regression verdict; exits 2 on
-                                                         regression fail (CI surfaces
-                                                         the diff in the job log)
-  reports/v1/agents/baseline_mock.json                   locked mock-pipeline baseline
-                                                         (100 cases, MockLLMClient,
-                                                         always-entail NLI, stub retrieval,
-                                                         MockJudge); refreshed in the
-                                                         same PR whenever a tracked
-                                                         metric intentionally moves
-  backend/tests/test_agents_eval.py                      extended: 100-case loader test +
-                                                         expected_recommendation_family
-                                                         coverage; new TestPhase6Metrics
-                                                         class with 14 tests covering
-                                                         citation_precision/recall +
-                                                         recommendation_correctness +
-                                                         hallucination_rate
-  backend/tests/test_rag_generation_llm.py               extended: UsageTotals accumulation
-                                                         + estimate_cost_usd determinism +
-                                                         Gemini/Groq factory tests + API-
-                                                         key guard tests
-  backend/tests/test_agents_eval_judge.py                NEW. 23 tests covering JudgeScore
-                                                         clamping + MockJudge keyword
-                                                         logic + JSON parser robustness +
-                                                         JudgeAggregate roll-up + API-key
-                                                         guards + get_judge factory
-  backend/tests/test_agents_eval_regression.py           NEW. 11 tests covering
-                                                         check_regression: no-change /
-                                                         drop-within-tolerance /
-                                                         drop-beyond-tolerance /
-                                                         hallucination-direction /
-                                                         missing-baseline-metric /
-                                                         missing-baseline-file
-  backend/pyproject.toml                                 adds google-genai + openai
-                                                         (Groq client) to dependencies;
-                                                         mypy ignore_missing_imports for
-                                                         google + google.genai
-  docs/adr/019-phase-6-eval-harness.md                   NEW. Binding decision: 100
-                                                         stratified cases + 4 new metrics +
-                                                         LLM-as-judge layer +
-                                                         recommendation-family keyword
-                                                         table + ±2 pp regression gate +
-                                                         free-tier-only LLM stack
-                                                         (Mock + Gemini 2.5 Flash +
-                                                         opt-in Groq). Rejected
-                                                         alternatives: ragas, full BERT-
-                                                         score, paid Claude/GPT-4o
-                                                         judges, ±1 pp tolerance.
-                                                         Supersedes the "Phase 6 = locked
-                                                         eval set + paid multi-model"
-                                                         bullet in AGENTS §7
-  docs/research/19-phase-6-eval-design.md                NEW. Companion design walkthrough:
-                                                         why 100 not 30/250/1000; why
-                                                         family-keyword table not full-
-                                                         text LLM judge for recommendation;
-                                                         why ±2 pp not ±1 pp; what the
-                                                         mock baseline does and does not
-                                                         tell us; honest weaknesses
-  EVAL.md                                                rewritten: §1-3 the 100-case
-                                                         eval set + 7 metrics + LLM judge
-                                                         + regression gate; §4 the mock-
-                                                         pipeline headline table; §5
-                                                         repro steps for the free-tier
-                                                         live cells (Gemini + Groq);
-                                                         §6 known caveats
-  MODEL_CARD.md                                          new §12 Phase-6 eval harness
-                                                         (100 cases + 4 new metrics +
-                                                         judge + cost + regression gate);
-                                                         subsequent §13-16 renumbered
-                                                         from old §12-15; ADR-019 added
-                                                         to references
-  .github/workflows/ci.yml                               adds two Phase-6 steps:
-                                                         (a) in test-python:
-                                                         generate_agent_cases.py
-                                                         --check-only (~2 s); (b) new
-                                                         agent-eval-mock job running the
-                                                         full 100-case mock pipeline with
-                                                         --regression-check (~2 min on
-                                                         ubuntu-latest; no API keys,
-                                                         no model weights)
-  AGENTS.md                                              §4 Tech Stack rewrite to bake
-                                                         in the free-tier-only constraint
-                                                         (Vercel Hobby + HF Spaces Docker +
-                                                         Supabase Free + Gemini 2.5 Flash +
-                                                         opt-in Groq + Langfuse Cloud
-                                                         Hobby + Sentry Free); current
-                                                         status + open decisions refreshed;
-                                                         Phase 6 deliverables block
 
 Phase 5.4 deliverables (PR #20 squash-merged b4750fd 2026-05-16):
   frontend/src/components/app-shell/app-shell.tsx     Mobile-aware shell: sidebar inline above
