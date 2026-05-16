@@ -94,6 +94,15 @@ dependencies = [
     "pydantic-settings>=2.6,<3",
     "tenacity>=9.0,<11",
     "httpx>=0.28,<1",
+    # Phase 6 LLM stack (ADR-019, free-tier-only per ADR-024).
+    #   google-genai - Google AI Studio SDK (gemini-2.5-flash).
+    #                  Free tier per https://ai.google.dev/pricing.
+    #   openai       - reused for the Groq client (Groq exposes an
+    #                  OpenAI-compatible /v1 surface).
+    # No paid clients (anthropic, native openai) are listed: callers
+    # who already pay can `pip install anthropic openai` separately.
+    "google-genai>=1.0,<3",
+    "openai>=2.0,<3",
 ]
 
 [dependency-groups]
@@ -230,6 +239,11 @@ module = [
   # Same disposition as the LangChain stack.
   "langgraph", "langgraph.*",
   "langgraph_checkpoint", "langgraph_checkpoint.*",
+  # Phase 6: google-genai ships partial typing but uses dynamic
+  # attribute access (`response.text`, `usage_metadata`) that our
+  # static-check call sites read; same disposition as openai/anthropic.
+  "google", "google.*",
+  "google.genai", "google.genai.*",
 ]
 ignore_missing_imports = true
 

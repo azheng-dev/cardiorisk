@@ -17,6 +17,7 @@ from cardiorisk.agents.eval import (
 )
 from cardiorisk.agents.eval.figures import render_all
 from cardiorisk.agents.eval.loader import AgentEvalCase
+from cardiorisk.agents.eval.scorer import RECOMMENDATION_FAMILY_KEYWORDS
 from cardiorisk.agents.state import (
     AgentState,
     AuditEntry,
@@ -73,7 +74,7 @@ def _verified(text: str, chunk_id: str = "c1") -> VerifiedClaim:
 class TestLoadCases:
     def test_loads_full_case_set(self) -> None:
         cases = load_cases(repo_root=REPO_ROOT)
-        assert len(cases) >= 30  # 30 hand-curated, may grow later
+        assert len(cases) >= 100  # Phase 6 locks at 100
         for c in cases:
             assert c.id.startswith("a")
             assert c.expected_risk_band in ("low", "intermediate", "high")
@@ -86,6 +87,16 @@ class TestLoadCases:
                 "data_quality",
                 "refusal",
             )
+            # Phase-6 field: every case has a recommendation family
+            assert c.expected_recommendation_family in {
+                "lifestyle_only",
+                "lifestyle_plus_review",
+                "statin_consider",
+                "statin_plus_bp",
+                "statin_plus_bp_plus_referral",
+                "specialist_referral_urgent",
+                "refusal_no_recommendation",
+            }
 
     def test_tag_filter(self) -> None:
         cases = load_cases(repo_root=REPO_ROOT, tag_filter="high_risk")
@@ -109,6 +120,33 @@ class TestLoadCases:
 
 
 # ----------------------------------------------------------------- scorer
+def _retrieved(chunk_ids: Sequence[str]) -> tuple[RetrievedChunk, ...]:
+    out: list[RetrievedChunk] = []
+    for i, cid in enumerate(chunk_ids):
+        chunk = Chunk(
+            chunk_id=cid,
+            doc_id="doc",
+            strategy="token",
+            char_start=0,
+            char_end=10,
+            page_start=1,
+            page_end=1,
+            text=f"text-{cid}",
+            n_tokens=2,
+        )
+        out.append(
+            RetrievedChunk(
+                chunk=chunk,
+                score=1.0 - i * 0.1,
+                rrf_score=1.0 - i * 0.1,
+                vector_rank=i + 1,
+                bm25_rank=i + 1,
+                rerank_score=None,
+            )
+        )
+    return tuple(out)
+
+
 def _make_state(
     *,
     case: AgentEvalCase,
@@ -117,6 +155,10 @@ def _make_state(
     n_verified: int = 1,
     n_suppressed: int = 0,
     letter_words: int = 80,
+    letter_text: str | None = None,
+    retrieved_chunk_ids: Sequence[str] | None = None,
+    verified_cite_ids: Sequence[str] | None = None,
+    suppression_reason: str = "no_passage_entails",
 ) -> AgentState:
     triage = TriageResult(
         normalised_patient=case.patient,
@@ -133,23 +175,41 @@ def _make_state(
         top_attributions=(RiskAttribution(feature="Age", contribution=0.5),),
         summary="risk",
     )
+    # Default: verified claims cite c0..c{n-1}, all of which are in the
+    # retrieved set => citation_precision / recall = 1.0.
+    cite_ids = (
+        tuple(verified_cite_ids)
+        if verified_cite_ids is not None
+        else tuple(f"c{i}" for i in range(n_verified))
+    )
+    retrieved = _retrieved(
+        retrieved_chunk_ids
+        if retrieved_chunk_ids is not None
+        else [f"c{i}" for i in range(max(n_verified, 1))]
+    )
+    verified_claims = tuple(
+        _verified(f"Claim {i}.", cite_ids[i] if i < len(cite_ids) else f"c{i}")
+        for i in range(n_verified)
+    )
     answer = GeneratedAnswer(
         query="...",
         raw_llm_text="...",
         is_refusal=False,
-        verified_claims=tuple(_verified(f"Claim {i}.", f"c{i}") for i in range(n_verified)),
+        verified_claims=verified_claims,
         suppressed_claims=tuple(
             SuppressedClaim(
                 text=f"S{i}",
                 cited_chunk_ids=(),
                 best_entailment=0.0,
-                reason="no_passage_entails",
+                reason=suppression_reason,
             )
             for i in range(n_suppressed)
         ),
+        retrieved=retrieved,
     )
     guideline = GuidelineResult(question="q", answer=answer, summary="g")
-    letter_text = "x " * letter_words
+    if letter_text is None:
+        letter_text = "x " * letter_words
     letter = LetterResult(draft=letter_text.strip(), citations=("c1",), summary="l")
     audit = tuple(
         AuditEntry(
@@ -240,6 +300,126 @@ class TestScoreCase:
         state = _make_state(case=case, letter_words=50)
         report = score_case(case, state)
         assert not report.letter.passed
+
+
+# ----------------------------------------------------------------- Phase 6 metrics
+class TestPhase6Metrics:
+    """Citation precision / recall, recommendation correctness, hallucination."""
+
+    def _case(
+        self,
+        family: str = "statin_consider",
+        tag: str = "intermediate_risk",
+        band: str = "intermediate",
+    ) -> AgentEvalCase:
+        return AgentEvalCase(
+            id="a000",
+            patient=_patient(),
+            expected_risk_band=band,
+            expected_min_verified_claims=1,
+            expected_letter_min_words=10,
+            expected_sanity_flags=(),
+            tag=tag,
+            rationale="...",
+            expected_recommendation_family=family,
+        )
+
+    def test_perfect_citations_score_one(self) -> None:
+        case = self._case()
+        state = _make_state(case=case, n_verified=2, retrieved_chunk_ids=("c0", "c1"))
+        r = score_case(case, state)
+        assert r.citation_precision == pytest.approx(1.0)
+        assert r.citation_recall == pytest.approx(1.0)
+        assert r.hallucination_rate == pytest.approx(0.0)
+
+    def test_phantom_citation_lowers_precision_and_recall(self) -> None:
+        case = self._case()
+        # Two claims; first cites c0 (in retrieved), second cites c99 (phantom).
+        state = _make_state(
+            case=case,
+            n_verified=2,
+            retrieved_chunk_ids=("c0",),
+            verified_cite_ids=("c0", "c99"),
+        )
+        r = score_case(case, state)
+        assert r.citation_precision == pytest.approx(0.5)
+        assert r.citation_recall == pytest.approx(0.5)
+
+    def test_no_verified_no_suppressed_is_vacuous_one(self) -> None:
+        case = self._case(family="refusal_no_recommendation", tag="refusal", band="low")
+        state = _make_state(case=case, n_verified=0, n_suppressed=0)
+        r = score_case(case, state)
+        assert r.citation_precision == pytest.approx(1.0)
+        assert r.citation_recall == pytest.approx(1.0)
+        assert r.hallucination_rate == pytest.approx(0.0)
+
+    def test_suppression_counts_as_hallucination(self) -> None:
+        case = self._case()
+        # 1 verified + 1 suppressed (no_passage_entails) => 1/2 hallucinated
+        state = _make_state(case=case, n_verified=1, n_suppressed=1)
+        r = score_case(case, state)
+        assert r.hallucination_rate == pytest.approx(0.5)
+
+    def test_suppression_other_reasons_not_counted(self) -> None:
+        case = self._case()
+        # 'parser_error' is not in HALLUCINATION_SUPPRESSION_REASONS
+        state = _make_state(
+            case=case,
+            n_verified=1,
+            n_suppressed=1,
+            suppression_reason="parser_error",
+        )
+        r = score_case(case, state)
+        assert r.hallucination_rate == pytest.approx(0.0)
+
+    def test_recommendation_correct_when_keyword_present(self) -> None:
+        case = self._case(family="statin_plus_bp")
+        keywords = RECOMMENDATION_FAMILY_KEYWORDS["statin_plus_bp"]
+        letter = f"Consider {keywords[0]} therapy and review {keywords[1]}."
+        state = _make_state(case=case, n_verified=1, letter_text=letter)
+        r = score_case(case, state)
+        assert r.recommendation_correct is True
+
+    def test_recommendation_wrong_when_no_keyword(self) -> None:
+        case = self._case(family="lifestyle_only")
+        state = _make_state(case=case, n_verified=1, letter_text="Please continue current care.")
+        r = score_case(case, state)
+        assert r.recommendation_correct is False
+
+    def test_refusal_family_credits_canonical_refusal_text(self) -> None:
+        case = self._case(family="refusal_no_recommendation", tag="refusal", band="low")
+        # Canonical refusal text from the generator
+        letter = "I do not have the supporting guidance for that question."
+        state = _make_state(case=case, n_verified=0, letter_text=letter)
+        r = score_case(case, state)
+        assert r.recommendation_correct is True
+
+    def test_aggregate_rolls_up_phase_6_metrics(self) -> None:
+        case = self._case(family="statin_plus_bp")
+        keyword = RECOMMENDATION_FAMILY_KEYWORDS["statin_plus_bp"][0]
+        good_letter = f"Recommend {keyword} therapy."
+        bad_letter = "Please continue current care."
+        reports = [
+            score_case(
+                case,
+                _make_state(case=case, n_verified=2, letter_text=good_letter),
+            ),
+            score_case(
+                case,
+                _make_state(
+                    case=case,
+                    n_verified=2,
+                    verified_cite_ids=("c0", "c99"),
+                    retrieved_chunk_ids=("c0",),
+                    letter_text=bad_letter,
+                ),
+            ),
+        ]
+        agg = aggregate_reports(reports)
+        assert agg.recommendation_correctness_rate == pytest.approx(0.5)
+        assert agg.mean_citation_precision == pytest.approx(0.75)  # (1.0 + 0.5) / 2
+        assert agg.mean_citation_recall == pytest.approx(0.75)
+        assert agg.mean_hallucination_rate == pytest.approx(0.0)
 
 
 # ----------------------------------------------------------------- aggregate

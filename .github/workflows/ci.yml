@@ -196,6 +196,42 @@ jobs:
       # ubuntu-latest.
       - name: Smoke eval_agents.py --smoke
         run: uv run --project backend python backend/scripts/eval_agents.py --smoke
+      # Phase 6: validate the 100-case eval set against the schema and
+      # check the generator is reproducible (same seed = same bytes).
+      # ~2s on ubuntu-latest. Catches schema drift in cases.jsonl on
+      # any PR that touches eval/agents/.
+      - name: Validate eval/agents/cases.jsonl against schema
+        run: uv run --project backend python backend/scripts/generate_agent_cases.py --check-only
+
+  # ------------------------------------------------------------ phase-6 eval gate
+  agent-eval-mock:
+    name: agent-eval-mock (regression gate)
+    runs-on: ubuntu-latest
+    needs: test-python
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install backend deps
+        run: uv sync --project backend --frozen
+      # Phase 6: full 100-case mock pipeline (MockLLMClient + always-entail
+      # NLI + stub retrieval + MockJudge) and gate against
+      # reports/v1/agents/baseline_mock.json with the ±2 pp tolerance
+      # documented in ADR-019 §5. The full run takes ~2 minutes on
+      # ubuntu-latest; no API keys, no model weights, no DeBERTa. This
+      # job is required on main (branch protection adds it after the
+      # PR that introduces it lands).
+      - name: Run mock-pipeline agent eval + regression gate
+        env:
+          OMP_NUM_THREADS: "1"
+          KMP_DUPLICATE_LIB_OK: "TRUE"
+          TOKENIZERS_PARALLELISM: "false"
+        run: |
+          uv run --project backend python backend/scripts/eval_agents.py \
+            --reports-dir /tmp/cr_eval --figures-dir /tmp/cr_eval_fig \
+            --regression-check reports/v1/agents/baseline_mock.json
 
   # ---------------------------------------------------------------- typescript
   lint-ts:

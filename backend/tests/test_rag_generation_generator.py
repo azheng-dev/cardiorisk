@@ -140,8 +140,11 @@ def test_generator_uses_mock_nli_end_to_end() -> None:
 def test_generator_records_phantom_citation_under_suppressed() -> None:
     chunks = [_chunk("a:1", "Real passage.")]
 
+    from cardiorisk.rag.generation.llm import UsageTotals
+
     class _PhantomLLM:
         name = "phantom"
+        usage = UsageTotals()
 
         def generate(self, messages: Sequence[LLMMessage], **_: object) -> str:
             return "Bogus claim [does_not_exist]."
@@ -160,8 +163,11 @@ def test_generator_records_phantom_citation_under_suppressed() -> None:
 def test_generator_records_uncited_claim_under_suppressed() -> None:
     chunks = [_chunk("a:1", "Real passage.")]
 
+    from cardiorisk.rag.generation.llm import UsageTotals
+
     class _UncitedLLM:
         name = "uncited"
+        usage = UsageTotals()
 
         def generate(self, messages: Sequence[LLMMessage], **_: object) -> str:
             return "I am sure of this without a citation."
