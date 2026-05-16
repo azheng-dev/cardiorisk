@@ -82,9 +82,10 @@ Current phase:        Phase 8 (Deploy + promote) about to start; re-plan
 
 Last checkpoint:      Phase 7 (Observability + cost) auto-merged on
                       the AGENTS §0 finish-line grant (PR #24 squash-
-                      merged 2026-05-16; non-UI phase; no required CI
-                      check added — the latency budget rides on the
-                      existing agent-eval-mock job). Headline: end-to-
+                      merged 2026-05-16 commit 69db44f; non-UI phase;
+                      no required CI check added — the latency budget
+                      rides on the existing agent-eval-mock job;
+                      10/10 required checks green). Headline: end-to-
                       end observability stack live, trace IDs round-
                       trip cleanly, /v1/agents API contract fixed
                       against the Phase 5.3 frontend client, latency
@@ -448,7 +449,8 @@ Last meaningful PR:   #24 feat(observability): Phase 7 — free-tier
                       flat DecideRequest) + multiplicative ±20% p95
                       latency budget gate extending check_regression
                       + refreshed baseline_mock.json (squash-merged
-                      2026-05-16).
+                      2026-05-16 commit 69db44f; 10/10 required CI
+                      checks green).
                       #23 fix(ci): de-flake axe-pages gate by waiting for
                       next-themes hydration (squash-merged 2026-05-16
                       commit 4243f54).
@@ -570,7 +572,7 @@ Branch protection on main (live, set 2026-05-05):
   enforce_admins:                        false  (escape hatch; logged in ADR-007)
   allow_force_pushes / deletions:        false
 
-Phase 7 deliverables (PR #24 squash-merged 2026-05-16; non-UI phase; no required CI check added):
+Phase 7 deliverables (PR #24 squash-merged 2026-05-16 commit 69db44f; non-UI phase; no required CI check added):
   backend/cardiorisk/settings.py                       new central Settings(BaseSettings); reads
                                                        APP_ENV / LANGFUSE_* / SENTRY_DSN /
                                                        SUPABASE_* / NEXT_PUBLIC_* from .env +
