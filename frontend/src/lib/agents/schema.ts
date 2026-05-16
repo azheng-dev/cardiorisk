@@ -121,6 +121,15 @@ export const caseSnapshotSchema = z.object({
   case_id: z.string(),
   status: z.enum(["awaiting_decision", "complete", "rejected"]),
   next_stage: agentStage.nullable(),
+  /**
+   * Langfuse trace id for the case run. Always populated:
+   * - real Langfuse trace id when the backend has LANGFUSE_* env keys
+   * - "mock-trace-<hex>" sentinel otherwise (Phase 7 contract)
+   *
+   * `null` is accepted for backwards-compatibility with snapshots
+   * persisted before Phase 7 landed; new responses always set it.
+   */
+  trace_id: z.string().nullable().optional(),
   patient: patientInputSchema,
   triage: triageResultSchema.nullable(),
   risk: riskResultSchema.nullable(),

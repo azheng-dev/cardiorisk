@@ -10,7 +10,7 @@
     "is_smoke": false,
     "cases_path": "eval/agents/cases.jsonl",
     "extras": {
-      "wall_clock_s": 106.34,
+      "wall_clock_s": 119.81,
       "judge_name": "mock-judge"
     }
   },
@@ -21,8 +21,8 @@
     "guideline_pass_rate": 1.0,
     "letter_pass_rate": 1.0,
     "full_pipeline_pass_rate": 0.41,
-    "median_total_duration_ms": 1029.317,
-    "p95_total_duration_ms": 1055.491,
+    "median_total_duration_ms": 1155.608,
+    "p95_total_duration_ms": 1210.774,
     "confusion_matrix": {
       "low": {
         "low": 9,
@@ -187,6 +187,98 @@
       "input_tokens": 7800,
       "output_tokens": 400,
       "cost_usd": 0.0
+    }
+  },
+  "regression": {
+    "baseline_path": "../reports/v1/agents/baseline_mock.json",
+    "tolerance_pp": 2.0,
+    "latency_tolerance_pct": 0.2,
+    "failed": false,
+    "deltas": {
+      "triage_pass_rate": {
+        "current": 0.97,
+        "baseline": 0.97,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "risk_band_match_rate": {
+        "current": 0.43,
+        "baseline": 0.43,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "guideline_pass_rate": {
+        "current": 1.0,
+        "baseline": 1.0,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "letter_pass_rate": {
+        "current": 1.0,
+        "baseline": 1.0,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "full_pipeline_pass_rate": {
+        "current": 0.41,
+        "baseline": 0.41,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "recommendation_correctness_rate": {
+        "current": 0.41,
+        "baseline": 0.41,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "mean_citation_precision": {
+        "current": 1.0,
+        "baseline": 1.0,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "mean_citation_recall": {
+        "current": 1.0,
+        "baseline": 1.0,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "judge_pass_rate": {
+        "current": 0.41,
+        "baseline": 0.41,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "higher_is_better"
+      },
+      "mean_hallucination_rate": {
+        "current": 0.0,
+        "baseline": 0.0,
+        "delta_pp": 0.0,
+        "fail": false,
+        "direction": "lower_is_better"
+      },
+      "median_total_duration_ms": {
+        "current": 1155.608,
+        "baseline": 1155.858,
+        "delta_pct": -0.0216,
+        "fail": false,
+        "direction": "latency"
+      },
+      "p95_total_duration_ms": {
+        "current": 1210.774,
+        "baseline": 1203.877,
+        "delta_pct": 0.5729,
+        "fail": false,
+        "direction": "latency"
+      }
     }
   }
 }

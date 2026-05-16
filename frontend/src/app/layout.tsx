@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 
@@ -53,6 +55,10 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>
+        {/* Vercel Web Analytics + Speed Insights — both auto-no-op
+            outside Vercel (no DSN/token required). Phase 7, ADR-024. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

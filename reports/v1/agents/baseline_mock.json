@@ -10,7 +10,7 @@
     "is_smoke": false,
     "cases_path": "eval/agents/cases.jsonl",
     "extras": {
-      "wall_clock_s": 106.34,
+      "wall_clock_s": 120.05,
       "judge_name": "mock-judge"
     }
   },
@@ -21,8 +21,8 @@
     "guideline_pass_rate": 1.0,
     "letter_pass_rate": 1.0,
     "full_pipeline_pass_rate": 0.41,
-    "median_total_duration_ms": 1029.317,
-    "p95_total_duration_ms": 1055.491,
+    "median_total_duration_ms": 1155.858,
+    "p95_total_duration_ms": 1203.8770000000002,
     "confusion_matrix": {
       "low": {
         "low": 9,

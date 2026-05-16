@@ -251,6 +251,17 @@ def main() -> int:
         default=2.0,
         help="tolerance in percentage points for the regression gate (default: 2.0)",
     )
+    parser.add_argument(
+        "--latency-regression-tolerance-pct",
+        type=float,
+        default=0.20,
+        help=(
+            "multiplicative tolerance for median/p95 latency in the "
+            "regression gate (default: 0.20 = +/-20%%, per ADR-024). "
+            "Independent from --regression-tolerance-pp because latency "
+            "variance is multiplicative, not additive."
+        ),
+    )
     args = parser.parse_args()
 
     cases = load_cases(
@@ -281,6 +292,7 @@ def main() -> int:
         judge=judge,
         regression_baseline_path=args.regression_check,
         regression_tolerance_pp=args.regression_tolerance_pp,
+        latency_regression_tolerance_pct=args.latency_regression_tolerance_pct,
     )
 
     # Tiny summary on stdout for CI logs.
@@ -313,14 +325,19 @@ def main() -> int:
 
     if "regression" in summary and summary["regression"]["failed"]:
         print(
-            "\n[regression] one or more tracked metrics dropped beyond the tolerance:",
+            "\n[regression] one or more tracked metrics drifted beyond the tolerance:",
             file=sys.stderr,
         )
         for label, info in summary["regression"]["deltas"].items():
             if info["fail"]:
+                delta_field = (
+                    f"delta_pct={info['delta_pct']}%"
+                    if info["direction"] == "latency"
+                    else f"delta_pp={info['delta_pp']}"
+                )
                 print(
                     f"  - {label}: current={info['current']} baseline={info['baseline']} "
-                    f"delta_pp={info['delta_pp']} (direction={info['direction']})",
+                    f"{delta_field} (direction={info['direction']})",
                     file=sys.stderr,
                 )
         return 2

@@ -9,6 +9,7 @@ import pytest
 
 from cardiorisk.agents.eval.orchestrator import (
     REGRESSION_METRICS,
+    REGRESSION_METRICS_LATENCY,
     REGRESSION_METRICS_LOWER_IS_BETTER,
     check_regression,
 )
@@ -26,6 +27,8 @@ def _summary(
     rec: float = 1.0,
     halluc: float = 0.0,
     judge: float = 1.0,
+    median_ms: float = 1000.0,
+    p95_ms: float = 1100.0,
 ) -> dict[str, object]:
     return {
         "aggregate": {
@@ -38,6 +41,8 @@ def _summary(
             "mean_citation_precision": prec,
             "mean_citation_recall": rec,
             "mean_hallucination_rate": halluc,
+            "median_total_duration_ms": median_ms,
+            "p95_total_duration_ms": p95_ms,
         },
         "judge_aggregate": {"pass_rate": judge},
     }
@@ -142,7 +147,87 @@ class TestCheckRegression:
         # documented path. This guards against typos in the path
         # tuples breaking the gate silently.
         seen_labels = set()
-        for path, label in REGRESSION_METRICS + REGRESSION_METRICS_LOWER_IS_BETTER:
+        for path, label in (
+            REGRESSION_METRICS + REGRESSION_METRICS_LOWER_IS_BETTER + REGRESSION_METRICS_LATENCY
+        ):
             assert label not in seen_labels, f"duplicate metric label {label!r}"
             seen_labels.add(label)
             assert all(isinstance(p, str) and p for p in path)
+
+
+class TestLatencyGate:
+    """Phase 7 — multiplicative latency tolerance (default ±20 %)."""
+
+    def test_within_band_passes(self, tmp_path: Path) -> None:
+        baseline = _write(tmp_path, _summary(median_ms=1000.0, p95_ms=1100.0))
+        # +15 % over baseline on both axes — within the 20 % default.
+        result = check_regression(
+            current_summary=_summary(median_ms=1150.0, p95_ms=1265.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+        )
+        assert result["failed"] is False
+        assert result["deltas"]["median_total_duration_ms"]["direction"] == "latency"
+        assert result["deltas"]["median_total_duration_ms"]["delta_pct"] == pytest.approx(15.0)
+
+    def test_above_band_fails(self, tmp_path: Path) -> None:
+        baseline = _write(tmp_path, _summary(median_ms=1000.0, p95_ms=1100.0))
+        # +25 % > 20 % tolerance → fail.
+        result = check_regression(
+            current_summary=_summary(median_ms=1250.0, p95_ms=1375.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+        )
+        assert result["failed"] is True
+        assert result["deltas"]["median_total_duration_ms"]["fail"] is True
+        assert result["deltas"]["p95_total_duration_ms"]["fail"] is True
+
+    def test_improvement_never_fails(self, tmp_path: Path) -> None:
+        baseline = _write(tmp_path, _summary(median_ms=1000.0, p95_ms=2000.0))
+        # 30 % *faster* — definitely not a regression.
+        result = check_regression(
+            current_summary=_summary(median_ms=700.0, p95_ms=1400.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+        )
+        assert result["failed"] is False
+
+    def test_custom_tolerance_band_honoured(self, tmp_path: Path) -> None:
+        baseline = _write(tmp_path, _summary(median_ms=1000.0, p95_ms=1100.0))
+        # +25 % over baseline; the default 20 % gate would fail, but
+        # a 30 % tolerance accommodates it.
+        result = check_regression(
+            current_summary=_summary(median_ms=1250.0, p95_ms=1375.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+            latency_tolerance_pct=0.30,
+        )
+        assert result["failed"] is False
+        assert result["latency_tolerance_pct"] == pytest.approx(0.30)
+
+    def test_zero_baseline_handled(self, tmp_path: Path) -> None:
+        # Pathological case: a baseline that recorded zero latency
+        # (e.g. dry-run). Any positive new value must be flagged.
+        baseline = _write(tmp_path, _summary(median_ms=0.0, p95_ms=0.0))
+        result = check_regression(
+            current_summary=_summary(median_ms=50.0, p95_ms=50.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+        )
+        assert result["failed"] is True
+        assert result["deltas"]["median_total_duration_ms"]["delta_pct"] is None
+
+    def test_missing_baseline_latency_metric_does_not_fail(self, tmp_path: Path) -> None:
+        # Pre-Phase-7 baselines lack the latency keys; the gate must
+        # treat them as "not yet tracked" rather than instant-fail.
+        baseline_dict = _summary()
+        assert isinstance(baseline_dict["aggregate"], dict)
+        del baseline_dict["aggregate"]["p95_total_duration_ms"]
+        baseline = _write(tmp_path, baseline_dict)
+        result = check_regression(
+            current_summary=_summary(p95_ms=99999.0),
+            baseline_path=baseline,
+            tolerance_pp=2.0,
+        )
+        assert result["failed"] is False
+        assert result["deltas"]["p95_total_duration_ms"]["baseline"] is None

@@ -251,6 +251,14 @@ class AgentState(BaseModel):
     termination_reason: str | None = None
     current_stage: AgentStage | None = None
 
+    #: Per-case Langfuse trace id (Phase 7). Set at case creation
+    #: by :mod:`cardiorisk.api.server` so the UI can deep-link to
+    #: the Langfuse trace view. When Langfuse is disabled, the API
+    #: layer mints a ``mock-trace-<8-hex>`` sentinel via
+    #: :func:`cardiorisk.observability.new_trace_id` so the field is
+    #: always populated.
+    trace_id: str | None = None
+
 
 def append_decision(
     state: AgentState, *, stage: AgentStage, decision: Decision

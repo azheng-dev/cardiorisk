@@ -80,8 +80,29 @@ cd ../frontend && pnpm install && pnpm test
 - [AGENTS.md](./AGENTS.md) — operating context for both human and AI contributors. Read this first.
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — branch / commit / PR conventions, hook setup, CI overview.
 - [EVAL.md](./EVAL.md) — eval methodology and headline numbers (filled from Phase 6).
+- [MODEL_CARD.md](./MODEL_CARD.md) — model card with §13 covering the Phase 7 observability stack and the p95 latency budget gate.
 - [docs/adr/](./docs/adr/) — architecture decision records.
 - [docs/research/](./docs/research/) — Phase 1 critical review of prior work and the proposed v1 design (filled in Phase 1).
+
+## Observability
+
+Phase 7 wires a free-tier observability stack — every hook is a no-op when its key is unset, so CI runs against the mock pipeline without making a network call.
+
+- **Langfuse Cloud Hobby** (50 K observations / month) records every LLM call (prompt + completion + tokens + USD cost) and every agent-node span. Each case has a `trace_id` that round-trips from `AgentState` through the API into the UI; the audit screen renders an **"Open in Langfuse"** deep-link when `NEXT_PUBLIC_LANGFUSE_TRACE_URL_BASE` is set and the trace ID is not a mock sentinel.
+- **Sentry Free** (5 K errors / month) tracks runtime errors on both the FastAPI surface and the Next.js app. A recursive `patient`-key scrubber runs on every SDK (`before_send`) so synthetic-but-PHI-shaped payloads are dropped before they leave the process.
+- **Vercel Web Analytics + Speed Insights** captures web vitals (LCP / FID / INP / CLS) on every Vercel-deployed page view; free on the Hobby plan we already deploy on.
+- A new **p95 latency budget gate** extends the Phase 6 regression gate with `median_total_duration_ms` + `p95_total_duration_ms`, checked with a multiplicative **±20%** tolerance against the locked mock baseline.
+
+Full methodology + rejected alternatives in [ADR-024](./docs/adr/024-observability-free-tier.md); opinionated walkthrough in [`docs/research/20-observability-design.md`](./docs/research/20-observability-design.md).
+
+```bash
+LANGFUSE_PUBLIC_KEY=... LANGFUSE_SECRET_KEY=... \
+SENTRY_DSN=... \
+GEMINI_API_KEY=... \
+  uv run --project backend python backend/scripts/eval_agents.py \
+    --llm gemini --judge gemini \
+    --reports-dir reports/v1/agents/gemini
+```
 
 ## Disclaimer
 
