@@ -355,7 +355,54 @@ uv run --project backend python backend/scripts/eval_agents.py
 
 Writes [`reports/v1/agents/per_case.json`](reports/v1/agents/per_case.json), [`reports/v1/agents/aggregate.json`](reports/v1/agents/aggregate.json), and 3 figures under [`reports/v1/figures/agents/`](reports/v1/figures/agents/). The CLI also exposes `--smoke` (3 cases, ~5 s, the CI default — no joblib artefact required), `--limit N`, `--tag <tag>`, `--risk-model {tabicl,xgboost,lr,ensemble}`, and `--risk-source {Cleveland,Hungarian,LongBeachVA,Switzerland}`. The FastAPI surface runs locally with `uv run --project backend uvicorn cardiorisk.api:build_app --factory --reload`; the OpenAPI spec is at `/docs`.
 
-## 12. Limitations & out-of-scope
+## 12. Phase-6 eval harness (100-case agent eval + regression gate)
+
+Phase 6 grew the Phase 4 30-case smoke into a real eval. The case set went from 30 to **100** (25 high + 25 intermediate + 25 low + 10 borderline + 8 data-quality + 4 extreme + 3 refusal), four new per-case metrics ship (`citation_precision`, `citation_recall`, `recommendation_correctness`, `hallucination_rate`), an LLM-as-judge layer with a pluggable Protocol scores the letter drafts on two 1-5 Likert axes, the LLM stack moved to free-tier-only (Mock + Gemini 2.5 Flash + opt-in Groq Llama-3.3-70B; Anthropic / OpenAI clients kept for opt-in users but excluded from the default config), and a ±2 pp regression gate enforces the locked mock-pipeline baseline in CI on every PR. Full methodology + headline numbers + reproduce steps live in [EVAL.md](EVAL.md); binding choices in [ADR-019](docs/adr/019-phase-6-eval-harness.md); opinionated walkthrough in [`docs/research/19-phase-6-eval-design.md`](docs/research/19-phase-6-eval-design.md).
+
+### Headline (mock pipeline, 100 cases, $0 cost)
+
+| Metric | Value | Notes |
+|---|---|---|
+| Cases | 100 | locked at `eval/agents/cases.jsonl` v1 |
+| Wall-clock per case (median / p95) | 1029 ms / 1055 ms | smoke pipeline |
+| Triage pass rate | **0.97** | 3 data-quality cases not surfacing the injected flag |
+| Risk band match | 0.43 | mock TabICL classifier (LODO cross-source ceiling per §3) |
+| Guideline pass | 1.00 | always-entail Mock NLI |
+| Letter pass | 1.00 | mock letter draft always meets word-count floor |
+| Recommendation correctness | 0.41 | mock LetterAgent template ≠ the expected keyword on ~60% of cases |
+| Citation precision | **1.00** | mock LLM cites the literal prompt chunks |
+| Citation recall | **1.00** | every verified claim has a citation in the retrieved set |
+| Hallucination rate | **0.00** | mock LLM never tries to fabricate |
+| Judge pass rate (MockJudge) | 0.41 | mirrors recommendation correctness (deterministic mock judge) |
+| Total cost | **$0.00** | mock floor cell, by construction |
+
+**How to read this table.** The mock pipeline is the *floor*, not the ceiling. `MockLLMClient` cites the literal chunks it sees and never hallucinates (precision / recall / hallucination_rate are locked at perfect). The `LetterAgent`'s template applied to mocked chunks doesn't always land in the expected recommendation family — that's the 0.41 figure. The `risk_band_match_rate` of 0.43 reflects the same TabICL LODO ceiling Phase 2.4 documented; it is recapitulated here on synthetic cases.
+
+### Live Gemini cell
+
+Run locally (not committed to CI, but ships in the codebase end-to-end):
+
+```bash
+GEMINI_API_KEY=... \
+  uv run --project backend python backend/scripts/eval_agents.py \
+    --llm gemini --judge gemini \
+    --reports-dir reports/v1/agents/gemini
+```
+
+Expected USD cost for a full 100-case run: ~$0.05 (well inside the Gemini 2.5 Flash free tier of 10 RPM / 250 K TPM / 250 RPD — the run is fully covered if you've made no other Gemini calls that day). The third opt-in cell is Groq Llama-3.3-70B (`--llm groq --judge groq`, requires `GROQ_API_KEY`).
+
+### Regression gate (CI-enforced)
+
+The mock baseline lives at [`reports/v1/agents/baseline_mock.json`](reports/v1/agents/baseline_mock.json). On every PR, `.github/workflows/ci.yml` runs:
+
+```bash
+uv run --project backend python backend/scripts/eval_agents.py \
+  --regression-check reports/v1/agents/baseline_mock.json
+```
+
+The job exits non-zero (and fails the PR) if any of the nine tracked metrics drifts by more than ±2 percentage points in the wrong direction. The lower-is-better axis (`mean_hallucination_rate`) fails on increases; the eight higher-is-better metrics fail on decreases. Missing-baseline metrics (new fields not yet in the baseline) record as `fail=False` so the gate is silent on metric additions. The baseline is refreshed in the same PR as whatever motivated the refresh.
+
+## 13. Limitations & out-of-scope
 
 - **Not validated in a clinical setting.** No clinician-in-the-loop study, no real-EHR integration, no deployment.
 - **Trained on small, biased UCI sources.** ~920 rows total across four heterogeneous sources, none of which is contemporary Australian primary-care data. Generalisability to any cohort outside these four sources is *unverified*.
@@ -367,11 +414,11 @@ Writes [`reports/v1/agents/per_case.json`](reports/v1/agents/per_case.json), [`r
 - **KernelSHAP test-slice cap (80 rows per model × fold).** See §5 "Methodological caveats" — inflates the standard error of mean |SHAP| by ~1.2×–1.9×; rank-based cross-model agreement is essentially unaffected. Recoverable via `--max-test-rows 0`.
 - **The Honours-Ensemble row is the architecture only, not the WOA-Ensemble pipeline** (see §3 of [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md)). The WOA feature-selection layer that produced the Honours report's headline number is not in the supplied archive; we did not invent one. Reading the Honours-Ensemble row as if it is "WOA-Ensemble under our protocol" is incorrect.
 
-## 13. Honesty caveats specific to the Honours-Ensemble row
+## 14. Honesty caveats specific to the Honours-Ensemble row
 
 The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at sensitivity 89.72%, specificity 83.12% (single 80/20 split, no CV, no per-source breakdown, no calibration). Our table reports a different number under a different protocol (4-fold LODO, calibrated, sensitivity at 85% / 90% specificity not at the default 0.5 threshold, no WOA layer). A direct numerical comparison ("89.72% vs our X%") is misleading. The right reading is qualitative: the Honours architecture's relative position against the v1 trio under a fair LODO protocol. Full discussion in [`docs/research/09-honours-vs-v1.md`](docs/research/09-honours-vs-v1.md).
 
-## 14. Reproducibility
+## 15. Reproducibility
 
 - All code: this repo, MIT-licensed.
 - Run training (full LODO, ~40 min on a recent CPU): `uv sync --project backend && uv run --project backend python backend/scripts/train_v1.py`. `--smoke` for a 1-fold synthetic-data smoke pass (~70s).
@@ -382,7 +429,7 @@ The Honours team's Final Report §7.2 Table 2.2 reports WOA-Ensemble on HFP at s
 - Determinism: every wrapper pins `random_state` / `torch.manual_seed` to the project seed (20260505). XGBoost reproduces to ~1e-6 across runs; the PyTorch Ensemble reproduces to ~1e-5 (deterministic-algorithms flag deliberately not enabled — see [ADR-012](docs/adr/012-honours-baseline-reproduction.md)). KernelSHAP per-row values reproduce to ~1e-5; aggregate quantities (mean |SHAP|, Spearman ranks) to ~1e-6. Drift PSI is closed-form on binned histograms and reproduces exactly bit-for-bit modulo numpy floating-point ordering.
 - CI: all three smoke runs are enforced on every PR (`train_v1.py --smoke`, `compute_explanations.py --smoke`, and `compute_drift.py --smoke` steps in [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
-## 15. References
+## 16. References
 
 - [TabICL (Inria Soda)](https://github.com/soda-inria/tabicl) — BSD-3-Clause.
 - [XGBoost](https://xgboost.readthedocs.io/) — Apache-2.0.
@@ -407,3 +454,4 @@ Architecture decisions:
 - [ADR-016](docs/adr/016-retrieval-stack.md) — retrieval stack (Phase 3.2; with 2026-05-15 amendment recording the real-corpus reranker reversal).
 - [ADR-017](docs/adr/017-citation-and-nli-verification.md) — citation-mandatory generation + NLI verification (Phase 3.3).
 - [ADR-018](docs/adr/018-agent-orchestration.md) — 4-agent orchestration with LangGraph + HITL gates + FastAPI surface (Phase 4).
+- [ADR-019](docs/adr/019-phase-6-eval-harness.md) — Phase-6 eval harness (100 cases + 4 new metrics + LLM-judge + free-tier-only LLM stack + ±2 pp regression gate).

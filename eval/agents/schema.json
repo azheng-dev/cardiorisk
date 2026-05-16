@@ -15,8 +15,8 @@
   "properties": {
     "id": {
       "type": "string",
-      "pattern": "^a[0-9]{3}$",
-      "description": "Sequential id like 'a001'. Stable across edits; never recycle."
+      "pattern": "^a[0-9]{3,4}$",
+      "description": "Sequential id like 'a001' (or 'a0001' once the set crosses 1000). Stable across edits; never recycle."
     },
     "patient": {
       "type": "object",
@@ -66,6 +66,19 @@
       "type": "array",
       "items": { "type": "string" },
       "default": []
+    },
+    "expected_recommendation_family": {
+      "type": "string",
+      "enum": [
+        "lifestyle_only",
+        "lifestyle_plus_review",
+        "statin_consider",
+        "statin_plus_bp",
+        "statin_plus_bp_plus_referral",
+        "specialist_referral_urgent",
+        "refusal_no_recommendation"
+      ],
+      "description": "Phase-6 addition. The recommendation family the letter-stage draft is expected to land in. The scorer matches case-insensitive keyword families against the draft; see ADR-019 §4 for the keyword tables."
     },
     "tag": {
       "type": "string",

@@ -19,7 +19,12 @@ DEFAULT_SCHEMA_PATH = Path("eval/agents/schema.json")
 
 @dataclass(frozen=True)
 class AgentEvalCase:
-    """One Phase-4 agent-eval case (validated)."""
+    """One Phase-4 agent-eval case (validated).
+
+    Phase 6 added :attr:`expected_recommendation_family`. Pre-Phase-6
+    rows that lack the field fall through to ``"statin_consider"`` as
+    the most-conservative default so old fixtures keep parsing.
+    """
 
     id: str
     patient: PatientInput
@@ -29,6 +34,9 @@ class AgentEvalCase:
     expected_sanity_flags: tuple[str, ...]
     tag: str
     rationale: str
+    # Phase-6 addition; default keeps old test fixtures parsing without
+    # construction changes. The loader always supplies an explicit value.
+    expected_recommendation_family: str = "statin_consider"
 
 
 def _validate_row(row: dict[str, Any], schema: dict[str, Any]) -> None:
@@ -82,6 +90,9 @@ def load_cases(
                     expected_min_verified_claims=row.get("expected_min_verified_claims", 1),
                     expected_letter_min_words=row.get("expected_letter_min_words", 60),
                     expected_sanity_flags=tuple(row.get("expected_sanity_flags", ())),
+                    expected_recommendation_family=row.get(
+                        "expected_recommendation_family", "statin_consider"
+                    ),
                     tag=row["tag"],
                     rationale=row["rationale"],
                 )

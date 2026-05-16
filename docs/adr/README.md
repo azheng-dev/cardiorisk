@@ -23,6 +23,7 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 | [016](./016-retrieval-stack.md) | Retrieval stack for v1 (BGE-M3 dense + rank_bm25 sparse + RRF fusion + BGE reranker, in-memory hnswlib graduating to pgvector in Phase 4) | Accepted (with 2026-05-15 amendment) | 3.2 |
 | [017](./017-citation-and-nli-verification.md) | Citation-mandatory generation + NLI verification (DeBERTa-v3-MNLI default, Mock-LLM for CI, real-LLM A/B deferred to Phase 6) | Accepted | 3.3 |
 | [018](./018-agent-orchestration.md) | 4-agent orchestration with LangGraph + HITL gates + FastAPI surface, with a 30-case mini-eval | Accepted | 4 |
+| [019](./019-phase-6-eval-harness.md) | Phase-6 eval harness — 100 stratified cases, four new metrics (citation precision / recall, recommendation correctness, hallucination rate), pluggable LLM-judge layer, free-tier-only LLM stack (Mock + Gemini 2.5 Flash + opt-in Groq), and a ±2 pp regression gate against `baseline_mock.json` | Accepted | 6 |
 | [020](./020-brand-and-visual-identity.md) | Brand + visual identity (clinical-teal accent, semantic CSS-variable tokens, Tailwind v4, light + dark first-class) | Accepted | 5.1 |
 | [021](./021-component-system-and-a11y-gate.md) | Component system + a11y gate (Radix primitives + shadcn-pattern catalog + Ladle published catalog + axe-playwright CI gate) | Accepted | 5.2 |
 | [022](./022-workflow-screens.md) | Workflow screens, app shell, and mock-mode client (Next 15 App Router; 5 routes; zod-shared mock client; zustand store) | Accepted | 5.3 |
@@ -30,5 +31,4 @@ Why each non-trivial design choice in this repo looks the way it does. See [ADR-
 
 Future ADRs (placeholders, written in the phase that needs them):
 
-- ADR-019: LLM choice + multi-model evaluation (Phase 6).
-- ADR-024: Deploy + observability (Phase 7 / Phase 8).
+- ADR-024: Free-tier deploy architecture (Phase 8). Will lock the **Vercel Hobby + Hugging Face Spaces Docker + Supabase Free + Gemini API + Langfuse Cloud Hobby + Sentry Free** combination. Documents the rejected paid alternatives (Railway / Fly.io / Anthropic / OpenAI) and the cold-start mitigation (mock-mode default + warming-up banner). Binding for all of Phase 8.

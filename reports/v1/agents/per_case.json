@@ -22,7 +22,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 3391.07,
+      "duration_ms": 2836.424,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -33,7 +33,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 1.356,
+      "duration_ms": 1.117,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -44,7 +44,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.014,
+      "duration_ms": 0.018000000000000002,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -52,9 +52,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 3392.4500000000003,
+    "total_duration_ms": 2837.569,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a001",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
   },
   {
     "id": "a002",
@@ -79,7 +91,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1043.355,
+      "duration_ms": 1028.277,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -90,7 +102,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.179,
+      "duration_ms": 0.203,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -109,9 +121,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1043.555,
+    "total_duration_ms": 1028.501,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a002",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
   },
   {
     "id": "a003",
@@ -125,7 +149,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -138,7 +162,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1024.412,
+      "duration_ms": 1036.3700000000001,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -149,7 +173,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.175,
+      "duration_ms": 0.187,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -160,7 +184,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -168,11 +192,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1024.606,
+    "total_duration_ms": 1036.574,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a003",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
   },
   {
     "id": "a004",
@@ -197,7 +233,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1042.454,
+      "duration_ms": 1035.965,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -208,7 +244,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.155,
+      "duration_ms": 0.182,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -227,9 +263,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1042.627,
+    "total_duration_ms": 1036.165,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a004",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
   },
   {
     "id": "a005",
@@ -243,7 +291,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.006,
+      "duration_ms": 0.007,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -254,7 +302,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1029.3110000000001,
+      "duration_ms": 1026.979,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -265,7 +313,76 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.148,
+      "duration_ms": 0.17200000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1027.17,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a005",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a006",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1031.241,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.83600252866745,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.185,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -284,12 +401,93 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1029.476,
+    "total_duration_ms": 1031.442,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a006",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
   },
   {
-    "id": "a006",
+    "id": "a007",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1017.8149999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.8461758494377136,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1018.0039999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a007",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a008",
     "tag": "high_risk",
     "expected_risk_band": "high",
     "observed_risk_band": "high",
@@ -311,11 +509,149 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1039.279,
+      "duration_ms": 1031.832,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
-        "probability": 0.83600252866745,
+        "probability": 0.9513670206069946,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16699999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1032.017,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a008",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a009",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1040.43,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.4683102071285248,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1040.616,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a009",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a010",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "intermediate",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1023.312,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "intermediate",
+        "probability": 0.05661161616444588,
         "model_artefact_present": true
       }
     },
@@ -341,237 +677,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1039.467,
+    "total_duration_ms": 1023.499,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
-  },
-  {
-    "id": "a007",
-    "tag": "high_risk",
-    "expected_risk_band": "high",
-    "observed_risk_band": "high",
-    "band_match": true,
-    "n_verified_claims": 2,
-    "n_suppressed_claims": 0,
-    "letter_word_count": 78,
-    "triage": {
-      "stage": "triage",
-      "passed": true,
-      "duration_ms": 0.006,
-      "detail": {
-        "summary_present": true,
-        "expected_flags": [],
-        "observed_flags": [],
-        "missing_expected_flags": []
-      }
-    },
-    "risk": {
-      "stage": "risk",
-      "passed": true,
-      "duration_ms": 1046.111,
-      "detail": {
-        "expected_band": "high",
-        "observed_band": "high",
-        "probability": 0.8461758494377136,
-        "model_artefact_present": true
-      }
-    },
-    "guideline": {
-      "stage": "guideline",
-      "passed": true,
-      "duration_ms": 0.147,
-      "detail": {
-        "n_verified_claims": 2,
-        "n_suppressed_claims": 0,
-        "expected_min_verified_claims": 1,
-        "is_refusal": false
-      }
-    },
-    "letter": {
-      "stage": "letter",
-      "passed": true,
-      "duration_ms": 0.011,
-      "detail": {
-        "word_count": 78,
-        "expected_min_words": 60,
-        "n_citations": 2,
-        "n_redacted_claims": 0
-      }
-    },
-    "total_duration_ms": 1046.275,
-    "sanity_flags_observed": [],
-    "sanity_flags_missing": []
-  },
-  {
-    "id": "a008",
-    "tag": "high_risk",
-    "expected_risk_band": "high",
-    "observed_risk_band": "high",
-    "band_match": true,
-    "n_verified_claims": 2,
-    "n_suppressed_claims": 0,
-    "letter_word_count": 78,
-    "triage": {
-      "stage": "triage",
-      "passed": true,
-      "duration_ms": 0.006,
-      "detail": {
-        "summary_present": true,
-        "expected_flags": [],
-        "observed_flags": [],
-        "missing_expected_flags": []
-      }
-    },
-    "risk": {
-      "stage": "risk",
-      "passed": true,
-      "duration_ms": 1042.927,
-      "detail": {
-        "expected_band": "high",
-        "observed_band": "high",
-        "probability": 0.9513670206069946,
-        "model_artefact_present": true
-      }
-    },
-    "guideline": {
-      "stage": "guideline",
-      "passed": true,
-      "duration_ms": 0.163,
-      "detail": {
-        "n_verified_claims": 2,
-        "n_suppressed_claims": 0,
-        "expected_min_verified_claims": 1,
-        "is_refusal": false
-      }
-    },
-    "letter": {
-      "stage": "letter",
-      "passed": true,
-      "duration_ms": 0.011,
-      "detail": {
-        "word_count": 78,
-        "expected_min_words": 60,
-        "n_citations": 2,
-        "n_redacted_claims": 0
-      }
-    },
-    "total_duration_ms": 1043.107,
-    "sanity_flags_observed": [],
-    "sanity_flags_missing": []
-  },
-  {
-    "id": "a009",
-    "tag": "intermediate_risk",
-    "expected_risk_band": "intermediate",
-    "observed_risk_band": "high",
-    "band_match": false,
-    "n_verified_claims": 2,
-    "n_suppressed_claims": 0,
-    "letter_word_count": 78,
-    "triage": {
-      "stage": "triage",
-      "passed": true,
-      "duration_ms": 0.005,
-      "detail": {
-        "summary_present": true,
-        "expected_flags": [],
-        "observed_flags": [],
-        "missing_expected_flags": []
-      }
-    },
-    "risk": {
-      "stage": "risk",
-      "passed": false,
-      "duration_ms": 1026.145,
-      "detail": {
-        "expected_band": "intermediate",
-        "observed_band": "high",
-        "probability": 0.4683102071285248,
-        "model_artefact_present": true
-      }
-    },
-    "guideline": {
-      "stage": "guideline",
-      "passed": true,
-      "duration_ms": 0.14400000000000002,
-      "detail": {
-        "n_verified_claims": 2,
-        "n_suppressed_claims": 0,
-        "expected_min_verified_claims": 1,
-        "is_refusal": false
-      }
-    },
-    "letter": {
-      "stage": "letter",
-      "passed": true,
-      "duration_ms": 0.009000000000000001,
-      "detail": {
-        "word_count": 78,
-        "expected_min_words": 60,
-        "n_citations": 2,
-        "n_redacted_claims": 0
-      }
-    },
-    "total_duration_ms": 1026.3029999999999,
-    "sanity_flags_observed": [],
-    "sanity_flags_missing": []
-  },
-  {
-    "id": "a010",
-    "tag": "intermediate_risk",
-    "expected_risk_band": "intermediate",
-    "observed_risk_band": "intermediate",
-    "band_match": true,
-    "n_verified_claims": 2,
-    "n_suppressed_claims": 0,
-    "letter_word_count": 78,
-    "triage": {
-      "stage": "triage",
-      "passed": true,
-      "duration_ms": 0.006,
-      "detail": {
-        "summary_present": true,
-        "expected_flags": [],
-        "observed_flags": [],
-        "missing_expected_flags": []
-      }
-    },
-    "risk": {
-      "stage": "risk",
-      "passed": true,
-      "duration_ms": 1066.376,
-      "detail": {
-        "expected_band": "intermediate",
-        "observed_band": "intermediate",
-        "probability": 0.05661161616444588,
-        "model_artefact_present": true
-      }
-    },
-    "guideline": {
-      "stage": "guideline",
-      "passed": true,
-      "duration_ms": 0.161,
-      "detail": {
-        "n_verified_claims": 2,
-        "n_suppressed_claims": 0,
-        "expected_min_verified_claims": 1,
-        "is_refusal": false
-      }
-    },
-    "letter": {
-      "stage": "letter",
-      "passed": true,
-      "duration_ms": 0.011,
-      "detail": {
-        "word_count": 78,
-        "expected_min_words": 60,
-        "n_citations": 2,
-        "n_redacted_claims": 0
-      }
-    },
-    "total_duration_ms": 1066.554,
-    "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a010",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a011",
@@ -596,7 +716,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.6510000000001,
+      "duration_ms": 1023.474,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -607,7 +727,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.154,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -626,9 +746,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.8220000000001,
+    "total_duration_ms": 1023.662,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a011",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a012",
@@ -653,7 +785,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1021.0729999999999,
+      "duration_ms": 1036.728,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "intermediate",
@@ -664,7 +796,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.146,
+      "duration_ms": 0.166,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -683,9 +815,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1021.2349999999999,
+    "total_duration_ms": 1036.91,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a012",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a013",
@@ -710,7 +854,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1044.946,
+      "duration_ms": 1020.189,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -721,7 +865,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.145,
+      "duration_ms": 0.16799999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -732,7 +876,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.017,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -740,69 +884,24 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1045.107,
+    "total_duration_ms": 1020.38,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a013",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a014",
-    "tag": "intermediate_risk",
-    "expected_risk_band": "intermediate",
-    "observed_risk_band": "high",
-    "band_match": false,
-    "n_verified_claims": 2,
-    "n_suppressed_claims": 0,
-    "letter_word_count": 78,
-    "triage": {
-      "stage": "triage",
-      "passed": true,
-      "duration_ms": 0.006,
-      "detail": {
-        "summary_present": true,
-        "expected_flags": [],
-        "observed_flags": [],
-        "missing_expected_flags": []
-      }
-    },
-    "risk": {
-      "stage": "risk",
-      "passed": false,
-      "duration_ms": 1048.983,
-      "detail": {
-        "expected_band": "intermediate",
-        "observed_band": "high",
-        "probability": 0.5666755437850952,
-        "model_artefact_present": true
-      }
-    },
-    "guideline": {
-      "stage": "guideline",
-      "passed": true,
-      "duration_ms": 0.159,
-      "detail": {
-        "n_verified_claims": 2,
-        "n_suppressed_claims": 0,
-        "expected_min_verified_claims": 1,
-        "is_refusal": false
-      }
-    },
-    "letter": {
-      "stage": "letter",
-      "passed": true,
-      "duration_ms": 0.011,
-      "detail": {
-        "word_count": 78,
-        "expected_min_words": 60,
-        "n_citations": 2,
-        "n_redacted_claims": 0
-      }
-    },
-    "total_duration_ms": 1049.1589999999999,
-    "sanity_flags_observed": [],
-    "sanity_flags_missing": []
-  },
-  {
-    "id": "a015",
     "tag": "intermediate_risk",
     "expected_risk_band": "intermediate",
     "observed_risk_band": "high",
@@ -824,18 +923,18 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1042.587,
+      "duration_ms": 1018.0290000000001,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
-        "probability": 0.40520623326301575,
+        "probability": 0.5666755437850952,
         "model_artefact_present": true
       }
     },
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.15,
+      "duration_ms": 0.18000000000000002,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -846,7 +945,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.015000000000000001,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -854,12 +953,24 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1042.752,
+    "total_duration_ms": 1018.2290000000002,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a014",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
-    "id": "a016",
+    "id": "a015",
     "tag": "intermediate_risk",
     "expected_risk_band": "intermediate",
     "observed_risk_band": "high",
@@ -881,18 +992,18 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1034.2420000000002,
+      "duration_ms": 1028.1899999999998,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
-        "probability": 0.12132275849580765,
+        "probability": 0.40520623326301575,
         "model_artefact_present": true
       }
     },
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.152,
+      "duration_ms": 0.17200000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -903,7 +1014,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -911,9 +1022,90 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.4110000000003,
+    "total_duration_ms": 1028.3809999999999,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a015",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a016",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1026.014,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.12132275849580765,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.178,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.2079999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a016",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a017",
@@ -927,7 +1119,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -938,7 +1130,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1060.819,
+      "duration_ms": 1028.114,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -949,7 +1141,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.147,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -960,7 +1152,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -968,9 +1160,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1060.983,
+    "total_duration_ms": 1028.305,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a017",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a018",
@@ -995,7 +1199,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1036.301,
+      "duration_ms": 1033.489,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1006,7 +1210,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.148,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1025,9 +1229,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.465,
+    "total_duration_ms": 1033.676,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a018",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a019",
@@ -1052,7 +1268,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.2959999999999,
+      "duration_ms": 1026.45,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1063,7 +1279,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.145,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1074,7 +1290,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.011,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1082,9 +1298,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.458,
+    "total_duration_ms": 1026.635,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a019",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a020",
@@ -1113,7 +1341,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1034.567,
+      "duration_ms": 1044.455,
       "detail": {
         "expected_band": "low",
         "observed_band": "intermediate",
@@ -1124,7 +1352,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.152,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1135,7 +1363,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.01,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1143,11 +1371,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1034.737,
+    "total_duration_ms": 1044.6409999999998,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [
       "age_outside_training_range"
-    ]
+    ],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a020",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a021",
@@ -1172,7 +1412,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1031.036,
+      "duration_ms": 1030.959,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -1183,7 +1423,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.14400000000000002,
+      "duration_ms": 0.184,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1202,9 +1442,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.1960000000001,
+    "total_duration_ms": 1031.159,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a021",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a022",
@@ -1218,7 +1470,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.005,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1229,7 +1481,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1023.671,
+      "duration_ms": 1031.063,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -1240,7 +1492,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.157,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1251,7 +1503,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.012,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1259,9 +1511,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1023.845,
+    "total_duration_ms": 1031.2530000000002,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a022",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a023",
@@ -1275,7 +1539,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.009000000000000001,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [],
@@ -1286,7 +1550,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1026.125,
+      "duration_ms": 1024.484,
       "detail": {
         "expected_band": "low",
         "observed_band": "high",
@@ -1297,7 +1561,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.147,
+      "duration_ms": 0.171,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1308,7 +1572,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1316,9 +1580,21 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1026.291,
+    "total_duration_ms": 1024.672,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a023",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a024",
@@ -1347,7 +1623,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1051.127,
+      "duration_ms": 1046.242,
       "detail": {
         "expected_band": "low",
         "observed_band": "low",
@@ -1358,7 +1634,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.14400000000000002,
+      "duration_ms": 0.17300000000000001,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1369,7 +1645,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1377,11 +1653,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1051.287,
+    "total_duration_ms": 1046.433,
     "sanity_flags_observed": [],
     "sanity_flags_missing": [
       "age_outside_training_range"
-    ]
+    ],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a024",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
   },
   {
     "id": "a025",
@@ -1395,7 +1683,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1410,7 +1698,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1022.0229999999999,
+      "duration_ms": 1023.0310000000001,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1421,7 +1709,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.158,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1432,7 +1720,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1440,11 +1728,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1022.1979999999999,
+    "total_duration_ms": 1023.2170000000001,
     "sanity_flags_observed": [
       "cholesterol_missing_sentinel"
     ],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a025",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a026",
@@ -1458,7 +1758,7 @@
     "triage": {
       "stage": "triage",
       "passed": true,
-      "duration_ms": 0.007,
+      "duration_ms": 0.006,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1473,7 +1773,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1034.975,
+      "duration_ms": 1033.953,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1484,7 +1784,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.14400000000000002,
+      "duration_ms": 0.17,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1495,7 +1795,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1503,11 +1803,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1035.136,
+    "total_duration_ms": 1034.1399999999999,
     "sanity_flags_observed": [
       "resting_bp_extreme"
     ],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a026",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a027",
@@ -1536,7 +1848,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1030.9550000000002,
+      "duration_ms": 1021.0649999999999,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1547,7 +1859,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.146,
+      "duration_ms": 0.16699999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1558,7 +1870,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.011,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1566,11 +1878,23 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1031.1170000000002,
+    "total_duration_ms": 1021.2489999999999,
     "sanity_flags_observed": [
       "oldpeak_negative"
     ],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a027",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
   },
   {
     "id": "a028",
@@ -1584,7 +1908,7 @@
     "triage": {
       "stage": "triage",
       "passed": false,
-      "duration_ms": 0.007,
+      "duration_ms": 0.008,
       "detail": {
         "summary_present": true,
         "expected_flags": [
@@ -1602,7 +1926,7 @@
     "risk": {
       "stage": "risk",
       "passed": true,
-      "duration_ms": 1019.9359999999999,
+      "duration_ms": 1027.415,
       "detail": {
         "expected_band": "high",
         "observed_band": "high",
@@ -1613,7 +1937,7 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.145,
+      "duration_ms": 0.178,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1624,7 +1948,7 @@
     "letter": {
       "stage": "letter",
       "passed": true,
-      "duration_ms": 0.01,
+      "duration_ms": 0.012,
       "detail": {
         "word_count": 78,
         "expected_min_words": 60,
@@ -1632,13 +1956,25 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1020.098,
+    "total_duration_ms": 1027.613,
     "sanity_flags_observed": [
       "age_outside_training_range"
     ],
     "sanity_flags_missing": [
       "resting_bp_extreme"
-    ]
+    ],
+    "expected_recommendation_family": "statin_plus_bp_plus_referral",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a028",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=statin_plus_bp_plus_referral",
+      "passed": true
+    }
   },
   {
     "id": "a029",
@@ -1663,7 +1999,7 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1035.915,
+      "duration_ms": 1026.551,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
@@ -1674,7 +2010,76 @@
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.156,
+      "duration_ms": 0.17200000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.74,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a029",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a030",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1019.2900000000001,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.1704997718334198,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1693,12 +2098,3693 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1036.087,
+    "total_duration_ms": 1019.484,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a030",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
   },
   {
-    "id": "a030",
+    "id": "a031",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1031.13,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9734897613525391,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.192,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1031.3410000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a031",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a032",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1048.6109999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.8717893362045288,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1048.799,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a032",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a033",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1035.076,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.749435305595398,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.177,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1035.272,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a033",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a034",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1045.715,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9661185145378113,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.182,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.020999999999999998,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1045.924,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a034",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a035",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1029.039,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9745358824729919,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.191,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1029.248,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a035",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a036",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1025.185,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9765400290489197,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1025.3719999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a036",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a037",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1030.6709999999998,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9607148766517639,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.182,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.87,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a037",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a038",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1022.9399999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.7120755910873413,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.183,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.14,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a038",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a039",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1040.1180000000002,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.6499289274215698,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.18000000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1040.3170000000002,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a039",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a040",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1028.1860000000001,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.7910436987876892,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1028.3770000000002,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a040",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a041",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1022.6170000000001,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9665372967720032,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1022.802,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a041",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a042",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1030.458,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9014835953712463,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.185,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.66,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a042",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a043",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.008,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1032.864,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9776344895362854,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.165,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1033.048,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a043",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a044",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1066.3229999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9525821208953857,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.185,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1066.524,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a044",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a045",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1017.2289999999999,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9519180059432983,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16699999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.016,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1017.4179999999999,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a045",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a046",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1025.643,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9807453155517578,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.189,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1025.849,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a046",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a047",
+    "tag": "high_risk",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1034.342,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.8702218532562256,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1034.539,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a047",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a048",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "low",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1039.624,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "low",
+        "probability": 0.049512580037117004,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.18100000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1039.821,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a048",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a049",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1025.283,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.6042984127998352,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1025.4679999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a049",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a050",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1041.639,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.2611102759838104,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.195,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1041.8519999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a050",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a051",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1017.0349999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.42978692054748535,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1017.2199999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a051",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a052",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1031.216,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.3064988851547241,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1031.4119999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a052",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a053",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1034.267,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.42341169714927673,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.183,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1034.467,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a053",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a054",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1055.301,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.22875560820102692,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1055.491,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a054",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a055",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1029.709,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.15902015566825867,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1029.8990000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a055",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a056",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1038.41,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.4868158996105194,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.183,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1038.6100000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a056",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a057",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1043.7749999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.10581006854772568,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.174,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1043.966,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a057",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a058",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1036.999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.29524222016334534,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1037.186,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a058",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a059",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1029.8529999999998,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.43422558903694153,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.18100000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.051,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a059",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a060",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1041.2559999999999,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.5151859521865845,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1041.4419999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a060",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a061",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1018.098,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.33064278960227966,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1018.2869999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a061",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a062",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1032.872,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.5391121506690979,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.187,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1033.076,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a062",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a063",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1039.776,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.1271781325340271,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1039.963,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a063",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a064",
+    "tag": "intermediate_risk",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "intermediate",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1027.618,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "intermediate",
+        "probability": 0.09364230185747147,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1027.8029999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a064",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a065",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1010.7230000000001,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.0422978512942791,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1010.9090000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a065",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a066",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1021.1239999999999,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.0983901247382164,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1021.31,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a066",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a067",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1030.579,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.1255997121334076,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.769,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a067",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a068",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1017.1410000000001,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.03538907691836357,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1017.3270000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a068",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a069",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1025.179,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.18188975751399994,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1025.365,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a069",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a070",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1033.6019999999999,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.11831106245517731,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1033.7979999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a070",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a071",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.008,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1023.214,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.10515650361776352,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.4010000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a071",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a072",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1020.745,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.09988444298505783,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1020.934,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a072",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a073",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1028.65,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.0989166647195816,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1028.835,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a073",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a074",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1036.733,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.25179731845855713,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.188,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1036.94,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a074",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a075",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1020.5519999999999,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.08835683017969131,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.175,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1020.7439999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a075",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a076",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1026.759,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.042065706104040146,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.178,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.954,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a076",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a077",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1059.0759999999998,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.03680136799812317,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.184,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1059.2779999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a077",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a078",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1034.5420000000001,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.032142333686351776,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1034.729,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a078",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a079",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1037.782,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.1762520968914032,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1037.9679999999998,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a079",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a080",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1026.5040000000001,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.28937071561813354,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16799999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.688,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a080",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a081",
+    "tag": "low_risk",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1023.422,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.17271187901496887,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.19,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1023.629,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a081",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a082",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1030.4560000000001,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.43516066670417786,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.178,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.653,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a082",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a083",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1014.3420000000001,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.11634999513626099,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.179,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1014.5370000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a083",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a084",
     "tag": "borderline",
     "expected_risk_band": "intermediate",
     "observed_risk_band": "high",
@@ -1720,18 +5806,513 @@
     "risk": {
       "stage": "risk",
       "passed": false,
-      "duration_ms": 1030.5629999999999,
+      "duration_ms": 1026.791,
       "detail": {
         "expected_band": "intermediate",
         "observed_band": "high",
-        "probability": 0.1704997718334198,
+        "probability": 0.438233882188797,
         "model_artefact_present": true
       }
     },
     "guideline": {
       "stage": "guideline",
       "passed": true,
-      "duration_ms": 0.147,
+      "duration_ms": 0.185,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.014,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.9959999999999,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a084",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a085",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1021.508,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.32181042432785034,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1021.6980000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a085",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a086",
+    "tag": "borderline",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1019.422,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.16496394574642181,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.18000000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.014,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1019.628,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a086",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a087",
+    "tag": "borderline",
+    "expected_risk_band": "low",
+    "observed_risk_band": "intermediate",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1020.611,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "intermediate",
+        "probability": 0.057825952768325806,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.171,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1020.799,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a087",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a088",
+    "tag": "borderline",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1025.9389999999999,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.18053968250751495,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17200000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1026.127,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a088",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a089",
+    "tag": "borderline",
+    "expected_risk_band": "low",
+    "observed_risk_band": "low",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1019.0120000000001,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "low",
+        "probability": 0.04211965203285217,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.174,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1019.2040000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_plus_review",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a089",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_plus_review",
+      "passed": true
+    }
+  },
+  {
+    "id": "a090",
+    "tag": "data_quality",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "cholesterol_missing_sentinel"
+        ],
+        "observed_flags": [
+          "cholesterol_missing_sentinel",
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1020.216,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9734435677528381,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1020.404,
+    "sanity_flags_observed": [
+      "cholesterol_missing_sentinel",
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a090",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a091",
+    "tag": "data_quality",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "resting_bp_extreme"
+        ],
+        "observed_flags": [
+          "resting_bp_extreme"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1026.4180000000001,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9655845165252686,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
       "detail": {
         "n_verified_claims": 2,
         "n_suppressed_claims": 0,
@@ -1750,8 +6331,679 @@
         "n_redacted_claims": 0
       }
     },
-    "total_duration_ms": 1030.7259999999999,
+    "total_duration_ms": 1026.603,
+    "sanity_flags_observed": [
+      "resting_bp_extreme"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a091",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_plus_bp",
+      "passed": false
+    }
+  },
+  {
+    "id": "a092",
+    "tag": "data_quality",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "cholesterol_missing_sentinel"
+        ],
+        "observed_flags": [
+          "cholesterol_missing_sentinel"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1047.807,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.7811282873153687,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.18000000000000002,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.01,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1048.003,
+    "sanity_flags_observed": [
+      "cholesterol_missing_sentinel"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_consider",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a092",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=statin_consider",
+      "passed": false
+    }
+  },
+  {
+    "id": "a093",
+    "tag": "data_quality",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1033.771,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.12842507660388947,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.202,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1033.991,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a093",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a094",
+    "tag": "data_quality",
+    "expected_risk_band": "low",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "resting_bp_extreme"
+        ],
+        "observed_flags": [
+          "resting_bp_extreme"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1029.115,
+      "detail": {
+        "expected_band": "low",
+        "observed_band": "high",
+        "probability": 0.12761302292346954,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.185,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1029.317,
+    "sanity_flags_observed": [
+      "resting_bp_extreme"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "lifestyle_only",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a094",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=lifestyle_only",
+      "passed": true
+    }
+  },
+  {
+    "id": "a095",
+    "tag": "extreme_case",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1027.886,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9692500233650208,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.186,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1028.09,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp_plus_referral",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a095",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=statin_plus_bp_plus_referral",
+      "passed": true
+    }
+  },
+  {
+    "id": "a096",
+    "tag": "extreme_case",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1027.573,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.9544994831085205,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.013,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1027.7620000000002,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp_plus_referral",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a096",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=statin_plus_bp_plus_referral",
+      "passed": true
+    }
+  },
+  {
+    "id": "a097",
+    "tag": "extreme_case",
+    "expected_risk_band": "high",
+    "observed_risk_band": "high",
+    "band_match": true,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [
+          "age_outside_training_range"
+        ],
+        "observed_flags": [
+          "age_outside_training_range"
+        ],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": true,
+      "duration_ms": 1030.5420000000001,
+      "detail": {
+        "expected_band": "high",
+        "observed_band": "high",
+        "probability": 0.8740378618240356,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.16899999999999998,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 1,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 60,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1030.7300000000002,
+    "sanity_flags_observed": [
+      "age_outside_training_range"
+    ],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "statin_plus_bp_plus_referral",
+    "recommendation_correct": true,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a097",
+      "letter_quality": 5,
+      "recommendation_alignment": 5,
+      "rationale": "keyword_hit=True n_words=78 family=statin_plus_bp_plus_referral",
+      "passed": true
+    }
+  },
+  {
+    "id": "a098",
+    "tag": "refusal",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.006,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1032.337,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.7535820007324219,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.185,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 0,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 20,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1032.539,
     "sanity_flags_observed": [],
-    "sanity_flags_missing": []
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "refusal_no_recommendation",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a098",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=refusal_no_recommendation",
+      "passed": false
+    }
+  },
+  {
+    "id": "a099",
+    "tag": "refusal",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.005,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1091.3120000000001,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.14870129525661469,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.17300000000000001,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 0,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.011,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 20,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1091.5010000000002,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "refusal_no_recommendation",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a099",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=refusal_no_recommendation",
+      "passed": false
+    }
+  },
+  {
+    "id": "a100",
+    "tag": "refusal",
+    "expected_risk_band": "intermediate",
+    "observed_risk_band": "high",
+    "band_match": false,
+    "n_verified_claims": 2,
+    "n_suppressed_claims": 0,
+    "letter_word_count": 78,
+    "triage": {
+      "stage": "triage",
+      "passed": true,
+      "duration_ms": 0.007,
+      "detail": {
+        "summary_present": true,
+        "expected_flags": [],
+        "observed_flags": [],
+        "missing_expected_flags": []
+      }
+    },
+    "risk": {
+      "stage": "risk",
+      "passed": false,
+      "duration_ms": 1072.843,
+      "detail": {
+        "expected_band": "intermediate",
+        "observed_band": "high",
+        "probability": 0.4084179997444153,
+        "model_artefact_present": true
+      }
+    },
+    "guideline": {
+      "stage": "guideline",
+      "passed": true,
+      "duration_ms": 0.19,
+      "detail": {
+        "n_verified_claims": 2,
+        "n_suppressed_claims": 0,
+        "expected_min_verified_claims": 0,
+        "is_refusal": false
+      }
+    },
+    "letter": {
+      "stage": "letter",
+      "passed": true,
+      "duration_ms": 0.012,
+      "detail": {
+        "word_count": 78,
+        "expected_min_words": 20,
+        "n_citations": 2,
+        "n_redacted_claims": 0
+      }
+    },
+    "total_duration_ms": 1073.0520000000001,
+    "sanity_flags_observed": [],
+    "sanity_flags_missing": [],
+    "expected_recommendation_family": "refusal_no_recommendation",
+    "recommendation_correct": false,
+    "citation_precision": 1.0,
+    "citation_recall": 1.0,
+    "hallucination_rate": 0.0,
+    "judge": {
+      "case_id": "a100",
+      "letter_quality": 5,
+      "recommendation_alignment": 1,
+      "rationale": "keyword_hit=False n_words=78 family=refusal_no_recommendation",
+      "passed": false
+    }
   }
 ]

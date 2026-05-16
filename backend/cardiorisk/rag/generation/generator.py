@@ -30,7 +30,7 @@ from dataclasses import dataclass, field
 from typing import Final
 
 from ..retrieval.pipeline import RetrievalPipeline, RetrievedChunk
-from .llm import BaseLLMClient, LLMMessage
+from .llm import BaseLLMClient, LLMMessage, UsageTotals
 from .nli import DEFAULT_ENTAILMENT_THRESHOLD, BaseNLIVerifier, EntailmentResult
 from .parser import REFUSAL_SENTINEL, ParsedAnswer, parse_answer
 from .prompts import DEFAULT_PROMPT, PromptPassage, render_citation_prompt
@@ -109,6 +109,17 @@ class CitationGenerator:
         self._with_rerank = with_rerank
         self._entail_threshold = entail_threshold
         self._max_tokens = max_tokens
+
+    @property
+    def llm_usage(self) -> UsageTotals | None:
+        """Expose the underlying LLM client's :class:`UsageTotals` so
+        the eval orchestrator can record token + USD cost per cell
+        without poking at private attributes."""
+        return getattr(self._llm, "usage", None)
+
+    @property
+    def llm_name(self) -> str:
+        return getattr(self._llm, "name", "unknown")
 
     def generate(self, query: str) -> GeneratedAnswer:
         """Run the full retrieve / prompt / parse / verify pipeline."""

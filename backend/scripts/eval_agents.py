@@ -1,12 +1,36 @@
-"""CLI: run the Phase-4 agent eval.
+"""CLI: run the Phase-4 / Phase-6 agent eval.
 
 Modes::
 
     --smoke            MockLLM + MockNLI + MockRetrievalPipeline +
-                       3-case slice. ~3 s on ubuntu-latest. CI default.
-                       No corpus weights, no API keys.
-    --full             All 30 cases against whatever generator/pipeline
+                       MockJudge + 3-case slice. ~3 s on ubuntu-latest.
+                       CI default. No corpus weights, no API keys.
+    --full             All 100 cases against whatever generator/pipeline
                        you build (passed through --llm / --nli / etc).
+                       Phase 6: defaults to the Gemini judge when a
+                       ``GEMINI_API_KEY`` is present; falls back to
+                       Mock if not.
+
+Phase-6 flags::
+
+    --llm {mock|gemini|groq|anthropic|openai}
+                       Which LLM client the generator uses. Default
+                       ``mock``. ``gemini`` needs ``GEMINI_API_KEY``.
+    --judge {mock|gemini|groq}
+                       Which judge scores the letter drafts. Default
+                       ``mock``. Lives behind its own flag so you can
+                       mix-and-match (e.g. ``--llm mock --judge gemini``
+                       to gate the mock generator's drafts with a real
+                       judge).
+    --regression-check PATH
+                       After running, diff the new aggregate against
+                       PATH (a previous aggregate.json or
+                       ``baseline_mock.json``). Exits non-zero if any
+                       tracked metric drops by more than
+                       ``--regression-tolerance-pp``.
+    --regression-tolerance-pp FLOAT
+                       Default 2.0 (per ADR-019). Tighten to gate more
+                       aggressively; loosen for noisy live cells.
 
 Outputs land under ``reports/v1/agents/{per_case,aggregate}.json`` and
 ``reports/v1/figures/agents/{per_stage_pass_rate,risk_band_confusion,
@@ -40,14 +64,14 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
-from cardiorisk.agents.eval import load_cases, run_eval
+from cardiorisk.agents.eval import get_judge, load_cases, run_eval
 from cardiorisk.data.paths import (
     REPO_ROOT,
     REPORTS_V1_AGENTS,
     REPORTS_V1_AGENTS_FIGURES,
 )
 from cardiorisk.rag.generation.generator import CitationGenerator
-from cardiorisk.rag.generation.llm import MockLLMClient
+from cardiorisk.rag.generation.llm import MockLLMClient, get_llm_client
 from cardiorisk.rag.generation.nli import EntailmentResult, MockNLIVerifier
 from cardiorisk.rag.ingest.chunkers import Chunk
 from cardiorisk.rag.retrieval.pipeline import RetrievedChunk
@@ -136,10 +160,11 @@ class _AlwaysEntails(MockNLIVerifier):
         return [self.entails(p, h) for p, h in pairs]
 
 
-def _build_smoke_generator() -> CitationGenerator:
+def _build_smoke_generator(llm_name: str = "mock") -> CitationGenerator:
+    llm = MockLLMClient() if llm_name == "mock" else get_llm_client(llm_name)
     return CitationGenerator(
         retrieval_pipeline=_StubPipeline(_mock_chunks()),  # type: ignore[arg-type]
-        llm_client=MockLLMClient(),
+        llm_client=llm,
         nli_verifier=_AlwaysEntails(),
     )
 
@@ -200,6 +225,32 @@ def main() -> int:
         default="Cleveland",
         help="LODO held-out source for the risk artefact (default: Cleveland)",
     )
+    parser.add_argument(
+        "--llm",
+        type=str,
+        default="mock",
+        choices=("mock", "gemini", "groq", "anthropic", "openai"),
+        help="LLM client (default: mock; gemini needs GEMINI_API_KEY)",
+    )
+    parser.add_argument(
+        "--judge",
+        type=str,
+        default="mock",
+        choices=("mock", "gemini", "groq"),
+        help="judge model (default: mock; gemini needs GEMINI_API_KEY)",
+    )
+    parser.add_argument(
+        "--regression-check",
+        type=Path,
+        default=None,
+        help="path to a baseline aggregate.json to diff against; exits non-zero on regression",
+    )
+    parser.add_argument(
+        "--regression-tolerance-pp",
+        type=float,
+        default=2.0,
+        help="tolerance in percentage points for the regression gate (default: 2.0)",
+    )
     args = parser.parse_args()
 
     cases = load_cases(
@@ -211,14 +262,15 @@ def main() -> int:
         print("No eval cases matched the filters.", file=sys.stderr)
         return 1
 
-    generator = _build_smoke_generator()  # Phase 4 only ships the smoke generator path.
+    generator = _build_smoke_generator(args.llm)
+    judge = get_judge(args.judge)
 
     summary = run_eval(
         generator=generator,
         cases=cases,
         risk_model_name=args.risk_model,
         risk_held_out_source=args.risk_source,
-        llm_client_name=type(generator._llm).__name__,
+        llm_client_name=generator.llm_name,
         nli_verifier_name=type(generator._nli).__name__,
         embedder_name="stub",
         reranker_name="off",
@@ -226,6 +278,9 @@ def main() -> int:
         output_dir=args.reports_dir,
         figures_dir=args.figures_dir,
         cases_path_override=args.cases_path,
+        judge=judge,
+        regression_baseline_path=args.regression_check,
+        regression_tolerance_pp=args.regression_tolerance_pp,
     )
 
     # Tiny summary on stdout for CI logs.
@@ -238,8 +293,37 @@ def main() -> int:
         "full_pipeline_pass_rate": summary["aggregate"]["full_pipeline_pass_rate"],
         "median_total_duration_ms": summary["aggregate"]["median_total_duration_ms"],
         "p95_total_duration_ms": summary["aggregate"]["p95_total_duration_ms"],
+        "recommendation_correctness_rate": summary["aggregate"]["recommendation_correctness_rate"],
+        "mean_citation_precision": summary["aggregate"]["mean_citation_precision"],
+        "mean_citation_recall": summary["aggregate"]["mean_citation_recall"],
+        "mean_hallucination_rate": summary["aggregate"]["mean_hallucination_rate"],
+        "judge_pass_rate": summary["judge_aggregate"]["pass_rate"],
+        "judge_mean_letter_quality": summary["judge_aggregate"]["mean_letter_quality"],
+        "judge_mean_recommendation_alignment": summary["judge_aggregate"][
+            "mean_recommendation_alignment"
+        ],
+        "usage_cost_usd": (
+            summary["usage"]["generator_llm"]["cost_usd"]
+            + summary["usage"]["judge_llm"]["cost_usd"]
+        ),
     }
+    if "regression" in summary:
+        headline["regression_failed"] = summary["regression"]["failed"]
     print(json.dumps(headline, indent=2))
+
+    if "regression" in summary and summary["regression"]["failed"]:
+        print(
+            "\n[regression] one or more tracked metrics dropped beyond the tolerance:",
+            file=sys.stderr,
+        )
+        for label, info in summary["regression"]["deltas"].items():
+            if info["fail"]:
+                print(
+                    f"  - {label}: current={info['current']} baseline={info['baseline']} "
+                    f"delta_pp={info['delta_pp']} (direction={info['direction']})",
+                    file=sys.stderr,
+                )
+        return 2
     return 0
 
 
