@@ -396,3 +396,16 @@ jobs:
         env:
           CI: "true"
         run: pnpm axe:pages
+      # Upload the Playwright HTML report + test-results on failure so a
+      # diagnosing agent can see the actual violation / timeout instead of
+      # having to guess from the truncated log stream.
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-pages-report
+          path: |
+            frontend/playwright-report/
+            frontend/test-results/
+          retention-days: 7
+          if-no-files-found: ignore
